@@ -10,6 +10,7 @@ namespace targil0
     {
         static partial void Welcome8790()
         {
+
             Console.WriteLine("I am also here");
         }
     }
