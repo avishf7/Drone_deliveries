@@ -105,7 +105,7 @@ namespace ConsoleUI
             if (int.TryParse(Console.ReadLine(), out int s))
                 chosen = (OpeningOptions)s;
             else
-                throw new Exception();
+                throw new FormatException();
 
             return chosen;
         }
@@ -123,7 +123,7 @@ namespace ConsoleUI
             if (int.TryParse(Console.ReadLine(), out int s))
                 chosen = (InsertOptions)s;
             else
-                throw new Exception();
+                throw new FormatException();
 
             return chosen;
         }
@@ -141,7 +141,7 @@ namespace ConsoleUI
             if (int.TryParse(Console.ReadLine(), out int s))
                 chosen = (UpdateOptions)s;
             else
-                throw new Exception();
+                throw new FormatException();
 
             return chosen;
         }
@@ -159,8 +159,9 @@ namespace ConsoleUI
             if (int.TryParse(Console.ReadLine(), out int s))
                 chosen = (DisplayOptions)s;
             else
-                throw new Exception();
+                throw new FormatException();
 
+            
             return chosen;
         }
 

@@ -11,6 +11,11 @@ namespace IDAL
             public string Phone { get; set; }
             public double Longitude { get; set; }
             public double Lattitude { get; set; }
+
+            public override string ToString()
+            {
+                return "Id :" + Id +"\nName:" + Name + Phone + Longitude + Lattitude;
+            }
         }
 
         public struct package

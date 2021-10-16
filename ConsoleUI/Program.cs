@@ -12,7 +12,7 @@ namespace ConsoleUI
             do
             {
                 try { ch = MenuOptions.PrintOpeningMenu(); }
-                catch (ArgumentException) { ch = MenuOptions.OpeningOptions.DEFAULT; }
+                catch (FormatException) { ch = MenuOptions.OpeningOptions.DEFAULT; }
 
                 switch (ch)
                 {
@@ -26,7 +26,7 @@ namespace ConsoleUI
                         do
                         {
                             try { IChoice = MenuOptions.PrintInsertMenu(); }
-                            catch (ArgumentException) { IChoice = MenuOptions.InsertOptions.DEFAULT; }
+                            catch (FormatException) { IChoice = MenuOptions.InsertOptions.DEFAULT; }
 
                             switch (IChoice)
                             {
@@ -57,7 +57,7 @@ namespace ConsoleUI
                         do
                         {
                             try { UChoice = MenuOptions.PrintUpdateMenu(); }
-                            catch (ArgumentException) { UChoice = MenuOptions.UpdateOptions.DEFAULT; }
+                            catch (FormatException) { UChoice = MenuOptions.UpdateOptions.DEFAULT; }
 
                             switch (UChoice)
                             {
@@ -90,7 +90,7 @@ namespace ConsoleUI
                         do
                         {
                             try { DChoice = MenuOptions.PrintDisplayMenu(); }
-                            catch (ArgumentException) { DChoice = MenuOptions.DisplayOptions.DEFAULT; }
+                            catch (FormatException) { DChoice = MenuOptions.DisplayOptions.DEFAULT; }
 
                             switch (DChoice)
                             {
@@ -121,7 +121,7 @@ namespace ConsoleUI
                         do
                         {
                             try { LVChoice = MenuOptions.PrintListViewMenu(); }
-                            catch (ArgumentException) { LVChoice = MenuOptions.ListViewOptions.DEFAULT; }
+                            catch (FormatException) { LVChoice = MenuOptions.ListViewOptions.DEFAULT; }
 
                             switch (LVChoice)
                             {
