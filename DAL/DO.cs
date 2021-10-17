@@ -14,7 +14,8 @@ namespace IDAL
 
             public override string ToString()
             {
-                return "Id :" + Id +"\nName:" + Name + Phone + Longitude + Lattitude;
+                return "Details of Id :" + Id + "\nName:" + Name +
+                    "\nphone: "Phone + "\nLongitude " Longitude + "\nLattitude: " Lattitude + "\n";
             }
         }
 
@@ -31,6 +32,13 @@ namespace IDAL
             public DateTime Delivered { get; set; }
             public int DroneId { get; set; }
 
+            public override string ToString()
+            {
+                return "Details of Id :" + Id + "\nSenderId: " + SenderId +
+                    "\nTargetId: " + TargetId + "\nWeight: " + Weight + "\nPriority: " + Priority
+                    + "\nRequested: " + Requested + "\nScheduled: " + Scheduled + "\nPickedUp"
+                    + PickedUp + "\nDelivered: " + Delivered + "\nDroneId: " + DroneId + "\n";
+            }
         }
 
         public struct Drone
@@ -40,6 +48,14 @@ namespace IDAL
             public Weight MaxWeight { get; set; }
             public DroneStatuses Status { get; set; }
             public double Battery { get; set; }
+
+            public override string ToString()
+            {
+                return "Details of Id :" + Id + "\nModel: " + Model + "\nMaxWeight: " +
+                     MaxWeight + "\nDroneStatuses: " + Status + "\nBatteryOfDrone: "
+                     + Battery + "\n";
+            }
+
         }
 
         public struct Station
@@ -49,12 +65,26 @@ namespace IDAL
             public int ChargeSlots { get; set; }
             public double Longitude { get; set; }
             public double Lattitude { get; set; }
+
+            public override string ToString()
+            {
+                return "Details of Id :" + Id + "\nName: " + Name + "\nChargeSlots: " +
+                     "\nLongitude: " + Longitude + "\nLattitude: " + Lattitude + "\n";
+            }
+
         }
 
         public struct DroneCharge
         {
             public int DroneId { get; set; }
             public int StationId { get; set; }
+
+            public override string ToString()
+            {
+                return "Details of DroneCharge: " + "\nDroneId: " + DroneId + "\nStationId: "
+                    + StationId +"\n";
+            }
+
         }
     }
 
