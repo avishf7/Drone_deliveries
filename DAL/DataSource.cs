@@ -29,16 +29,17 @@ namespace DalObject
 
         internal static void Initialize()
         {
+
             for (int i = 0; i < 5; i++)
             {
                 drones.Add(new()
                 {
                     Id = rand.Next(10),
-                    MaxWeight = (Weight)rand.Next(3),
+                    MaxWeight = Weight.HEAVY,
                     Model = models[rand.Next(3)],
                     Status = (DroneStatuses)rand.Next(3),
                     Battery = 90
-                }) ;
+                });
 
             }
 
@@ -49,27 +50,11 @@ namespace DalObject
                     Id = rand.Next(10),
                     Name = customerNames[rand.Next(10)],
                     FreeChargeSlots = rand.Next(4),
-                    Longitude =,
-                    Lattitude =,
+                    Longitude = 32 + rand.NextDouble(),
+                    Lattitude = 35 + rand.NextDouble(),
                 });
             }
 
-            for (int i = 0; i < 10; i++)
-            {
-                packages.Add(new()
-                {
-                    Id = rand.Next(10),
-                    SenderId =,
-                    TargetId =,
-                    Weight = (Weight)rand.Next(3),
-                    Priority = (Priorities)rand.Next(3),
-                    Requested = models[rand.Next(3)],
-                    Scheduled = DateTime.Now,
-                    PickedUp = DateTime.Now,
-                    Delivered = DateTime.Now,
-                    DroneId = DateTime.Now
-                }) ;
-            }
 
             for (int i = 0; i < 10; i++)
             {
@@ -78,12 +63,41 @@ namespace DalObject
                     Id = rand.Next(10),
                     Name = customerNames[rand.Next(10)],
                     Phone = phones[rand.Next(10)],
-                    Longitude =,
-                    Lattitude =,
+                    Longitude = 32 + rand.NextDouble(),
+                    Lattitude = 35 + rand.NextDouble(),
                 });
             }
 
-            
+            for (int i = 0; i < 10; i++)
+            {
+                packages.Add(new()
+                {
+                    Id = rand.Next(10),
+                    SenderId = customers[rand.Next(10)].Id,
+                    TargetId = customers[rand.Next(10)].Id,
+                    Weight = (Weight)rand.Next(3),
+                    Priority = (Priorities)rand.Next(3),
+                    Requested = DateTime.Now,
+                    Scheduled = DateTime.Now.AddDays(rand.Next(3)),
+                    PickedUp = DateTime.Now.AddHours(rand.Next(3)),
+                    Delivered = DateTime.Now.AddHours(rand.Next(4)),
+
+                    DroneId = drones[rand.Next(5)].Id
+
+                });
+            }
+
+            static Drone GetAvailableDrone()
+            {
+                Drone drone;
+                do
+                {
+                    drone = drones[rand.Next(5)];
+                } while (drone.Status != DroneStatuses.AVAILABLE);
+            }
+
+
         }
     }
+  
 }
