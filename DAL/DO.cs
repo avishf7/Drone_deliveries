@@ -65,11 +65,12 @@ namespace IDAL
             public int ChargeSlots { get; set; }
             public double Longitude { get; set; }
             public double Lattitude { get; set; }
-
+            public int freePositions { get; set; }
             public override string ToString()
             {
                 return "Details of Id :" + Id + "\nName: " + Name + "\nChargeSlots: " +
-                     "\nLongitude: " + Longitude + "\nLattitude: " + Lattitude + "\n";
+                     "\nLongitude: " + Longitude + "\nLattitude: " + Lattitude + 
+                     "\nfreePositions" + freePositions +"\n";
             }
 
         }
