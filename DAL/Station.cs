@@ -19,7 +19,7 @@ namespace IDAL
 
             public override string ToString()
             {
-                return "Details of Id :" + Id + "\nName: " + Name + "\nCharge slots: " +
+                return "Details of ID :" + Id + "\nName: " + Name + "\nCharge slots: " +
                      "\nLongitude: " + Longitude + "\nLattitude: " + Lattitude +
                      "\nFree positions: " + freePositions + "\n";
             }
