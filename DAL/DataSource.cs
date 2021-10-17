@@ -41,10 +41,49 @@ namespace DalObject
                 }) ;
 
             }
+
+            for (int i = 0; i < 2; i++)
+            {
+                stations.Add(new()
+                {
+                    Id = rand.Next(10),
+                    Name = customerNames[rand.Next(10)],
+                    FreeChargeSlots = rand.Next(4),
+                    Longitude =,
+                    Lattitude =,
+                });
+            }
+
             for (int i = 0; i < 10; i++)
             {
-
+                packages.Add(new()
+                {
+                    Id = rand.Next(10),
+                    SenderId =,
+                    TargetId =,
+                    Weight = (Weight)rand.Next(3),
+                    Priority = (Priorities)rand.Next(3),
+                    Requested = models[rand.Next(3)],
+                    Scheduled = DateTime.Now,
+                    PickedUp = DateTime.Now,
+                    Delivered = DateTime.Now,
+                    DroneId = DateTime.Now
+                }) ;
             }
+
+            for (int i = 0; i < 10; i++)
+            {
+                customers.Add(new()
+                {
+                    Id = rand.Next(10),
+                    Name = customerNames[rand.Next(10)],
+                    Phone = phones[rand.Next(10)],
+                    Longitude =,
+                    Lattitude =,
+                });
+            }
+
+            
         }
     }
 }
