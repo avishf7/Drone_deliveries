@@ -82,11 +82,11 @@ namespace DalObject
                     PickedUp = DateTime.Now.AddHours(rand.Next(3)),
                     Delivered = DateTime.Now.AddHours(rand.Next(4)),
 
-                    DroneId = drones[rand.Next(5)].Id
+                    DroneId = GetAvailableDrone()
 
                 });
             }
-
+            
             static Drone GetAvailableDrone()
             {
                 Drone drone;
@@ -95,9 +95,6 @@ namespace DalObject
                     drone = drones[rand.Next(5)];
                 } while (drone.Status != DroneStatuses.AVAILABLE);
             }
-
-
         }
     }
-  
 }
