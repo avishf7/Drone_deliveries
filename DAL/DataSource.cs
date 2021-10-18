@@ -8,14 +8,13 @@ using IDAL.DO;
 namespace DalObject
 {
 
-    class DataSource
+     class DataSource
     {
         static Random rand = new Random();
         static string[] customerNames = new string[10] { "Shlomi", "Meir", "Miki", "Shalom", "Dani", "Avishay", "Chaim", "Moti", "Shimon", "Bibi" };
         static string[] phones = new string[10] { "0546273849", "0546223849", "0546211849", "0546413849", "0546254849", "0546273878", "0547273849", "0546273749", "0546277849", "0546273847" };
         static string[] stationNames = new string[4] { "Electric Charging Station", "Gnrgy Charging Station", "VIRTA Charging Station", "EV-Edge Charging Station" };
         static string[] models = new string[3] { "MAVIC MINI 2", "Mavic Air 2", "COMBO AIR 2S" };
-
 
         internal static List<Drone> drones = new();
         internal static List<Station> stations = new();
@@ -90,12 +89,15 @@ namespace DalObject
                     DroneId = GetAvailableDrone().Id
 
                 });
+
+                Config config = new()
+                {
+                    PackageIdCounter = packages.Max(pck => pck.Id) + 1
+                };
             }
 
-                    DroneId = drones[rand.Next(5)].Id
 
-                });
-            }
+                
 
             static Drone GetAvailableDrone()
             {
@@ -104,6 +106,8 @@ namespace DalObject
                 {
                     drone = drones[rand.Next(5)];
                 } while (drone.Status != DroneStatuses.AVAILABLE);
+
+                return drone;
             }
 
 
