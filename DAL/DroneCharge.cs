@@ -8,9 +8,18 @@ namespace IDAL
 {
     namespace DO
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public struct DroneCharge
         {
+            /// <summary>
+            /// 
+            /// </summary>
             public int DroneId { get; set; }
+            /// <summary>
+            /// 
+            /// </summary>
             public int StationId { get; set; }
 
             public override string ToString()

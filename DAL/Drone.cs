@@ -8,12 +8,30 @@ namespace IDAL
 {
     namespace DO
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public struct Drone
         {
+            /// <summary>
+            /// 
+            /// </summary>
             public int Id { get; set; }
+            /// <summary>
+            /// 
+            /// </summary>
             public string Model { get; set; }
+            /// <summary>
+            /// 
+            /// </summary>
             public Weight MaxWeight { get; set; }
+            /// <summary>
+            /// 
+            /// </summary>
             public DroneStatuses Status { get; set; }
+            /// <summary>
+            /// 
+            /// </summary>
             public double Battery { get; set; }
 
             public override string ToString()
