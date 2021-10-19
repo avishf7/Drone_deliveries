@@ -7,7 +7,7 @@ using IDAL;
 namespace DalObject
 {
     /// <summary>
-    /// 
+    /// A class in which we will make the changes in all parts of the code
     /// </summary>
     public class DalObject
     {
@@ -23,7 +23,7 @@ namespace DalObject
             DataSource.Initialize();
         }
         /// <summary>
-        /// 
+        /// Function of adding a drone  to drones.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="model"></param>
@@ -34,7 +34,7 @@ namespace DalObject
             DataSource.drones.Add(new() { Id = id, Model = model, MaxWeight = maxWeight, Status = status, Battery = 100 });
         }
         /// <summary>
-        /// 
+        /// Function of adding a drone station to the stations.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
@@ -53,7 +53,7 @@ namespace DalObject
             });
         }
         /// <summary>
-        /// 
+        ///  Function of adding a customer.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
@@ -72,7 +72,7 @@ namespace DalObject
             });
         }
         /// <summary>
-        /// 
+        /// Function of adding a package.
         /// </summary>
         /// <param name="sendersId"></param>
         /// <param name="targetsId"></param>
@@ -92,7 +92,7 @@ namespace DalObject
             });
         }
         /// <summary>
-        /// 
+        /// Function to connect packag to drone .
         /// </summary>
         /// <param name="id"></param>
         /// <param name="droneId"></param>
