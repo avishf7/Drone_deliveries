@@ -8,20 +8,20 @@ using IDAL.DO;
 namespace DalObject
 {
     /// <summary>
-    /// 
+    /// A class that stores the data of all objects.
     /// </summary>
-     class DataSource
+    class DataSource
     {
         /// <summary>
-        /// 
+        /// Create a static random show.
         /// </summary>
         static Random rand = new Random();
         /// <summary>
-        /// 
+        /// Create a static array that contains customer names
         /// </summary>
         static string[] customerNames = new string[10] { "Shlomi", "Meir", "Miki", "Shalom", "Dani", "Avishay", "Chaim", "Moti", "Shimon", "Bibi" };
         /// <summary>
-        /// 
+        /// Create a static array that contains customers' phone numbers.
         /// </summary>
         static string[] phones = new string[10] { "0546273849", "0546223849", "0546211849", "0546413849", "0546254849", "0546273878", "0547273849", "0546273749", "0546277849", "0546273847" };
         /// <summary>
