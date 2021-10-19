@@ -120,13 +120,10 @@ namespace DalObject
                     PickedUp = DateTime.Now.AddDays(3).AddHours(3),
                     Delivered = DateTime.Now.AddDays(3).AddHours(3).AddHours(4),
                     DroneId = GetAvailableDrone().Id
-
                 });
-
-                Config.PackageIdCounter = packages.Max(pck => pck.Id) + 1;
             }
 
-
+                Config.PackageIdCounter = packages.Max(pck => pck.Id) + 1;
         }
 
         /// <summary>

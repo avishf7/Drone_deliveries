@@ -36,9 +36,9 @@ namespace ConsoleUI
                                     Console.WriteLine("\n");
                                     break;
                                 case MenuOptions.InsertOptions.STATION:
-                                    Console.WriteLine("Enter stations ID: ");
+                                    Console.WriteLine("Enter station ID: ");
                                     int stationId = int.Parse(Console.ReadLine());
-                                    Console.WriteLine("Enter drones name: ");
+                                    Console.WriteLine("Enter station name: ");
                                     string name = (Console.ReadLine());
                                     Console.WriteLine("Enter num of free station: ");
                                     int numOfFreeStation = int.Parse(Console.ReadLine());
@@ -50,23 +50,23 @@ namespace ConsoleUI
                                     dalObject.AddStation(stationId, name, numOfFreeStation, longitude, lattitude);
                                     break;
                                 case MenuOptions.InsertOptions.DRONE:
-                                    Console.WriteLine("Enter drones ID: ");
+                                    Console.WriteLine("Enter drone ID: ");
                                     int droneId = int.Parse(Console.ReadLine());
-                                    Console.WriteLine("Enter drones model: ");
+                                    Console.WriteLine("Enter drone model: ");
                                     string model = (Console.ReadLine());
-                                    Console.WriteLine("Enter drones Weight - To LIGHT enter 0, to MEDIUM enter 1 and to HEAVY enter 2: ");
+                                    Console.WriteLine("Enter drone Weight - To LIGHT enter 0, to MEDIUM enter 1 and to HEAVY enter 2: ");
                                     Weight maxweight = (Weight)int.Parse(Console.ReadLine());
-                                    Console.WriteLine("Enter drones status - To  AVAILABLE  enter 0, to MAINTENANCE enter 1 and to DELIVERY enter 2: ");
+                                    Console.WriteLine("Enter drone status - To  AVAILABLE  enter 0, to MAINTENANCE enter 1 and to DELIVERY enter 2: ");
                                     DroneStatuses status = (DroneStatuses)int.Parse(Console.ReadLine());
 
                                     dalObject.AddDrone(droneId, model, maxweight, status);
                                     break;
                                 case MenuOptions.InsertOptions.CUSTOMER:
-                                    Console.WriteLine("Enter customers ID: ");
+                                    Console.WriteLine("Enter customer ID: ");
                                     int cusId = int.Parse(Console.ReadLine());
-                                    Console.WriteLine("Enter customers name: ");
+                                    Console.WriteLine("Enter customer name: ");
                                     string cusName = (Console.ReadLine());
-                                    Console.WriteLine("Enter customers phone: ");
+                                    Console.WriteLine("Enter customer phone: ");
                                     string phone = (Console.ReadLine());
                                     Console.WriteLine("Enter longitude of customers adress: ");
                                     double cusLongitude = (int)double.Parse(Console.ReadLine());
@@ -76,13 +76,13 @@ namespace ConsoleUI
                                     dalObject.AddCustomer(cusId, cusName, phone, cusLongitude, cusLattitude);
                                     break;
                                 case MenuOptions.InsertOptions.PACKAGE:
-                                    Console.WriteLine("Enter package's ID: ");
+                                    Console.WriteLine("Enter package ID: ");
                                     int id = int.Parse(Console.ReadLine());
-                                    Console.WriteLine("Enter targets ID: ");
+                                    Console.WriteLine("Enter target ID: ");
                                     int sendersId = int.Parse(Console.ReadLine());
-                                    Console.WriteLine("Enter senders ID: ");
+                                    Console.WriteLine("Enter sender ID: ");
                                     int targetsId = int.Parse(Console.ReadLine());
-                                    Console.WriteLine("Enter package's Weight - To LIGHT enter 0, to MEDIUM enter 1 and to HEAVY enter 2: ");
+                                    Console.WriteLine("Enter package Weight - To LIGHT enter 0, to MEDIUM enter 1 and to HEAVY enter 2: ");
                                     Weight weight = (Weight)int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter pariority - To NORMAL enter 0, to FAST enter 1 and to EMERENCY enter 2: ");
                                     Priorities priority = (Priorities)int.Parse(Console.ReadLine());
