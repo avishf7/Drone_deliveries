@@ -121,8 +121,11 @@ namespace ConsoleUI
                                     dalObject.ConnectedPackagToDrone(id, droneId);
                                     break;
                                 case MenuOptions.UpdateOptions.PICKING_UP:
+                                    Console.WriteLine("Enter package ID for picking up: ");
                                     break;
                                 case MenuOptions.UpdateOptions.SUPPLY:
+                                    Console.WriteLine("Enter package ID for supply : ");
+
                                     break;
                                 case MenuOptions.UpdateOptions.CHARGING:
                                     break;
