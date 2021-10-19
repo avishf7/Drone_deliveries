@@ -15,6 +15,7 @@ namespace DalObject
         /// 
         /// </summary>
         List<DroneCharge> droneCharges = new();
+
         /// <summary>
         /// CTOR
         /// </summary>
@@ -106,7 +107,81 @@ namespace DalObject
 
         }
 
-        
+        public void PickUp(int id)
+        {
+            Package package = DataSource.packages.Find(pck => pck.Id == id);
+
+            package.PickedUp = DateTime.Now;
+        }
+
+        public void Deliver(int id)
+        {
+            Package package = DataSource.packages.Find(pck => pck.Id == id);
+
+            package.Delivered = DateTime.Now;
+        }
+
+        public void SendDroneForCharge(int droneId, int stationId)
+        {
+            Drone drone = DataSource.drones.Find(drn => drn.Id == droneId);
+            Station station = DataSource.stations.Find(st => st.Id == stationId);
+
+            drone.Status = DroneStatuses.MAINTENANCE;
+            droneCharges.Add(new()
+            {
+                DroneId = droneId,
+                StationId = stationId
+            });
+        }
+
+        public void RealeseDroneFromCharge(int droneId)
+        {
+            Drone drone = DataSource.drones.Find(drn => drn.Id == droneId);
+            droneCharges.Remove(droneCharges.Find(drnCh => drnCh.DroneId == droneId));
+
+            drone.Status = DroneStatuses.AVAILABLE;
+            drone.Battery = 100;
+        }
+
+        public Station GetStation(int stationId)
+        {
+            Station tmp = DataSource.stations.Find(st => st.Id == stationId);
+
+            return new()
+            {
+                Id = tmp.Id,
+                Name = tmp.Name,
+                FreeChargeSlots = tmp.FreeChargeSlots,
+                Longitude = tmp.Longitude,
+                Lattitude = tmp.Lattitude,
+            };
+        }
+
+        public Drone GetDrone(int droneId)
+        {
+            Drone tmp = DataSource.drones.Find(dr => dr.Id == droneId);
+
+            return new()
+            {
+                Id = tmp.Id,
+                MaxWeight = tmp.MaxWeight,
+                Model = models[rand.Next(3)],
+                Status = (DroneStatuses)rand.Next(3),
+                Battery = 90
+            }
+        }
+
+        public Customer GetCustomer(int customerId)
+        {
+            return DataSource.customers.Find(cus => cus.Id == customerId);
+        }
+
+        public Package GetPackage(int packageId)
+        {
+            return DataSource.packages.Find(pck => pck.Id == packageId);
+        }
+
+
 
     }
 }
