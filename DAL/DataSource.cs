@@ -85,9 +85,9 @@ namespace DalObject
                     Weight = (Weight)rand.Next(3),
                     Priority = (Priorities)rand.Next(3),
                     Requested = DateTime.Now,
-                    Scheduled = DateTime.Now.AddDays(rand.Next(3)),
-                    PickedUp = DateTime.Now.AddHours(rand.Next(3)),
-                    Delivered = DateTime.Now.AddHours(rand.Next(4)),
+                    Scheduled = DateTime.Now.AddDays(3),
+                    PickedUp = DateTime.Now.AddDays(3).AddHours(3),
+                    Delivered = DateTime.Now.AddDays(3).AddHours(3).AddHours(4),
                     DroneId = GetAvailableDrone().Id
 
                 });

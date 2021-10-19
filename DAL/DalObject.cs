@@ -75,8 +75,8 @@ namespace DalObject
 
         public void AddPackage()
         {
-         ///  Console.WriteLine("Enter package's ID: ");
-            ///int id = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter package's ID: ");
+            int id = int.Parse(Console.ReadLine());
             Console.WriteLine("Enter targets ID: ");
             int sendersId = int.Parse(Console.ReadLine());
             Console.WriteLine("Enter senders ID: ");
@@ -85,11 +85,39 @@ namespace DalObject
             Weight maxweight = (Weight)int.Parse(Console.ReadLine());
             Console.WriteLine("Enter pariority - To NORMAL enter 0, to FAST enter 1 and to EMERENCY enter 2: ");
             Priorities priority = (Priorities)int.Parse(Console.ReadLine());
+            DateTime requested = DateTime.Now;
 
 
+
+            DataSource.packages.Add(new()
+            {
+                Id = id,
+                SenderId = sendersId,
+                TargetId = targetsId,
+                Weight = maxweight,
+                Priority = priority,
+                Requested = requested,
+
+            });
 
         }
 
+
+        public void ConnectedPackagToDrone()
+        {
+            Console.WriteLine("Enter package's ID  for associating: ");
+            int id = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter drone ID: ");
+            int droneId = int.Parse(Console.ReadLine());
+
+
+            Drone drone = DataSource.drones.Find(drn => drn.Id == droneId);
+            Package package = DataSource.packages.Find(pck => pck.Id == id);
+            package.DroneId = droneId;
+            package.Scheduled = DateTime.Now;
+            drone.Status = DroneStatuses.DELIVERY;
+
+        }
 
     }
 }
