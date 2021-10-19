@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using IDAL.DO;
 
 
@@ -11,6 +12,7 @@ namespace ConsoleUI
             DalObject.DalObject dalObject = new();
             MenuOptions.OpeningOptions ch;
 
+            
             do
             {
                 try { ch = MenuOptions.PrintOpeningMenu(); }
@@ -191,6 +193,7 @@ namespace ConsoleUI
                                 case MenuOptions.ListViewOptions.PACKAGES:
                                     break;
                                 case MenuOptions.ListViewOptions.UNASSIGNED_STATIONS:
+
                                     break;
                                 case MenuOptions.ListViewOptions.AVAILABLE_FOR_CHARGING:
                                     break;

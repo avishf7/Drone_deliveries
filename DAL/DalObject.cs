@@ -30,7 +30,7 @@ namespace DalObject
         /// <param name="model"></param>
         /// <param name="maxWeight"></param>
         /// <param name="status"></param>
-        public void AddDrone(int id,string model,Weight maxWeight,DroneStatuses status)
+        public void AddDrone(int id, string model, Weight maxWeight, DroneStatuses status)
         {
             DataSource.drones.Add(new() { Id = id, Model = model, MaxWeight = maxWeight, Status = status, Battery = 100 });
         }
@@ -42,7 +42,7 @@ namespace DalObject
         /// <param name="numOfFreeStation"></param>
         /// <param name="Longitude"></param>
         /// <param name="lattitude"></param>
-        public void AddStation(int id, string name, int numOfFreeStation,double Longitude, double lattitude)
+        public void AddStation(int id, string name, int numOfFreeStation, double Longitude, double lattitude)
         {
             DataSource.stations.Add(new()
             {
@@ -61,7 +61,7 @@ namespace DalObject
         /// <param name="phone"></param>
         /// <param name="longitude"></param>
         /// <param name="lattitude"></param>
-        public void AddCustomer(int id, string name, string phone,double longitude, double lattitude)
+        public void AddCustomer(int id, string name, string phone, double longitude, double lattitude)
         {
             DataSource.customers.Add(new()
             {
@@ -89,7 +89,10 @@ namespace DalObject
                 Weight = weight,
                 Priority = priority,
                 Requested = DateTime.Now,
-
+                Scheduled = DateTime.MinValue,
+                PickedUp = DateTime.MinValue,
+                Delivered = DateTime.MinValue,
+                DroneId = -1
             });
         }
         /// <summary>
@@ -165,21 +168,175 @@ namespace DalObject
             {
                 Id = tmp.Id,
                 MaxWeight = tmp.MaxWeight,
-                Model = models[rand.Next(3)],
-                Status = (DroneStatuses)rand.Next(3),
-                Battery = 90
-            }
+                Model = tmp.Model,
+                Status = tmp.Status,
+                Battery = tmp.Battery
+            };
         }
 
         public Customer GetCustomer(int customerId)
         {
-            return DataSource.customers.Find(cus => cus.Id == customerId);
+            Customer tmp = DataSource.customers.Find(cus => cus.Id == customerId);
+
+            return new()
+            {
+                Id = tmp.Id,
+                Name = tmp.Name,
+                Phone = tmp.Phone,
+                Longitude = tmp.Longitude,
+                Lattitude = tmp.Lattitude,
+
+            };
         }
 
         public Package GetPackage(int packageId)
         {
-            return DataSource.packages.Find(pck => pck.Id == packageId);
+            Package tmp = DataSource.packages.Find(pck => pck.Id == packageId);
+
+            return new()
+            {
+                Id = tmp.Id,
+                SenderId = tmp.SenderId,
+                TargetId = tmp.TargetId,
+                Weight = tmp.Weight,
+                Priority = tmp.Priority,
+                Requested = tmp.Requested,
+                Scheduled = tmp.Scheduled,
+                PickedUp = tmp.PickedUp,
+                Delivered = tmp.Delivered,
+                DroneId = tmp.DroneId
+            };
         }
+
+        public List<Station> GetStations()
+        {
+            List<Station> stations = new();
+
+            foreach (var st in DataSource.stations)
+            {
+                stations.Add(new()
+                {
+                    Id = st.Id,
+                    Name = st.Name,
+                    FreeChargeSlots = st.FreeChargeSlots,
+                    Longitude = st.Longitude,
+                    Lattitude = st.Lattitude,
+                });
+            }
+
+            return stations;
+        }
+
+        public List<Drone> GetDrones()
+        {
+            List < Drone > drones = new();
+
+
+            foreach (var dr in DataSource.drones)
+            {
+                drones.Add(new()
+                {
+                    Id = dr.Id,
+                    MaxWeight = dr.MaxWeight,
+                    Model = dr.Model,
+                    Status = dr.Status,
+                    Battery = dr.Battery
+                });
+            }
+
+            return drones;
+        }
+
+        public List<Customer> GetCustomers()
+        {
+            List<Customer> customers = new();
+
+            foreach (var cus in DataSource.customers)
+            {
+                customers.Add(new()
+                {
+                    Id = cus.Id,
+                    Name = cus.Name,
+                    Phone = cus.Phone,
+                    Longitude = cus.Longitude,
+                    Lattitude = cus.Lattitude,
+                });
+            }
+
+            return customers;
+        }
+
+        public List<Package> GetPackages()
+        {
+            List <Package> packages = new();
+
+            foreach (var pck in DataSource.packages)
+            {
+                packages.Add(new()
+                {
+                    Id = pck.Id,
+                    SenderId = pck.SenderId,
+                    TargetId = pck.TargetId,
+                    Weight = pck.Weight,
+                    Priority = pck.Priority,
+                    Requested = pck.Requested,
+                    Scheduled = pck.Scheduled,
+                    PickedUp = pck.PickedUp,
+                    Delivered = pck.Delivered,
+                    DroneId = pck.DroneId
+                });
+            }
+
+            return packages;
+        }
+
+        public List<Package> GetNotScheduledPackages()
+        {
+            List<Package> tmpPackages = DataSource.packages.FindAll(pck => pck.DroneId == -1);
+            List<Package> packages = new();
+
+            foreach (var pck in tmpPackages)
+            {
+                packages.Add(new()
+                {
+                    Id = pck.Id,
+                    SenderId = pck.SenderId,
+                    TargetId = pck.TargetId,
+                    Weight = pck.Weight,
+                    Priority = pck.Priority,
+                    Requested = pck.Requested,
+                    Scheduled = pck.Scheduled,
+                    PickedUp = pck.PickedUp,
+                    Delivered = pck.Delivered,
+                    DroneId = pck.DroneId
+                });
+            }
+
+            return packages;
+        }
+
+        public List<Station> GetFreeStations()
+        {
+            List < Station> tmpStations = DataSource.stations.FindAll(st => st.FreeChargeSlots != 0);
+            List<Station> stations = new();
+
+            foreach (var st in tmpStations)
+            {
+                stations.Add(new()
+                {
+                    Id = st.Id,
+                    Name = st.Name,
+                    FreeChargeSlots = st.FreeChargeSlots,
+                    Longitude = st.Longitude,
+                    Lattitude = st.Lattitude,
+                });
+            }
+
+            return stations;
+        }
+
+
+
 
 
 
