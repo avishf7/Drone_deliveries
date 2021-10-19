@@ -28,8 +28,8 @@ namespace DalObject
             internal int PackageIdCounter;
 
         }
-        Config config;
 
+        internal static Config config;
 
         /// <summary>
         /// 
