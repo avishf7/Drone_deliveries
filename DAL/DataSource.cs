@@ -28,6 +28,8 @@ namespace DalObject
             internal int PackageIdCounter;
 
         }
+        Config config;
+
 
         /// <summary>
         /// 
@@ -90,7 +92,7 @@ namespace DalObject
 
                 });
 
-                Config config = new()
+                config = new()
                 {
                     PackageIdCounter = packages.Max(pck => pck.Id) + 1
                 };
