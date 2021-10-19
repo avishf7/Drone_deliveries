@@ -205,34 +205,40 @@ namespace ConsoleUI
                                     Console.WriteLine("\n");
                                     break;
                                 case MenuOptions.ListViewOptions.STATIONS:
-                                    foreach (var st in getStations)
+                                    foreach (var st in dalObject.GetStations())
                                     {
                                         Console.WriteLine(st + "\n");
                                     }
                                     break;
                                 case MenuOptions.ListViewOptions.DRONES:
-                                    foreach (var dr in getDrone)
+                                    foreach (var dr in dalObject.GetDrones())
                                     {
                                         Console.WriteLine(dr + "\n");
                                     }
                                     break;
                                 case MenuOptions.ListViewOptions.CUSTOMERS:
-                                    foreach (var cu in getCustomer)
+                                    foreach (var cus in dalObject.GetCustomers())
                                     {
-                                        Console.WriteLine(cu + "\n");
+                                        Console.WriteLine(cus + "\n");
                                     }
                                     break;
                                 case MenuOptions.ListViewOptions.PACKAGES:
-                                    foreach (var pck in getPackage)
+                                    foreach (var pck in dalObject.GetPackages())
                                     {
                                         Console.WriteLine(pck + "\n");
                                     }
                                     break;
-                                case MenuOptions.ListViewOptions.UNASSIGNED_STATIONS:
-
-                            
+                                case MenuOptions.ListViewOptions.UNASSIGNED_PACKAGES:
+                                    foreach (var pck in dalObject.GetNotScheduledPackages())
+                                    {
+                                        Console.WriteLine(pck + "\n");
+                                    }
                                     break;
                                 case MenuOptions.ListViewOptions.AVAILABLE_FOR_CHARGING:
+                                    foreach (var st in dalObject.GetFreeStations())
+                                    {
+                                        Console.WriteLine(st + "\n");
+                                    }
                                     break;
                                 default:
                                     Console.WriteLine("\nERROR: invalid choice\n");

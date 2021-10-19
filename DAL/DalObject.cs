@@ -110,6 +110,10 @@ namespace DalObject
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
         public void PickUp(int id)
         {
             Package package = DataSource.packages.Find(pck => pck.Id == id);
@@ -117,6 +121,10 @@ namespace DalObject
             package.PickedUp = DateTime.Now;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
         public void Deliver(int id)
         {
             Package package = DataSource.packages.Find(pck => pck.Id == id);
@@ -124,6 +132,11 @@ namespace DalObject
             package.Delivered = DateTime.Now;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <param name="stationId"></param>
         public void SendDroneForCharge(int droneId, int stationId)
         {
             Drone drone = DataSource.drones.Find(drn => drn.Id == droneId);
@@ -137,6 +150,10 @@ namespace DalObject
             });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="droneId"></param>
         public void RealeseDroneFromCharge(int droneId)
         {
             Drone drone = DataSource.drones.Find(drn => drn.Id == droneId);
@@ -146,6 +163,11 @@ namespace DalObject
             drone.Battery = 100;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="stationId"></param>
+        /// <returns></returns>
         public Station GetStation(int stationId)
         {
             Station tmp = DataSource.stations.Find(st => st.Id == stationId);
@@ -160,6 +182,11 @@ namespace DalObject
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <returns></returns>
         public Drone GetDrone(int droneId)
         {
             Drone tmp = DataSource.drones.Find(dr => dr.Id == droneId);
@@ -174,6 +201,11 @@ namespace DalObject
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <returns></returns>
         public Customer GetCustomer(int customerId)
         {
             Customer tmp = DataSource.customers.Find(cus => cus.Id == customerId);
@@ -189,6 +221,11 @@ namespace DalObject
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="packageId"></param>
+        /// <returns></returns>
         public Package GetPackage(int packageId)
         {
             Package tmp = DataSource.packages.Find(pck => pck.Id == packageId);
@@ -208,6 +245,10 @@ namespace DalObject
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public List<Station> GetStations()
         {
             List<Station> stations = new();
@@ -227,6 +268,10 @@ namespace DalObject
             return stations;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public List<Drone> GetDrones()
         {
             List < Drone > drones = new();
@@ -247,6 +292,10 @@ namespace DalObject
             return drones;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public List<Customer> GetCustomers()
         {
             List<Customer> customers = new();
@@ -266,6 +315,10 @@ namespace DalObject
             return customers;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public List<Package> GetPackages()
         {
             List <Package> packages = new();
@@ -290,6 +343,10 @@ namespace DalObject
             return packages;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public List<Package> GetNotScheduledPackages()
         {
             List<Package> tmpPackages = DataSource.packages.FindAll(pck => pck.DroneId == -1);
@@ -315,6 +372,10 @@ namespace DalObject
             return packages;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public List<Station> GetFreeStations()
         {
             List < Station> tmpStations = DataSource.stations.FindAll(st => st.FreeChargeSlots != 0);
@@ -334,11 +395,5 @@ namespace DalObject
 
             return stations;
         }
-
-
-
-
-
-
     }
 }
