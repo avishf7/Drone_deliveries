@@ -122,14 +122,23 @@ namespace ConsoleUI
                                     break;
                                 case MenuOptions.UpdateOptions.PICKING_UP:
                                     Console.WriteLine("Enter package ID for picking up: ");
+                                    dalObject.PickUp(int.Parse(Console.ReadLine()));
                                     break;
                                 case MenuOptions.UpdateOptions.SUPPLY:
                                     Console.WriteLine("Enter package ID for supply : ");
-
+                                    dalObject.Deliver(int.Parse(Console.ReadLine()));
                                     break;
                                 case MenuOptions.UpdateOptions.CHARGING:
+                                    Console.WriteLine("Enter drone ID for charge : ");
+                                   int drId =  (int.Parse(Console.ReadLine()));
+                                    Console.WriteLine("Enter sttion ID for charge : ");
+                                    int stId = (int.Parse(Console.ReadLine()));
+                                    dalObject.SendDroneForCharge(drId, stId);
                                     break;
                                 case MenuOptions.UpdateOptions.RELEASE:
+                                    Console.WriteLine("Enter drone ID for release : ");
+                                    dalObject.RealeseDroneFromCharge(int.Parse(Console.ReadLine()));
+
                                     break;
 
                                 default:
@@ -155,12 +164,20 @@ namespace ConsoleUI
                                     Console.WriteLine("\n");
                                     break;
                                 case MenuOptions.DisplayOptions.STATION:
+                                    Console.WriteLine("Enter statio ID to see: ");
+                                    dalObject.GetStation(int.Parse(Console.ReadLine()));
                                     break;
                                 case MenuOptions.DisplayOptions.DRONE:
+                                    Console.WriteLine("Enter drone ID to see: ");
+                                    dalObject.GetDrone(int.Parse(Console.ReadLine()));
                                     break;
                                 case MenuOptions.DisplayOptions.CUSTOMER:
+                                    Console.WriteLine("Enter customer ID to see: ");
+                                    dalObject.GetCustomer(int.Parse(Console.ReadLine()));
                                     break;
                                 case MenuOptions.DisplayOptions.PACKAGE:
+                                    Console.WriteLine("Enter package ID to see: ");
+                                    dalObject.GetPackage(int.Parse(Console.ReadLine()));
                                     break;
 
                                 default:
@@ -186,18 +203,34 @@ namespace ConsoleUI
                                     Console.WriteLine("\n");
                                     break;
                                 case MenuOptions.ListViewOptions.STATIONS:
+                                    foreach (var st in getStations)
+                                    {
+                                        Console.WriteLine(st + "\n");
+                                    }
                                     break;
                                 case MenuOptions.ListViewOptions.DRONES:
+                                    foreach (var dr in getDrone)
+                                    {
+                                        Console.WriteLine(dr + "\n");
+                                    }
                                     break;
                                 case MenuOptions.ListViewOptions.CUSTOMERS:
+                                    foreach (var cu in getCustomer)
+                                    {
+                                        Console.WriteLine(cu + "\n");
+                                    }
                                     break;
                                 case MenuOptions.ListViewOptions.PACKAGES:
+                                    foreach (var pck in getPackage)
+                                    {
+                                        Console.WriteLine(pck + "\n");
+                                    }
                                     break;
                                 case MenuOptions.ListViewOptions.UNASSIGNED_STATIONS:
+                            
                                     break;
                                 case MenuOptions.ListViewOptions.AVAILABLE_FOR_CHARGING:
                                     break;
- 
                                 default:
                                     Console.WriteLine("\nERROR: invalid choice\n");
                                     break;
