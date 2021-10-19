@@ -25,11 +25,9 @@ namespace DalObject
         /// </summary>
         internal class Config
         {
-            internal int PackageIdCounter;
+            internal static int PackageIdCounter;
 
         }
-
-        internal static Config config;
 
         /// <summary>
         /// 
@@ -92,10 +90,7 @@ namespace DalObject
 
                 });
 
-                config = new()
-                {
-                    PackageIdCounter = packages.Max(pck => pck.Id) + 1
-                };
+                Config.PackageIdCounter = packages.Max(pck => pck.Id) + 1;
             }
 
 

@@ -10,107 +10,56 @@ namespace DalObject
     {
         List<DroneCharge> droneCharges = new();
 
-        public void AddDrone()
+        public DalObject()
         {
-            Console.WriteLine("Enter drones ID: ");
-            int id = int.Parse(Console.ReadLine());
-            Console.WriteLine("Enter drones model: ");
-            string model = (Console.ReadLine());
-            Console.WriteLine("Enter drones Weight - To LIGHT enter 0, to MEDIUM enter 1 and to HEAVY enter 2: ");
-            Weight maxweight = (Weight)int.Parse(Console.ReadLine());
-            Console.WriteLine("Enter drones status - To  AVAILABLE  enter 0, to MAINTENANCE enter 1 and to DELIVERY enter 2: ");
-            DroneStatuses status = (DroneStatuses)int.Parse(Console.ReadLine());
-            double battery = 100.0;
-
-
-            DataSource.drones.Add(new() { Id = id, Model = model, MaxWeight = maxweight, Status = status, Battery = battery });
+            DataSource.Initialize();
         }
 
-        public void AddStation()
+        public void AddDrone(int id,string model,Weight maxWeight,DroneStatuses status)
         {
-            Console.WriteLine("Enter stations ID: ");
-            int id = int.Parse(Console.ReadLine());
-            Console.WriteLine("Enter drones name: ");
-            string name = (Console.ReadLine());
-            Console.WriteLine("Enter num of free station: ");
-            int numOfFreeStation = int.Parse(Console.ReadLine());
-            Console.WriteLine("Enter longitude of stations adress: ");
-            double longitude = (int)double.Parse(Console.ReadLine());
-            Console.WriteLine("Enter lattitude of stations adress: ");
-            double lattitude = (int)double.Parse(Console.ReadLine());
+            DataSource.drones.Add(new() { Id = id, Model = model, MaxWeight = maxWeight, Status = status, Battery = 100 });
+        }
 
-
+        public void AddStation(int id, string name, int numOfFreeStation,double Longitude, double lattitude)
+        {
             DataSource.stations.Add(new()
             {
                 Id = id,
                 Name = name,
                 FreeChargeSlots = numOfFreeStation,
-                Longitude = lattitude,
+                Longitude = Longitude,
                 Lattitude = lattitude
             });
         }
 
-        public void AddCustomer()
+        public void AddCustomer(int id, string name, string phone,double longitude, double lattitude)
         {
-            Console.WriteLine("Enter customers ID: ");
-            int id = int.Parse(Console.ReadLine());
-            Console.WriteLine("Enter customers name: ");
-            string name = (Console.ReadLine());
-            Console.WriteLine("Enter customers phone: ");
-            string phone = (Console.ReadLine());
-            Console.WriteLine("Enter longitude of customers adress: ");
-            double longitude = (int)double.Parse(Console.ReadLine());
-            Console.WriteLine("Enter lattitude of customers adress: ");
-            double lattitude = (int)double.Parse(Console.ReadLine());
-
             DataSource.customers.Add(new()
             {
                 Id = id,
                 Name = name,
                 Phone = phone,
-                Longitude = lattitude,
+                Longitude = longitude,
                 Lattitude = lattitude
             });
         }
 
-        public void AddPackage()
+        public void AddPackage(int sendersId, int targetsId, Weight weight, Priorities priority)
         {
-            Console.WriteLine("Enter package's ID: ");
-            int id = int.Parse(Console.ReadLine());
-            Console.WriteLine("Enter targets ID: ");
-            int sendersId = int.Parse(Console.ReadLine());
-            Console.WriteLine("Enter senders ID: ");
-            int targetsId = int.Parse(Console.ReadLine());
-            Console.WriteLine("Enter package's Weight - To LIGHT enter 0, to MEDIUM enter 1 and to HEAVY enter 2: ");
-            Weight maxweight = (Weight)int.Parse(Console.ReadLine());
-            Console.WriteLine("Enter pariority - To NORMAL enter 0, to FAST enter 1 and to EMERENCY enter 2: ");
-            Priorities priority = (Priorities)int.Parse(Console.ReadLine());
-            DateTime requested = DateTime.Now;
-
-
-
             DataSource.packages.Add(new()
             {
-                Id = id,
+                Id = DataSource.Config.PackageIdCounter++,
                 SenderId = sendersId,
                 TargetId = targetsId,
-                Weight = maxweight,
+                Weight = weight,
                 Priority = priority,
-                Requested = requested,
+                Requested = DateTime.Now,
 
             });
-
         }
 
-
-        public void ConnectedPackagToDrone()
+        public void ConnectedPackagToDrone(int id, int droneId)
         {
-            Console.WriteLine("Enter package's ID  for associating: ");
-            int id = int.Parse(Console.ReadLine());
-            Console.WriteLine("Enter drone ID: ");
-            int droneId = int.Parse(Console.ReadLine());
-
-
             Drone drone = DataSource.drones.Find(drn => drn.Id == droneId);
             Package package = DataSource.packages.Find(pck => pck.Id == id);
             package.DroneId = droneId;
