@@ -111,7 +111,7 @@ namespace DalObject
         }
 
         /// <summary>
-        /// 
+        /// Function for collecting a package by skimmer
         /// </summary>
         /// <param name="id"></param>
         public void PickUp(int id)
@@ -122,7 +122,7 @@ namespace DalObject
         }
 
         /// <summary>
-        /// 
+        /// Function for delivering package to customer
         /// </summary>
         /// <param name="id"></param>
         public void Deliver(int id)
@@ -133,7 +133,7 @@ namespace DalObject
         }
 
         /// <summary>
-        /// 
+        /// Function for sending a skimmer for charging at a base station
         /// </summary>
         /// <param name="droneId"></param>
         /// <param name="stationId"></param>
@@ -151,7 +151,7 @@ namespace DalObject
         }
 
         /// <summary>
-        /// 
+        /// Function for releasing a skimmer from charging at a base station
         /// </summary>
         /// <param name="droneId"></param>
         public void RealeseDroneFromCharge(int droneId)
