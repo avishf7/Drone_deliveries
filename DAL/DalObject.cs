@@ -12,7 +12,7 @@ namespace DalObject
     public class DalObject
     {
         /// <summary>
-        /// 
+        /// Set up a list of charging stations.
         /// </summary>
         List<DroneCharge> droneCharges = new();
 
@@ -222,7 +222,7 @@ namespace DalObject
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="packageId"></param>
         /// <returns></returns>
@@ -246,7 +246,7 @@ namespace DalObject
         }
 
         /// <summary>
-        /// 
+        /// Displays a list of base stations
         /// </summary>
         /// <returns></returns>
         public List<Station> GetStations()
@@ -269,7 +269,7 @@ namespace DalObject
         }
 
         /// <summary>
-        /// 
+        /// Displays a list of drone's.
         /// </summary>
         /// <returns></returns>
         public List<Drone> GetDrones()
@@ -293,7 +293,7 @@ namespace DalObject
         }
 
         /// <summary>
-        /// 
+        /// Displays a list of customers.
         /// </summary>
         /// <returns></returns>
         public List<Customer> GetCustomers()
@@ -316,7 +316,7 @@ namespace DalObject
         }
 
         /// <summary>
-        /// 
+        /// Displays a list of package's.
         /// </summary>
         /// <returns></returns>
         public List<Package> GetPackages()
@@ -344,7 +344,7 @@ namespace DalObject
         }
 
         /// <summary>
-        /// 
+        /// Displays a list of packages not yet associated with the glider.
         /// </summary>
         /// <returns></returns>
         public List<Package> GetNotScheduledPackages()
@@ -373,7 +373,7 @@ namespace DalObject
         }
 
         /// <summary>
-        /// 
+        /// Display of base stations with available charging stations
         /// </summary>
         /// <returns></returns>
         public List<Station> GetFreeStations()

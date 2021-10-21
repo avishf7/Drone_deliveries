@@ -51,19 +51,19 @@ namespace DalObject
         internal static List<Customer> customers = new();
 
         /// <summary>
-        /// 
+        /// A class containing static fields to indicate the first free element in each list.
         /// </summary>
         internal class Config
         {
             /// <summary>
-            /// 
+            /// Set up a static function with internal permission to make a running code for a package.
             /// </summary>
             internal static int PackageIdCounter;
 
         }
 
         /// <summary>
-        /// 
+        /// Enter data for all the structures we defined in CS.
         /// </summary>
         internal static void Initialize()
         {
@@ -127,9 +127,9 @@ namespace DalObject
         }
 
         /// <summary>
-        /// 
+        /// Looking for a free drone.
         /// </summary>
-        /// <returns></returns>
+        /// <returns><drone/returns>
         private static Drone GetAvailableDrone()
         {
             Drone drone;
