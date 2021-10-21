@@ -9,16 +9,16 @@ namespace IDAL
     namespace DO
     {
         /// <summary>
-        /// 
+        /// A structure containing the details of the charging station
         /// </summary>
         public struct DroneCharge
         {
             /// <summary>
-            /// 
+            /// Gets the droneId;
             /// </summary>
             public int DroneId { get; set; }
             /// <summary>
-            /// 
+            /// Gets the stationId;
             /// </summary>
             public int StationId { get; set; }
 

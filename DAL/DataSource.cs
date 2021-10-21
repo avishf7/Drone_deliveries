@@ -25,28 +25,28 @@ namespace DalObject
         /// </summary>
         static string[] phones = new string[10] { "0546273849", "0546223849", "0546211849", "0546413849", "0546254849", "0546273878", "0547273849", "0546273749", "0546277849", "0546273847" };
         /// <summary>
-        /// 
+        /// Create a static array that contains stations name.
         /// </summary>
         static string[] stationNames = new string[4] { "Electric Charging Station", "Gnrgy Charging Station", "VIRTA Charging Station", "EV-Edge Charging Station" };
         /// <summary>
-        /// 
+        ///  Create a static array that contains drone's model.
         /// </summary>
         static string[] models = new string[3] { "MAVIC MINI 2", "Mavic Air 2", "COMBO AIR 2S" };
 
         /// <summary>
-        /// 
+        /// Create a static drone list. 
         /// </summary>
         internal static List<Drone> drones = new();
         /// <summary>
-        /// 
+        /// Create a static station list.
         /// </summary>
         internal static List<Station> stations = new();
         /// <summary>
-        /// 
+        /// Create a static package list.
         /// </summary>
         internal static List<Package> packages = new();
         /// <summary>
-        /// 
+        /// Create a static Customer list.
         /// </summary>
         internal static List<Customer> customers = new();
 

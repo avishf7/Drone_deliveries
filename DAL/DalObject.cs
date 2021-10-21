@@ -162,7 +162,7 @@ namespace DalObject
             drone.Status = DroneStatuses.AVAILABLE;
             drone.Battery = 100;
         }
-
+        /*איפה הפונקציה של הוספת והסרת העמדה שנתפסה*/
         /// <summary>
         /// 
         /// </summary>
