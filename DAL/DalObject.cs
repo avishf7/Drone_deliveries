@@ -164,7 +164,7 @@ namespace DalObject
         }
         /*איפה הפונקציה של הוספת והסרת העמדה שנתפסה*/
         /// <summary>
-        /// 
+        /// Function for displaying base station
         /// </summary>
         /// <param name="stationId"></param>
         /// <returns></returns>
@@ -183,7 +183,7 @@ namespace DalObject
         }
 
         /// <summary>
-        /// 
+        /// Function for displaying drone.
         /// </summary>
         /// <param name="droneId"></param>
         /// <returns></returns>
@@ -202,7 +202,7 @@ namespace DalObject
         }
 
         /// <summary>
-        /// 
+        /// Function for displaying customer.
         /// </summary>
         /// <param name="customerId"></param>
         /// <returns></returns>
@@ -222,7 +222,7 @@ namespace DalObject
         }
 
         /// <summary>
-        ///
+        ///Function for displaying package.
         /// </summary>
         /// <param name="packageId"></param>
         /// <returns></returns>
