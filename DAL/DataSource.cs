@@ -129,7 +129,7 @@ namespace DalObject
         /// <summary>
         /// Looking for a free drone.
         /// </summary>
-        /// <returns><drone/returns>
+        /// <returns>Available drone<drone/returns>
         private static Drone GetAvailableDrone()
         {
             Drone drone;
