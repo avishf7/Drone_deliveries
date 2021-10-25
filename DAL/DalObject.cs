@@ -32,6 +32,16 @@ namespace DalObject
         }
 
         /// <summary>
+        /// Function of updating a drone.
+        /// </summary>
+        /// <param name="drone">Drone to update</param>
+        public void UpdateDrone(Drone drone)
+        {
+           int iU = DataSource.drones.FindIndex(dr => dr.Id == drone.Id);
+            DataSource.drones.Insert(iU, drone);
+        }
+
+        /// <summary>
         /// Function for displaying drone.
         /// </summary>
         /// <param name="droneId">The id of drone</param>
@@ -126,6 +136,16 @@ namespace DalObject
         }
 
         /// <summary>
+        /// Function of updating a drone.
+        /// </summary>
+        /// <param name="station">Station to update</param>
+        public void UpdateStation(Station station)
+        {
+            int iU = DataSource.stations.FindIndex(st => st.Id == station.Id);
+            DataSource.stations.Insert(iU, station);
+        }
+
+        /// <summary>
         /// Function for displaying base station
         /// </summary>
         /// <param name="stationId">The id of the station</param>
@@ -204,6 +224,16 @@ namespace DalObject
         }
 
         /// <summary>
+        /// Function of updating a customer.
+        /// </summary>
+        /// <param name="customer">Customer to update</param>
+        public void UpdateCustomer(Customer customer)
+        {
+            int iU = DataSource.customers.FindIndex(cus => cus.Id == customer.Id);
+            DataSource.customers.Insert(iU, customer);
+        }
+
+        /// <summary>
         /// Function for displaying customer.
         /// </summary>
         /// <param name="customerId">The id of customer</param>
@@ -261,6 +291,16 @@ namespace DalObject
         {
             package.Id = DataSource.Config.PackageIdCounter++;
             DataSource.packages.Add(package);
+        }
+
+        /// <summary>
+        /// Function of updating a package.
+        /// </summary>
+        /// <param name="Package">Package to update</param>
+        public void UpdatePackage(Package Package)
+        {
+            int iU = DataSource.packages.FindIndex(pck => pck.Id == Package.Id);
+            DataSource.packages.Insert(iU, Package);
         }
 
         /// <summary>
@@ -409,6 +449,16 @@ namespace DalObject
         public void RemoveDroneCharge(DroneCharge droneCharge)
         {
             DataSource.droneCharges.Remove(droneCharge);
+        }
+
+        /// <summary>
+        /// Function of updating a drone charge.
+        /// </summary>
+        /// <param name="Package">Package to update</param>
+        public void UpdateDroneCharge(DroneCharge droneCharge)
+        {
+            int iU = DataSource.droneCharges.FindIndex(drCh => drCh.DroneId == droneCharge.DroneId);
+            DataSource.droneCharges.Insert(iU, droneCharge);
         }
 
         /// <summary>
