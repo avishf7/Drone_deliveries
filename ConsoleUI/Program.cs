@@ -53,7 +53,15 @@ namespace ConsoleUI
                                     Console.WriteLine("Enter lattitude of stations adress: ");
                                     double lattitude = (int)double.Parse(Console.ReadLine());
 
-                                    dalObject.AddStation(stationId, name, numOfFreeStation, longitude, lattitude);
+                                    dalObject.AddStation(new()
+                                    {
+                                        Id = stationId,
+                                        Name = name,
+                                        FreeChargeSlots = numOfFreeStation,
+                                        Longitude = longitude,
+                                        Lattitude = lattitude
+                                    });
+
                                     break;
                                 case MenuOptions.InsertOptions.DRONE:
                                     Console.WriteLine("Enter drone ID: ");
@@ -61,11 +69,18 @@ namespace ConsoleUI
                                     Console.WriteLine("Enter drone model: ");
                                     string model = (Console.ReadLine());
                                     Console.WriteLine("Enter drone Weight - To LIGHT enter 0, to MEDIUM enter 1 and to HEAVY enter 2: ");
-                                    Weight maxweight = (Weight)int.Parse(Console.ReadLine());
+                                    Weight maxWeight = (Weight)int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter drone status - To  AVAILABLE  enter 0, to MAINTENANCE enter 1 and to DELIVERY enter 2: ");
                                     DroneStatuses status = (DroneStatuses)int.Parse(Console.ReadLine());
 
-                                    dalObject.AddDrone(droneId, model, maxweight, status);
+                                    dalObject.AddDrone(new() 
+                                    { 
+                                        Id = droneId, Model = model,
+                                        MaxWeight = maxWeight,
+                                        Status = status,
+                                        Battery = 100
+                                    });
+
                                     break;
                                 case MenuOptions.InsertOptions.CUSTOMER:
                                     Console.WriteLine("Enter customer ID: ");
@@ -79,7 +94,15 @@ namespace ConsoleUI
                                     Console.WriteLine("Enter lattitude of customers adress: ");
                                     double cusLattitude = (int)double.Parse(Console.ReadLine());
 
-                                    dalObject.AddCustomer(cusId, cusName, phone, cusLongitude, cusLattitude);
+                                    dalObject.AddCustomer(new()
+                                    {
+                                        Id = cusId,
+                                        Name = cusName,
+                                        Phone = phone,
+                                        Longitude = cusLongitude,
+                                        Lattitude = cusLattitude
+                                    });
+
                                     break;
                                 case MenuOptions.InsertOptions.PACKAGE:
                                     Console.WriteLine("Enter package ID: ");
@@ -93,7 +116,18 @@ namespace ConsoleUI
                                     Console.WriteLine("Enter pariority - To NORMAL enter 0, to FAST enter 1 and to EMERENCY enter 2: ");
                                     Priorities priority = (Priorities)int.Parse(Console.ReadLine());
 
-                                    dalObject.AddPackage(sendersId, targetsId, weight, priority);
+                                    dalObject.AddPackage(new()
+                                    {
+                                        SenderId = sendersId,
+                                        TargetId = targetsId,
+                                        Weight = weight,
+                                        Priority = priority,
+                                        Requested = DateTime.Now,
+                                        Scheduled = DateTime.MinValue,
+                                        PickedUp = DateTime.MinValue,
+                                        Delivered = DateTime.MinValue,
+                                        DroneId = -1
+                                    });
                                     break;
 
                                 default:
@@ -277,7 +311,7 @@ namespace ConsoleUI
                                     longitude = double.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter station ID to calculate from: ");
                                     Station station = dalObject.GetStation(int.Parse(Console.ReadLine()));
-                                    Console.WriteLine("\nthe distance between " + lattitude + "\u00B0N ," + longitude + "\u00B0E to station " + station.Id + " is " + Distance(lattitude, longitude,station.Lattitude,station.Longitude) + " KM");
+                                    Console.WriteLine("\nthe distance between " + lattitude + "\u00B0N ," + longitude + "\u00B0E to station " + station.Id + " is " + Distance(lattitude, longitude, station.Lattitude, station.Longitude) + " KM");
                                     break;
                                 case MenuOptions.DistanceOptions.CUSTOMER:
                                     Console.WriteLine("Enter lattitude: ");
