@@ -90,10 +90,10 @@ namespace DalObject
                 stations.Add(new()
                 {
                     Id = rand.Next(10),
-                    Name = customerNames[rand.Next(10)],
+                    Name = stationNames[rand.Next(4)],
                     FreeChargeSlots = rand.Next(4),
-                    Longitude = 32 + rand.NextDouble(),
-                    Lattitude = 35 + rand.NextDouble(),
+                    Lattitude = 32 + rand.NextDouble(),
+                    Longitude = 35 + rand.NextDouble(),
                 });
             }
 
@@ -105,8 +105,8 @@ namespace DalObject
                     Id = rand.Next(10),
                     Name = customerNames[rand.Next(10)],
                     Phone = phones[rand.Next(10)],
-                    Longitude = 32 + rand.NextDouble(),
-                    Lattitude = 35 + rand.NextDouble(),
+                    Lattitude = 32 + rand.NextDouble(),
+                    Longitude = 35 + rand.NextDouble(),
                 });
             }
 

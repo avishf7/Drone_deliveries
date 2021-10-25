@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using IDAL.DO;
 
 
+
 namespace ConsoleUI
 {
     
@@ -169,20 +170,20 @@ namespace ConsoleUI
                                     Console.WriteLine("\n");
                                     break;
                                 case MenuOptions.DisplayOptions.STATION:
-                                    Console.WriteLine("Enter statio ID to see: ");
-                                    Console.WriteLine(dalObject.GetStation(int.Parse(Console.ReadLine())) + "\n");
+                                    Console.WriteLine("Enter station ID to see: ");
+                                    Console.WriteLine("\n" + dalObject.GetStation(int.Parse(Console.ReadLine())));
                                     break;
                                 case MenuOptions.DisplayOptions.DRONE:
                                     Console.WriteLine("Enter drone ID to see: ");
-                                    Console.WriteLine(dalObject.GetDrone(int.Parse(Console.ReadLine())) + "\n");
+                                    Console.WriteLine("\n" + dalObject.GetDrone(int.Parse(Console.ReadLine())));
                                     break;
                                 case MenuOptions.DisplayOptions.CUSTOMER:
                                     Console.WriteLine("Enter customer ID to see: ");
-                                    Console.WriteLine(dalObject.GetCustomer(int.Parse(Console.ReadLine())) + "\n");
+                                    Console.WriteLine("\n" + dalObject.GetCustomer(int.Parse(Console.ReadLine())));
                                     break;
                                 case MenuOptions.DisplayOptions.PACKAGE:
                                     Console.WriteLine("Enter package ID to see: ");
-                                    Console.WriteLine(dalObject.GetPackage(int.Parse(Console.ReadLine())) + "\n");
+                                    Console.WriteLine("\n" + dalObject.GetPackage(int.Parse(Console.ReadLine())));
                                     break;
 
                                 default:
@@ -210,37 +211,37 @@ namespace ConsoleUI
                                 case MenuOptions.ListViewOptions.STATIONS:
                                     foreach (var st in dalObject.GetStations())
                                     {
-                                        Console.WriteLine(st + "\n");
+                                        Console.WriteLine("\n" + st);
                                     }
                                     break;
                                 case MenuOptions.ListViewOptions.DRONES:
                                     foreach (var dr in dalObject.GetDrones())
                                     {
-                                        Console.WriteLine(dr + "\n");
+                                        Console.WriteLine("\n" + dr );
                                     }
                                     break;
                                 case MenuOptions.ListViewOptions.CUSTOMERS:
                                     foreach (var cus in dalObject.GetCustomers())
                                     {
-                                        Console.WriteLine(cus + "\n");
+                                        Console.WriteLine("\n" + cus);
                                     }
                                     break;
                                 case MenuOptions.ListViewOptions.PACKAGES:
                                     foreach (var pck in dalObject.GetPackages())
                                     {
-                                        Console.WriteLine(pck + "\n");
+                                        Console.WriteLine("\n" + pck);
                                     }
                                     break;
                                 case MenuOptions.ListViewOptions.UNASSIGNED_PACKAGES:
                                     foreach (var pck in dalObject.GetNotScheduledPackages())
                                     {
-                                        Console.WriteLine(pck + "\n");
+                                        Console.WriteLine("\n" + pck);
                                     }
                                     break;
                                 case MenuOptions.ListViewOptions.AVAILABLE_FOR_CHARGING:
                                     foreach (var st in dalObject.GetFreeStations())
                                     {
-                                        Console.WriteLine(st + "\n");
+                                        Console.WriteLine("\n" + st);
                                     }
                                     break;
                                 default:
@@ -252,6 +253,51 @@ namespace ConsoleUI
 
                         break;
 
+                    case MenuOptions.OpeningOptions.DISTANCE:
+                        MenuOptions.DistanceOptions DiChoice;
+
+                        do
+                        {
+
+                            try { DiChoice = MenuOptions.PrintDistanceMenu(); }
+                            catch (FormatException) { DiChoice = MenuOptions.DistanceOptions.DEFAULT; }
+
+                            double lattitude, longitude;
+
+                            switch (DiChoice)
+                            {
+                                case MenuOptions.DistanceOptions.BACK:
+                                    Console.WriteLine("\n");
+                                    break;
+                                case MenuOptions.DistanceOptions.STATION:
+                                    
+                                    Console.WriteLine("Enter lattitude: ");
+                                    lattitude = double.Parse(Console.ReadLine());
+                                    Console.WriteLine("Enter longitude: ");
+                                    longitude = double.Parse(Console.ReadLine());
+                                    Console.WriteLine("Enter station ID to calculate from: ");
+                                    Station station = dalObject.GetStation(int.Parse(Console.ReadLine()));
+                                    Console.WriteLine("\nthe distance between " + lattitude + "\u00B0N ," + longitude + "\u00B0E to station " + station.Id + " is " + station.distanceFrom(lattitude, longitude) + " KM");
+                                    break;
+                                case MenuOptions.DistanceOptions.CUSTOMER:
+                                    Console.WriteLine("Enter lattitude: ");
+                                    lattitude = double.Parse(Console.ReadLine());
+                                    Console.WriteLine("Enter longitude: ");
+                                    longitude = double.Parse(Console.ReadLine());
+                                    Console.WriteLine("Enter customer ID to calculate from: ");
+                                    Customer customer = dalObject.GetCustomer(int.Parse(Console.ReadLine()));
+                                    Console.WriteLine("\nthe distance between " + lattitude + "\u00B0N ," + longitude + "\u00B0E to station " + customer.Id + " is " + customer.distanceFrom(lattitude, longitude) + " KM");
+                                    break;
+                                case MenuOptions.DistanceOptions.DEFAULT:
+                                    Console.WriteLine("\nERROR: invalid choice\n");
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                        } while ((int)DiChoice != 0);
+
+                        break;
                     default:
                         Console.WriteLine("\nERROR: invalid choice\n");
                         break;

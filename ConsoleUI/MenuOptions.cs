@@ -14,8 +14,8 @@ namespace ConsoleUI
     {
         public enum OpeningOptions
         {
-            EXIT, ADD, UPDATE, PRINT, PRINT_LISTS,
-            FIRST_MENU_OPTION = EXIT, LAST_MENU_OPTION = PRINT_LISTS, DEFAULT
+            EXIT, ADD, UPDATE, PRINT, PRINT_LISTS, DISTANCE,
+            FIRST_MENU_OPTION = EXIT, LAST_MENU_OPTION = DISTANCE, DEFAULT
         };
 
         public enum InsertOptions
@@ -42,14 +42,21 @@ namespace ConsoleUI
             FIRST_MENU_OPTION = BACK, LAST_MENU_OPTION = AVAILABLE_FOR_CHARGING, DEFAULT
         };
 
+        public enum DistanceOptions
+        {
+            BACK, STATION, CUSTOMER,
+            FIRST_MENU_OPTION = BACK, LAST_MENU_OPTION = CUSTOMER, DEFAULT
+        };
+
 
         private static string[] OpeningMenuOptionLine = new string[(int)OpeningOptions.LAST_MENU_OPTION + 1]
         {
             "Exit",
             "Insert options",
-            "Update Options",
-            "Display Options",
-            "List View Options"
+            "Update options",
+            "Display options",
+            "List View options",
+            "Distance options(bonus)"
         };
 
         private static string[] InsertMenuOptionLine = new string[(int)InsertOptions.LAST_MENU_OPTION + 1]
@@ -89,6 +96,13 @@ namespace ConsoleUI
             "Show the list of packages",
             "Show a list of packages that have not yet been assigned to the drone",
             "Show of stations with available charging stations",
+       };
+
+        private static string[] DistanceMenuOptionLine = new string[(int)DistanceOptions.LAST_MENU_OPTION + 1]
+       {
+            "Back to the main menu",
+            "Calculate distance from station",
+            "Calculate distance from customer"
        };
 
 
@@ -179,6 +193,24 @@ namespace ConsoleUI
                 chosen = (ListViewOptions)s;
             else
                 throw new ArgumentException();
+
+            return chosen;
+        }
+
+        public static DistanceOptions PrintDistanceMenu()
+        {
+            DistanceOptions chosen;
+
+            Console.WriteLine("\nDistance options:\n");
+
+            for (chosen = DistanceOptions.FIRST_MENU_OPTION; chosen <= DistanceOptions.LAST_MENU_OPTION; ++chosen)
+                Console.WriteLine("{0,10}\t--\t" + DistanceMenuOptionLine[(int)chosen], (int)chosen);
+
+            Console.Write("\nPlease choose an option: ");
+            if (int.TryParse(Console.ReadLine(), out int s))
+                chosen = (DistanceOptions)s;
+            else
+                throw new FormatException();
 
             return chosen;
         }

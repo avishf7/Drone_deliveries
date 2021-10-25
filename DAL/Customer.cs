@@ -30,10 +30,40 @@ namespace IDAL
             /// </summary>
             public double Lattitude { get; set; }
 
+            /// <summary>
+            ///  Calculate the distance (KM) between the received location and the customer 
+            /// according to their coordinates,
+            /// Using a distance calculation formula
+            /// </summary>
+            /// <param name="lattitude">Latitude on the map</param>
+            /// <param name="longitude">longitude on the map</param>
+            /// <returns>the distance (KM) between the received location and the customer</returns>
+            public double distanceFrom(double lattitude, double longitude)
+            {
+                //Converts decimal degrees to radians:
+                var rlat1 = Math.PI * Lattitude / 180;
+                var rlat2 = Math.PI * lattitude / 180;
+                var rLon1 = Math.PI * Longitude / 180;
+                var rLon2 = Math.PI * longitude / 180;
+                var theta = Longitude - longitude;
+                var rtheta = Math.PI * theta / 180;
+
+                //Formula for calculating the distance 
+                //between two coordinates represented by radians:
+                var dist = (Math.Sin(rlat1) * Math.Sin(rlat2)) + Math.Cos(rlat1) *
+                          Math.Cos(rlat2) * Math.Cos(rtheta);
+                dist = Math.Acos(dist);
+
+                dist = dist * 180 / Math.PI;  //Converts radians to decimal degrees
+                dist = dist * 60 * 1.1515;
+
+                return dist * 1.61081082288953;      //Converts to KM
+            }
+
             public override string ToString()
             {
                 return "Details of ID :" + Id + "\nName:" + Name + "\nPhone:" + 
-                    Phone + "\nLongitude: " + Longitude + "\nLattitude: " + Lattitude + "\n";
+                    Phone + "\nLattitude: " + Lattitude + "\nLongitude: " + Longitude + "\n";
             }
         }
     }
