@@ -35,8 +35,8 @@ namespace IDAL
             /// according to their coordinates,
             /// Using a distance calculation formula
             /// </summary>
-            /// <param name="lattitude">Latitude on the map</param>
-            /// <param name="longitude">longitude on the map</param>
+            /// <param name="lattitude">Start latitude on the map</param>
+            /// <param name="longitude">Start longitude on the map</param>
             /// <returns>the distance (KM) between the received location and the customer</returns>
             public double distanceFrom(double lattitude, double longitude)
             {

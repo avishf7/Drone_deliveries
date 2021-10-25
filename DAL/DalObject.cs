@@ -91,12 +91,27 @@ namespace DalObject
                 DroneId = -1
             });
         }
+
+        /// <summary>
+        /// Function of adding a droneCharge.
+        /// </summary>
+        /// <param name="droneId">Drone to charge</param>
+        /// <param name="stationId">Charge station</param>
+        public void AddDroneCharge(int droneId, int stationId)
+        {
+            DataSource.droneCharges.Add(new()
+            {
+                DroneId = droneId,
+                StationId = stationId
+            });
+        }
+
         /// <summary>
         /// Function to connect packag to drone .
         /// </summary>
         /// <param name="id">The id of the package </param>
         /// <param name="droneId">The id of the drone</param>
-        public void ConnectedPackagToDrone(int id, int droneId)
+        public void ConnectPackageToDrone(int id, int droneId)
         {
             Drone drone = DataSource.drones.Find(drn => drn.Id == droneId);
             Package package = DataSource.packages.Find(pck => pck.Id == id);
@@ -105,6 +120,8 @@ namespace DalObject
             drone.Status = DroneStatuses.DELIVERY;
 
         }
+        
+
 
         /// <summary>
         /// Function for collecting a package by skimmer
@@ -144,6 +161,8 @@ namespace DalObject
                 DroneId = droneId,
                 StationId = stationId
             });
+
+            station.FreeChargeSlots--;
         }
 
         /// <summary>
@@ -153,8 +172,11 @@ namespace DalObject
         public void RealeseDroneFromCharge(int droneId)
         {
             Drone drone = DataSource.drones.Find(drn => drn.Id == droneId);
+            DroneCharge droneCharge = DataSource.droneCharges.Find(drnCh => drnCh.DroneId == droneId);
+            Station station = DataSource.stations.Find(st => st.Id == droneCharge.StationId);
             DataSource.droneCharges.Remove(DataSource.droneCharges.Find(drnCh => drnCh.DroneId == droneId));
 
+            station.FreeChargeSlots++;
             drone.Status = DroneStatuses.AVAILABLE;
             drone.Battery = 100;
         }

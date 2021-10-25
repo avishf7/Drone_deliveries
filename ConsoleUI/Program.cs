@@ -6,17 +6,17 @@ using IDAL.DO;
 
 namespace ConsoleUI
 {
-    
+
     class Program
     {
-        
+
 
         static void Main(string[] args)
         {
             DalObject.DalObject dalObject = new();
             MenuOptions.OpeningOptions ch;
 
-            
+
             do
             {
                 try { ch = MenuOptions.PrintOpeningMenu(); }
@@ -124,7 +124,7 @@ namespace ConsoleUI
                                     Console.WriteLine("Enter drone ID: ");
                                     int droneId = int.Parse(Console.ReadLine());
 
-                                    dalObject.ConnectedPackagToDrone(id, droneId);
+                                    dalObject.ConnectPackageToDrone(id, droneId);
                                     break;
                                 case MenuOptions.UpdateOptions.PICKING_UP:
                                     Console.WriteLine("Enter package ID for picking up: ");
@@ -136,7 +136,7 @@ namespace ConsoleUI
                                     break;
                                 case MenuOptions.UpdateOptions.CHARGING:
                                     Console.WriteLine("Enter drone ID for charge : ");
-                                   int drId =  (int.Parse(Console.ReadLine()));
+                                    int drId = (int.Parse(Console.ReadLine()));
                                     Console.WriteLine("Enter sttion ID for charge : ");
                                     int stId = (int.Parse(Console.ReadLine()));
                                     dalObject.SendDroneForCharge(drId, stId);
@@ -217,7 +217,7 @@ namespace ConsoleUI
                                 case MenuOptions.ListViewOptions.DRONES:
                                     foreach (var dr in dalObject.GetDrones())
                                     {
-                                        Console.WriteLine("\n" + dr );
+                                        Console.WriteLine("\n" + dr);
                                     }
                                     break;
                                 case MenuOptions.ListViewOptions.CUSTOMERS:
@@ -270,14 +270,14 @@ namespace ConsoleUI
                                     Console.WriteLine("\n");
                                     break;
                                 case MenuOptions.DistanceOptions.STATION:
-                                    
+
                                     Console.WriteLine("Enter lattitude: ");
                                     lattitude = double.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter longitude: ");
                                     longitude = double.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter station ID to calculate from: ");
                                     Station station = dalObject.GetStation(int.Parse(Console.ReadLine()));
-                                    Console.WriteLine("\nthe distance between " + lattitude + "\u00B0N ," + longitude + "\u00B0E to station " + station.Id + " is " + station.distanceFrom(lattitude, longitude) + " KM");
+                                    Console.WriteLine("\nthe distance between " + lattitude + "\u00B0N ," + longitude + "\u00B0E to station " + station.Id + " is " + Distance(lattitude, longitude,station.Lattitude,station.Longitude) + " KM");
                                     break;
                                 case MenuOptions.DistanceOptions.CUSTOMER:
                                     Console.WriteLine("Enter lattitude: ");
@@ -286,7 +286,7 @@ namespace ConsoleUI
                                     longitude = double.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter customer ID to calculate from: ");
                                     Customer customer = dalObject.GetCustomer(int.Parse(Console.ReadLine()));
-                                    Console.WriteLine("\nthe distance between " + lattitude + "\u00B0N ," + longitude + "\u00B0E to station " + customer.Id + " is " + customer.distanceFrom(lattitude, longitude) + " KM");
+                                    Console.WriteLine("\nthe distance between " + lattitude + "\u00B0N ," + longitude + "\u00B0E to station " + customer.Id + " is " + Distance(lattitude, longitude, customer.Lattitude, customer.Longitude) + " KM");
                                     break;
                                 case MenuOptions.DistanceOptions.DEFAULT:
                                     Console.WriteLine("\nERROR: invalid choice\n");
@@ -306,8 +306,40 @@ namespace ConsoleUI
             }
             while ((int)ch != 0);
 
-                Console.Read();
+            Console.Read();
 
-            }
+        }
+
+        /// <summary>
+        /// Calculate the distance (KM) between two received locations 
+        /// according to their coordinates,
+        /// Using a distance calculation formula
+        /// </summary>
+        /// <param name="latStart">Start latitude on the map</param>
+        /// <param name="lonStart">Start longitude on the map</param>
+        /// <param name="latEnd">End latitude on the map</param>
+        /// <param name="lonEnd">End longitude on the map</param>
+        /// <returns>distance (KM) between two received locations</returns>
+        static double Distance(double latStart, double lonStart, double latEnd, double lonEnd)
+        {
+            //Converts decimal degrees to radians:
+            var rlat1 = Math.PI * latStart / 180;
+            var rlat2 = Math.PI * latEnd / 180;
+            var rLon1 = Math.PI * lonStart / 180;
+            var rLon2 = Math.PI * lonEnd / 180;
+            var theta = lonStart - lonEnd;
+            var rtheta = Math.PI * theta / 180;
+
+            //Formula for calculating the distance 
+            //between two coordinates represented by radians:
+            var dist = (Math.Sin(rlat1) * Math.Sin(rlat2)) + Math.Cos(rlat1) *
+                      Math.Cos(rlat2) * Math.Cos(rtheta);
+            dist = Math.Acos(dist);
+
+            dist = dist * 180 / Math.PI;  //Converts radians to decimal degrees
+            dist = dist * 60 * 1.1515;
+
+            return dist * 1.61081082288953;      //Converts to KM
+        }
     }
 }
