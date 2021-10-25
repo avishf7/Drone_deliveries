@@ -49,6 +49,10 @@ namespace DalObject
         /// Create a static Customer list.
         /// </summary>
         internal static List<Customer> customers = new();
+        /// <summary>
+        /// Set up a list of charging stations.
+        /// </summary>
+        internal static List<DroneCharge> droneCharges = new();
 
         /// <summary>
         /// A class containing static fields to indicate the first free element in each list.

@@ -11,10 +11,6 @@ namespace DalObject
     /// </summary>
     public class DalObject
     {
-        /// <summary>
-        /// Set up a list of charging stations.
-        /// </summary>
-        List<DroneCharge> droneCharges = new();
 
         /// <summary>
         /// CTOR
@@ -143,7 +139,7 @@ namespace DalObject
             Station station = DataSource.stations.Find(st => st.Id == stationId);
 
             drone.Status = DroneStatuses.MAINTENANCE;
-            droneCharges.Add(new()
+            DataSource.droneCharges.Add(new()
             {
                 DroneId = droneId,
                 StationId = stationId
@@ -157,7 +153,7 @@ namespace DalObject
         public void RealeseDroneFromCharge(int droneId)
         {
             Drone drone = DataSource.drones.Find(drn => drn.Id == droneId);
-            droneCharges.Remove(droneCharges.Find(drnCh => drnCh.DroneId == droneId));
+            DataSource.droneCharges.Remove(DataSource.droneCharges.Find(drnCh => drnCh.DroneId == droneId));
 
             drone.Status = DroneStatuses.AVAILABLE;
             drone.Battery = 100;

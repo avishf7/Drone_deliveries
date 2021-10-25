@@ -170,19 +170,19 @@ namespace ConsoleUI
                                     break;
                                 case MenuOptions.DisplayOptions.STATION:
                                     Console.WriteLine("Enter statio ID to see: ");
-                                    dalObject.GetStation(int.Parse(Console.ReadLine()));
+                                    Console.WriteLine(dalObject.GetStation(int.Parse(Console.ReadLine())) + "\n");
                                     break;
                                 case MenuOptions.DisplayOptions.DRONE:
                                     Console.WriteLine("Enter drone ID to see: ");
-                                    dalObject.GetDrone(int.Parse(Console.ReadLine()));
+                                    Console.WriteLine(dalObject.GetDrone(int.Parse(Console.ReadLine())) + "\n");
                                     break;
                                 case MenuOptions.DisplayOptions.CUSTOMER:
                                     Console.WriteLine("Enter customer ID to see: ");
-                                    dalObject.GetCustomer(int.Parse(Console.ReadLine()));
+                                    Console.WriteLine(dalObject.GetCustomer(int.Parse(Console.ReadLine())) + "\n");
                                     break;
                                 case MenuOptions.DisplayOptions.PACKAGE:
                                     Console.WriteLine("Enter package ID to see: ");
-                                    dalObject.GetPackage(int.Parse(Console.ReadLine()));
+                                    Console.WriteLine(dalObject.GetPackage(int.Parse(Console.ReadLine())) + "\n");
                                     break;
 
                                 default:
