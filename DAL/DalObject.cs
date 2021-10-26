@@ -85,37 +85,46 @@ namespace DalObject
         }
 
         /// <summary>
-        /// Function for sending a skimmer for charging at a base station
+        /// A function that implements a skimmer association mode for a package
         /// </summary>
-        /// <param name="droneId">The id of the drone</param>
-        /// <param name="stationId">The id of the station</param>
-        public void SendDroneForCharge(int droneId, int stationId)
+        /// <param name="id">The id of the drone</param>
+        public void AssigningSkimmerToPackage(int id)
         {
-            Drone drone = DataSource.drones.Find(drn => drn.Id == droneId);
-            Station station = DataSource.stations.Find(st => st.Id == stationId);
+            Drone drone = DataSource.drones.Find(drn => drn.Id == id);
 
-            drone.Status = DroneStatuses.MAINTENANCE;
-            DataSource.droneCharges.Add(new()
-            {
-                DroneId = droneId,
-                StationId = stationId
-            });
-
-            station.FreeChargeSlots--;
+            drone.Status = DroneStatuses.DELIVERY;
         }
 
         /// <summary>
-        /// Function for releasing a skimmer from charging at a base station
+        /// A function that implements a skimmer mode that has completed the shipment
+        /// </summary>
+        /// <param name="id">The id of the drone</param>
+        public void DroneDeliverEnded(int id)
+        {
+            Drone drone = DataSource.drones.Find(drn => drn.Id == id);
+
+            drone.Status = DroneStatuses.AVAILABLE;
+        }
+
+        /// <summary>
+        /// A function that implements a mode of sending a skimmer to a charging station
+        /// </summary>
+        /// <param name="droneId">The id of the drone</param>
+        public void SendDroneForCharge(int droneId)
+        {
+            Drone drone = DataSource.drones.Find(drn => drn.Id == droneId);
+
+            drone.Status = DroneStatuses.MAINTENANCE;
+        }
+
+        /// <summary>
+        /// A function that implements a skimmer release mode from a charging position
         /// </summary>
         /// <param name="droneId">The id of the drone</param>
         public void RealeseDroneFromCharge(int droneId)
         {
             Drone drone = DataSource.drones.Find(drn => drn.Id == droneId);
-            DroneCharge droneCharge = DataSource.droneCharges.Find(drnCh => drnCh.DroneId == droneId);
-            Station station = DataSource.stations.Find(st => st.Id == droneCharge.StationId);
-            DataSource.droneCharges.Remove(DataSource.droneCharges.Find(drnCh => drnCh.DroneId == droneId));
 
-            station.FreeChargeSlots++;
             drone.Status = DroneStatuses.AVAILABLE;
             drone.Battery = 100;
         }
@@ -163,6 +172,8 @@ namespace DalObject
                 Lattitude = tmp.Lattitude,
             };
         }
+
+
         /// <summary>
         /// Displays a list of base stations
         /// </summary>
@@ -208,6 +219,28 @@ namespace DalObject
             }
 
             return stations;
+        }
+
+        /// <summary>
+        /// A function that implements a state of perception of a charging position
+        /// </summary>
+        /// <param name="stationId">The id of the station</param>
+        public void UsingChargingStation( int stationId)
+        {
+            Station station = DataSource.stations.Find(st => st.Id == stationId);
+
+            station.FreeChargeSlots--;
+        }
+
+        /// <summary>
+        /// A function that implements a state of releasing a charging position
+        /// </summary>
+        /// <param name="stationId">The id of the station</param>
+        public void RealeseChargingStation(int stationId)
+        {
+            Station station = DataSource.stations.Find(st => st.Id == stationId);
+
+            station.FreeChargeSlots++;
         }
 
         #endregion
@@ -327,12 +360,6 @@ namespace DalObject
             };
         }
 
-
-
-
-
-
-
         /// <summary>
         /// Displays a list of package's.
         /// </summary>
@@ -391,22 +418,20 @@ namespace DalObject
         }
 
         /// <summary>
-        /// Function to connect packag to drone .
+        /// A function that implements a state of connecting a package to a skimmer
         /// </summary>
         /// <param name="id">The id of the package </param>
         /// <param name="droneId">The id of the drone</param>
         public void ConnectPackageToDrone(int id, int droneId)
         {
-            Drone drone = DataSource.drones.Find(drn => drn.Id == droneId);
             Package package = DataSource.packages.Find(pck => pck.Id == id);
+
             package.DroneId = droneId;
             package.Scheduled = DateTime.Now;
-            drone.Status = DroneStatuses.DELIVERY;
-
         }
 
         /// <summary>
-        /// Function for collecting a package by skimmer
+        /// A function that implements the state of a collected package
         /// </summary>
         /// <param name="id">The id of the package </param>
         public void PickUp(int id)
@@ -417,16 +442,14 @@ namespace DalObject
         }
 
         /// <summary>
-        /// Function for delivering package to customer
+        /// A function that implements the state of a delivered package
         /// </summary>
         /// <param name="id">The id of the package</param>
-        public void Deliver(int id)
+        public void PackageDeliver(int id)
         {
             Package package = DataSource.packages.Find(pck => pck.Id == id);
-            Drone drone = DataSource.drones.Find(drn => drn.Id == package.DroneId);
 
             package.Delivered = DateTime.Now;
-            drone.Status = DroneStatuses.AVAILABLE;
         }
 
         #endregion
@@ -499,13 +522,6 @@ namespace DalObject
         }
 
         #endregion
-
-
-
-
-
-
-
 
     }
 }

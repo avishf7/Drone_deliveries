@@ -40,6 +40,7 @@ namespace ConsoleUI
                             {
                                 case MenuOptions.InsertOptions.BACK:
                                     Console.WriteLine("\n");
+
                                     break;
                                 case MenuOptions.InsertOptions.STATION:
                                     Console.WriteLine("Enter station ID: ");
@@ -105,8 +106,6 @@ namespace ConsoleUI
 
                                     break;
                                 case MenuOptions.InsertOptions.PACKAGE:
-                                    Console.WriteLine("Enter package ID: ");
-                                    int id = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter target ID: ");
                                     int sendersId = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter sender ID: ");
@@ -128,6 +127,7 @@ namespace ConsoleUI
                                         Delivered = DateTime.MinValue,
                                         DroneId = -1
                                     });
+
                                     break;
 
                                 default:
@@ -151,6 +151,7 @@ namespace ConsoleUI
                             {
                                 case MenuOptions.UpdateOptions.BACK:
                                     Console.WriteLine("\n");
+
                                     break;
                                 case MenuOptions.UpdateOptions.ASSOCIATION:
                                     Console.WriteLine("Enter package ID  for associating: ");
@@ -159,25 +160,44 @@ namespace ConsoleUI
                                     int droneId = int.Parse(Console.ReadLine());
 
                                     dalObject.ConnectPackageToDrone(id, droneId);
+                                    dalObject.AssigningSkimmerToPackage(droneId);
+
                                     break;
                                 case MenuOptions.UpdateOptions.PICKING_UP:
                                     Console.WriteLine("Enter package ID for picking up: ");
                                     dalObject.PickUp(int.Parse(Console.ReadLine()));
+
                                     break;
                                 case MenuOptions.UpdateOptions.SUPPLY:
                                     Console.WriteLine("Enter package ID for supply : ");
-                                    dalObject.Deliver(int.Parse(Console.ReadLine()));
+                                    Package pck = dalObject.GetPackage(int.Parse(Console.ReadLine()));
+
+                                    dalObject.PackageDeliver(pck.Id);
+                                    dalObject.DroneDeliverEnded(pck.DroneId);
+
                                     break;
                                 case MenuOptions.UpdateOptions.CHARGING:
                                     Console.WriteLine("Enter drone ID for charge : ");
                                     int drId = (int.Parse(Console.ReadLine()));
                                     Console.WriteLine("Enter sttion ID for charge : ");
                                     int stId = (int.Parse(Console.ReadLine()));
-                                    dalObject.SendDroneForCharge(drId, stId);
+                                    dalObject.SendDroneForCharge(drId);
+                                    dalObject.UsingChargingStation(stId);
+                                    dalObject.AddDroneCharge(new()
+                                    {
+                                        DroneId = drId,
+                                        StationId = stId
+                                    });
+
                                     break;
                                 case MenuOptions.UpdateOptions.RELEASE:
+
                                     Console.WriteLine("Enter drone ID for release : ");
-                                    dalObject.RealeseDroneFromCharge(int.Parse(Console.ReadLine()));
+                                    DroneCharge drCh = dalObject.GetDroneCharge(int.Parse(Console.ReadLine()));
+
+                                    dalObject.RealeseDroneFromCharge(drCh.DroneId);
+                                    dalObject.RealeseChargingStation(drCh.StationId);
+                                    dalObject.RemoveDroneCharge(drCh);
 
                                     break;
 
@@ -202,22 +222,27 @@ namespace ConsoleUI
                             {
                                 case MenuOptions.DisplayOptions.BACK:
                                     Console.WriteLine("\n");
+
                                     break;
                                 case MenuOptions.DisplayOptions.STATION:
                                     Console.WriteLine("Enter station ID to see: ");
                                     Console.WriteLine("\n" + dalObject.GetStation(int.Parse(Console.ReadLine())));
+
                                     break;
                                 case MenuOptions.DisplayOptions.DRONE:
                                     Console.WriteLine("Enter drone ID to see: ");
                                     Console.WriteLine("\n" + dalObject.GetDrone(int.Parse(Console.ReadLine())));
+
                                     break;
                                 case MenuOptions.DisplayOptions.CUSTOMER:
                                     Console.WriteLine("Enter customer ID to see: ");
                                     Console.WriteLine("\n" + dalObject.GetCustomer(int.Parse(Console.ReadLine())));
+
                                     break;
                                 case MenuOptions.DisplayOptions.PACKAGE:
                                     Console.WriteLine("Enter package ID to see: ");
                                     Console.WriteLine("\n" + dalObject.GetPackage(int.Parse(Console.ReadLine())));
+
                                     break;
 
                                 default:
@@ -241,42 +266,49 @@ namespace ConsoleUI
                             {
                                 case MenuOptions.ListViewOptions.BACK:
                                     Console.WriteLine("\n");
+
                                     break;
                                 case MenuOptions.ListViewOptions.STATIONS:
                                     foreach (var st in dalObject.GetStations())
                                     {
                                         Console.WriteLine("\n" + st);
                                     }
+
                                     break;
                                 case MenuOptions.ListViewOptions.DRONES:
                                     foreach (var dr in dalObject.GetDrones())
                                     {
                                         Console.WriteLine("\n" + dr);
                                     }
+
                                     break;
                                 case MenuOptions.ListViewOptions.CUSTOMERS:
                                     foreach (var cus in dalObject.GetCustomers())
                                     {
                                         Console.WriteLine("\n" + cus);
                                     }
+
                                     break;
                                 case MenuOptions.ListViewOptions.PACKAGES:
                                     foreach (var pck in dalObject.GetPackages())
                                     {
                                         Console.WriteLine("\n" + pck);
                                     }
+
                                     break;
                                 case MenuOptions.ListViewOptions.UNASSIGNED_PACKAGES:
                                     foreach (var pck in dalObject.GetNotScheduledPackages())
                                     {
                                         Console.WriteLine("\n" + pck);
                                     }
+
                                     break;
                                 case MenuOptions.ListViewOptions.AVAILABLE_FOR_CHARGING:
                                     foreach (var st in dalObject.GetFreeStations())
                                     {
                                         Console.WriteLine("\n" + st);
                                     }
+
                                     break;
                                 default:
                                     Console.WriteLine("\nERROR: invalid choice\n");
@@ -312,6 +344,7 @@ namespace ConsoleUI
                                     Console.WriteLine("Enter station ID to calculate from: ");
                                     Station station = dalObject.GetStation(int.Parse(Console.ReadLine()));
                                     Console.WriteLine("\nthe distance between " + lattitude + "\u00B0N ," + longitude + "\u00B0E to station " + station.Id + " is " + Distance(lattitude, longitude, station.Lattitude, station.Longitude) + " KM");
+
                                     break;
                                 case MenuOptions.DistanceOptions.CUSTOMER:
                                     Console.WriteLine("Enter lattitude: ");
@@ -321,6 +354,7 @@ namespace ConsoleUI
                                     Console.WriteLine("Enter customer ID to calculate from: ");
                                     Customer customer = dalObject.GetCustomer(int.Parse(Console.ReadLine()));
                                     Console.WriteLine("\nthe distance between " + lattitude + "\u00B0N ," + longitude + "\u00B0E to station " + customer.Id + " is " + Distance(lattitude, longitude, customer.Lattitude, customer.Longitude) + " KM");
+
                                     break;
                                 case MenuOptions.DistanceOptions.DEFAULT:
                                     Console.WriteLine("\nERROR: invalid choice\n");
