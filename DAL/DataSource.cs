@@ -78,9 +78,7 @@ namespace DalObject
                 {
                     Id = rand.Next(10),
                     MaxWeight = Weight.HEAVY,
-                    Model = models[rand.Next(3)],
-                    Status = (DroneStatuses)rand.Next(3),
-                    Battery = 90
+                    Model = models[rand.Next(3)]
                 });
 
             }
@@ -134,13 +132,13 @@ namespace DalObject
         /// Looking for a free drone.
         /// </summary>
         /// <returns>Available drone<drone/returns>
-        private static Drone GetAvailableDrone()
+       private static Drone GetAvailableDrone()
         {
             Drone drone;
-            do
-            {
+           // do
+            //{
                 drone = drones[rand.Next(5)];
-            } while (drone.Status != DroneStatuses.AVAILABLE);
+            //} //while (drone.Status != DroneStatuses.AVAILABLE);
 
             return drone;
         }

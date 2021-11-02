@@ -72,20 +72,21 @@ namespace ConsoleUI
                                     Console.WriteLine("Enter drone Weight - To LIGHT enter 0, to MEDIUM enter 1 and to HEAVY enter 2: ");
                                     Weight maxWeight = (Weight)int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter drone status - To  AVAILABLE  enter 0, to MAINTENANCE enter 1 and to DELIVERY enter 2: ");
-                                    DroneStatuses status = (DroneStatuses)int.Parse(Console.ReadLine());
+                                    //DroneStatuses status = (DroneStatuses)int.Parse(Console.ReadLine());
 
                                     dalObject.AddDrone(new() 
                                     { 
                                         Id = droneId, Model = model,
                                         MaxWeight = maxWeight,
-                                        Status = status,
-                                        Battery = 100
+                                        //Status = status,
+                                        //Battery = 100
                                     });
 
                                     break;
                                 case MenuOptions.InsertOptions.CUSTOMER:
                                     Console.WriteLine("Enter customer ID: ");
                                     int cusId = int.Parse(Console.ReadLine());
+                                    dalObject.ComparisonCustomer(cusId);
                                     Console.WriteLine("Enter customer name: ");
                                     string cusName = (Console.ReadLine());
                                     Console.WriteLine("Enter customer phone: ");
@@ -103,6 +104,7 @@ namespace ConsoleUI
                                         Longitude = cusLongitude,
                                         Lattitude = cusLattitude
                                     });
+                                  
 
                                     break;
                                 case MenuOptions.InsertOptions.PACKAGE:

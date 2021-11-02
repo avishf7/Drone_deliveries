@@ -37,7 +37,7 @@ namespace DalObject
         /// <param name="drone">Drone to update</param>
         public void UpdateDrone(Drone drone)
         {
-           int iU = DataSource.drones.FindIndex(dr => dr.Id == drone.Id);
+            int iU = DataSource.drones.FindIndex(dr => dr.Id == drone.Id);
             DataSource.drones.Insert(iU, drone);
         }
 
@@ -55,8 +55,8 @@ namespace DalObject
                 Id = tmp.Id,
                 MaxWeight = tmp.MaxWeight,
                 Model = tmp.Model,
-                Status = tmp.Status,
-                Battery = tmp.Battery
+                //    Status = tmp.Status,
+                //  Battery = tmp.Battery
             };
         }
 
@@ -76,8 +76,8 @@ namespace DalObject
                     Id = dr.Id,
                     MaxWeight = dr.MaxWeight,
                     Model = dr.Model,
-                    Status = dr.Status,
-                    Battery = dr.Battery
+                    //  Status = dr.Status,
+                    //  Battery = dr.Battery
                 });
             }
 
@@ -92,7 +92,7 @@ namespace DalObject
         {
             Drone drone = DataSource.drones.Find(drn => drn.Id == id);
 
-            drone.Status = DroneStatuses.DELIVERY;
+            //   drone.Status = DroneStatuses.DELIVERY;
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace DalObject
         {
             Drone drone = DataSource.drones.Find(drn => drn.Id == id);
 
-            drone.Status = DroneStatuses.AVAILABLE;
+            //    drone.Status = DroneStatuses.AVAILABLE;
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace DalObject
         {
             Drone drone = DataSource.drones.Find(drn => drn.Id == droneId);
 
-            drone.Status = DroneStatuses.MAINTENANCE;
+            //  drone.Status = DroneStatuses.MAINTENANCE;
         }
 
         /// <summary>
@@ -125,8 +125,8 @@ namespace DalObject
         {
             Drone drone = DataSource.drones.Find(drn => drn.Id == droneId);
 
-            drone.Status = DroneStatuses.AVAILABLE;
-            drone.Battery = 100;
+            //  drone.Status = DroneStatuses.AVAILABLE;
+            //  drone.Battery = 100;
         }
 
 
@@ -142,6 +142,11 @@ namespace DalObject
         public void AddStation(Station station)
         {
             DataSource.stations.Add(station);
+        }
+
+        public void ComparisonCustomer(int cusId)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -225,11 +230,13 @@ namespace DalObject
         /// A function that implements a state of perception of a charging position
         /// </summary>
         /// <param name="stationId">The id of the station</param>
-        public void UsingChargingStation( int stationId)
+        public void UsingChargingStation(int stationId)
         {
             Station station = DataSource.stations.Find(st => st.Id == stationId);
+            int indexStation = DataSource.stations.FindIndex(st => st.Id == stationId);
 
             station.FreeChargeSlots--;
+            DataSource.stations[indexStation] = station;
         }
 
         /// <summary>
@@ -240,7 +247,10 @@ namespace DalObject
         {
             Station station = DataSource.stations.Find(st => st.Id == stationId);
 
+            int indexStation = DataSource.stations.FindIndex(st => st.Id == stationId);
+
             station.FreeChargeSlots++;
+            DataSource.stations[indexStation] = station;
         }
 
         #endregion
@@ -256,6 +266,14 @@ namespace DalObject
             DataSource.customers.Add(customer);
         }
 
+        public void ComparisonCustomer(Customer customer, int id)
+        {
+            int find = DataSource.customers.FindIndex(cus => cus.Id == customer.Id);
+            if (find!!= -1)
+            {
+                Console.WriteLine("Existing customer number, enter another number: ");
+            }
+        }
         /// <summary>
         /// Function of updating a customer.
         /// </summary>
@@ -425,9 +443,14 @@ namespace DalObject
         public void ConnectPackageToDrone(int id, int droneId)
         {
             Package package = DataSource.packages.Find(pck => pck.Id == id);
+            int indexPackage = DataSource.packages.FindIndex(pck => pck.Id == id);
 
             package.DroneId = droneId;
             package.Scheduled = DateTime.Now;
+
+            DataSource.packages[indexPackage] = package;
+
+
         }
 
         /// <summary>
@@ -437,8 +460,11 @@ namespace DalObject
         public void PickUp(int id)
         {
             Package package = DataSource.packages.Find(pck => pck.Id == id);
+            int indexPackage = DataSource.packages.FindIndex(pck => pck.Id == id);
 
             package.PickedUp = DateTime.Now;
+            DataSource.packages[indexPackage] = package;
+
         }
 
         /// <summary>
@@ -448,8 +474,10 @@ namespace DalObject
         public void PackageDeliver(int id)
         {
             Package package = DataSource.packages.Find(pck => pck.Id == id);
+            int indexPackage = DataSource.packages.FindIndex(pck => pck.Id == id);
 
             package.Delivered = DateTime.Now;
+            DataSource.packages[indexPackage] = package;
         }
 
         #endregion

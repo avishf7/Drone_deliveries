@@ -11,7 +11,7 @@ namespace IDAL
         /// <summary>
         /// Situations where the drone can be
         /// </summary>
-        public enum DroneStatuses { AVAILABLE, MAINTENANCE, DELIVERY }
+     //   public enum DroneStatuses { AVAILABLE, MAINTENANCE, DELIVERY }
         /// <summary>
         /// Delivery priority
         /// </summary>

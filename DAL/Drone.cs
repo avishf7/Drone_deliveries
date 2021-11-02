@@ -26,19 +26,13 @@ namespace IDAL
             /// </summary>
             public Weight MaxWeight { get; set; }
             /// <summary>
-            /// gets the status.
-            /// </summary>
-            public DroneStatuses Status { get; set; }
-            /// <summary>
-            /// gets the battery.
-            /// </summary>
-            public double Battery { get; set; }
+
+
 
             public override string ToString()
             {
                 return "Details of Id :" + Id + "\nModel: " + Model + "\nMax weight: " +
-                     MaxWeight + "\nDrone statuses: " + Status + "\nBattery of drone: "
-                     + Battery + "\n";
+                     MaxWeight + "\n";
             }
         }
     }
