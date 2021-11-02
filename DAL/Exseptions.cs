@@ -22,6 +22,25 @@ namespace IDAL.DO
         // special constructor for our custom exception
 
         override public string ToString()
-        { return "ExistsNumberException:" + Capacity + "\n" + Message; }
+        { return "Exists number exception:" + Capacity + "\n" + Message; }
     }
+
+    [Serializable]
+    public class NoNumberFoundExeptions : Exception
+    {
+        public int Capacity { get; private set; }
+
+        public NoNumberFoundExeptions() : base() { }
+        public NoNumberFoundExeptions(string message) : base(message) { }
+        public NoNumberFoundExeptions(string message, Exception inner) : base(message, inner) { }
+        protected NoNumberFoundExeptions(SerializationInfo info, StreamingContext context)
+     : base(info, context) { }
+        // special constructor for our custom exception
+
+        override public string ToString()
+        { return "No number found exeptions:" + Capacity + "\n" + Message; }
+    }
+
+
+
 }

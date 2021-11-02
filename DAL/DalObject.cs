@@ -28,7 +28,7 @@ namespace DalObject
         /// <param name="drone">Drone to add</param>
         public void AddDrone(Drone drone)
         {
-            if (DataSource.dronesList.Exists(x=>x.Id==drone.Id))
+            if (DataSource.dronesList.Exists(x => x.Id == drone.Id))
             {
                 throw new ExistsNumberException();
             }
@@ -41,6 +41,10 @@ namespace DalObject
         /// <param name="drone">Drone to update</param>
         public void UpdateDrone(Drone drone)
         {
+            if (DataSource.dronesList.Exists(x => x.Id != drone.Id))
+            {
+                throw new NoNumberFoundExeptions();
+            }
             int iU = DataSource.dronesList.FindIndex(dr => dr.Id == drone.Id);
             DataSource.dronesList.Insert(iU, drone);
         }
@@ -55,14 +59,14 @@ namespace DalObject
             Drone tmp = DataSource.dronesList.Find(dr => dr.Id == droneId);
 
             return tmp;
-               /* new()
-            {
-                Id = tmp.Id,
-                MaxWeight = tmp.MaxWeight,
-                Model = tmp.Model,
-                //    Status = tmp.Status,
-                //  Battery = tmp.Battery
-            };*/
+            /* new()
+         {
+             Id = tmp.Id,
+             MaxWeight = tmp.MaxWeight,
+             Model = tmp.Model,
+             //    Status = tmp.Status,
+             //  Battery = tmp.Battery
+         };*/
         }
 
         /// <summary>
@@ -71,22 +75,22 @@ namespace DalObject
         /// <returns>The list of dronesList</returns>
         public IEnumerable<Drone> GetDrones()
         {
-          //  List<Drone> drones = new();
+            //  List<Drone> drones = new();
 
             return DataSource.dronesList.Take(DataSource.dronesList.Count).ToList();
-           /* foreach (var dr in DataSource.dronesList)
-            {
-                drones.Add(new()
-                {
-                    Id = dr.Id,
-                    MaxWeight = dr.MaxWeight,
-                    Model = dr.Model,
-                    //  Status = dr.Status,
-                    //  Battery = dr.Battery
-                });
-            }
+            /* foreach (var dr in DataSource.dronesList)
+             {
+                 drones.Add(new()
+                 {
+                     Id = dr.Id,
+                     MaxWeight = dr.MaxWeight,
+                     Model = dr.Model,
+                     //  Status = dr.Status,
+                     //  Battery = dr.Battery
+                 });
+             }
 
-            return drones;*/
+             return drones;*/
         }
 
         /// <summary>
@@ -164,6 +168,10 @@ namespace DalObject
         /// <param name="station">Station to update</param>
         public void UpdateStation(Station station)
         {
+            if (DataSource.stations.Exists(x => x.Id != station.Id))
+            {
+                throw new NoNumberFoundExeptions();
+            }
             int iU = DataSource.stations.FindIndex(st => st.Id == station.Id);
             DataSource.stations.Insert(iU, station);
         }
@@ -178,14 +186,14 @@ namespace DalObject
             Station tmp = DataSource.stations.Find(st => st.Id == stationId);
 
             return tmp;
-                /*new()
-            {
-                Id = tmp.Id,
-                Name = tmp.Name,
-                FreeChargeSlots = tmp.FreeChargeSlots,
-                Longitude = tmp.Longitude,
-                Lattitude = tmp.Lattitude,
-            };*/
+            /*new()
+        {
+            Id = tmp.Id,
+            Name = tmp.Name,
+            FreeChargeSlots = tmp.FreeChargeSlots,
+            Longitude = tmp.Longitude,
+            Lattitude = tmp.Lattitude,
+        };*/
         }
 
 
@@ -197,30 +205,32 @@ namespace DalObject
         {
             return DataSource.stations.Take(DataSource.stations.Count).ToList();
 
-          /*  List<Station> stations = new();
+            /*  List<Station> stations = new();
 
-            foreach (var st in DataSource.stations)
-            {
-                stations.Add(new()
-                {
-                    Id = st.Id,
-                    Name = st.Name,
-                    FreeChargeSlots = st.FreeChargeSlots,
-                    Longitude = st.Longitude,
-                    Lattitude = st.Lattitude,
-                });
-            }
+              foreach (var st in DataSource.stations)
+              {
+                  stations.Add(new()
+                  {
+                      Id = st.Id,
+                      Name = st.Name,
+                      FreeChargeSlots = st.FreeChargeSlots,
+                      Longitude = st.Longitude,
+                      Lattitude = st.Lattitude,
+                  });
+              }
 
-            return stations;*/
+              return stations;*/
         }
 
         /// <summary>
         /// Display of base stations with available charging stations
         /// </summary>
         /// <returns>The base stations with available charging stations</returns>
-        public List<Station> GetFreeStations()
+        public IEnumerable<Station> GetFreeStations()
         {
-            List<Station> tmpStations = DataSource.stations.FindAll(st => st.FreeChargeSlots != 0);
+            return DataSource.stations.TakeWhile(x => x.FreeChargeSlots > 0).ToList();
+
+            /*List<Station> tmpStations = DataSource.stations.FindAll(st => st.FreeChargeSlots != 0);
             List<Station> stations = new();
 
             foreach (var st in tmpStations)
@@ -235,7 +245,7 @@ namespace DalObject
                 });
             }
 
-            return stations;
+            return stations;*/
         }
 
         /// <summary>
@@ -285,7 +295,7 @@ namespace DalObject
         public void ComparisonCustomer(Customer customer, int id)
         {
             int find = DataSource.customers.FindIndex(cus => cus.Id == customer.Id);
-            if (find!!= -1)
+            if (find != -1)
             {
                 Console.WriteLine("Existing customer number, enter another number: ");
             }
@@ -296,6 +306,10 @@ namespace DalObject
         /// <param name="customer">Customer to update</param>
         public void UpdateCustomer(Customer customer)
         {
+            if (DataSource.customers.Exists(x => x.Id != customer.Id))
+            {
+                throw new NoNumberFoundExeptions();
+            }
             int iU = DataSource.customers.FindIndex(cus => cus.Id == customer.Id);
             DataSource.customers.Insert(iU, customer);
         }
@@ -310,15 +324,15 @@ namespace DalObject
             Customer tmp = DataSource.customers.Find(cus => cus.Id == customerId);
 
             return tmp;
-                /*new()
-            {
-                Id = tmp.Id,
-                Name = tmp.Name,
-                Phone = tmp.Phone,
-                Longitude = tmp.Longitude,
-                Lattitude = tmp.Lattitude,
+            /*new()
+        {
+            Id = tmp.Id,
+            Name = tmp.Name,
+            Phone = tmp.Phone,
+            Longitude = tmp.Longitude,
+            Lattitude = tmp.Lattitude,
 
-            };*/
+        };*/
         }
 
         /// <summary>
@@ -329,21 +343,21 @@ namespace DalObject
         {
             return DataSource.customers.Take(DataSource.customers.Count).ToList();
 
-           /* List<Customer> customers = new();
+            /* List<Customer> customers = new();
 
-            foreach (var cus in DataSource.customers)
-            {
-                customers.Add(new()
-                {
-                    Id = cus.Id,
-                    Name = cus.Name,
-                    Phone = cus.Phone,
-                    Longitude = cus.Longitude,
-                    Lattitude = cus.Lattitude,
-                });
-            }
+             foreach (var cus in DataSource.customers)
+             {
+                 customers.Add(new()
+                 {
+                     Id = cus.Id,
+                     Name = cus.Name,
+                     Phone = cus.Phone,
+                     Longitude = cus.Longitude,
+                     Lattitude = cus.Lattitude,
+                 });
+             }
 
-            return customers;*/
+             return customers;*/
         }
 
         #endregion
@@ -383,19 +397,19 @@ namespace DalObject
             Package tmp = DataSource.packages.Find(pck => pck.Id == packageId);
 
             return tmp;
-               /* new()
-            {
-                Id = tmp.Id,
-                SenderId = tmp.SenderId,
-                TargetId = tmp.TargetId,
-                Weight = tmp.Weight,
-                Priority = tmp.Priority,
-                Requested = tmp.Requested,
-                Scheduled = tmp.Scheduled,
-                PickedUp = tmp.PickedUp,
-                Delivered = tmp.Delivered,
-                DroneId = tmp.DroneId
-            };*/
+            /* new()
+         {
+             Id = tmp.Id,
+             SenderId = tmp.SenderId,
+             TargetId = tmp.TargetId,
+             Weight = tmp.Weight,
+             Priority = tmp.Priority,
+             Requested = tmp.Requested,
+             Scheduled = tmp.Scheduled,
+             PickedUp = tmp.PickedUp,
+             Delivered = tmp.Delivered,
+             DroneId = tmp.DroneId
+         };*/
         }
 
         /// <summary>
@@ -406,26 +420,26 @@ namespace DalObject
         {
             return DataSource.packages.Take(DataSource.packages.Count).ToList();
 
-           /* List<Package> packages = new();
+            /* List<Package> packages = new();
 
-            foreach (var pck in DataSource.packages)
-            {
-                packages.Add(new()
-                {
-                    Id = pck.Id,
-                    SenderId = pck.SenderId,
-                    TargetId = pck.TargetId,
-                    Weight = pck.Weight,
-                    Priority = pck.Priority,
-                    Requested = pck.Requested,
-                    Scheduled = pck.Scheduled,
-                    PickedUp = pck.PickedUp,
-                    Delivered = pck.Delivered,
-                    DroneId = pck.DroneId
-                });
-            }
+             foreach (var pck in DataSource.packages)
+             {
+                 packages.Add(new()
+                 {
+                     Id = pck.Id,
+                     SenderId = pck.SenderId,
+                     TargetId = pck.TargetId,
+                     Weight = pck.Weight,
+                     Priority = pck.Priority,
+                     Requested = pck.Requested,
+                     Scheduled = pck.Scheduled,
+                     PickedUp = pck.PickedUp,
+                     Delivered = pck.Delivered,
+                     DroneId = pck.DroneId
+                 });
+             }
 
-            return packages;*/
+             return packages;*/
         }
 
         /// <summary>
@@ -544,11 +558,11 @@ namespace DalObject
             DroneCharge tmp = DataSource.droneCharges.Find(dr => dr.DroneId == droneId);
 
             return tmp;
-               /* new()
-            {
-                DroneId = droneId,
-                StationId = tmp.StationId
-            };*/
+            /* new()
+         {
+             DroneId = droneId,
+             StationId = tmp.StationId
+         };*/
         }
 
         /// <summary>
@@ -559,18 +573,18 @@ namespace DalObject
         {
             return DataSource.droneCharges.Take(DataSource.droneCharges.Count).ToList();
 
-          /*  List<DroneCharge> drones = new();
+            /*  List<DroneCharge> drones = new();
 
-            foreach (var dr in DataSource.droneCharges)
-            {
-                drones.Add(new()
-                {
-                    DroneId = dr.DroneId,
-                    StationId = dr.StationId
-                });
-            }
+              foreach (var dr in DataSource.droneCharges)
+              {
+                  drones.Add(new()
+                  {
+                      DroneId = dr.DroneId,
+                      StationId = dr.StationId
+                  });
+              }
 
-            return drones;*/
+              return drones;*/
         }
 
         #endregion
