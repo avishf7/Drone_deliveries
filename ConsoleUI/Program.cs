@@ -64,7 +64,7 @@ namespace ConsoleUI
                                             Lattitude = lattitude
                                         });
                                     }
-                                    catch(ExistsNumberException ex)
+                                    catch (ExistsNumberException ex)
                                     {
                                         Console.WriteLine(ex);
                                     }
@@ -91,7 +91,7 @@ namespace ConsoleUI
                                             //Battery = 100
                                         });
                                     }
-                                    catch(ExistsNumberException ex)
+                                    catch (ExistsNumberException ex)
                                     {
                                         Console.WriteLine(ex);
                                     }
@@ -120,10 +120,10 @@ namespace ConsoleUI
                                             Lattitude = cusLattitude
                                         });
                                     }
-                                    catch(ExistsNumberException ex)
+                                    catch (ExistsNumberException ex)
                                     {
                                         Console.WriteLine(ex);
-                                    }                               
+                                    }
                                     break;
 
                                 case MenuOptions.InsertOptions.PACKAGE:
@@ -174,6 +174,7 @@ namespace ConsoleUI
                                     Console.WriteLine("\n");
 
                                     break;
+
                                 case MenuOptions.UpdateOptions.ASSOCIATION:
                                     Console.WriteLine("Enter package ID  for associating: ");
                                     int id = int.Parse(Console.ReadLine());
