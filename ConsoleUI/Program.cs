@@ -10,7 +10,6 @@ namespace ConsoleUI
     class Program
     {
 
-
         static void Main(string[] args)
         {
             DalObject.DalObject dalObject = new();
@@ -54,16 +53,24 @@ namespace ConsoleUI
                                     Console.WriteLine("Enter lattitude of stations adress: ");
                                     double lattitude = (int)double.Parse(Console.ReadLine());
 
-                                    dalObject.AddStation(new()
+                                    try
                                     {
-                                        Id = stationId,
-                                        Name = name,
-                                        FreeChargeSlots = numOfFreeStation,
-                                        Longitude = longitude,
-                                        Lattitude = lattitude
-                                    });
+                                        dalObject.AddStation(new()
+                                        {
+                                            Id = stationId,
+                                            Name = name,
+                                            FreeChargeSlots = numOfFreeStation,
+                                            Longitude = longitude,
+                                            Lattitude = lattitude
+                                        });
+                                    }
+                                    catch(ExistsNumberException ex)
+                                    {
+                                        Console.WriteLine(ex);
+                                    }
 
                                     break;
+
                                 case MenuOptions.InsertOptions.DRONE:
                                     Console.WriteLine("Enter drone ID: ");
                                     int droneId = int.Parse(Console.ReadLine());
@@ -73,16 +80,23 @@ namespace ConsoleUI
                                     Weight maxWeight = (Weight)int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter drone status - To  AVAILABLE  enter 0, to MAINTENANCE enter 1 and to DELIVERY enter 2: ");
                                     //DroneStatuses status = (DroneStatuses)int.Parse(Console.ReadLine());
-
-                                    dalObject.AddDrone(new() 
-                                    { 
-                                        Id = droneId, Model = model,
-                                        MaxWeight = maxWeight,
-                                        //Status = status,
-                                        //Battery = 100
-                                    });
-
+                                    try
+                                    {
+                                        dalObject.AddDrone(new()
+                                        {
+                                            Id = droneId,
+                                            Model = model,
+                                            MaxWeight = maxWeight,
+                                            //Status = status,
+                                            //Battery = 100
+                                        });
+                                    }
+                                    catch(ExistsNumberException ex)
+                                    {
+                                        Console.WriteLine(ex);
+                                    }
                                     break;
+
                                 case MenuOptions.InsertOptions.CUSTOMER:
                                     Console.WriteLine("Enter customer ID: ");
                                     int cusId = int.Parse(Console.ReadLine());
@@ -95,18 +109,23 @@ namespace ConsoleUI
                                     double cusLongitude = (int)double.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter lattitude of customers adress: ");
                                     double cusLattitude = (int)double.Parse(Console.ReadLine());
-
-                                    dalObject.AddCustomer(new()
+                                    try
                                     {
-                                        Id = cusId,
-                                        Name = cusName,
-                                        Phone = phone,
-                                        Longitude = cusLongitude,
-                                        Lattitude = cusLattitude
-                                    });
-                                  
-
+                                        dalObject.AddCustomer(new()
+                                        {
+                                            Id = cusId,
+                                            Name = cusName,
+                                            Phone = phone,
+                                            Longitude = cusLongitude,
+                                            Lattitude = cusLattitude
+                                        });
+                                    }
+                                    catch(ExistsNumberException ex)
+                                    {
+                                        Console.WriteLine(ex);
+                                    }                               
                                     break;
+
                                 case MenuOptions.InsertOptions.PACKAGE:
                                     Console.WriteLine("Enter target ID: ");
                                     int sendersId = int.Parse(Console.ReadLine());

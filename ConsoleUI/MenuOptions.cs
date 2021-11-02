@@ -91,7 +91,7 @@ namespace ConsoleUI
        {
             "Back to the main menu",
             "Show a list of stations",
-            "Show the list of drones",
+            "Show the list of dronesList",
             "Show customer list",
             "Show the list of packages",
             "Show a list of packages that have not yet been assigned to the drone",

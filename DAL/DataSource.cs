@@ -36,7 +36,7 @@ namespace DalObject
         /// <summary>
         /// Create a static drone list. 
         /// </summary>
-        internal static List<Drone> drones = new();
+        internal static List<Drone> dronesList = new();
         /// <summary>
         /// Create a static station list.
         /// </summary>
@@ -74,7 +74,7 @@ namespace DalObject
 
             for (int i = 0; i < 5; i++)
             {
-                drones.Add(new()
+                dronesList.Add(new()
                 {
                     Id = rand.Next(10),
                     MaxWeight = Weight.HEAVY,
@@ -137,7 +137,7 @@ namespace DalObject
             Drone drone;
            // do
             //{
-                drone = drones[rand.Next(5)];
+                drone = dronesList[rand.Next(5)];
             //} //while (drone.Status != DroneStatuses.AVAILABLE);
 
             return drone;
