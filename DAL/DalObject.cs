@@ -9,7 +9,7 @@ namespace DalObject
     /// <summary>
     /// A class in which we will make the changes in all parts of the code
     /// </summary>
-    public class DalObject
+    public class DalObject : IDal
     {
 
         /// <summary>
@@ -41,11 +41,12 @@ namespace DalObject
         /// <param name="drone">Drone to update</param>
         public void UpdateDrone(Drone drone)
         {
-            if (DataSource.dronesList.Exists(x => x.Id != drone.Id))
+            int iU = DataSource.dronesList.FindIndex(dr => dr.Id == drone.Id);
+            if (iU == -1)
             {
                 throw new NoNumberFoundExeptions();
             }
-            int iU = DataSource.dronesList.FindIndex(dr => dr.Id == drone.Id);
+
             DataSource.dronesList.Insert(iU, drone);
         }
 
@@ -73,24 +74,10 @@ namespace DalObject
         /// Displays a list of drone's.
         /// </summary>
         /// <returns>The list of dronesList</returns>
-        public IEnumerable<Drone> GetDrones()
+        public IEnumerable<Drone> GetDrones(Predicate<Drone> predicate = null)
         {
-            //  List<Drone> drones = new();
+            return DataSource.dronesList.FindAll(i => predicate == null ? true : predicate(i)).ToList();
 
-            return DataSource.dronesList.Take(DataSource.dronesList.Count).ToList();
-            /* foreach (var dr in DataSource.dronesList)
-             {
-                 drones.Add(new()
-                 {
-                     Id = dr.Id,
-                     MaxWeight = dr.MaxWeight,
-                     Model = dr.Model,
-                     //  Status = dr.Status,
-                     //  Battery = dr.Battery
-                 });
-             }
-
-             return drones;*/
         }
 
         /// <summary>
@@ -138,7 +125,11 @@ namespace DalObject
             //  drone.Battery = 100;
         }
 
-
+        public void DeleteDrone(int id)
+        {
+            int Id = DataSource.dronesList.FindIndex(dr => dr.Id == id);
+            DataSource.dronesList.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundExeptions(" "));
+        }
 
         #endregion
 
@@ -155,11 +146,6 @@ namespace DalObject
                 throw new ExistsNumberException();
             }
             DataSource.stations.Add(station);
-        }
-
-        public void ComparisonCustomer(int cusId)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -292,14 +278,14 @@ namespace DalObject
             DataSource.customers.Add(customer);
         }
 
-        public void ComparisonCustomer(Customer customer, int id)
-        {
-            int find = DataSource.customers.FindIndex(cus => cus.Id == customer.Id);
-            if (find != -1)
-            {
-                Console.WriteLine("Existing customer number, enter another number: ");
-            }
-        }
+        //public void ComparisonCustomer(Customer customer, int id)
+        //{
+        //    int find = DataSource.customers.FindIndex(cus => cus.Id == customer.Id);
+        //    if (find != -1)
+        //    {
+        //        Console.WriteLine("Existing customer number, enter another number: ");
+        //    }
+        //}
         /// <summary>
         /// Function of updating a customer.
         /// </summary>
@@ -343,21 +329,6 @@ namespace DalObject
         {
             return DataSource.customers.Take(DataSource.customers.Count).ToList();
 
-            /* List<Customer> customers = new();
-
-             foreach (var cus in DataSource.customers)
-             {
-                 customers.Add(new()
-                 {
-                     Id = cus.Id,
-                     Name = cus.Name,
-                     Phone = cus.Phone,
-                     Longitude = cus.Longitude,
-                     Lattitude = cus.Lattitude,
-                 });
-             }
-
-             return customers;*/
         }
 
         #endregion
@@ -587,7 +558,25 @@ namespace DalObject
               return drones;*/
         }
 
+
+
+
+
         #endregion
+
+
+        public List<double> ChargingRequest()
+        {
+            List<double> ChargingRequests = new()
+            {
+                DataSource.Config.DroneAvailable,
+                DataSource.Config.LightWeight,
+                DataSource.Config.MediumWeight,
+                DataSource.Config.HeavyWeight,
+                DataSource.Config.ChargingRate
+            };
+            return ChargingRequests;
+        }
 
     }
 }

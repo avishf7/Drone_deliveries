@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using IDAL;
 using IDAL.DO;
 
 
@@ -12,7 +13,8 @@ namespace ConsoleUI
 
         static void Main(string[] args)
         {
-            DalObject.DalObject dalObject = new();
+            IDal dalObject = new DalObject.DalObject();
+
             MenuOptions.OpeningOptions ch;
 
 
@@ -100,7 +102,6 @@ namespace ConsoleUI
                                 case MenuOptions.InsertOptions.CUSTOMER:
                                     Console.WriteLine("Enter customer ID: ");
                                     int cusId = int.Parse(Console.ReadLine());
-                                    dalObject.ComparisonCustomer(cusId);
                                     Console.WriteLine("Enter customer name: ");
                                     string cusName = (Console.ReadLine());
                                     Console.WriteLine("Enter customer phone: ");
@@ -291,7 +292,8 @@ namespace ConsoleUI
 
                                     break;
                                 case MenuOptions.ListViewOptions.STATIONS:
-                                    foreach (var st in dalObject.GetStations())
+                                    var st1 = dalObject.GetStations();
+                                    foreach (var st in st1)
                                     {
                                         Console.WriteLine("\n" + st);
                                     }

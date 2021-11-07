@@ -63,6 +63,11 @@ namespace DalObject
             /// Set up a static function with internal permission to make a running code for a package.
             /// </summary>
             internal static int PackageIdCounter;
+            internal static double DroneAvailable;
+            internal static double LightWeight;
+            internal static double MediumWeight;
+            internal static double HeavyWeight;
+            internal static double ChargingRate;
 
         }
 
