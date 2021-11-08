@@ -20,5 +20,9 @@ namespace IBL.BO
         /// Delivery priority
         /// </summary>
         public enum Priorities { NORMAL, FAST, EMERENCY }
+        /// <summary>
+        /// 
+        /// </summary>
+        public enum PackageStatus { DEFINED, ASSOCIATED, COLLECTED, PROVIDED }
     }
 }
