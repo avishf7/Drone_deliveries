@@ -44,7 +44,7 @@ namespace DalObject
             int iU = DataSource.dronesList.FindIndex(dr => dr.Id == drone.Id);
             if (iU == -1)
             {
-                throw new NoNumberFoundExeptions();
+                throw new NoNumberFoundExeptions(" ");
             }
 
             DataSource.dronesList.Insert(iU, drone);
@@ -59,15 +59,7 @@ namespace DalObject
         {
             Drone tmp = DataSource.dronesList.Find(dr => dr.Id == droneId);
 
-            return tmp;
-            /* new()
-         {
-             Id = tmp.Id,
-             MaxWeight = tmp.MaxWeight,
-             Model = tmp.Model,
-             //    Status = tmp.Status,
-             //  Battery = tmp.Battery
-         };*/
+            return tmp;         
         }
 
         /// <summary>
@@ -87,8 +79,6 @@ namespace DalObject
         public void AssigningSkimmerToPackage(int id)
         {
             Drone drone = DataSource.dronesList.Find(drn => drn.Id == id);
-
-            //   drone.Status = DroneStatuses.DELIVERY;
         }
 
         /// <summary>
@@ -109,8 +99,6 @@ namespace DalObject
         public void SendDroneForCharge(int droneId)
         {
             Drone drone = DataSource.dronesList.Find(drn => drn.Id == droneId);
-
-            //  drone.Status = DroneStatuses.MAINTENANCE;
         }
 
         /// <summary>
@@ -120,9 +108,6 @@ namespace DalObject
         public void RealeseDroneFromCharge(int droneId)
         {
             Drone drone = DataSource.dronesList.Find(drn => drn.Id == droneId);
-
-            //  drone.Status = DroneStatuses.AVAILABLE;
-            //  drone.Battery = 100;
         }
 
         public void DeleteDrone(int id)
@@ -171,15 +156,7 @@ namespace DalObject
         {
             Station tmp = DataSource.stations.Find(st => st.Id == stationId);
 
-            return tmp;
-            /*new()
-        {
-            Id = tmp.Id,
-            Name = tmp.Name,
-            FreeChargeSlots = tmp.FreeChargeSlots,
-            Longitude = tmp.Longitude,
-            Lattitude = tmp.Lattitude,
-        };*/
+            return tmp;     
         }
 
 
@@ -187,51 +164,20 @@ namespace DalObject
         /// Displays a list of base stations
         /// </summary>
         /// <returns>The list of stations</returns>
-        public IEnumerable<Station> GetStations()
+        public IEnumerable<Station> GetStations(Predicate<Station> predicate = null)
         {
-            return DataSource.stations.Take(DataSource.stations.Count).ToList();
-
-            /*  List<Station> stations = new();
-
-              foreach (var st in DataSource.stations)
-              {
-                  stations.Add(new()
-                  {
-                      Id = st.Id,
-                      Name = st.Name,
-                      FreeChargeSlots = st.FreeChargeSlots,
-                      Longitude = st.Longitude,
-                      Lattitude = st.Lattitude,
-                  });
-              }
-
-              return stations;*/
-        }
+            return DataSource.stations.FindAll(i => predicate == null ? true : predicate(i)).ToList();
+            
+           // return DataSource.stations.Take(DataSource.stations.Count).ToList();
+             }
 
         /// <summary>
         /// Display of base stations with available charging stations
         /// </summary>
         /// <returns>The base stations with available charging stations</returns>
-        public IEnumerable<Station> GetFreeStations()
+        public IEnumerable<Station> GetFreeStations(Predicate<Station> predicate = null)
         {
-            return DataSource.stations.TakeWhile(x => x.FreeChargeSlots > 0).ToList();
-
-            /*List<Station> tmpStations = DataSource.stations.FindAll(st => st.FreeChargeSlots != 0);
-            List<Station> stations = new();
-
-            foreach (var st in tmpStations)
-            {
-                stations.Add(new()
-                {
-                    Id = st.Id,
-                    Name = st.Name,
-                    FreeChargeSlots = st.FreeChargeSlots,
-                    Longitude = st.Longitude,
-                    Lattitude = st.Lattitude,
-                });
-            }
-
-            return stations;*/
+            return DataSource.stations.FindAll(i => predicate == null ? true : predicate(i)).ToList();
         }
 
         /// <summary>
@@ -261,6 +207,11 @@ namespace DalObject
             DataSource.stations[indexStation] = station;
         }
 
+        public void DeleteStation(int id)
+        {
+            int Id = DataSource.stations.FindIndex(st => st.Id == id);
+            DataSource.stations.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundExeptions(" "));
+        }
         #endregion
 
         #region Customer functions
@@ -309,26 +260,25 @@ namespace DalObject
         {
             Customer tmp = DataSource.customers.Find(cus => cus.Id == customerId);
 
-            return tmp;
-            /*new()
-        {
-            Id = tmp.Id,
-            Name = tmp.Name,
-            Phone = tmp.Phone,
-            Longitude = tmp.Longitude,
-            Lattitude = tmp.Lattitude,
-
-        };*/
+            return tmp;        
         }
 
         /// <summary>
         /// Displays a list of customers.
         /// </summary>
         /// <returns>The list of customers</returns>
-        public IEnumerable<Customer> GetCustomers()
+        public IEnumerable<Customer> GetCustomers(Predicate<Customer> predicate = null)
         {
-            return DataSource.customers.Take(DataSource.customers.Count).ToList();
+            return DataSource.customers.FindAll(i => predicate == null ? true : predicate(i)).ToList();
+            
+           // return DataSource.customers.Take(DataSource.customers.Count).ToList();
 
+        }
+
+        public void DeleteCustomer(int id)
+        {
+            int Id = DataSource.customers.FindIndex(cus => cus.Id == id);
+            DataSource.customers.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundExeptions(" "));
         }
 
         #endregion
@@ -368,49 +318,17 @@ namespace DalObject
             Package tmp = DataSource.packages.Find(pck => pck.Id == packageId);
 
             return tmp;
-            /* new()
-         {
-             Id = tmp.Id,
-             SenderId = tmp.SenderId,
-             TargetId = tmp.TargetId,
-             Weight = tmp.Weight,
-             Priority = tmp.Priority,
-             Requested = tmp.Requested,
-             Scheduled = tmp.Scheduled,
-             PickedUp = tmp.PickedUp,
-             Delivered = tmp.Delivered,
-             DroneId = tmp.DroneId
-         };*/
         }
 
         /// <summary>
         /// Displays a list of package's.
         /// </summary>
         /// <returns>The list of packages</returns>
-        public IEnumerable<Package> GetPackages()
+        public IEnumerable<Package> GetPackages(Predicate<Package> predicate = null)
         {
-            return DataSource.packages.Take(DataSource.packages.Count).ToList();
-
-            /* List<Package> packages = new();
-
-             foreach (var pck in DataSource.packages)
-             {
-                 packages.Add(new()
-                 {
-                     Id = pck.Id,
-                     SenderId = pck.SenderId,
-                     TargetId = pck.TargetId,
-                     Weight = pck.Weight,
-                     Priority = pck.Priority,
-                     Requested = pck.Requested,
-                     Scheduled = pck.Scheduled,
-                     PickedUp = pck.PickedUp,
-                     Delivered = pck.Delivered,
-                     DroneId = pck.DroneId
-                 });
-             }
-
-             return packages;*/
+            return DataSource.packages.FindAll(i => predicate == null ? true : predicate(i)).ToList();
+            
+            //return DataSource.packages.Take(DataSource.packages.Count).ToList();
         }
 
         /// <summary>
@@ -419,27 +337,27 @@ namespace DalObject
         /// <returns>List of packages not yet tied to the drone</returns>
         public IEnumerable<Package> GetNotScheduledPackages()
         {
-            List<Package> tmpPackages = DataSource.packages.FindAll(pck => pck.DroneId == -1);
-            List<Package> packages = new();
+            return DataSource.packages.FindAll(pck => pck.DroneId == -1).ToList();
+            //List<Package> packages = new();
 
-            foreach (var pck in tmpPackages)
-            {
-                packages.Add(new()
-                {
-                    Id = pck.Id,
-                    SenderId = pck.SenderId,
-                    TargetId = pck.TargetId,
-                    Weight = pck.Weight,
-                    Priority = pck.Priority,
-                    Requested = pck.Requested,
-                    Scheduled = pck.Scheduled,
-                    PickedUp = pck.PickedUp,
-                    Delivered = pck.Delivered,
-                    DroneId = pck.DroneId
-                });
-            }
+            //foreach (var pck in tmpPackages)
+            //{
+            //    packages.Add(new()
+            //    {
+            //        Id = pck.Id,
+            //        SenderId = pck.SenderId,
+            //        TargetId = pck.TargetId,
+            //        Weight = pck.Weight,
+            //        Priority = pck.Priority,
+            //        Requested = pck.Requested,
+            //        Scheduled = pck.Scheduled,
+            //        PickedUp = pck.PickedUp,
+            //        Delivered = pck.Delivered,
+            //        DroneId = pck.DroneId
+            //    });
+            //}
 
-            return packages;
+            //return packages;
         }
 
         /// <summary>
@@ -487,6 +405,12 @@ namespace DalObject
             DataSource.packages[indexPackage] = package;
         }
 
+        public void DeletePackage(int id)
+        {
+            int Id = DataSource.packages.FindIndex(pck => pck.Id == id);
+            DataSource.packages.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundExeptions(" "));
+        }
+
         #endregion
 
         #region Drone charge functions
@@ -529,37 +453,25 @@ namespace DalObject
             DroneCharge tmp = DataSource.droneCharges.Find(dr => dr.DroneId == droneId);
 
             return tmp;
-            /* new()
-         {
-             DroneId = droneId,
-             StationId = tmp.StationId
-         };*/
         }
 
         /// <summary>
         /// Displays a list of drone chrarges.
         /// </summary>
         /// <returns>The list of dronesList</returns>
-        public IEnumerable<DroneCharge> GetDronesCharges()
+        public IEnumerable<DroneCharge> GetDronesCharges(Predicate<DroneCharge> predicate = null)
         {
-            return DataSource.droneCharges.Take(DataSource.droneCharges.Count).ToList();
-
-            /*  List<DroneCharge> drones = new();
-
-              foreach (var dr in DataSource.droneCharges)
-              {
-                  drones.Add(new()
-                  {
-                      DroneId = dr.DroneId,
-                      StationId = dr.StationId
-                  });
-              }
-
-              return drones;*/
+            return DataSource.droneCharges.FindAll(i => predicate == null ? true : predicate(i)).ToList();
+        
+        //    return DataSource.droneCharges.Take(DataSource.droneCharges.Count).ToList();
         }
 
 
-
+        public void DeleteDronesCharge(int id)
+        {
+            int Id = DataSource.droneCharges.FindIndex(drc => drc.DroneId == id);
+            DataSource.droneCharges.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundExeptions(" "));
+        }
 
 
         #endregion
