@@ -4,20 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BL
+namespace IBL.BO
 {
     class CustomerToList
     {
         /// <summary>
-        /// 
+        /// Gets customer id
         /// </summary>
         public int CustomerId { get; set; }
         /// <summary>
-        /// 
+        /// Gets customer name
         /// </summary>
         public string CustomerName { get; set; }
         /// <summary>
-        /// 
+        /// Gets customer phone
         /// </summary>
         public string CustomerPhone { get; set; }
         /// <summary>

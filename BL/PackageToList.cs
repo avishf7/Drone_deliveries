@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static IBL.BO.Enumerations;
 
-namespace BL
+namespace IBL.BO
 {
     class PackageToList
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BL
+namespace IBL.BO
 {
     class StationToList
     {
@@ -31,5 +31,6 @@ namespace BL
             return "Details of ID :" + Id + "\nName: " + Name + "\nSeveral available charging stations: "
                 + SeveralAvailableChargingStations + "\nNumber of charging stations occupied: " +
                 NumberOfChargingStationsOccupied + "\n";
+        }
     }
 }

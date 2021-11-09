@@ -4,5 +4,6 @@ namespace IBL.BO
 {
     public class BL
     {
+
     }
 }
