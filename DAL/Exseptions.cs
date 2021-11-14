@@ -9,11 +9,11 @@ using System.Runtime.Serialization;
 
 namespace IDAL.DO
 {
+
+
     [Serializable]
     public class ExistsNumberException : Exception
     {
-        public int Capacity { get; private set; }
-
         public ExistsNumberException() : base() { }
         public ExistsNumberException(string message) : base(message) { }
         public ExistsNumberException(string message, Exception inner) : base(message, inner) { }
@@ -22,14 +22,12 @@ namespace IDAL.DO
         // special constructor for our custom exception
 
         override public string ToString()
-        { return "Exists number exception:" + Capacity + "\n" + Message; }
+        { return "Exists number exception:"+ Message; }
     }
 
     [Serializable]
     public class NoNumberFoundExeptions : Exception
     {
-        public int Capacity { get; private set; }
-
         public NoNumberFoundExeptions() : base() { }
         public NoNumberFoundExeptions(string message) : base(message) { }
         public NoNumberFoundExeptions(string message, Exception inner) : base(message, inner) { }
@@ -38,7 +36,7 @@ namespace IDAL.DO
         // special constructor for our custom exception
 
         override public string ToString()
-        { return "No number found exeptions:" + Capacity + "\n" + Message; }
+        { return "No number found exeptions:" + Message; }
     }
 
 

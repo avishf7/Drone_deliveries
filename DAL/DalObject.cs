@@ -288,10 +288,7 @@ namespace DalObject
         /// <summary>
         /// Function of adding a package.
         /// </summary>
-        /// <param name="sendersId">Identity card of the sender of the package</param>
-        /// <param name="targetsId">Identity card of the recipient of the package</param>
-        /// <param name="weight">The weight of the package</param>
-        /// <param name="priority">Priority of shipment</param>
+        /// <param name="package">Package to add</param>
         public void AddPackage(Package package)
         {
             package.Id = DataSource.Config.PackageIdCounter++;
