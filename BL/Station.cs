@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    class Station
+     public class Station
     {
         /// <summary>
         /// Gets the id
@@ -31,16 +31,22 @@ namespace IBL.BO
         /// <summary>
         /// Gets num of charging drones
         /// </summary>
-        public int NumOfChargingDrones { get; set; }
+        public List<DroneCharge> ChargingDrones { get; set; }
 
 
 
 
         public override string ToString()
         {
+          /*  string str =" ";
+            str += String.Join(" ", ChargingDrones);
+            foreach (var item in ChargingDrones)
+            {
+                str += item.ToString()+" ";
+            }*/
             return "Details of ID :" + Id + "\nName: " + Name + "\nLattitude: " + Lattitude + "\nLongitude: " + Longitude
                 + "\nFree charge slots: " + FreeChargeSlots
-                  + "\nNum of charging drones" + NumOfChargingDrones +"\n";
+                  + "\nNum of charging drones" + String.Join(" ", ChargingDrones) + "\n";
         }
     }
 }

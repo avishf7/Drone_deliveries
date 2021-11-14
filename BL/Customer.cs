@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    class Customer
+    public class Customer
     {
         /// <summary>
         /// Gets the id.

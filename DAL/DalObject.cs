@@ -68,7 +68,7 @@ namespace DalObject
         /// <returns>The list of dronesList</returns>
         public IEnumerable<Drone> GetDrones(Predicate<Drone> predicate = null)
         {
-            return DataSource.dronesList.FindAll(i => predicate == null ? true : predicate(i)).ToList();
+            return DataSource.dronesList.FindAll(i => predicate == null ? true : predicate(i));
 
         }
 

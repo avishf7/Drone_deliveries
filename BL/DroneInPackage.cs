@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    class DroneInPackage
+    public class DroneInPackage
     {
         public int Id { get; set; }
         public double BatteryStatus { get; set; }

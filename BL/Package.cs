@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static IBL.BO.Enumerations;
 
 namespace IBL.BO
 {
-    class Package
+   public class Package
     {
         /// <summary>
         /// Gets the id.

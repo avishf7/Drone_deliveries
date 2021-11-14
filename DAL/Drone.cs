@@ -25,7 +25,7 @@ namespace IDAL
             /// gets the max weight.
             /// </summary>
             public Weight MaxWeight { get; set; }
-            /// <summary>
+        
 
 
 

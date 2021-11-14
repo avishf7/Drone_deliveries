@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    class Enumerations
-    {
+ 
+    
         /// <summary>
         /// Weight types
         /// </summary>
@@ -15,7 +15,7 @@ namespace IBL.BO
         /// <summary>
         /// Situations where the drone can be
         /// </summary>
-        public enum DroneStatuses { AVAILABLE, MAINTENANCE, DELIVERY }
+        public enum DroneStatuses { AVAILABLE, MAINTENANCE, SENDERING }
         /// <summary>
         /// Delivery priority
         /// </summary>
@@ -24,5 +24,5 @@ namespace IBL.BO
         /// 
         /// </summary>
         public enum PackageStatus { DEFINED, ASSOCIATED, COLLECTED, PROVIDED }
-    }
+    
 }
