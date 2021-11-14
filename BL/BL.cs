@@ -62,8 +62,8 @@ namespace IBL.BO
                 {
                 //    item.DroneStatus = rd.Next(DroneStatuses.0,1);
                 }
-            }     
-            int index2=drones.FindIndex(x=> x.)
+            }
+            int index2 = drones.FindIndex(x => x.);
         }
     }
 }

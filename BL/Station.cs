@@ -17,13 +17,9 @@ namespace IBL.BO
         /// </summary>
         public string Name { get; set; }
         /// <summary>
-        /// Gets the longitude.
+        /// 
         /// </summary>
-        public double Longitude { get; set; }
-        /// <summary>
-        /// Gets the lattitude.
-        /// </summary>
-        public double Lattitude { get; set; }
+        Location LocationOfStation;
         /// <summary>
         /// Gets the free charge slot.
         /// </summary>
@@ -44,7 +40,7 @@ namespace IBL.BO
             {
                 str += item.ToString()+" ";
             }*/
-            return "Details of ID :" + Id + "\nName: " + Name + "\nLattitude: " + Lattitude + "\nLongitude: " + Longitude
+            return "Details of ID :" + Id + "\nName: " + Name + "\nLocation of station\n" + LocationOfStation
                 + "\nFree charge slots: " + FreeChargeSlots
                   + "\nNum of charging drones" + String.Join(" ", ChargingDrones) + "\n";
         }

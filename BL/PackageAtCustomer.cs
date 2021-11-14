@@ -23,7 +23,11 @@ namespace IBL.BO
         /// <summary>
         /// 
         /// </summary>
-        public PackageStatus status { get; set; }
+        public PackageStatus Status { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        CustomerInPackage CustomerInPackage;
 
 
         /// <summary>
@@ -33,7 +37,7 @@ namespace IBL.BO
         public override string ToString()
         {
             return "Details of ID:" + CustomerId + "\nWeight: " + Weight + "\nPriority: " + Priority
-                + "\nStatus: " + status + "\n";
+                + "\nStatus: " + Status + "\nCustomer in package: " + CustomerInPackage + "\n";
         }
     }
 }
