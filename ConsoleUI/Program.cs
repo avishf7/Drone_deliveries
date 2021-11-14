@@ -144,9 +144,9 @@ namespace ConsoleUI
                                         Weight = weight,
                                         Priority = priority,
                                         Requested = DateTime.Now,
-                                        Scheduled = DateTime.MinValue,
-                                        PickedUp = DateTime.MinValue,
-                                        Delivered = DateTime.MinValue,
+                                        Scheduled = new DateTime(0,0,0),
+                                        PickedUp = new DateTime(0, 0, 0),
+                                        Delivered = new DateTime(0, 0, 0),
                                         DroneId = -1
                                     });
 
