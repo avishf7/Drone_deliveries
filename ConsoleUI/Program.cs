@@ -81,7 +81,7 @@ namespace ConsoleUI
                                     Console.WriteLine("Enter drone Weight - To LIGHT enter 0, to MEDIUM enter 1 and to HEAVY enter 2: ");
                                     Weight maxWeight = (Weight)int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter drone status - To  AVAILABLE  enter 0, to MAINTENANCE enter 1 and to DELIVERY enter 2: ");
-                                    //DroneStatuses status = (DroneStatuses)int.Parse(Console.ReadLine());
+
                                     try
                                     {
                                         dalObject.AddDrone(new()
@@ -89,8 +89,6 @@ namespace ConsoleUI
                                             Id = droneId,
                                             Model = model,
                                             MaxWeight = maxWeight,
-                                            //Status = status,
-                                            //Battery = 100
                                         });
                                     }
                                     catch (ExistsNumberException ex)
@@ -183,7 +181,6 @@ namespace ConsoleUI
                                     int droneId = int.Parse(Console.ReadLine());
 
                                     dalObject.ConnectPackageToDrone(id, droneId);
-                                    dalObject.AssigningSkimmerToPackage(droneId);
 
                                     break;
                                 case MenuOptions.UpdateOptions.PICKING_UP:
@@ -196,7 +193,6 @@ namespace ConsoleUI
                                     Package pck = dalObject.GetPackage(int.Parse(Console.ReadLine()));
 
                                     dalObject.PackageDeliver(pck.Id);
-                                    dalObject.DroneDeliverEnded(pck.DroneId);
 
                                     break;
                                 case MenuOptions.UpdateOptions.CHARGING:
@@ -204,7 +200,6 @@ namespace ConsoleUI
                                     int drId = (int.Parse(Console.ReadLine()));
                                     Console.WriteLine("Enter sttion ID for charge : ");
                                     int stId = (int.Parse(Console.ReadLine()));
-                                    dalObject.SendDroneForCharge(drId);
                                     dalObject.UsingChargingStation(stId);
                                     dalObject.AddDroneCharge(new()
                                     {
@@ -218,9 +213,9 @@ namespace ConsoleUI
                                     Console.WriteLine("Enter drone ID for release : ");
                                     DroneCharge drCh = dalObject.GetDroneCharge(int.Parse(Console.ReadLine()));
 
-                                    dalObject.RealeseDroneFromCharge(drCh.DroneId);
+
                                     dalObject.RealeseChargingStation(drCh.StationId);
-                                    dalObject.RemoveDroneCharge(drCh);
+                                    dalObject.DeleteDroneCharge(drCh.DroneId);
 
                                     break;
 
@@ -321,14 +316,14 @@ namespace ConsoleUI
 
                                     break;
                                 case MenuOptions.ListViewOptions.UNASSIGNED_PACKAGES:
-                                    foreach (var pck in dalObject.GetNotScheduledPackages())
+                                    foreach (var pck in dalObject.GetPackages(x => x.Scheduled == DateTime.MinValue))
                                     {
                                         Console.WriteLine("\n" + pck);
                                     }
 
                                     break;
                                 case MenuOptions.ListViewOptions.AVAILABLE_FOR_CHARGING:
-                                    foreach (var st in dalObject.GetFreeStations())
+                                    foreach (var st in dalObject.GetStations(x => x.FreeChargeSlots != 0))
                                     {
                                         Console.WriteLine("\n" + st);
                                     }

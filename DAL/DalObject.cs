@@ -57,9 +57,12 @@ namespace DalObject
         /// <returns>A copy of the drone function</returns>
         public Drone GetDrone(int droneId)
         {
-            Drone tmp = DataSource.dronesList.Find(dr => dr.Id == droneId);
+            if (!DataSource.dronesList.Exists(x => x.Id == droneId))
+            {
+                throw new NoNumberFoundExeptions(" ");
+            }
 
-            return tmp;         
+            return DataSource.dronesList.Find(dr => dr.Id == droneId);
         }
 
         /// <summary>
@@ -72,43 +75,6 @@ namespace DalObject
 
         }
 
-        /// <summary>
-        /// A function that implements a skimmer association mode for a package
-        /// </summary>
-        /// <param name="id">The id of the drone</param>
-        public void AssigningSkimmerToPackage(int id)
-        {
-            Drone drone = DataSource.dronesList.Find(drn => drn.Id == id);
-        }
-
-        /// <summary>
-        /// A function that implements a skimmer mode that has completed the shipment
-        /// </summary>
-        /// <param name="id">The id of the drone</param>
-        public void DroneDeliverEnded(int id)
-        {
-            Drone drone = DataSource.dronesList.Find(drn => drn.Id == id);
-
-            //    drone.Status = DroneStatuses.AVAILABLE;
-        }
-
-        /// <summary>
-        /// A function that implements a mode of sending a skimmer to a charging station
-        /// </summary>
-        /// <param name="droneId">The id of the drone</param>
-        public void SendDroneForCharge(int droneId)
-        {
-            Drone drone = DataSource.dronesList.Find(drn => drn.Id == droneId);
-        }
-
-        /// <summary>
-        /// A function that implements a skimmer release mode from a charging position
-        /// </summary>
-        /// <param name="droneId">The id of the drone</param>
-        public void RealeseDroneFromCharge(int droneId)
-        {
-            Drone drone = DataSource.dronesList.Find(drn => drn.Id == droneId);
-        }
 
         public void DeleteDrone(int id)
         {
@@ -139,10 +105,11 @@ namespace DalObject
         /// <param name="station">Station to update</param>
         public void UpdateStation(Station station)
         {
-            if (DataSource.stations.Exists(x => x.Id != station.Id))
+            if (!DataSource.stations.Exists(x => x.Id == station.Id))
             {
                 throw new NoNumberFoundExeptions();
             }
+
             int iU = DataSource.stations.FindIndex(st => st.Id == station.Id);
             DataSource.stations.Insert(iU, station);
         }
@@ -154,9 +121,14 @@ namespace DalObject
         /// <returns>A copy of the station function</returns>
         public Station GetStation(int stationId)
         {
-            Station tmp = DataSource.stations.Find(st => st.Id == stationId);
+            if (!DataSource.stations.Exists(x => x.Id == stationId))
+            {
+                throw new NoNumberFoundExeptions();
+            }
 
-            return tmp;     
+            return DataSource.stations.Find(st => st.Id == stationId);
+
+
         }
 
 
@@ -167,17 +139,6 @@ namespace DalObject
         public IEnumerable<Station> GetStations(Predicate<Station> predicate = null)
         {
             return DataSource.stations.FindAll(i => predicate == null ? true : predicate(i)).ToList();
-            
-           // return DataSource.stations.Take(DataSource.stations.Count).ToList();
-             }
-
-        /// <summary>
-        /// Display of base stations with available charging stations
-        /// </summary>
-        /// <returns>The base stations with available charging stations</returns>
-        public IEnumerable<Station> GetFreeStations(Predicate<Station> predicate = null)
-        {
-            return DataSource.stations.FindAll(i => predicate == null ? true : predicate(i)).ToList();
         }
 
         /// <summary>
@@ -186,7 +147,7 @@ namespace DalObject
         /// <param name="stationId">The id of the station</param>
         public void UsingChargingStation(int stationId)
         {
-            Station station = DataSource.stations.Find(st => st.Id == stationId);
+            Station station = GetStation(stationId);
             int indexStation = DataSource.stations.FindIndex(st => st.Id == stationId);
 
             station.FreeChargeSlots--;
@@ -199,8 +160,7 @@ namespace DalObject
         /// <param name="stationId">The id of the station</param>
         public void RealeseChargingStation(int stationId)
         {
-            Station station = DataSource.stations.Find(st => st.Id == stationId);
-
+            Station station = GetStation(stationId);
             int indexStation = DataSource.stations.FindIndex(st => st.Id == stationId);
 
             station.FreeChargeSlots++;
@@ -229,24 +189,17 @@ namespace DalObject
             DataSource.customers.Add(customer);
         }
 
-        //public void ComparisonCustomer(Customer customer, int id)
-        //{
-        //    int find = DataSource.customers.FindIndex(cus => cus.Id == customer.Id);
-        //    if (find != -1)
-        //    {
-        //        Console.WriteLine("Existing customer number, enter another number: ");
-        //    }
-        //}
         /// <summary>
         /// Function of updating a customer.
         /// </summary>
         /// <param name="customer">Customer to update</param>
         public void UpdateCustomer(Customer customer)
         {
-            if (DataSource.customers.Exists(x => x.Id != customer.Id))
+            if (!DataSource.customers.Exists(x => x.Id == customer.Id))
             {
                 throw new NoNumberFoundExeptions();
             }
+
             int iU = DataSource.customers.FindIndex(cus => cus.Id == customer.Id);
             DataSource.customers.Insert(iU, customer);
         }
@@ -258,9 +211,14 @@ namespace DalObject
         /// <returns>A copy of the customer function</returns>
         public Customer GetCustomer(int customerId)
         {
+            if (!DataSource.customers.Exists(x => x.Id == customerId))
+            {
+                throw new NoNumberFoundExeptions();
+            }
+
             Customer tmp = DataSource.customers.Find(cus => cus.Id == customerId);
 
-            return tmp;        
+            return tmp;
         }
 
         /// <summary>
@@ -270,9 +228,6 @@ namespace DalObject
         public IEnumerable<Customer> GetCustomers(Predicate<Customer> predicate = null)
         {
             return DataSource.customers.FindAll(i => predicate == null ? true : predicate(i)).ToList();
-            
-           // return DataSource.customers.Take(DataSource.customers.Count).ToList();
-
         }
 
         public void DeleteCustomer(int id)
@@ -299,10 +254,15 @@ namespace DalObject
         /// Function of updating a package.
         /// </summary>
         /// <param name="Package">Package to update</param>
-        public void UpdatePackage(Package Package)
+        public void UpdatePackage(Package package)
         {
-            int iU = DataSource.packages.FindIndex(pck => pck.Id == Package.Id);
-            DataSource.packages.Insert(iU, Package);
+            if (!DataSource.packages.Exists(x => x.Id == package.Id))
+            {
+                throw new NoNumberFoundExeptions();
+            }
+
+            int iU = DataSource.packages.FindIndex(pck => pck.Id == package.Id);
+            DataSource.packages.Insert(iU, package);
         }
 
         /// <summary>
@@ -312,9 +272,12 @@ namespace DalObject
         /// <returns>A copy of the package function</returns>
         public Package GetPackage(int packageId)
         {
-            Package tmp = DataSource.packages.Find(pck => pck.Id == packageId);
+            if (!DataSource.packages.Exists(x => x.Id == packageId))
+            {
+                throw new NoNumberFoundExeptions();
+            }
 
-            return tmp;
+            return DataSource.packages.Find(pck => pck.Id == packageId);
         }
 
         /// <summary>
@@ -324,37 +287,6 @@ namespace DalObject
         public IEnumerable<Package> GetPackages(Predicate<Package> predicate = null)
         {
             return DataSource.packages.FindAll(i => predicate == null ? true : predicate(i)).ToList();
-            
-            //return DataSource.packages.Take(DataSource.packages.Count).ToList();
-        }
-
-        /// <summary>
-        /// Displays a list of packages not yet associated with the glider.
-        /// </summary>
-        /// <returns>List of packages not yet tied to the drone</returns>
-        public IEnumerable<Package> GetNotScheduledPackages()
-        {
-            return DataSource.packages.FindAll(pck => pck.DroneId == -1).ToList();
-            //List<Package> packages = new();
-
-            //foreach (var pck in tmpPackages)
-            //{
-            //    packages.Add(new()
-            //    {
-            //        Id = pck.Id,
-            //        SenderId = pck.SenderId,
-            //        TargetId = pck.TargetId,
-            //        Weight = pck.Weight,
-            //        Priority = pck.Priority,
-            //        Requested = pck.Requested,
-            //        Scheduled = pck.Scheduled,
-            //        PickedUp = pck.PickedUp,
-            //        Delivered = pck.Delivered,
-            //        DroneId = pck.DroneId
-            //    });
-            //}
-
-            //return packages;
         }
 
         /// <summary>
@@ -364,15 +296,13 @@ namespace DalObject
         /// <param name="droneId">The id of the drone</param>
         public void ConnectPackageToDrone(int id, int droneId)
         {
-            Package package = DataSource.packages.Find(pck => pck.Id == id);
+            Package package = GetPackage(id);
             int indexPackage = DataSource.packages.FindIndex(pck => pck.Id == id);
 
             package.DroneId = droneId;
             package.Scheduled = DateTime.Now;
 
             DataSource.packages[indexPackage] = package;
-
-
         }
 
         /// <summary>
@@ -381,7 +311,7 @@ namespace DalObject
         /// <param name="id">The id of the package </param>
         public void PickUp(int id)
         {
-            Package package = DataSource.packages.Find(pck => pck.Id == id);
+            Package package = GetPackage(id);
             int indexPackage = DataSource.packages.FindIndex(pck => pck.Id == id);
 
             package.PickedUp = DateTime.Now;
@@ -395,7 +325,7 @@ namespace DalObject
         /// <param name="id">The id of the package</param>
         public void PackageDeliver(int id)
         {
-            Package package = DataSource.packages.Find(pck => pck.Id == id);
+            Package package = GetPackage(id);
             int indexPackage = DataSource.packages.FindIndex(pck => pck.Id == id);
 
             package.Delivered = DateTime.Now;
@@ -418,16 +348,12 @@ namespace DalObject
         /// <param name="droneCharge">Drone charge to add</param>
         public void AddDroneCharge(DroneCharge droneCharge)
         {
-            DataSource.droneCharges.Add(droneCharge);
-        }
+            if (DataSource.droneCharges.Exists(x => x.DroneId == droneCharge.DroneId))
+            {
+                throw new ExistsNumberException();
+            }
 
-        /// <summary>
-        /// Function of remove a droneCharge.
-        /// </summary>
-        /// <param name="droneCharge">Drone charge to remove</param>
-        public void RemoveDroneCharge(DroneCharge droneCharge)
-        {
-            DataSource.droneCharges.Remove(droneCharge);
+            DataSource.droneCharges.Add(droneCharge);
         }
 
         /// <summary>
@@ -436,6 +362,11 @@ namespace DalObject
         /// <param name="Package">Package to update</param>
         public void UpdateDroneCharge(DroneCharge droneCharge)
         {
+            if (!DataSource.droneCharges.Exists(x => x.DroneId == droneCharge.DroneId))
+            {
+                throw new NoNumberFoundExeptions();
+            }
+
             int iU = DataSource.droneCharges.FindIndex(drCh => drCh.DroneId == droneCharge.DroneId);
             DataSource.droneCharges.Insert(iU, droneCharge);
         }
@@ -447,9 +378,12 @@ namespace DalObject
         /// <returns>A copy of the drone function</returns>
         public DroneCharge GetDroneCharge(int droneId)
         {
-            DroneCharge tmp = DataSource.droneCharges.Find(dr => dr.DroneId == droneId);
+            if (!DataSource.droneCharges.Exists(x => x.DroneId == droneId))
+            {
+                throw new NoNumberFoundExeptions();
+            }
 
-            return tmp;
+            return DataSource.droneCharges.Find(dr => dr.DroneId == droneId);
         }
 
         /// <summary>
@@ -459,13 +393,16 @@ namespace DalObject
         public IEnumerable<DroneCharge> GetDronesCharges(Predicate<DroneCharge> predicate = null)
         {
             return DataSource.droneCharges.FindAll(i => predicate == null ? true : predicate(i)).ToList();
-        
-        //    return DataSource.droneCharges.Take(DataSource.droneCharges.Count).ToList();
         }
 
 
-        public void DeleteDronesCharge(int id)
+        public void DeleteDroneCharge(int id)
         {
+            if (!DataSource.droneCharges.Exists(x => x.DroneId == id))
+            {
+                throw new NoNumberFoundExeptions();
+            }
+
             int Id = DataSource.droneCharges.FindIndex(drc => drc.DroneId == id);
             DataSource.droneCharges.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundExeptions(" "));
         }
@@ -484,6 +421,7 @@ namespace DalObject
                 DataSource.Config.HeavyWeight,
                 DataSource.Config.ChargingRate
             };
+
             return ChargingRequests;
         }
 

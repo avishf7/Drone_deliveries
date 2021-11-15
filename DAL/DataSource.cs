@@ -66,23 +66,23 @@ namespace DalObject
             /// <summary>
             /// 
             /// </summary>
-            internal static double DroneAvailable;
+            internal static double DroneAvailable = 1;
             /// <summary>
             /// 
             /// </summary>
-            internal static double LightWeight;
+            internal static double LightWeight = 1.5;
             /// <summary>
             /// 
             /// </summary>
-            internal static double MediumWeight;
+            internal static double MediumWeight = 2;
             /// <summary>
             /// 
             /// </summary>
-            internal static double HeavyWeight;
+            internal static double HeavyWeight = 2.5;
             /// <summary>
             /// 
             /// </summary>
-            internal static double ChargingRate;
+            internal static double ChargingRate = 30;
 
         }
 
@@ -128,7 +128,10 @@ namespace DalObject
                 });
             }
 
-            for (int i = 0; i < 10; i++)
+
+            //################### Add 10 diffrent stations #######################
+
+            for (int i = 0; i < 5; i++)
             {
                 packages.Add(new()
                 {
@@ -138,30 +141,66 @@ namespace DalObject
                     Weight = (Weight)rand.Next(3),
                     Priority = (Priorities)rand.Next(3),
                     Requested = DateTime.Now,
-                    Scheduled = DateTime.Now.AddDays(3),
-                    PickedUp = DateTime.Now.AddDays(3).AddHours(3),
-                    Delivered = DateTime.Now.AddDays(3).AddHours(3).AddHours(4),
-                    DroneId = GetAvailableDrone().Id
+                    Scheduled = DateTime.MinValue,
+                    PickedUp = DateTime.MinValue,
+                    Delivered = DateTime.MinValue,
+                    DroneId = -1
                 });
             }
 
-                Config.PackageIdCounter = packages.Max(pck => pck.Id) + 1;
+            for (int i = 5; i < 7; i++)
+            {
+                packages.Add(new()
+                {
+                    Id = rand.Next(10),
+                    SenderId = customers[rand.Next(10)].Id,
+                    TargetId = customers[rand.Next(10)].Id,
+                    Weight = (Weight)rand.Next(3),
+                    Priority = (Priorities)rand.Next(3),
+                    Requested = DateTime.Now.AddHours(-3),
+                    Scheduled = DateTime.Now,
+                    PickedUp = DateTime.MinValue,
+                    Delivered = DateTime.MinValue,
+                    DroneId = dronesList[i - 5].Id
+                });
+            }
+
+            for (int i = 7; i < 9; i++)
+            {
+                packages.Add(new()
+                {
+                    Id = rand.Next(10),
+                    SenderId = customers[rand.Next(10)].Id,
+                    TargetId = customers[rand.Next(10)].Id,
+                    Weight = (Weight)rand.Next(3),
+                    Priority = (Priorities)rand.Next(3),
+                    Requested = DateTime.Now.AddHours(-6),
+                    Scheduled = DateTime.Now.AddHours(-3),
+                    PickedUp = DateTime.Now,
+                    Delivered = DateTime.MinValue,
+                    DroneId = dronesList[i - 5].Id
+                });
+            }
+
+            packages.Add(new()
+            {
+                Id = rand.Next(10),
+                SenderId = customers[rand.Next(10)].Id,
+                TargetId = customers[rand.Next(10)].Id,
+                Weight = (Weight)rand.Next(3),
+                Priority = (Priorities)rand.Next(3),
+                Requested = DateTime.Now.AddHours(-9),
+                Scheduled = DateTime.Now.AddHours(-6),
+                PickedUp = DateTime.Now.AddHours(-3),
+                Delivered = DateTime.Now,
+                DroneId = dronesList[4].Id
+            });
+
+            //####################################################################
+
+            Config.PackageIdCounter = packages.Max(pck => pck.Id) + 1;
         }
 
-        /// <summary>
-        /// Looking for a free drone.
-        /// </summary>
-        /// <returns>Available drone<drone/returns>
-       private static Drone GetAvailableDrone()
-        {
-            Drone drone;
-           // do
-            //{
-                drone = dronesList[rand.Next(5)];
-            //} //while (drone.Status != DroneStatuses.AVAILABLE);
-
-            return drone;
-        }
     }
-  
+
 }
