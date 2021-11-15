@@ -26,6 +26,7 @@ namespace BL
 
         public BL()
         {
+            
             List<double> tmp = dal.ChargingRequest();
             DroneAvailable = tmp[0];
             LightWeight = tmp[1];
