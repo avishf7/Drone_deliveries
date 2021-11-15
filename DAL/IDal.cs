@@ -10,6 +10,7 @@ namespace IDAL
     public interface IDal
     {
         #region Drone functions
+
         /// <summary>
         /// Function of adding a drone  to dronesList.
         /// </summary>
