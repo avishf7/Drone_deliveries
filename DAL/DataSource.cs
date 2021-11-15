@@ -64,23 +64,23 @@ namespace DalObject
             /// </summary>
             internal static int PackageIdCounter;
             /// <summary>
-            /// 
+            /// Power consumption in percent per km when the drone is empty
             /// </summary>
             internal static double DroneAvailable = 1;
             /// <summary>
-            /// 
+            /// Power consumption in percent per km when the glider carries light delivery
             /// </summary>
             internal static double LightWeight = 1.5;
             /// <summary>
-            /// 
+            /// Power consumption in percent per km when the glider carries medium shipping
             /// </summary>
             internal static double MediumWeight = 2;
             /// <summary>
-            /// 
+            /// Power consumption in percent per km when the glider carries heavy shipping
             /// </summary>
             internal static double HeavyWeight = 2.5;
             /// <summary>
-            /// 
+            /// Percentage of skimmer charge per hour
             /// </summary>
             internal static double ChargingRate = 30;
 

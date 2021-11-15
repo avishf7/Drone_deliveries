@@ -68,6 +68,7 @@ namespace DalObject
         /// <summary>
         /// Displays a list of drone's.
         /// </summary>
+        /// <param name="predicate">The list will be filtered according to the conditions obtained</param> 
         /// <returns>The list of dronesList</returns>
         public IEnumerable<Drone> GetDrones(Predicate<Drone> predicate = null)
         {
@@ -75,7 +76,10 @@ namespace DalObject
 
         }
 
-
+        /// <summary>
+        /// Delete a drone from the list
+        /// </summary>
+        /// <param name="id">The id of the drone</param>
         public void DeleteDrone(int id)
         {
             int Id = DataSource.dronesList.FindIndex(dr => dr.Id == id);
@@ -100,7 +104,7 @@ namespace DalObject
         }
 
         /// <summary>
-        /// Function of updating a drone.
+        /// Function of updating a station.
         /// </summary>
         /// <param name="station">Station to update</param>
         public void UpdateStation(Station station)
@@ -135,6 +139,7 @@ namespace DalObject
         /// <summary>
         /// Displays a list of base stations
         /// </summary>
+        /// <param name="predicate">The list will be filtered according to the conditions obtained</param>
         /// <returns>The list of stations</returns>
         public IEnumerable<Station> GetStations(Predicate<Station> predicate = null)
         {
@@ -166,7 +171,10 @@ namespace DalObject
             station.FreeChargeSlots++;
             DataSource.stations[indexStation] = station;
         }
-
+        /// <summary>
+        /// Delete a station from the list
+        /// </summary>
+        /// <param name="id">The id of the station</param>
         public void DeleteStation(int id)
         {
             int Id = DataSource.stations.FindIndex(st => st.Id == id);
@@ -221,15 +229,21 @@ namespace DalObject
             return tmp;
         }
 
+
         /// <summary>
         /// Displays a list of customers.
         /// </summary>
+        /// <param name="predicate">The list will be filtered according to the conditions obtained</param>
         /// <returns>The list of customers</returns>
         public IEnumerable<Customer> GetCustomers(Predicate<Customer> predicate = null)
         {
             return DataSource.customers.FindAll(i => predicate == null ? true : predicate(i)).ToList();
         }
 
+        /// <summary>
+        /// Delete a customer from the list
+        /// </summary>
+        /// <param name="id">The id of the customer</param>
         public void DeleteCustomer(int id)
         {
             int Id = DataSource.customers.FindIndex(cus => cus.Id == id);
@@ -280,9 +294,11 @@ namespace DalObject
             return DataSource.packages.Find(pck => pck.Id == packageId);
         }
 
+
         /// <summary>
         /// Displays a list of package's.
         /// </summary>
+        /// <param name="predicate">The list will be filtered according to the conditions obtained</param>
         /// <returns>The list of packages</returns>
         public IEnumerable<Package> GetPackages(Predicate<Package> predicate = null)
         {
@@ -332,6 +348,11 @@ namespace DalObject
             DataSource.packages[indexPackage] = package;
         }
 
+
+        /// <summary>
+        /// Delete a package from the list
+        /// </summary>
+        /// <param name="id">The id of the package</param>
         public void DeletePackage(int id)
         {
             int Id = DataSource.packages.FindIndex(pck => pck.Id == id);
@@ -343,7 +364,7 @@ namespace DalObject
         #region Drone charge functions
 
         /// <summary>
-        /// Function of remove a droneCharge.
+        /// Function of adding a droneCharge.
         /// </summary>
         /// <param name="droneCharge">Drone charge to add</param>
         public void AddDroneCharge(DroneCharge droneCharge)
@@ -389,13 +410,17 @@ namespace DalObject
         /// <summary>
         /// Displays a list of drone chrarges.
         /// </summary>
+        /// <param name="predicate">The list will be filtered according to the conditions obtained</param>
         /// <returns>The list of dronesList</returns>
         public IEnumerable<DroneCharge> GetDronesCharges(Predicate<DroneCharge> predicate = null)
         {
             return DataSource.droneCharges.FindAll(i => predicate == null ? true : predicate(i)).ToList();
         }
 
-
+        /// <summary>
+        /// Delete a drone charge from the list
+        /// </summary>
+        /// <param name="id">The id of drone</param>
         public void DeleteDroneCharge(int id)
         {
             if (!DataSource.droneCharges.Exists(x => x.DroneId == id))
@@ -410,7 +435,10 @@ namespace DalObject
 
         #endregion
 
-
+        /// <summary>
+        /// Information on power consumption and charging time
+        /// </summary>
+        /// <returns>A list of the charging requests</returns>
         public List<double> ChargingRequest()
         {
             List<double> ChargingRequests = new()
