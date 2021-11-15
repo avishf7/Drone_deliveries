@@ -13,13 +13,13 @@ namespace IBL.BO
         /// </summary>
         public int Id { get; set; }
         /// <summary>
-        /// Gets the sender id.
+        /// 
         /// </summary>
-        public int SenderId { get; set; }
+        CustomerInPackage SenderCustomerInPackage;
         /// <summary>
-        /// Gets the target id.
+        /// 
         /// </summary>
-        public int TargetId { get; set; }
+        CustomerInPackage TargetCustomerInPackage;
         /// <summary>
         /// Gets the weight.
         /// </summary>
@@ -28,10 +28,10 @@ namespace IBL.BO
         /// Gets the priority.
         /// </summary>
         public Priorities Priority { get; set; }
+        /// <summary>
+        /// 
         /// </summary>
-        /// Gets the drone id.
-        /// </summary>
-        public int DroneId { get; set; }
+        DroneInPackage droneInPackage;
         /// <summary>
         /// Gets the requested
         /// </summary>
@@ -53,10 +53,10 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            return "Details of ID:" + Id + "\nSender ID: " + SenderId +
-                "\nTarget ID: " + TargetId + "\nWeight: " + Weight + "\nPriority: " + Priority
+            return "Details of ID:" + Id + "\nSender customer in package: " + SenderCustomerInPackage +
+                "\nTarget customer in package: " + TargetCustomerInPackage + "\nWeight: " + Weight + "\nPriority: " + Priority
                 + "\nRequested: " + Requested + "\nScheduled: " + Scheduled + "\nPicked up: "
-                + PickedUp + "\nDelivered: " + Delivered + "\nDrone ID: " + DroneId + "\n";
+                + PickedUp + "\nDelivered: " + Delivered + "\nDrone in package: " + droneInPackage + "\n";
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,19 +28,18 @@ namespace IBL.BO
         /// <summary>
         /// Gets number of delivery in progress
         /// </summary>
-        public int NumberOfDeliveryInProgress { get; set; }
+        PackageInTransfer DeliveryInProgress;
         /// <summary>
         /// 
         /// </summary>
-        public double CurrentLocationOfDrone { get; set; }
-
+        Location LocationOfDrone;
 
 
         public override string ToString()
         {
             return "Details of Id :" + Id + "\nModel: " + Model + "\nMax weight: " +
-                 MaxWeight + "\nStatus of battery: " + BatteryStatus + "\nDeliver in progress: " + NumberOfDeliveryInProgress+
-                 "\nCurrent location of drone: " + CurrentLocationOfDrone +"\n";
+                 MaxWeight + "\nStatus of battery: " + BatteryStatus + "\nDeliver in progress: " + DeliveryInProgress +
+                 "\nCurrent location of drone: " + LocationOfDrone +"\n";
         }
 
     }

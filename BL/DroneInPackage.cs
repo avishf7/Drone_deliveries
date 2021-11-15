@@ -8,13 +8,22 @@ namespace IBL.BO
 {
     public class DroneInPackage
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public int Id { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double BatteryStatus { get; set; }
-        //מיקום
-
+        /// <summary>
+        /// 
+        /// </summary>
+        Location LocationOfDrone;
         public override string ToString()
         {
-            return "Details of Id :" + Id + "\nStatus of battery: " + BatteryStatus + "\n";
+            return "Details of Id :" + Id + "\nStatus of battery: " + BatteryStatus + "\nLocation of drone: " 
+                + LocationOfDrone +"\n";
         }
     }
 }
