@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace BL
 {
-    public class BL : IBl
+    public partial class BL : IBl
     {
         IDal dal = new DalObject.DalObject();
 
@@ -37,6 +37,8 @@ namespace BL
             //הבאת רשימת הרחפנים משכבת הנתונים
             List<IDAL.DO.Drone> drones = dal.GetDrones().ToList();
             List<IDAL.DO.Package> senderingPackages = dal.GetPackages(x => x.DroneId != -1 && x.Delivered == DateTime.MinValue).ToList();
+            List<IDAL.DO.Package> deliveredPackages = dal.GetPackages(x => x.Delivered != DateTime.MinValue).ToList();
+            List<IDAL.DO.Station> stations = dal.GetStations().ToList();
 
             foreach (var drone in drones)
             {
@@ -49,7 +51,6 @@ namespace BL
                 switch (droneStatus)
                 {
                     case DroneStatuses.AVAILABLE:
-                        List<IDAL.DO.Package> deliveredPackages = dal.GetPackages(x => x.Delivered != DateTime.MinValue).ToList();
                         IDAL.DO.Customer randomCustomer = dal.GetCustomer(deliveredPackages[rd.Next(deliveredPackages.Count)].TargetId);
 
                         droneLocation = new() { Lattitude = randomCustomer.Lattitude, Longitude = randomCustomer.Longitude };
@@ -57,7 +58,6 @@ namespace BL
 
                         break;
                     case DroneStatuses.MAINTENANCE:
-                        List<IDAL.DO.Station> stations = dal.GetStations().ToList();
                         IDAL.DO.Station randomStation = stations[rd.Next(stations.Count)];
 
                         droneLocation = new() { Lattitude = randomStation.Lattitude, Longitude = randomStation.Longitude };
@@ -94,7 +94,7 @@ namespace BL
                     Id = drone.Id,
                     Model = drone.Model,
                     MaxWeight = (Weight)(int)drone.MaxWeight,
-                    BatteryStatus = rd.NextDouble() * rd.Next((int)Math.Ceiling(minBattery), (int)maxBattery),
+                    BatteryStatus = rd.NextDouble() * rd.Next((int)(maxBattery - Math.Ceiling(minBattery))) + Math.Ceiling(minBattery),
                     DroneStatus = droneStatus,
                     Location = droneLocation,
                     PackageNumber = (iPck != -1) ? senderingPackages[iPck].Id : iPck
@@ -167,6 +167,5 @@ namespace BL
                     return distance * DroneAvailable;
             }
         }
-
     }
 }
