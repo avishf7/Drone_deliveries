@@ -37,7 +37,9 @@ namespace BL
 
                 DroneLists[drr].DroneStatus = dr.DroneStatus;
                 DroneLists[drr].LocationOfDrone = dr.LocationOfDrone;
-                
+                DroneLists[drr].BatteryStatus = dr.BatteryStatus;
+
+
 
 
             }
