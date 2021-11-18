@@ -16,13 +16,13 @@ namespace IBL
         /// Function of adding a drone  to dronesList.
         /// </summary>
         /// <param name="drone">Drone to add</param>        
-        void AddDrone(Drone drone);
+        void AddDrone(Drone drone ,int staionId);
 
         /// <summary>
         /// Function of updating a drone.
         /// </summary>
         /// <param name="drone">Drone to update</param>        
-        void UpdateDrone(DroneToList drone);
+        void UpdateDrone(int droneId, string model);
 
         /// <summary>
         /// Function for displaying drone.

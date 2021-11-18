@@ -24,19 +24,19 @@ namespace BL
         /// <summary>
         /// 
         /// </summary>
-        CustomerInPackage SenderCustomerInPackage;
+       public CustomerInPackage SenderCustomerInPackage { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        CustomerInPackage TargetCustomerInPackage;
+        public CustomerInPackage TargetCustomerInPackage { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        Location CollectionLocation;
+        public Location CollectionLocation { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        Location DeliveryDestinationLocation;
+        public Location DeliveryDestinationLocation { get; set; }
         /// <summary>
         /// Distance from collection point to destination
         /// </summary>

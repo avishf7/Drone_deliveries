@@ -31,7 +31,7 @@ namespace IBL.BO
         /// <summary>
         /// 
         /// </summary>
-        public Location Location { get; set; }
+        public Location LocationOfDrone { get; set; }
         /// <summary>
         /// 
         /// </summary>

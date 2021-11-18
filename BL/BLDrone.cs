@@ -15,18 +15,28 @@ namespace BL
         {
             try
             {
-               List <IDAL.DO.Station> DroneSt =dal.GetStations().ToList();
-              IDAL.DO.Station st = DroneSt.Find(x => x.Id == staionId);
+                List<IDAL.DO.Station> DroneSt = dal.GetStations().ToList();
+                IDAL.DO.Station st = DroneSt.Find(x => x.Id == staionId);
                 dal.AddDrone(new IDAL.DO.Drone
                 {
                     Id = drone.Id,
                     MaxWeight = (IDAL.DO.Weight)drone.MaxWeight,
                     Model = drone.Model
                 });
-                drone.BatteryStatus = rd.NextDouble() * rd.Next((int)20) + 20;
-                drone.DroneStatus = DroneStatuses.MAINTENANCE;
+
                 drone.LocationOfDrone.Longitude = st.Longitude;
                 drone.LocationOfDrone.Lattitude = st.Lattitude;
+                dal.UsingChargingStation(st.Id);
+                DroneLists.Add(new()
+                {
+                    Id = drone.Id,
+                    MaxWeight = drone.MaxWeight,
+                    Model = drone.Model,
+                    BatteryStatus = rd.NextDouble() * rd.Next(20) + 20,
+                    DroneStatus = DroneStatuses.MAINTENANCE,
+                    LocationOfDrone = new() { Lattitude = st.Lattitude, Longitude = st.Longitude },
+                    PackageNumber = -1
+                });
 
             }
             catch (Exception)
@@ -36,44 +46,41 @@ namespace BL
             }
         }
 
-        public void UpdateDrone(DroneToList drone, int id)
+        public void UpdateDrone(int droneId, string model)
         {
             try
             {
                 List<IDAL.DO.Drone> DroneT = dal.GetDrones().ToList();
 
-                IDAL.DO.Drone st = DroneT.Find(x => x.Id == id);
-                dal.UpdateDrone(new IDAL.DO.Drone
-                {
-                    Model = st.Model
-                });
+                IDAL.DO.Drone dr = DroneT.Find(x => x.Id == droneId);
+                dr.Model = model;
+                dal.UpdateDrone(dr);
             }
             catch (Exception)
             {
 
                 throw;
-            }       
+            }
         }
 
         public Drone GetDrone(int droneId)
         {
-            try
-            {
-            
-                IDAL.DO.Drone DoDrone = dal.GetDrone(droneId);
-                Drone BoDrone = new()
-                {
-                    Id = DoDrone.Id,
-                    Model = DoDrone.Model,
-                    MaxWeight = (Weight)(IDAL.DO.Weight)DoDrone.MaxWeight,
-                    BatteryStatus=
-                };
-            }
-            catch (Exception)
-            {
 
-                throw;
+            var dr = DroneLists.Find(x => x.Id == droneId);
+            if (dr == null)
+            {
+                throw new NoNumberFoundExeptions();
             }
+
+            return new()
+            {
+                Id = dr.Id,
+                Model = dr.Model,
+                MaxWeight = dr.MaxWeight,
+                BatteryStatus =dr.BatteryStatus,
+                DroneStatus=dr.DroneStatus,
+                DeliveryInProgress = dr.DroneStatus==DroneStatuses.SENDERING ? new() {}
+                };
         }
 
         public IEnumerable<DroneToList> GetDrones(Predicate<Drone> predicate = null)

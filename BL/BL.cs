@@ -96,7 +96,7 @@ namespace BL
                     MaxWeight = (Weight)(int)drone.MaxWeight,
                     BatteryStatus = rd.NextDouble() * rd.Next((int)(maxBattery - Math.Ceiling(minBattery))) + Math.Ceiling(minBattery),
                     DroneStatus = droneStatus,
-                    Location = droneLocation,
+                    LocationOfDrone = droneLocation,
                     PackageNumber = (iPck != -1) ? senderingPackages[iPck].Id : iPck
                 });
             }

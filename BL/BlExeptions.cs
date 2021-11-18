@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    class BlExeptions
-    {
+
         [Serializable]
         public class ExistsNumberException : Exception
         {
@@ -39,7 +38,5 @@ namespace BL
 
             override public string ToString()
             { return "No number found exeptions:" + Capacity + "\n" + Message; }
-        }
-
-    }
+        }    
 }
