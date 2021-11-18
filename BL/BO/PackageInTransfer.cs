@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    class PackageInTransfer
+    public class PackageInTransfer
     {
         /// <summary>
         /// Gets the id.

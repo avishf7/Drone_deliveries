@@ -16,7 +16,7 @@ namespace IBL
         /// Function of adding a drone  to dronesList.
         /// </summary>
         /// <param name="drone">Drone to add</param>        
-        void AddDrone(DroneToList drone);
+        void AddDrone(Drone drone);
 
         /// <summary>
         /// Function of updating a drone.
@@ -52,7 +52,7 @@ namespace IBL
         /// Function of adding a drone station to the stations.
         /// </summary>
         /// <param name="station">Station to add</param>
-        void AddStation(StationToList station);
+        void AddStation(Station station);
 
         /// <summary>
         /// Function of updating a station.
@@ -88,7 +88,7 @@ namespace IBL
         /// Function of adding a customer.
         /// </summary>
         /// <param name="customer">Customer to add</param>
-        void AddCustomer(CustomerToList customer);
+        void AddCustomer(Customer customer);
 
         /// <summary>
         /// Function of updating a customer.
@@ -124,7 +124,7 @@ namespace IBL
         /// Function of adding a package.
         /// </summary>
         /// <param name="package">Package to add</param>
-        public void AddPackage(PackageToList package);
+        public void AddPackage(Package package);
 
         /// <summary>
         /// Function of updating a package.

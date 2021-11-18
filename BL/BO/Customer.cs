@@ -23,15 +23,15 @@ namespace IBL.BO
         /// <summary>
         /// 
         /// </summary>
-        Location CustomerLocation;
+        public Location CustomerLocation { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        List<CustomerInPackage> CustomerInPackageFromCustomer;
+        public List<CustomerInPackage> CustomerInPackageFromCustomer { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        List<CustomerInPackage> CustomerInPackageToCustomer;
+        public List<CustomerInPackage> CustomerInPackageToCustomer { get; set; }
 
 
 

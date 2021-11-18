@@ -11,11 +11,29 @@ namespace BL
 {
     public partial class BL : IBl
     {
-        public void AddPackage(PackageToList package)
+        public void AddPackage(Package package)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                dal.AddPackage(new IDAL.DO.Package
+                {
+                    SenderId = package.SenderCustomerInPackage,
+                    TargetId = package.TargetCustomerInPackage,
+                    Weight = (IDAL.DO.Weight)package.Weight,
+                    Priority = (IDAL.DO.Priorities)package.Priority,
+                    DroneId = 0,
+                    Requested = DateTime.Now,
+                    Scheduled = DateTime.MinValue,
+                    PickedUp = DateTime.MinValue,
+                    Delivered = DateTime.MinValue
+                }); ;
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
         public void UpdatePackage(PackageToList Package)
         {
             throw new NotImplementedException();

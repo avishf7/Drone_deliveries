@@ -19,7 +19,7 @@ namespace IBL.BO
         /// <summary>
         /// 
         /// </summary>
-        Location LocationOfStation;
+        public Location LocationOfStation { get; set; }
         /// <summary>
         /// Gets the free charge slot.
         /// </summary>
@@ -28,9 +28,6 @@ namespace IBL.BO
         /// Gets num of charging drones
         /// </summary>
         public List<DroneCharge> ChargingDrones { get; set; }
-
-
-
 
         public override string ToString()
         {

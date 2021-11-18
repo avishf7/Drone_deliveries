@@ -11,10 +11,29 @@ namespace BL
 {
     public partial class BL : IBl
     {
-        public void AddCustomer(CustomerToList customer)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="customer"></param>
+        public void AddCustomer(Customer customer)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                dal.AddCustomer(new IDAL.DO.Customer
+                {
+                    Id = customer.Id,
+                    Name = customer.Name,
+                    Phone = customer.Phone,
+                    Longitude = customer.CustomerLocation.Longitude,
+                    Lattitude = customer.CustomerLocation.Lattitude
+
+                });
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }        }
 
         public void UpdateCustomer(CustomerToList customer)
         {

@@ -25,21 +25,27 @@ namespace IBL.BO
         /// Gets the drone's battery stutus;
         /// </summary>
         public double BatteryStatus { get; set; }
-        /// <summary>
-        /// Gets number of delivery in progress
-        /// </summary>
-        PackageInTransfer DeliveryInProgress;
+
         /// <summary>
         /// 
         /// </summary>
-        Location LocationOfDrone;
+        public DroneStatuses DroneStatus { get; set; }
+        /// <summary>
+        /// Gets number of delivery in progress
+        /// </summary>
+        public PackageInTransfer DeliveryInProgress { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public Location LocationOfDrone { get; set; }
 
 
         public override string ToString()
         {
             return "Details of Id :" + Id + "\nModel: " + Model + "\nMax weight: " +
-                 MaxWeight + "\nStatus of battery: " + BatteryStatus + "\nDeliver in progress: " + DeliveryInProgress +
-                 "\nCurrent location of drone: " + LocationOfDrone +"\n";
+                 MaxWeight + "\nStatus of battery: " + BatteryStatus +
+                 "\nStusus of drone: " + DroneStatus + "Deliver in progress: " + DeliveryInProgress +
+                 "\nCurrent location of drone: " + LocationOfDrone + "\n";
         }
 
     }

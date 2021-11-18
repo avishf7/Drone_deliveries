@@ -15,11 +15,11 @@ namespace IBL.BO
         /// <summary>
         /// 
         /// </summary>
-        CustomerInPackage SenderCustomerInPackage;
+        public int  SenderCustomerInPackage { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        CustomerInPackage TargetCustomerInPackage;
+        public int  TargetCustomerInPackage { get; set; }
         /// <summary>
         /// Gets the weight.
         /// </summary>
@@ -31,7 +31,7 @@ namespace IBL.BO
         /// <summary>
         /// 
         /// </summary>
-        DroneInPackage droneInPackage;
+        public DroneInPackage droneInPackage { get; set; }
         /// <summary>
         /// Gets the requested
         /// </summary>

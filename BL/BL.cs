@@ -36,7 +36,7 @@ namespace BL
 
             //הבאת רשימת הרחפנים משכבת הנתונים
             List<IDAL.DO.Drone> drones = dal.GetDrones().ToList();
-            List<IDAL.DO.Package> senderingPackages = dal.GetPackages(x => x.DroneId != -1 && x.Delivered == DateTime.MinValue).ToList();
+            List<IDAL.DO.Package> senderingPackages = dal.GetPackages(x => x.DroneId != 0 && x.Delivered == DateTime.MinValue).ToList();
             List<IDAL.DO.Package> deliveredPackages = dal.GetPackages(x => x.Delivered != DateTime.MinValue).ToList();
             List<IDAL.DO.Station> stations = dal.GetStations().ToList();
 
@@ -45,7 +45,7 @@ namespace BL
                 Location droneLocation = null;
                 double minBattery = 0, maxBattery = 100;
                 int iPck = senderingPackages.FindIndex(x => x.DroneId == drone.Id);
-                DroneStatuses droneStatus = (iPck != -1) ? DroneStatuses.SENDERING : (DroneStatuses)rd.Next(2);
+                DroneStatuses droneStatus = iPck != -1 ? DroneStatuses.SENDERING : (DroneStatuses)rd.Next(2);
 
 
                 switch (droneStatus)
@@ -70,7 +70,8 @@ namespace BL
 
                         Location senderLocation = new() { Lattitude = sender.Lattitude, Longitude = sender.Longitude },
                                  targetLocation = new() { Lattitude = target.Lattitude, Longitude = target.Longitude };
-
+                        
+                        //לשים את החלק מהשולח עד ליעד + מהיעד עד ללטעינה הקרובה ביותר בחוץ כי החלק הזה משותף לשני המקרים 
                         if (senderingPackages[iPck].PickedUp == DateTime.MinValue)
                         {
                             droneLocation = FindClosestStationLocation(senderLocation);
@@ -87,7 +88,6 @@ namespace BL
 
                         break;
                 }
-
 
                 DroneLists.Add(new()
                 {

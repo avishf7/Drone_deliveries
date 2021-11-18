@@ -225,5 +225,6 @@ namespace IDAL
         /// </summary>
         /// <returns>A list of the charging requests</returns>
         List<double> ChargingRequest();
+    
     }
 }

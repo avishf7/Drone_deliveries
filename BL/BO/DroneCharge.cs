@@ -12,6 +12,7 @@ namespace IBL.BO
         /// Gets the droneId;
         /// </summary>
         public int DroneId { get; set; }
+
         /// <summary>
         /// Gets the drone's battery stutus;
         /// </summary>
