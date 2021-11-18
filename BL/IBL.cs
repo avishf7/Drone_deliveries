@@ -58,7 +58,7 @@ namespace IBL
         /// Function of updating a station.
         /// </summary>
         /// <param name="station">Station to update</param>
-        void UpdateStation(StationToList station);
+        void UpdateStation(int stationId, string name, int numOfChargeStation);
 
         /// <summary>
         /// Function for displaying base station

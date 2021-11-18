@@ -88,6 +88,7 @@ namespace BL
             }
             else
             {
+                //לא צריך לשלוח חריגה אלאלשלוח את כל הרחפן ללא הישות או עם ישות מאותחלת לNULL
                 throw new NoNumberFoundException();
             }
 

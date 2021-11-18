@@ -30,9 +30,26 @@ namespace BL
             }
         }
 
-        public void UpdateStation(StationToList station)
+        public void UpdateStation(int stationId, string name, int numOfChargeStation)
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<IDAL.DO.Station> stationsT = dal.GetStations().ToList();
+                IDAL.DO.Station st = stationsT.Find(x => x.Id == stationId);
+                Station station = GetStation(stationId);
+
+                st.Name = name;
+                if (numOfChargeStation<station.ChargingDrones.Count)
+                {
+                   // throw לא ניתן להכניס כמות זו;
+                }
+                st.FreeChargeSlots = numOfChargeStation - station.ChargingDrones.Count;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }      
         }
 
         public Station GetStation(int stationId)
@@ -68,9 +85,10 @@ namespace BL
         public IEnumerable<StationToList> GetStations(Predicate<Station> predicate = null)
         {
             throw new NotImplementedException();
+
         }
 
-        public void DeleteStation(int id)
+            public void DeleteStation(int id)
         {
             throw new NotImplementedException();
         }
