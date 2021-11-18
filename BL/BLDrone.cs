@@ -15,8 +15,8 @@ namespace BL
         {
             try
             {
-                List<IDAL.DO.Station> DroneSt = dal.GetStations().ToList();
-                IDAL.DO.Station st = DroneSt.Find(x => x.Id == staionId);
+                List<IDAL.DO.Station> stations = dal.GetStations().ToList();
+                IDAL.DO.Station st = stations.Find(x => x.Id == staionId);
                 dal.AddDrone(new IDAL.DO.Drone
                 {
                     Id = drone.Id,
@@ -24,9 +24,6 @@ namespace BL
                     Model = drone.Model
                 });
 
-                drone.LocationOfDrone.Longitude = st.Longitude;
-                drone.LocationOfDrone.Lattitude = st.Lattitude;
-                dal.UsingChargingStation(st.Id);
                 DroneLists.Add(new()
                 {
                     Id = drone.Id,
@@ -38,12 +35,11 @@ namespace BL
                     PackageNumber = -1
                 });
 
-            }
-            catch (Exception)
-            {
+                dal.UsingChargingStation(st.Id);
 
-                throw;
             }
+            catch (IDAL.NoNumberFoundException ex) { throw new NoNumberFoundException("Station ID not found",ex);}
+            catch (ExistsNumberException ex) { throw new ExistsNumberException("Drone already exists", ex); }
         }
 
         public void UpdateDrone(int droneId, string model)
@@ -51,25 +47,48 @@ namespace BL
             try
             {
                 List<IDAL.DO.Drone> DroneT = dal.GetDrones().ToList();
-
                 IDAL.DO.Drone dr = DroneT.Find(x => x.Id == droneId);
+
                 dr.Model = model;
                 dal.UpdateDrone(dr);
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
 
         public Drone GetDrone(int droneId)
-        {
-
+        { 
             var dr = DroneLists.Find(x => x.Id == droneId);
-            if (dr == null)
+            PackageInTransfer packageInTransfer = null;
+
+            if (dr != null)
             {
-                throw new NoNumberFoundExeptions();
+                if (dr.DroneStatus == DroneStatuses.SENDERING)
+                {
+                    IDAL.DO.Package package = dal.GetPackage(dr.PackageNumber);
+                    IDAL.DO.Customer sender = dal.GetCustomer(package.SenderId),
+                                     target = dal.GetCustomer(package.TargetId);
+                    Location senderLocation = new() { Lattitude = sender.Lattitude, Longitude = sender.Longitude },
+                             targetLocation = new() { Lattitude = target.Lattitude, Longitude = target.Longitude };
+
+                    packageInTransfer = new PackageInTransfer()
+                    {
+                        Id = package.Id,
+                        IsCollected = package.PickedUp != DateTime.MinValue,
+                        Priority = (Priorities)package.Priority,
+                        SenderCustomerInPackage = new() { CustomerId = sender.Id, CustomerName = sender.Name },
+                        TargetCustomerInPackage = new() { CustomerId = target.Id, CustomerName = target.Name },
+                        CollectionLocation = senderLocation,
+                        DeliveryDestinationLocation = targetLocation,
+                        DistanceCollectionToDestination = Distance(senderLocation, targetLocation)
+                    };
+                }
+            }
+            else
+            {
+                throw new NoNumberFoundException();
             }
 
             return new()
@@ -77,10 +96,11 @@ namespace BL
                 Id = dr.Id,
                 Model = dr.Model,
                 MaxWeight = dr.MaxWeight,
-                BatteryStatus =dr.BatteryStatus,
-                DroneStatus=dr.DroneStatus,
-                DeliveryInProgress = dr.DroneStatus==DroneStatuses.SENDERING ? new() {}
-                };
+                BatteryStatus = dr.BatteryStatus,
+                DroneStatus = dr.DroneStatus,
+                DeliveryInProgress = packageInTransfer,
+                LocationOfDrone = dr.LocationOfDrone
+            };
         }
 
         public IEnumerable<DroneToList> GetDrones(Predicate<Drone> predicate = null)

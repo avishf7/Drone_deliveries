@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 
 
 
-namespace IDAL.DO
+namespace IDAL
 {
 
 
@@ -26,12 +26,12 @@ namespace IDAL.DO
     }
 
     [Serializable]
-    public class NoNumberFoundExeptions : Exception
+    public class NoNumberFoundException : Exception
     {
-        public NoNumberFoundExeptions() : base() { }
-        public NoNumberFoundExeptions(string message) : base(message) { }
-        public NoNumberFoundExeptions(string message, Exception inner) : base(message, inner) { }
-        protected NoNumberFoundExeptions(SerializationInfo info, StreamingContext context)
+        public NoNumberFoundException() : base() { }
+        public NoNumberFoundException(string message) : base(message) { }
+        public NoNumberFoundException(string message, Exception inner) : base(message, inner) { }
+        protected NoNumberFoundException(SerializationInfo info, StreamingContext context)
      : base(info, context) { }
         // special constructor for our custom exception
 

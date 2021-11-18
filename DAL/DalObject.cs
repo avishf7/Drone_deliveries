@@ -44,7 +44,7 @@ namespace DalObject
             int iU = DataSource.dronesList.FindIndex(dr => dr.Id == drone.Id);
             if (iU == -1)
             {
-                throw new NoNumberFoundExeptions(" ");
+                throw new NoNumberFoundException(" ");
             }
 
             DataSource.dronesList.Insert(iU, drone);
@@ -59,7 +59,7 @@ namespace DalObject
         {
             if (!DataSource.dronesList.Exists(x => x.Id == droneId))
             {
-                throw new NoNumberFoundExeptions(" ");
+                throw new NoNumberFoundException(" ");
             }
 
             return DataSource.dronesList.Find(dr => dr.Id == droneId);
@@ -83,7 +83,7 @@ namespace DalObject
         public void DeleteDrone(int id)
         {
             int Id = DataSource.dronesList.FindIndex(dr => dr.Id == id);
-            DataSource.dronesList.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundExeptions(" "));
+            DataSource.dronesList.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundException(" "));
         }
 
         #endregion
@@ -111,7 +111,7 @@ namespace DalObject
         {
             if (!DataSource.stations.Exists(x => x.Id == station.Id))
             {
-                throw new NoNumberFoundExeptions();
+                throw new NoNumberFoundException();
             }
 
             int iU = DataSource.stations.FindIndex(st => st.Id == station.Id);
@@ -127,7 +127,7 @@ namespace DalObject
         {
             if (!DataSource.stations.Exists(x => x.Id == stationId))
             {
-                throw new NoNumberFoundExeptions();
+                throw new NoNumberFoundException();
             }
 
             return DataSource.stations.Find(st => st.Id == stationId);
@@ -178,7 +178,7 @@ namespace DalObject
         public void DeleteStation(int id)
         {
             int Id = DataSource.stations.FindIndex(st => st.Id == id);
-            DataSource.stations.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundExeptions(" "));
+            DataSource.stations.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundException(" "));
         }
         #endregion
 
@@ -205,7 +205,7 @@ namespace DalObject
         {
             if (!DataSource.customers.Exists(x => x.Id == customer.Id))
             {
-                throw new NoNumberFoundExeptions();
+                throw new NoNumberFoundException();
             }
 
             int iU = DataSource.customers.FindIndex(cus => cus.Id == customer.Id);
@@ -221,7 +221,7 @@ namespace DalObject
         {
             if (!DataSource.customers.Exists(x => x.Id == customerId))
             {
-                throw new NoNumberFoundExeptions();
+                throw new NoNumberFoundException();
             }
 
             Customer tmp = DataSource.customers.Find(cus => cus.Id == customerId);
@@ -247,7 +247,7 @@ namespace DalObject
         public void DeleteCustomer(int id)
         {
             int Id = DataSource.customers.FindIndex(cus => cus.Id == id);
-            DataSource.customers.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundExeptions(" "));
+            DataSource.customers.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundException(" "));
         }
 
         #endregion
@@ -272,7 +272,7 @@ namespace DalObject
         {
             if (!DataSource.packages.Exists(x => x.Id == package.Id))
             {
-                throw new NoNumberFoundExeptions();
+                throw new NoNumberFoundException();
             }
 
             int iU = DataSource.packages.FindIndex(pck => pck.Id == package.Id);
@@ -288,7 +288,7 @@ namespace DalObject
         {
             if (!DataSource.packages.Exists(x => x.Id == packageId))
             {
-                throw new NoNumberFoundExeptions();
+                throw new NoNumberFoundException();
             }
 
             return DataSource.packages.Find(pck => pck.Id == packageId);
@@ -356,7 +356,7 @@ namespace DalObject
         public void DeletePackage(int id)
         {
             int Id = DataSource.packages.FindIndex(pck => pck.Id == id);
-            DataSource.packages.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundExeptions(" "));
+            DataSource.packages.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundException(" "));
         }
 
         #endregion
@@ -385,7 +385,7 @@ namespace DalObject
         {
             if (!DataSource.droneCharges.Exists(x => x.DroneId == droneCharge.DroneId))
             {
-                throw new NoNumberFoundExeptions();
+                throw new NoNumberFoundException();
             }
 
             int iU = DataSource.droneCharges.FindIndex(drCh => drCh.DroneId == droneCharge.DroneId);
@@ -401,7 +401,7 @@ namespace DalObject
         {
             if (!DataSource.droneCharges.Exists(x => x.DroneId == droneId))
             {
-                throw new NoNumberFoundExeptions();
+                throw new NoNumberFoundException();
             }
 
             return DataSource.droneCharges.Find(dr => dr.DroneId == droneId);
@@ -425,11 +425,11 @@ namespace DalObject
         {
             if (!DataSource.droneCharges.Exists(x => x.DroneId == id))
             {
-                throw new NoNumberFoundExeptions();
+                throw new NoNumberFoundException();
             }
 
             int Id = DataSource.droneCharges.FindIndex(drc => drc.DroneId == id);
-            DataSource.droneCharges.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundExeptions(" "));
+            DataSource.droneCharges.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundException(" "));
         }
 
 
