@@ -54,7 +54,37 @@ namespace BL
 
         public void RealeseDroneFromCharge(int DroneId, TimeSpan time)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                int drr = DroneLists.FindIndex(x => x.Id == DroneId);
+                var dr = DroneLists.Find(x => x.Id == DroneId);
+
+                double timeOfCharg = time.TotalHours;
+
+                List<double> tmp = dal.ChargingRequest();
+
+                List<IDAL.DO.Station> stationsT = dal.GetStations(x => x.Lattitude==dr.LocationOfDrone.Lattitude&& x.Longitude==dr.LocationOfDrone.Longitude).ToList();
+                IDAL.DO.Station station = stationsT.Find(x => x.Lattitude == dr.LocationOfDrone.Lattitude && x.Longitude == dr.LocationOfDrone.Longitude);
+
+
+                if (dr==null || dr.DroneStatus!=DroneStatuses.MAINTENANCE)
+                {
+                 //   throw;
+                }
+                dr.BatteryStatus = timeOfCharg * tmp[4];
+                dr.DroneStatus = DroneStatuses.AVAILABLE;
+
+                DroneLists[drr].BatteryStatus = dr.BatteryStatus;
+                DroneLists[drr].DroneStatus = dr.DroneStatus;
+
+                dal.RealeseChargingStation(station.Id);
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }        }
     }
 }
