@@ -12,28 +12,34 @@ namespace IBL.BO
         /// Gets customer id
         /// </summary>
         public int CustomerId { get; set; }
+
         /// <summary>
         /// Gets customer name
         /// </summary>
         public string CustomerName { get; set; }
+
         /// <summary>
         /// Gets customer phone
         /// </summary>
         public string CustomerPhone { get; set; }
+
         /// <summary>
-        /// 
+        /// Gets number of packages provided
         /// </summary>
         public int NumOfPackagesProvided { get; set; }
+
         /// <summary>
-        /// 
+        /// Gets Number of packages not provided
         /// </summary>
         public int NumOfPackagesNotProvided { get; set; }
+
         /// <summary>
-        /// 
+        /// Gets number of packages received
         /// </summary>
         public int NumOfPackagesReceived { get; set; }
+
         /// <summary>
-        /// 
+        /// Gets several packages on way
         /// </summary>
         public int SeveralPackagesOnWay { get; set; }
 

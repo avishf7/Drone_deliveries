@@ -12,24 +12,29 @@ namespace IBL.BO
         /// Gets the id.
         /// </summary>
         public int Id { get; set; }
+
         /// <summary>
         /// Gets the name.
         /// </summary>
         public string Name { get; set; }
+
         /// <summary>
         /// Gets the phone.
         /// </summary>
         public string Phone { get; set; }
+
         /// <summary>
-        /// 
+        /// Gets the location of the customer
         /// </summary>
         public Location CustomerLocation { get; set; }
+
         /// <summary>
-        /// 
+        /// Gets a list of customer in package from the customer
         /// </summary>
         public List<CustomerInPackage> CustomerInPackageFromCustomer { get; set; }
+
         /// <summary>
-        /// 
+        /// Gets a list of customer in package to the customer
         /// </summary>
         public List<CustomerInPackage> CustomerInPackageToCustomer { get; set; }
 

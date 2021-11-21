@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IDAL
 {
-    public interface IDal
+    public interface IDal 
     {
         #region Drone functions
 

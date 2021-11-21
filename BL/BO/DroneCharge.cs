@@ -18,6 +18,8 @@ namespace IBL.BO
         /// </summary>
         public double BatteryStatus { get; set; }
 
+
+
         public override string ToString()
         {
             return "Details of DroneCharge: " + "\nDrone ID: " + DroneId + "\nDrone's battery stutus: "

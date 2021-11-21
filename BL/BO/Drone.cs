@@ -10,32 +10,37 @@ namespace IBL.BO
     public class Drone
     {
         /// <summary>
-        /// gets the id.
+        /// Gets the id.
         /// </summary>
         public int Id { get; set; }
+
         /// <summary>
-        /// gets the model.
+        /// Gets the model.
         /// </summary>
         public string Model { get; set; }
+
         /// <summary>
-        /// gets the max weight.
+        /// Gets the max weight.
         /// </summary>
         public Weight MaxWeight { get; set; }
+
         /// <summary>
         /// Gets the drone's battery stutus;
         /// </summary>
         public double BatteryStatus { get; set; }
 
         /// <summary>
-        /// 
+        /// Gets drone status
         /// </summary>
         public DroneStatuses DroneStatus { get; set; }
+
         /// <summary>
         /// Gets number of delivery in progress
         /// </summary>
         public PackageInTransfer DeliveryInProgress { get; set; }
+
         /// <summary>
-        /// 
+        /// Gets the location of drone
         /// </summary>
         public Location LocationOfDrone { get; set; }
 

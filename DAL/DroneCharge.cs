@@ -22,6 +22,8 @@ namespace IDAL
             /// </summary>
             public int StationId { get; set; }
 
+
+           
             public override string ToString()
             {
                 return "Details of DroneCharge: " + "\nDrone ID: " + DroneId + "\nStation ID: "

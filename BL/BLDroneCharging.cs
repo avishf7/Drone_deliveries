@@ -38,19 +38,13 @@ namespace BL
                 DroneLists[drr].DroneStatus = dr.DroneStatus;
                 DroneLists[drr].LocationOfDrone = dr.LocationOfDrone;
                 DroneLists[drr].BatteryStatus = dr.BatteryStatus;
-
-
-
-
             }
             catch (Exception)
             {
-
                 throw;
             }
-
-
         }
+
 
         public void RealeseDroneFromCharge(int DroneId, TimeSpan time)
         {
@@ -78,13 +72,11 @@ namespace BL
                 DroneLists[drr].DroneStatus = dr.DroneStatus;
 
                 dal.RealeseChargingStation(station.Id);
-
-
             }
             catch (Exception)
             {
-
                 throw;
-            }        }
+            }     
+        }
     }
 }

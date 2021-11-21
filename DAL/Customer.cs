@@ -29,8 +29,6 @@ namespace IDAL
             /// Gets the lattitude.
             /// </summary>
             public double Lattitude { get; set; }
-
         }
     }
-
 }
