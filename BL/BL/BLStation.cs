@@ -84,11 +84,13 @@ namespace BL
 
         public IEnumerable<StationToList> GetStations(Predicate<Station> predicate = null)
         {
-            throw new NotImplementedException();
+            List<IDAL.DO.Station> stations = (List<IDAL.DO.Station>)dal.GetStations();
+
+            return stations.FindAll(i => predicate == null ? true : predicate(i)).ToList();
 
         }
 
-            public void DeleteStation(int id)
+        public void DeleteStation(int id)
         {
             throw new NotImplementedException();
         }
