@@ -23,7 +23,7 @@ namespace BL
                     //  throw NoNumberFoundException;
                 }
 
-                List<IDAL.DO.Station> stationsT = dal.GetStations(x => x.FreeChargeSlots > 0).ToList();
+               
 
                 Location stLocation = FindClosestStationLocation(dr.LocationOfDrone);                
                 double KM = Distance(stLocation, dr.LocationOfDrone);
@@ -40,8 +40,10 @@ namespace BL
 
                 DroneLists.Insert(iDr, dr);
 
+                List<IDAL.DO.Station> stationsT = dal.GetStations(x => x.FreeChargeSlots > 0).ToList();
                 IDAL.DO.Station station = stationsT.Find(x => x.Lattitude == stLocation.Lattitude && x.Longitude == stLocation.Longitude);
                 dal.UsingChargingStation(station.Id);
+                dal.AddDroneCharge(new() { DroneId = DroneId, StationId = station.Id });
             }
             catch (Exception)
             {
@@ -54,32 +56,28 @@ namespace BL
         {
             try
             {
-                int drr = DroneLists.FindIndex(x => x.Id == DroneId);
-                var dr = DroneLists.Find(x => x.Id == DroneId);
-
-                double timeOfCharg = time.TotalHours;
-
-                List<double> tmp = dal.ChargingRequest();
-
-                List<IDAL.DO.Station> stationsT = dal.GetStations(x => x.Lattitude==dr.LocationOfDrone.Lattitude&& x.Longitude==dr.LocationOfDrone.Longitude).ToList();
-                IDAL.DO.Station station = stationsT.Find(x => x.Lattitude == dr.LocationOfDrone.Lattitude && x.Longitude == dr.LocationOfDrone.Longitude);
-
-
+                int iDr = DroneLists.FindIndex(x => x.Id == DroneId);
+                var dr = DroneLists.Find(x => x.Id == DroneId);         
+                                
                 if (dr==null || dr.DroneStatus!=DroneStatuses.MAINTENANCE)
                 {
                  //   throw;
                 }
-                dr.BatteryStatus = timeOfCharg * tmp[4];
+
+                dr.BatteryStatus = time.TotalHours * ChargingRate;
                 dr.DroneStatus = DroneStatuses.AVAILABLE;
 
-                DroneLists[drr].BatteryStatus = dr.BatteryStatus;
-                DroneLists[drr].DroneStatus = dr.DroneStatus;
+                DroneLists.Insert(iDr, dr);
+              
+                List<IDAL.DO.Station> stationsT = dal.GetStations(x => x.Lattitude == dr.LocationOfDrone.Lattitude && x.Longitude == dr.LocationOfDrone.Longitude).ToList();
+                IDAL.DO.Station station = stationsT.Find(x => x.Lattitude == dr.LocationOfDrone.Lattitude && x.Longitude == dr.LocationOfDrone.Longitude);
 
                 dal.RealeseChargingStation(station.Id);
+                dal.DeleteDroneCharge(DroneId);
             }
-            catch (Exception)
+            catch (IDAL.NoNumberFoundException)
             {
-                throw;
+                throw new IBL.NoNumberFoundException();
             }     
         }
     }

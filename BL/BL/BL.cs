@@ -34,7 +34,6 @@ namespace BL
             HeavyWeight = tmp[3];
             ChargingRate = tmp[4];
 
-            //הבאת רשימת הרחפנים משכבת הנתונים
             List<IDAL.DO.Drone> drones = dal.GetDrones().ToList();
             List<IDAL.DO.Package> senderingPackages = dal.GetPackages(x => x.DroneId != 0 && x.Delivered == DateTime.MinValue).ToList();
             List<IDAL.DO.Package> deliveredPackages = dal.GetPackages(x => x.Delivered != DateTime.MinValue).ToList();
@@ -70,8 +69,7 @@ namespace BL
 
                         Location senderLocation = new() { Lattitude = sender.Lattitude, Longitude = sender.Longitude },
                                  targetLocation = new() { Lattitude = target.Lattitude, Longitude = target.Longitude };
-                        
-                        //לשים את החלק מהשולח עד ליעד + מהיעד עד ללטעינה הקרובה ביותר בחוץ כי החלק הזה משותף לשני המקרים 
+                                                
                         if (senderingPackages[iPck].PickedUp == DateTime.MinValue)
                         {
                             droneLocation = FindClosestStationLocation(senderLocation);

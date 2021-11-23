@@ -92,22 +92,16 @@ namespace BL
             List<StationToList> boStations = new();
             foreach (var st in doStations)
             {
-
-                int numberOfChargingStationsOccupied = DroneLists.FindAll(dr => dr.DroneStatus == DroneStatuses.MAINTENANCE &&
-                                                                          dr.LocationOfDrone.Lattitude == st.Lattitude &&
-                                                                          dr.LocationOfDrone.Longitude == st.Longitude).Count;
-
                 StationToList stToList = new()
                 {
                     Id = st.Id,
                     Name = st.Name,
-                    NumberOfChargingStationsOccupied = numberOfChargingStationsOccupied,
+                    NumberOfChargingStationsOccupied = dal.GetDronesCharges(drCh => drCh.StationId == st.Id).ToList().Count,
                     SeveralAvailableChargingStations = st.FreeChargeSlots                    
                 };
 
                 if (predicate != null ? predicate(stToList) : true)
                     boStations.Add(stToList);
-
             }
 
             return boStations;
