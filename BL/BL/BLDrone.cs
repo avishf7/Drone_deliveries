@@ -106,7 +106,7 @@ namespace BL
 
         public IEnumerable<DroneToList> GetDrones(Predicate<Drone> predicate = null)
         {
-            var dr = DroneLists;
+
             List<DroneToList> BoDronesLists = new();
 
             foreach (var item in DroneLists)

@@ -87,7 +87,7 @@ namespace BL
 
         public IEnumerable<StationToList> GetStations(Predicate<Station> predicate = null)
         {
-            List<IDAL.DO.Station> doStations = (List<IDAL.DO.Station>)dal.GetStations();
+            List<IDAL.DO.Station> doStations = (List<IDAL.DO.Station>)dal.GetStations(predicate);
             List<StationToList> boStatons = new();
             foreach (var item in doStations)
             {
