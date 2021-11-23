@@ -12,28 +12,30 @@ namespace IBL.BO
         /// Gets customer id
         /// </summary>
         public int CustomerId { get; set; }
+
         /// <summary>
         /// Gets the weight.
         /// </summary>
         public Weight Weight { get; set; }
+
         /// <summary>
         /// Gets the priority.
         /// </summary>
         public Priorities Priority { get; set; }
+
         /// <summary>
-        /// 
+        /// Gets the status of package
         /// </summary>
         public PackageStatus Status { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        CustomerInPackage CustomerInPackage;
-
 
         /// <summary>
-        /// 
+        /// Gets the other side of the package
         /// </summary>
-        /// <returns></returns>
+        public CustomerInPackage CustomerInPackage { get; set; }
+
+
+
+
         public override string ToString()
         {
             return "Details of ID:" + CustomerId + "\nWeight: " + Weight + "\nPriority: " + Priority

@@ -9,33 +9,40 @@ namespace IBL.BO
     public class DroneToList
     {
         /// <summary>
-        /// gets the id.
+        /// Gets the id.
         /// </summary>
         public int Id { get; set; }
+
         /// <summary>
-        /// gets the model.
+        /// Gets the model.
         /// </summary>
         public string Model { get; set; }
+
         /// <summary>
-        /// gets the max weight.
+        /// Gets the max weight.
         /// </summary>
         public Weight MaxWeight { get; set; }
+
         /// <summary>
         /// Gets the drone's battery stutus;
         /// </summary>
         public double BatteryStatus { get; set; }
+
         /// <summary>
-        /// 
+        /// Gets drone status
         /// </summary>
         public DroneStatuses DroneStatus { get; set; }
+
         /// <summary>
-        /// 
+        /// Gets location of drone
         /// </summary>
         public Location LocationOfDrone { get; set; }
+
         /// <summary>
-        /// 
+        /// Gets package number
         /// </summary>
         public int PackageNumber { get; set; }
+
 
 
         public override string ToString()

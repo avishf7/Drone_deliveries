@@ -12,6 +12,7 @@ namespace IBL.BO
         /// Gets customer id
         /// </summary>
         public int CustomerId { get; set; }
+
         /// <summary>
         /// Gets customer name
         /// </summary>

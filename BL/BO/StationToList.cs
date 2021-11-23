@@ -12,20 +12,25 @@ namespace IBL.BO
         /// Gets the id
         /// </summary>
         public int Id { get; set; }
+
         /// <summary>
         /// Gets the name.
         /// </summary>
         public string Name { get; set; }
+
         /// <summary>
-        /// 
+        /// Gets several available charging stations
         /// </summary>
         public int SeveralAvailableChargingStations { get; set; }
+
         /// <summary>
-        /// 
+        /// Gets number of charging stations occupied
         /// </summary>
         public int NumberOfChargingStationsOccupied { get; set; }
 
 
+
+       
         public override string ToString()
         {
             return "Details of ID :" + Id + "\nName: " + Name + "\nSeveral available charging stations: "

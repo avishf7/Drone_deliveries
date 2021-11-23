@@ -12,16 +12,19 @@ namespace IBL.BO
         /// Weight types
         /// </summary>
         public enum Weight { LIGHT, MEDIUM, HEAVY }
+
         /// <summary>
         /// Situations where the drone can be
         /// </summary>
         public enum DroneStatuses { AVAILABLE, MAINTENANCE, SENDERING }
+
         /// <summary>
         /// Delivery priority
         /// </summary>
         public enum Priorities { NORMAL, FAST, EMERENCY }
+
         /// <summary>
-        /// 
+        /// Status of package
         /// </summary>
         public enum PackageStatus { DEFINED, ASSOCIATED, COLLECTED, PROVIDED }
     

@@ -12,10 +12,12 @@ namespace IBL.BO
         /// Gets the longitude.
         /// </summary>
         public double Longitude { get; set; }
+
         /// <summary>
         /// Gets the lattitude.
         /// </summary>
         public double Lattitude { get; set; }
+
 
 
         public override string ToString()
