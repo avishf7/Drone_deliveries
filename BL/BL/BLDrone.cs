@@ -106,7 +106,25 @@ namespace BL
 
         public IEnumerable<DroneToList> GetDrones(Predicate<Drone> predicate = null)
         {
-            throw new NotImplementedException();
+            var dr = DroneLists;
+            List<DroneToList> BoDronesLists = new();
+
+            foreach (var item in DroneLists)
+            {
+                BoDronesLists.Add(new()
+                {
+                    Id=item.Id,
+                    Model=item.Model,
+                    MaxWeight=item.MaxWeight,
+                    BatteryStatus=item.BatteryStatus,
+                    DroneStatus=item.DroneStatus,
+                    LocationOfDrone=item.LocationOfDrone,
+                    PackageNumber=
+
+                });
+            }
+            return BoDronesLists;
+
         }
 
         public void DeleteDrone(int id)

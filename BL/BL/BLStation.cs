@@ -39,9 +39,9 @@ namespace BL
                 Station station = GetStation(stationId);
 
                 st.Name = name;
-                if (numOfChargeStation<station.ChargingDrones.Count)
+                if (numOfChargeStation < station.ChargingDrones.Count)
                 {
-                   // throw לא ניתן להכניס כמות זו;
+                    // throw לא ניתן להכניס כמות זו;
                 }
                 st.FreeChargeSlots = numOfChargeStation - station.ChargingDrones.Count;
             }
@@ -49,7 +49,7 @@ namespace BL
             {
 
                 throw;
-            }      
+            }
         }
 
         public Station GetStation(int stationId)
@@ -57,22 +57,25 @@ namespace BL
             try
             {
                 IDAL.DO.Station DoStation = dal.GetStation(stationId);
-                Station BoStation= new()
+                Station BoStation = new()
                 {
                     Id = DoStation.Id,
                     Name = DoStation.Name,
                     FreeChargeSlots = DoStation.FreeChargeSlots,
                     LocationOfStation = new Location { Lattitude = DoStation.Lattitude, Longitude = DoStation.Longitude },
-                   
+
                 };
-                List <IDAL.DO.DroneCharge> doDroneCharge = dal.GetDronesCharges(x => x.StationId == stationId).ToList();
+                List<IDAL.DO.DroneCharge> doDroneCharge = dal.GetDronesCharges(x => x.StationId == stationId).ToList();
                 foreach (var i in doDroneCharge)
                 {
-                    BoStation.ChargingDrones.Add(new DroneCharge { DroneId = i.DroneId, 
-                        BatteryStatus = DroneLists[DroneLists.FindIndex(x => x.Id == i.DroneId)].BatteryStatus });
+                    BoStation.ChargingDrones.Add(new DroneCharge
+                    {
+                        DroneId = i.DroneId,
+                        BatteryStatus = DroneLists[DroneLists.FindIndex(x => x.Id == i.DroneId)].BatteryStatus
+                    });
                 }
                 BoStation.ChargingDrones.OrderBy(i => i.BatteryStatus);
-       
+
                 return BoStation;
             }
             catch (Exception)
@@ -84,10 +87,20 @@ namespace BL
 
         public IEnumerable<StationToList> GetStations(Predicate<Station> predicate = null)
         {
-            List<IDAL.DO.Station> stations = (List<IDAL.DO.Station>)dal.GetStations();
+            List<IDAL.DO.Station> doStations = (List<IDAL.DO.Station>)dal.GetStations();
+            List<StationToList> boStatons = new();
+            foreach (var item in doStations)
+            {
+                boStatons.Add(new()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    
+                });
 
-            return stations.FindAll(i => predicate == null ? true : predicate(i)).ToList();
+            }
 
+            return boStatons;
         }
 
         public void DeleteStation(int id)

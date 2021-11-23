@@ -152,6 +152,14 @@ namespace IBL
         /// <param name="id">The id of the package</param>
         void DeletePackage(int id);
 
+        /// <summary>
+        /// Displays a list of package's that no Requested.
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public IEnumerable<PackageToList> GetNoRequestedPackages(Predicate<Package> predicate = null)
+
+
         #endregion
 
         #region Delivery functions
