@@ -85,22 +85,32 @@ namespace BL
             }
         }
 
-        public IEnumerable<StationToList> GetStations(Predicate<Station> predicate = null)
+        public IEnumerable<StationToList> GetStations(Predicate<StationToList> predicate = null)
         {
-            List<IDAL.DO.Station> doStations = (List<IDAL.DO.Station>)dal.GetStations(predicate);
-            List<StationToList> boStatons = new();
-            foreach (var item in doStations)
+            List<IDAL.DO.Station> doStations = (List<IDAL.DO.Station>)dal.GetStations();
+            
+            List<StationToList> boStations = new();
+            foreach (var st in doStations)
             {
-                boStatons.Add(new()
+
+                int numberOfChargingStationsOccupied = DroneLists.FindAll(dr => dr.DroneStatus == DroneStatuses.MAINTENANCE &&
+                                                                          dr.LocationOfDrone.Lattitude == st.Lattitude &&
+                                                                          dr.LocationOfDrone.Longitude == st.Longitude).Count;
+
+                StationToList stToList = new()
                 {
-                    Id = item.Id,
-                    Name = item.Name,
-                    
-                });
+                    Id = st.Id,
+                    Name = st.Name,
+                    NumberOfChargingStationsOccupied = numberOfChargingStationsOccupied,
+                    SeveralAvailableChargingStations = st.FreeChargeSlots                    
+                };
+
+                if (predicate != null ? predicate(stToList) : true)
+                    boStations.Add(stToList);
 
             }
 
-            return boStatons;
+            return boStations;
         }
 
         public void DeleteStation(int id)

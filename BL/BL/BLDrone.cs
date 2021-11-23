@@ -38,8 +38,8 @@ namespace BL
                 dal.UsingChargingStation(st.Id);
 
             }
-            catch (IDAL.NoNumberFoundException ex) { throw new NoNumberFoundException("Station ID not found",ex);}
-            catch (ExistsNumberException ex) { throw new ExistsNumberException("Drone already exists", ex); }
+            catch (IDAL.NoNumberFoundException ex) { throw new IBL.NoNumberFoundException("Station ID not found", ex); }
+            catch (IDAL.ExistsNumberException ex) { throw new IBL.ExistsNumberException("Drone already exists", ex); }
         }
 
         public void UpdateDrone(int droneId, string model)
@@ -51,6 +51,8 @@ namespace BL
 
                 dr.Model = model;
                 dal.UpdateDrone(dr);
+
+                DroneLists.Find(drone => drone.Id == droneId).Model = model;
             }
             catch (Exception)
             {
@@ -59,7 +61,7 @@ namespace BL
         }
 
         public Drone GetDrone(int droneId)
-        { 
+        {
             var dr = DroneLists.Find(x => x.Id == droneId);
             PackageInTransfer packageInTransfer = null;
 
@@ -89,7 +91,7 @@ namespace BL
             else
             {
                 //לא צריך לשלוח חריגה אלאלשלוח את כל הרחפן ללא הישות או עם ישות מאותחלת לNULL
-                throw new NoNumberFoundException();
+                throw new IBL.NoNumberFoundException();
             }
 
             return new()
@@ -104,27 +106,26 @@ namespace BL
             };
         }
 
-        public IEnumerable<DroneToList> GetDrones(Predicate<Drone> predicate = null)
+        public IEnumerable<DroneToList> GetDrones(Predicate<DroneToList> predicate = null)
         {
-
-            List<DroneToList> BoDronesLists = new();
+            List<DroneToList> copyOfDroneLists = new();
 
             foreach (var item in DroneLists)
             {
-                BoDronesLists.Add(new()
-                {
-                    Id=item.Id,
-                    Model=item.Model,
-                    MaxWeight=item.MaxWeight,
-                    BatteryStatus=item.BatteryStatus,
-                    DroneStatus=item.DroneStatus,
-                    LocationOfDrone=item.LocationOfDrone,
-                    PackageNumber=
-
-                });
+                if (predicate != null ? predicate(item) : true)
+                    copyOfDroneLists.Add(new()
+                    {
+                        Id = item.Id,
+                        Model = item.Model,
+                        MaxWeight = item.MaxWeight,
+                        BatteryStatus = item.BatteryStatus,
+                        DroneStatus = item.DroneStatus,
+                        LocationOfDrone = item.LocationOfDrone,
+                        PackageNumber = item.PackageNumber,
+                    });
             }
-            return BoDronesLists;
 
+            return copyOfDroneLists;
         }
 
         public void DeleteDrone(int id)

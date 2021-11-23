@@ -15,29 +15,33 @@ namespace BL
         {
             try
             {
-                int drr = DroneLists.FindIndex(x => x.Id == DroneId);
+                int iDr = DroneLists.FindIndex(x => x.Id == DroneId);
                 var dr = DroneLists.Find(x => x.Id == DroneId);
+
                 if (dr == null || dr.DroneStatus != DroneStatuses.AVAILABLE)
                 {
                     //  throw NoNumberFoundException;
                 }
+
                 List<IDAL.DO.Station> stationsT = dal.GetStations(x => x.FreeChargeSlots > 0).ToList();
 
-                Location location = FindClosestStationLocation(dr.LocationOfDrone);
-                IDAL.DO.Station station = stationsT.Find(x => x.Lattitude == location.Lattitude && x.Longitude == location.Longitude);
-                double KM = Distance(location, dr.LocationOfDrone);
+                Location stLocation = FindClosestStationLocation(dr.LocationOfDrone);                
+                double KM = Distance(stLocation, dr.LocationOfDrone);
+                
+
                 if (KM <dr.BatteryStatus*DroneAvailable)
                 {
                     //throw
                 }
-                dr.BatteryStatus = KM + 1;
-                dr.LocationOfDrone = location;
-                dr.DroneStatus = DroneStatuses.MAINTENANCE;
-                dal.UsingChargingStation(station.Id);
 
-                DroneLists[drr].DroneStatus = dr.DroneStatus;
-                DroneLists[drr].LocationOfDrone = dr.LocationOfDrone;
-                DroneLists[drr].BatteryStatus = dr.BatteryStatus;
+                dr.BatteryStatus = KM + 1;
+                dr.LocationOfDrone = stLocation;
+                dr.DroneStatus = DroneStatuses.MAINTENANCE;
+
+                DroneLists.Insert(iDr, dr);
+
+                IDAL.DO.Station station = stationsT.Find(x => x.Lattitude == stLocation.Lattitude && x.Longitude == stLocation.Longitude);
+                dal.UsingChargingStation(station.Id);
             }
             catch (Exception)
             {

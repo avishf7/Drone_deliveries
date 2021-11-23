@@ -36,7 +36,7 @@ namespace IBL
         /// </summary>
         /// <param name="predicate">The list will be filtered according to the conditions obtained</param> 
         /// <returns>The list of dronesList</returns>
-        IEnumerable<DroneToList> GetDrones(Predicate<Drone> predicate = null);
+        IEnumerable<DroneToList> GetDrones(Predicate<DroneToList> predicate = null);
 
         /// <summary>
         /// Delete a drone from the list
@@ -72,7 +72,7 @@ namespace IBL
         /// </summary>
         /// <param name="predicate">The list will be filtered according to the conditions obtained</param> 
         /// <returns>The list of stations</returns>
-        IEnumerable<StationToList> GetStations(Predicate<Station> predicate = null);
+        IEnumerable<StationToList> GetStations(Predicate<StationToList> predicate = null);
 
         /// <summary>
         /// Delete a station from the list
@@ -118,7 +118,7 @@ namespace IBL
 
         #endregion
 
-        #region package functions
+        #region Package functions
 
         /// <summary>
         /// Function of adding a package.
@@ -152,12 +152,6 @@ namespace IBL
         /// <param name="id">The id of the package</param>
         void DeletePackage(int id);
 
-        /// <summary>
-        /// Displays a list of package's that no Requested.
-        /// </summary>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        public IEnumerable<PackageToList> GetNoRequestedPackages(Predicate<Package> predicate = null)
 
 
         #endregion

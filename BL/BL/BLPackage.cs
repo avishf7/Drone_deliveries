@@ -65,28 +65,6 @@ namespace BL
 
         }
 
-        public IEnumerable<PackageToList> GetNoRequestedPackages(Predicate<Package> predicate = null)
-        {
-            List<IDAL.DO.Package> DoPackage = (List<IDAL.DO.Package>)dal.GetPackages();
-            var pck = DoPackage.Find(x => x.Requested == DateTime.MinValue);
-            List<PackageToList> BoPpackageToLists = new();
-
-            foreach (var item in DoPackage)
-            {
-                BoPpackageToLists.Add(new()
-                {
-                    Id = item.Id,
-                    SenderId = item.SenderId,
-                    TargetId = item.TargetId,
-                    Priority = (Priorities)item.Priority,
-                    Weight = (Weight)item.Weight,
-                    PackageStatus =PackageStatus.DEFINED,
-                });
-
-                return BoPpackageToLists;
-        }
-
-
         public void DeletePackage(int id)
         {
             throw new NotImplementedException();
