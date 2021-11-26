@@ -65,4 +65,21 @@ namespace IBL
         override public string ToString()
         { return "There is no suitable package for scheduled" + "\n" + Message; }
     }
+
+    [Serializable]
+    public class TooSmallAmount : Exception
+    {
+        public TooSmallAmount() { }
+        public TooSmallAmount(string message) : base(message) { }
+        public TooSmallAmount(string message, Exception inner) : base(message, inner) { }
+        protected TooSmallAmount(
+          SerializationInfo info,
+          StreamingContext context) : base(info, context) { }
+
+        override public string ToString()
+        { return "Too small amount" + "\n" + Message; }
+
+    }
 }
+
+

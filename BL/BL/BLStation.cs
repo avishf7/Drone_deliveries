@@ -24,9 +24,9 @@ namespace BL
                     FreeChargeSlots = station.FreeChargeSlots,
                 });
             }
-            catch (Exception ex)
+            catch (IBL.ExistsNumberException ex )
             {
-                throw new Exception("Error: ", ex);
+                throw new IBL.ExistsNumberException ("Error: ", ex);
             }
         }
 
@@ -41,7 +41,7 @@ namespace BL
                 st.Name = name;
                 if (numOfChargeStation < station.ChargingDrones.Count)
                 {
-                    // throw לא ניתן להכניס כמות זו;
+                    throw new TooSmallAmount();
                 }
                 st.FreeChargeSlots = numOfChargeStation - station.ChargingDrones.Count;
             }

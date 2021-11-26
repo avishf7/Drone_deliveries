@@ -144,7 +144,7 @@ namespace IBL
         /// </summary>
         /// <param name="predicate">The list will be filtered according to the conditions obtained</param>
         /// <returns>The list of packages</returns>
-        public IEnumerable<PackageToList> GetPackages(Predicate<Package> predicate = null);
+        public IEnumerable<PackageToList> GetPackages(Predicate<PackageToList> predicate = null);
 
         /// <summary>
         /// Delete a package from the list

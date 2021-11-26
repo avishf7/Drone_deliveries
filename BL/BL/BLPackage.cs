@@ -44,14 +44,15 @@ namespace BL
             throw new NotImplementedException();
         }
 
-        public IEnumerable<PackageToList> GetPackages(Predicate<Package> predicate = null)
+        public IEnumerable<PackageToList> GetPackages(Predicate<PackageToList> predicate = null)
         {
-            List<IDAL.DO.Package> DoPackage = (List<IDAL.DO.Package>)dal.GetPackages(predicate);
-            List<PackageToList> BoPpackageToLists = new();
+            List<IDAL.DO.Package> DoPackage = (List<IDAL.DO.Package>)dal.GetPackages();
+            List<PackageToList> BoPackageToLists = new();
 
             foreach (var item in DoPackage)
             {
-                BoPpackageToLists.Add(new()
+               
+                 PackageToList  PckToLists = new()
                 {
                     Id = item.Id,
                     SenderId = item.SenderId,
@@ -59,9 +60,12 @@ namespace BL
                     Priority = (Priorities)item.Priority,
                     Weight = (Weight)item.Weight,
                     PackageStatus =
-                });
+                };
+                if (predicate != null ? predicate(PckToLists) : true)
+                    BoPackageToLists.Add(PckToLists);
+
             }
-            return BoPpackageToLists;
+            return BoPackageToLists;
 
         }
 

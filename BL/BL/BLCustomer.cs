@@ -29,11 +29,12 @@ namespace BL
 
                 });
             }
-            catch (Exception)
+            catch (IBL.ExistsNumberException ex)
             {
 
-                throw;
-            }        }
+                throw new IBL.ExistsNumberException("ERROR: ", ex);
+            }
+        }
 
         public void UpdateCustomer(CustomerToList customer)
         {
