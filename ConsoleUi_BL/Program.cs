@@ -244,7 +244,7 @@ namespace ConsoleUiBL
                                     bl.RealeseDroneFromCharge(reDroneId, new(h, m, s));
 
                                     //Output that displays the success of a request:
-                                    Console.WriteLine(bl.GetDrone(chDroneId));
+                                    Console.WriteLine(bl.GetDrone(reDroneId));
 
                                     break;
 
