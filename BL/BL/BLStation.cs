@@ -24,9 +24,9 @@ namespace BL
                     FreeChargeSlots = station.FreeChargeSlots,
                 });
             }
-            catch (IBL.ExistsNumberException ex )
+            catch (IBL.ExistsNumberException ex)
             {
-                throw new IBL.ExistsNumberException ("Error: ", ex);
+                throw new IBL.ExistsNumberException("Error: ", ex);
             }
         }
 
@@ -34,16 +34,21 @@ namespace BL
         {
             try
             {
-                List<IDAL.DO.Station> stationsT = dal.GetStations().ToList();
-                IDAL.DO.Station st = stationsT.Find(x => x.Id == stationId);
+                IDAL.DO.Station st = dal.GetStation(stationId);
                 Station station = GetStation(stationId);
 
-                st.Name = name;
-                if (numOfChargeStation < station.ChargingDrones.Count)
+                if (name != "")
+                    st.Name = name;
+                if (numOfChargeStation != -1)
                 {
-                    throw new TooSmallAmount();
+                    if (numOfChargeStation < station.ChargingDrones.Count)
+                    {
+                        throw new TooSmallAmount();
+                    }
+                    st.FreeChargeSlots = numOfChargeStation - station.ChargingDrones.Count;
                 }
-                st.FreeChargeSlots = numOfChargeStation - station.ChargingDrones.Count;
+
+                dal.UpdateStation(st);
             }
             catch (Exception)
             {
@@ -63,15 +68,15 @@ namespace BL
                     Name = DoStation.Name,
                     FreeChargeSlots = DoStation.FreeChargeSlots,
                     LocationOfStation = new Location { Lattitude = DoStation.Lattitude, Longitude = DoStation.Longitude },
-
                 };
+
                 List<IDAL.DO.DroneCharge> doDroneCharge = dal.GetDronesCharges(x => x.StationId == stationId).ToList();
                 foreach (var i in doDroneCharge)
                 {
                     BoStation.ChargingDrones.Add(new DroneCharge
                     {
                         DroneId = i.DroneId,
-                        BatteryStatus = DroneLists[DroneLists.FindIndex(x => x.Id == i.DroneId)].BatteryStatus
+                        BatteryStatus = DroneLists.Find(x => x.Id == i.DroneId).BatteryStatus
                     });
                 }
                 BoStation.ChargingDrones.OrderBy(i => i.BatteryStatus);
@@ -88,7 +93,7 @@ namespace BL
         public IEnumerable<StationToList> GetStations(Predicate<StationToList> predicate = null)
         {
             List<IDAL.DO.Station> doStations = (List<IDAL.DO.Station>)dal.GetStations();
-            
+
             List<StationToList> boStations = new();
             foreach (var st in doStations)
             {
@@ -97,7 +102,7 @@ namespace BL
                     Id = st.Id,
                     Name = st.Name,
                     NumberOfChargingStationsOccupied = dal.GetDronesCharges(drCh => drCh.StationId == st.Id).ToList().Count,
-                    SeveralAvailableChargingStations = st.FreeChargeSlots                    
+                    SeveralAvailableChargingStations = st.FreeChargeSlots
                 };
 
                 if (predicate != null ? predicate(stToList) : true)

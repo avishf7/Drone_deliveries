@@ -14,8 +14,8 @@ namespace ConsoleUiBL
     {
         public enum OpeningOptions
         {
-            EXIT, ADD, UPDATE, PRINT, PRINT_LISTS, DISTANCE,
-            FIRST_MENU_OPTION = EXIT, LAST_MENU_OPTION = DISTANCE, DEFAULT
+            EXIT, ADD, UPDATE, PRINT, PRINT_LISTS,
+            FIRST_MENU_OPTION = EXIT, LAST_MENU_OPTION = PRINT_LISTS, DEFAULT
         };
 
         public enum InsertOptions
@@ -26,7 +26,7 @@ namespace ConsoleUiBL
 
         public enum UpdateOptions
         {
-            BACK, ASSOCIATION, PICKING_UP, SUPPLY, CHARGING, RELEASE,
+            BACK, STATION, DRONE, CUSTOMER, ASSOCIATION, PICKING_UP, SUPPLY, CHARGING, RELEASE,
             FIRST_MENU_OPTION = BACK, LAST_MENU_OPTION = RELEASE, DEFAULT
         };
 
@@ -56,7 +56,6 @@ namespace ConsoleUiBL
             "Update options",
             "Display options",
             "List View options",
-            "Distance options(bonus)"
         };
 
         private static string[] InsertMenuOptionLine = new string[(int)InsertOptions.LAST_MENU_OPTION + 1]
@@ -71,6 +70,9 @@ namespace ConsoleUiBL
         private static string[] UpdateMenuOptionLine = new string[(int)UpdateOptions.LAST_MENU_OPTION + 1]
         {
             "Back to the main menu",
+            "Update station",
+            "Update drone",
+            "Update customer",
             "Assigning a Package to a Drone",
             "Pickup of a package by a drone",
             "End of supply",

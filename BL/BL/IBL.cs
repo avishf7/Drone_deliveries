@@ -94,7 +94,7 @@ namespace IBL
         /// Function of updating a customer.
         /// </summary>
         /// <param name="customer">Customer to update</param>
-        void UpdateCustomer(CustomerToList customer);
+        public void UpdateCustomer(int customerId, string name, string phone)
 
         /// <summary>
         /// Function for displaying customer.

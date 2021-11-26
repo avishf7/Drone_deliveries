@@ -40,7 +40,7 @@ namespace IBL.BO
         {
             return "Details of ID :" + Id + "\nName: " + Name + "\nLocation of station\n" + LocationOfStation
                 + "\nFree charge slots: " + FreeChargeSlots
-                  + "\nNum of charging drones" + String.Join(" ", ChargingDrones) + "\n";
+                  + "\nCharging drones:" + String.Join("\n  ", ChargingDrones) + "\n";
         }
     }
 }

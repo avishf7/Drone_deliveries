@@ -36,7 +36,7 @@ namespace BL
             }
         }
 
-        public void UpdateCustomer(CustomerToList customer)
+        public void UpdateCustomer(int customerId,string name, string phone)
         {
             throw new NotImplementedException();
         }

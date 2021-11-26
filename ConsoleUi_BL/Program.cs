@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using IBL;
+using IBL.BO;
 
 namespace ConsoleUiBL
 {
@@ -8,6 +10,7 @@ namespace ConsoleUiBL
         static void Main(string[] args)
         {
             IBl bl = new BL.BL();
+
 
             MenuOptions.OpeningOptions ch;
 
@@ -42,8 +45,8 @@ namespace ConsoleUiBL
                                     int stationId = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter station name: ");
                                     string name = (Console.ReadLine());
-                                    Console.WriteLine("Enter num of free station: ");
-                                    int numOfFreeStation = int.Parse(Console.ReadLine());
+                                    Console.WriteLine("Enter num of Charge Slots: ");
+                                    int ChargeSlots = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter longitude of stations adress: ");
                                     double longitude = (int)double.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter lattitude of stations adress: ");
@@ -51,13 +54,16 @@ namespace ConsoleUiBL
 
                                     try
                                     {
-                                        dalObject.AddStation(new()
+                                        bl.AddStation(new()
                                         {
                                             Id = stationId,
                                             Name = name,
-                                            FreeChargeSlots = numOfFreeStation,
-                                            Longitude = longitude,
-                                            Lattitude = lattitude
+                                            FreeChargeSlots = ChargeSlots,
+                                            LocationOfStation = new()
+                                            {
+                                                Longitude = longitude,
+                                                Lattitude = lattitude
+                                            }
                                         });
                                     }
                                     catch (ExistsNumberException ex)
@@ -65,6 +71,8 @@ namespace ConsoleUiBL
                                         Console.WriteLine(ex);
                                     }
 
+                                    //Output that displays the success of a request:
+                                    bl.GetStations().ToList().ForEach(st => Console.WriteLine(st));
                                     break;
 
                                 case MenuOptions.InsertOptions.DRONE:
@@ -74,21 +82,27 @@ namespace ConsoleUiBL
                                     string model = (Console.ReadLine());
                                     Console.WriteLine("Enter drone Weight - To LIGHT enter 0, to MEDIUM enter 1 and to HEAVY enter 2: ");
                                     Weight maxWeight = (Weight)int.Parse(Console.ReadLine());
-                                    Console.WriteLine("Enter drone status - To  AVAILABLE  enter 0, to MAINTENANCE enter 1 and to DELIVERY enter 2: ");
+                                    Console.WriteLine("Enter a station ID for initial charging: ");
+                                    int firstStationId = int.Parse(Console.ReadLine());
 
                                     try
                                     {
-                                        dalObject.AddDrone(new()
-                                        {
-                                            Id = droneId,
-                                            Model = model,
-                                            MaxWeight = maxWeight,
-                                        });
+                                        bl.AddDrone(
+                                            new()
+                                            {
+                                                Id = droneId,
+                                                Model = model,
+                                                MaxWeight = maxWeight,
+                                            },
+                                        firstStationId);
                                     }
                                     catch (ExistsNumberException ex)
                                     {
                                         Console.WriteLine(ex);
                                     }
+
+                                    //Output that displays the success of a request:
+                                    bl.GetDrones().ToList().ForEach(dr => Console.WriteLine(dr));
                                     break;
 
                                 case MenuOptions.InsertOptions.CUSTOMER:
@@ -104,19 +118,25 @@ namespace ConsoleUiBL
                                     double cusLattitude = (int)double.Parse(Console.ReadLine());
                                     try
                                     {
-                                        dalObject.AddCustomer(new()
+                                        bl.AddCustomer(new()
                                         {
                                             Id = cusId,
                                             Name = cusName,
                                             Phone = phone,
-                                            Longitude = cusLongitude,
-                                            Lattitude = cusLattitude
+                                            CustomerLocation = new()
+                                            {
+                                                Longitude = cusLongitude,
+                                                Lattitude = cusLattitude
+                                            }
                                         });
                                     }
                                     catch (ExistsNumberException ex)
                                     {
                                         Console.WriteLine(ex);
                                     }
+
+                                    //Output that displays the success of a request:
+                                    bl.GetCustomers().ToList().ForEach(cus => Console.WriteLine(cus));
                                     break;
 
                                 case MenuOptions.InsertOptions.PACKAGE:
@@ -129,19 +149,16 @@ namespace ConsoleUiBL
                                     Console.WriteLine("Enter pariority - To NORMAL enter 0, to FAST enter 1 and to EMERENCY enter 2: ");
                                     Priorities priority = (Priorities)int.Parse(Console.ReadLine());
 
-                                    dalObject.AddPackage(new()
+                                    bl.AddPackage(new()
                                     {
-                                        SenderId = sendersId,
-                                        TargetId = targetsId,
+                                        SenderCustomerInPackage = sendersId,
+                                        TargetCustomerInPackage = targetsId,
                                         Weight = weight,
                                         Priority = priority,
-                                        Requested = DateTime.Now,
-                                        Scheduled = new DateTime(0, 0, 0),
-                                        PickedUp = new DateTime(0, 0, 0),
-                                        Delivered = new DateTime(0, 0, 0),
-                                        DroneId = -1
                                     });
 
+                                    //Output that displays the success of a request:
+                                    bl.GetPackages().ToList().ForEach(pck => Console.WriteLine(pck));
                                     break;
 
                                 default:
@@ -168,48 +185,66 @@ namespace ConsoleUiBL
 
                                     break;
 
+                                case MenuOptions.UpdateOptions.STATION:
+                                    break;
+                                case MenuOptions.UpdateOptions.DRONE:
+                                    break;
+                                case MenuOptions.UpdateOptions.CUSTOMER:
+                                    break;
                                 case MenuOptions.UpdateOptions.ASSOCIATION:
-                                    Console.WriteLine("Enter package ID  for associating: ");
-                                    int id = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter drone ID: ");
-                                    int droneId = int.Parse(Console.ReadLine());
+                                    int assoDroneId = int.Parse(Console.ReadLine());
 
-                                    dalObject.ConnectPackageToDrone(id, droneId);
+                                    bl.packageAssigning(assoDroneId);
+
+                                    //Output that displays the success of a request:
+                                    Console.WriteLine(bl.GetDrone(assoDroneId));
 
                                     break;
                                 case MenuOptions.UpdateOptions.PICKING_UP:
-                                    Console.WriteLine("Enter package ID for picking up: ");
-                                    dalObject.PickUp(int.Parse(Console.ReadLine()));
+                                    Console.WriteLine("Enter drone ID: ");
+                                    int pickUpDroneId = int.Parse(Console.ReadLine());
+                                    bl.PickUp(pickUpDroneId);
+
+                                    //Output that displays the success of a request:
+                                    Console.WriteLine(bl.GetDrone(pickUpDroneId));
 
                                     break;
                                 case MenuOptions.UpdateOptions.SUPPLY:
-                                    Console.WriteLine("Enter package ID for supply : ");
-                                    Package pck = dalObject.GetPackage(int.Parse(Console.ReadLine()));
+                                    Console.WriteLine("Enter drone ID: ");
+                                    int supDroneId = int.Parse(Console.ReadLine());
 
-                                    dalObject.PackageDeliver(pck.Id);
+                                    bl.Deliver(supDroneId);
+
+                                    //Output that displays the success of a request:
+                                    Console.WriteLine(bl.GetDrone(supDroneId));
 
                                     break;
                                 case MenuOptions.UpdateOptions.CHARGING:
-                                    Console.WriteLine("Enter drone ID for charge : ");
-                                    int drId = (int.Parse(Console.ReadLine()));
-                                    Console.WriteLine("Enter sttion ID for charge : ");
-                                    int stId = (int.Parse(Console.ReadLine()));
-                                    dalObject.UsingChargingStation(stId);
-                                    dalObject.AddDroneCharge(new()
-                                    {
-                                        DroneId = drId,
-                                        StationId = stId
-                                    });
+                                    Console.WriteLine("Enter drone ID : ");
+                                    int chDroneId = (int.Parse(Console.ReadLine()));
+
+                                    bl.SendDroneForCharge(chDroneId);
+
+                                    //Output that displays the success of a request:
+                                    Console.WriteLine(bl.GetDrone(chDroneId));
 
                                     break;
                                 case MenuOptions.UpdateOptions.RELEASE:
 
-                                    Console.WriteLine("Enter drone ID for release : ");
-                                    DroneCharge drCh = dalObject.GetDroneCharge(int.Parse(Console.ReadLine()));
+                                    Console.WriteLine("Enter drone ID : ");
+                                    int reDroneId = (int.Parse(Console.ReadLine()));
+                                    Console.WriteLine("Enter the number of charging hours:");
+                                    int h = int.Parse(Console.ReadLine());
+                                    Console.WriteLine("Enter the number of charging minutes:");
+                                    int m = int.Parse(Console.ReadLine());
+                                    Console.WriteLine("Enter the number of charging seconds:");
+                                    int s = int.Parse(Console.ReadLine());
 
+                                    bl.RealeseDroneFromCharge(reDroneId, new(h, m, s));
 
-                                    dalObject.RealeseChargingStation(drCh.StationId);
-                                    dalObject.DeleteDroneCharge(drCh.DroneId);
+                                    //Output that displays the success of a request:
+                                    Console.WriteLine(bl.GetDrone(chDroneId));
 
                                     break;
 
@@ -391,7 +426,7 @@ namespace ConsoleUiBL
 
         }
 
-       
-    
+
+
     }
 }
