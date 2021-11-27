@@ -60,7 +60,9 @@ namespace BL
 
         public void PickUp(int droneId)
         {
-            throw new NotImplementedException();
+            List<IDAL.DO.Drone> Drone = dal.GetDrone();
+            var d = Drone.FindIndex(x => x.Id == droneId);
+
         }
 
         public void Deliver(int droneId)

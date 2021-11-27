@@ -51,17 +51,38 @@ namespace BL
 
             foreach (var item in DoPackage)
             {
-               
-                 PackageToList  PckToLists = new()
+                PackageStatus p=0;
+                if (item.Delivered != DateTime.MinValue)
+                {
+                    p  = PackageStatus.PROVIDED;
+                }
+                if (item.PickedUp != DateTime.MinValue)
+                {
+                    p  = PackageStatus.COLLECTED;
+                }
+                if (item.Scheduled != DateTime.MinValue)
+                {
+                     p = PackageStatus.ASSOCIATED;
+                }
+                if (item.Requested != DateTime.MinValue)
+                {
+                     p = PackageStatus.DEFINED;
+                }
+
+                PackageToList PckToLists = new()
                 {
                     Id = item.Id,
                     SenderId = item.SenderId,
                     TargetId = item.TargetId,
                     Priority = (Priorities)item.Priority,
                     Weight = (Weight)item.Weight,
-                    PackageStatus =
+                    PackageStatus = p
                 };
-                if (predicate != null ? predicate(PckToLists) : true)
+                
+               
+
+            
+            if (predicate != null ? predicate(PckToLists) : true)
                     BoPackageToLists.Add(PckToLists);
 
             }
