@@ -15,20 +15,24 @@ namespace IBL
         /// <summary>
         /// Function of adding a drone  to dronesList.
         /// </summary>
-        /// <param name="drone">Drone to add</param>        
+        /// <param name="drone">Drone to add</param>   
+        /// <exception cref="NoNumberFoundException"></exception>
+        /// <exception cref="ExistsNumberException"></exception>
         void AddDrone(Drone drone ,int staionId);
 
         /// <summary>
         /// Function of updating a drone.
         /// </summary>
-        /// <param name="drone">Drone to update</param>        
+        /// <param name="drone">Drone to update</param>  
+        /// <exception cref="NoNumberFoundException"></exception>
         void UpdateDrone(int droneId, string model);
 
         /// <summary>
         /// Function for displaying drone.
         /// </summary>
         /// <param name="droneId">The id of drone</param>
-        /// <returns>A copy of the drone function</returns>        
+        /// <returns>A copy of the drone function</returns>  
+        /// <exception cref="NoNumberFoundException"></exception>
         Drone GetDrone(int droneId);
 
         /// <summary>
@@ -52,12 +56,15 @@ namespace IBL
         /// Function of adding a drone station to the stations.
         /// </summary>
         /// <param name="station">Station to add</param>
+        /// <exception cref="ExistsNumberException"></exception>
         void AddStation(Station station);
 
         /// <summary>
         /// Function of updating a station.
         /// </summary>
         /// <param name="station">Station to update</param>
+        /// <exception cref="NoNumberFoundException"></exception>
+        /// <exception cref="TooSmallAmount"></exception>
         void UpdateStation(int stationId, string name, int numOfChargeStation);
 
         /// <summary>
@@ -65,6 +72,7 @@ namespace IBL
         /// </summary>
         /// <param name="stationId">The id of the station</param>
         /// <returns>A copy of the station function</returns>
+        /// <exception cref="NoNumberFoundException"></exception>
         Station GetStation(int stationId);
 
         /// <summary>
@@ -88,19 +96,22 @@ namespace IBL
         /// Function of adding a customer.
         /// </summary>
         /// <param name="customer">Customer to add</param>
+        /// <exception cref="ExistsNumberException"></exception>
         void AddCustomer(Customer customer);
 
         /// <summary>
         /// Function of updating a customer.
         /// </summary>
         /// <param name="customer">Customer to update</param>
-        public void UpdateCustomer(int customerId, string name, string phone)
+        /// <exception cref="NoNumberFoundException"></exception>
+        public void UpdateCustomer(int customerId, string name, string phone);
 
         /// <summary>
         /// Function for displaying customer.
         /// </summary>
         /// <param name="customerId">The id of customer</param>
         /// <returns>A copy of the customer function</returns>
+        /// <exception cref="NoNumberFoundException"></exception>
         Customer GetCustomer(int customerId);
 
         /// <summary>
@@ -124,12 +135,14 @@ namespace IBL
         /// Function of adding a package.
         /// </summary>
         /// <param name="package">Package to add</param>
+        /// <exception cref="ExistsNumberException"></exception>
         public void AddPackage(Package package);
 
         /// <summary>
         /// Function of updating a package.
         /// </summary>
         /// <param name="Package">Package to update</param>
+        /// <exception cref="NoNumberFoundException"></exception>
         public void UpdatePackage(PackageToList Package);
 
         /// <summary>
@@ -137,6 +150,7 @@ namespace IBL
         /// </summary>
         /// <param name="packageId"> The id of package</param>
         /// <returns>A copy of the package function</returns>
+        /// <exception cref="NoNumberFoundException"></exception>
         public Package GetPackage(int packageId);
 
         /// <summary>
@@ -162,6 +176,7 @@ namespace IBL
         /// A function that implements a state of Assigning drone to package 
         /// </summary>
         /// <param name="droneId">The id of the drone</param>
+        /// <exception cref="NoSuitablePackageForScheduledException"></exception>
         void packageAssigning(int droneId);
 
         /// <summary>

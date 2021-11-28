@@ -100,6 +100,10 @@ namespace ConsoleUiBL
                                     {
                                         Console.WriteLine(ex);
                                     }
+                                    catch (NoNumberFoundException ex)
+                                    {
+                                        Console.WriteLine(ex);
+                                    }
 
                                     //Output that displays the success of a request:
                                     bl.GetDrones().ToList().ForEach(dr => Console.WriteLine(dr));

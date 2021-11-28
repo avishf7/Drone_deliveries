@@ -11,10 +11,7 @@ namespace BL
 {
     public partial class BL : IBl
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="customer"></param>
+
         public void AddCustomer(Customer customer)
         {
             try
@@ -29,20 +26,30 @@ namespace BL
 
                 });
             }
-            catch (IBL.ExistsNumberException ex)
+            catch (IDAL.ExistsNumberException ex)
             {
-
-                throw new IBL.ExistsNumberException("ERROR: ", ex);
+                throw new IBL.NoNumberFoundException("Customer already exists", ex);
             }
         }
 
         public void UpdateCustomer(int customerId,string name, string phone)
         {
-            throw new NotImplementedException();
+            try { }
+            catch (IDAL.NoNumberFoundException ex)
+            {
+                throw new IBL.NoNumberFoundException("Customer ID not found", ex);
+            }
         }
 
         public Customer GetCustomer(int customerId)
         {
+            try { }
+            catch (IDAL.NoNumberFoundException ex)
+            {
+                throw new IBL.NoNumberFoundException("Customer ID not found", ex);
+            }
+
+
             throw new NotImplementedException();
         }
 

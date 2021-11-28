@@ -24,37 +24,41 @@ namespace BL
                     FreeChargeSlots = station.FreeChargeSlots,
                 });
             }
-            catch (IBL.ExistsNumberException ex)
+            catch (IDAL.ExistsNumberException ex)
             {
-                throw new IBL.ExistsNumberException("Error: ", ex);
+                throw new IBL.ExistsNumberException("Station already exists ", ex);
             }
         }
 
         public void UpdateStation(int stationId, string name, int numOfChargeStation)
         {
+            IDAL.DO.Station dalSt;
+            Station blSt;
+
             try
             {
-                IDAL.DO.Station st = dal.GetStation(stationId);
-                Station station = GetStation(stationId);
+                dalSt = dal.GetStation(stationId);
+                blSt = GetStation(stationId);
 
-                if (name != "")
-                    st.Name = name;
+            }
+            catch (IDAL.NoNumberFoundException ex)
+            {
+                throw new IBL.NoNumberFoundException("Station ID not found", ex);
+            }
+
+            if (name != "")
+                    dalSt.Name = name;
                 if (numOfChargeStation != -1)
                 {
-                    if (numOfChargeStation < station.ChargingDrones.Count)
+                    if (numOfChargeStation < blSt.ChargingDrones.Count)
                     {
                         throw new TooSmallAmount();
                     }
-                    st.FreeChargeSlots = numOfChargeStation - station.ChargingDrones.Count;
+                    dalSt.FreeChargeSlots = numOfChargeStation - blSt.ChargingDrones.Count;
                 }
 
-                dal.UpdateStation(st);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+                dal.UpdateStation(dalSt);
+            
         }
 
         public Station GetStation(int stationId)
@@ -71,6 +75,7 @@ namespace BL
                 };
 
                 List<IDAL.DO.DroneCharge> doDroneCharge = dal.GetDronesCharges(x => x.StationId == stationId).ToList();
+
                 foreach (var i in doDroneCharge)
                 {
                     BoStation.ChargingDrones.Add(new DroneCharge
@@ -83,10 +88,9 @@ namespace BL
 
                 return BoStation;
             }
-            catch (Exception)
+            catch (IDAL.NoNumberFoundException ex)
             {
-
-                throw;
+                throw new IBL.NoNumberFoundException("Station ID not found", ex);
             }
         }
 
