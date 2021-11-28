@@ -246,6 +246,7 @@ namespace ConsoleUiBL
                                     //Output that displays the success of a request:
                                     Console.WriteLine(bl.GetDrone(reDroneId));
 
+
                                     break;
 
                                 default:
