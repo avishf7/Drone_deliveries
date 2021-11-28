@@ -52,7 +52,7 @@ namespace BL
                 {
                     if (numOfChargeStation < blSt.ChargingDrones.Count)
                     {
-                        throw new TooSmallAmount();
+                        throw new TooSmallAmount("There is more drones in charge then new charge slots");
                     }
                     dalSt.FreeChargeSlots = numOfChargeStation - blSt.ChargingDrones.Count;
                 }
