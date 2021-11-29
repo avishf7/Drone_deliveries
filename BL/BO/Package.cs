@@ -16,11 +16,11 @@ namespace IBL.BO
         /// <summary>
         /// Gets the id of sender customer
         /// </summary>
-        public int  SenderCustomerInPackage { get; set; }
+        public CustomerInPackage SenderCustomerInPackage { get; set; }
         /// <summary>
         /// Gets the id of target customer
         /// </summary>
-        public int  TargetCustomerInPackage { get; set; }
+        public CustomerInPackage TargetCustomerInPackage { get; set; }
 
         /// <summary>
         /// Gets the weight.

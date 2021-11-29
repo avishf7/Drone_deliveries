@@ -126,6 +126,7 @@ namespace BL
                 return copyOfDroneLists;
             }
 
+
             public void DeleteDrone(int id)
             {
                 throw new NotImplementedException();

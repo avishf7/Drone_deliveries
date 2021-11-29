@@ -21,7 +21,7 @@ namespace IBL.BO
         /// <summary>
         /// Gets location of drone
         /// </summary>
-        Location LocationOfDrone;
+        public Location LocationOfDrone { get; set; }
 
 
 

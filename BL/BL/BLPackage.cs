@@ -11,14 +11,14 @@ namespace BL
 {
     public partial class BL : IBl
     {
-        public void AddPackage(Package package)
+        public void AddPackage(Package package, int senderId, int targetId)
         {
             try
             {
                 dal.AddPackage(new IDAL.DO.Package
                 {
-                    SenderId = package.SenderCustomerInPackage,
-                    TargetId = package.TargetCustomerInPackage,
+                    SenderId = senderId,
+                    TargetId = targetId,
                     Weight = (IDAL.DO.Weight)package.Weight,
                     Priority = (IDAL.DO.Priorities)package.Priority,
                     DroneId = 0,
@@ -38,6 +38,38 @@ namespace BL
         {
             try
             {
+                var DoPackage = dal.GetPackage(packageId);
+
+                var dr = DroneLists.Find(x => x.PackageNumber == packageId);
+
+                DroneInPackage droneInPackage = new()
+                {
+                    Id = dr.Id,
+                    BatteryStatus = dr.BatteryStatus,
+                   LocationOfDrone = dr.LocationOfDrone
+                };
+
+
+
+
+                Package BoPackage = new()
+                {
+                    Id = DoPackage.Id,         
+                    Weight = (Weight)DoPackage.Weight,
+                    Priority = (Priorities)DoPackage.Priority,
+                    Scheduled = DoPackage.Scheduled,
+                    Requested = DoPackage.Requested,
+                    PickedUp = DoPackage.PickedUp,
+                    Delivered = DoPackage.Delivered,
+                    droneInPackage = droneInPackage
+                };
+
+               BoPackage.SenderCustomerInPackage =GetCusomerInPackage(DoPackage.SenderId);
+                BoPackage.TargetCustomerInPackage = GetCusomerInPackage(DoPackage.TargetId);
+
+
+
+                return BoPackage;
 
             }
             catch (IDAL.NoNumberFoundException ex)

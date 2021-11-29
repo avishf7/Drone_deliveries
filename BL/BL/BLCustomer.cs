@@ -32,7 +32,7 @@ namespace BL
             }
         }
 
-        public void UpdateCustomer(int customerId,string name, string phone)
+        public void UpdateCustomer(int customerId, string name, string phone)
         {
             IDAL.DO.Customer dalCus;
             Customer blCus;

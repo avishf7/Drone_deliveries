@@ -136,7 +136,7 @@ namespace IBL
         /// </summary>
         /// <param name="package">Package to add</param>
         /// <exception cref="ExistsNumberException"></exception>
-        public void AddPackage(Package package);      
+        public void AddPackage(Package package, int senderId, int targetId);
 
         /// <summary>
         ///Function for displaying package.
@@ -208,5 +208,8 @@ namespace IBL
         void RealeseDroneFromCharge(int DroneId, TimeSpan time);
 
         #endregion 
+
+        public CustomerInPackage GetCusomerInPackage(int customerId);
+
     }
 }
