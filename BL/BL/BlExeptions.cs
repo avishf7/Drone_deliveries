@@ -77,7 +77,7 @@ namespace IBL
           StreamingContext context) : base(info, context) { }
 
         override public string ToString()
-        { return "Too small amount" + "\n" + Message; }
+        { return "Too small amount:" + "\n" + Message; }
 
     }
 }

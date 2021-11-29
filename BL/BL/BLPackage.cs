@@ -28,19 +28,27 @@ namespace BL
                     Delivered = DateTime.MinValue
                 }); ;
             }
-            catch (Exception)
+            catch (IDAL.ExistsNumberException ex)
             {
-
-                throw;
+                throw new IBL.ExistsNumberException("Package already exists ", ex);
             }
         }
         public void UpdatePackage(PackageToList Package)
         {
-            throw new NotImplementedException();
+            catch (IDAL.NoNumberFoundException ex)
+            {
+                throw new IBL.NoNumberFoundException("Package ID not found", ex);
+            }
         }
 
         public Package GetPackage(int packageId)
         {
+            catch (IDAL.NoNumberFoundException ex)
+            {
+                throw new IBL.NoNumberFoundException("Package ID not found", ex);
+            }
+
+
             throw new NotImplementedException();
         }
 

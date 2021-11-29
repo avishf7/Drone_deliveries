@@ -75,7 +75,7 @@ namespace BL
                 dal.RealeseChargingStation(station.Id);
                 dal.DeleteDroneCharge(DroneId);
             }
-            catch (IDAL.NoNumberFoundException)
+            catch (IDAL.NoNumberFoundException ex)
             {
                 throw new IBL.NoNumberFoundException();
             }     
