@@ -17,10 +17,16 @@ namespace BL
                 int iDr = DroneLists.FindIndex(x => x.Id == DroneId);
                 var dr = DroneLists.Find(x => x.Id == DroneId);
 
-                if (dr == null || dr.DroneStatus != DroneStatuses.AVAILABLE)
+
+                if (dr == null)
                 {
-                    //  throw NoNumberFoundException;
+                    throw new IBL.NoNumberFoundException();
                 }
+
+            if (dr.DroneStatus != DroneStatuses.AVAILABLE)
+            {
+                throw new DroneNotAvailableException();
+            }
 
                
 
@@ -30,9 +36,6 @@ namespace BL
 
             if (KM >= dr.BatteryStatus * DroneAvailable)
             {
-
-
-
                 dr.BatteryStatus = KM + 1;
                 dr.LocationOfDrone = stLocation;
                 dr.DroneStatus = DroneStatuses.MAINTENANCE;
@@ -60,10 +63,16 @@ namespace BL
                 int iDr = DroneLists.FindIndex(x => x.Id == DroneId);
                 var dr = DroneLists.Find(x => x.Id == DroneId);         
                                 
-                if (dr==null || dr.DroneStatus!=DroneStatuses.MAINTENANCE)
+                if (dr==null)
                 {
-                 //   throw;
+                   throw new IBL.NoNumberFoundException();
                 }
+
+                if (dr.DroneStatus != DroneStatuses.MAINTENANCE)
+                {
+                    throw new DroneNotMaintenanceException();
+                }
+
 
                 dr.BatteryStatus = time.TotalHours * ChargingRate;
                 dr.DroneStatus = DroneStatuses.AVAILABLE;

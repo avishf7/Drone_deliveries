@@ -62,14 +62,14 @@ namespace BL
         {
             var dr = DroneLists.Find(d => d.Id == droneId);
 
-            List<IDAL.DO.Package> DoPackage = (List<IDAL.DO.Package>)dal.GetPackages();
-            var PackageInDrone = DoPackage.Find(p => p.DroneId == droneId);
+        var DoPackage = dal.GetPackages(p => p.DroneId == droneId && p.PickedUp == DateTime.MinValue).First();
+         //   var PackageInDrone = DoPackage.Find(p => p.DroneId == droneId && p.PickedUp==DateTime.MinValue);
 
 
-            if (dr.PackageNumber== PackageInDrone.Id)
+            if (dr.PackageNumber== DoPackage.Id)
             {
                 dr.LocationOfDrone = ;
-                PackageInDrone.PickedUp = DateTime.Now;
+                DoPackage.PickedUp = DateTime.Now;
 
             }
 

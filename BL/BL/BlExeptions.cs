@@ -51,6 +51,20 @@ namespace IBL
         { return "Drone is not available " + "\n" + Message; }
     }
 
+    [Serializable]
+    internal class DroneNotMaintenanceException : Exception
+    {
+        public DroneNotMaintenanceException() : base() { }
+
+        public DroneNotMaintenanceException(string message) : base(message) { }
+
+        public DroneNotMaintenanceException(string message, Exception innerException) : base(message, innerException) { }
+
+        protected DroneNotMaintenanceException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+
+        override public string ToString()
+        { return "Drone is not maintenance status: " + "\n" + Message; }
+    }
 
     [Serializable]
     public class NoSuitablePackageForScheduledException : Exception

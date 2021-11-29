@@ -26,7 +26,7 @@ namespace BL
                     Scheduled = DateTime.MinValue,
                     PickedUp = DateTime.MinValue,
                     Delivered = DateTime.MinValue
-                }); ;
+                }); 
             }
             catch (IDAL.ExistsNumberException ex)
             {
