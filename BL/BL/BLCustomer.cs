@@ -110,8 +110,6 @@ namespace BL
                 throw new IBL.NoNumberFoundException("Customer ID not found", ex);
             }
 
-
-            throw new NotImplementedException();
         }
 
         public IEnumerable<CustomerToList> GetCustomers(Predicate<Customer> predicate = null)
