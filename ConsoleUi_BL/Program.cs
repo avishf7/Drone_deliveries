@@ -315,22 +315,22 @@ namespace ConsoleUiBL
                                     break;
                                 case MenuOptions.DisplayOptions.STATION:
                                     Console.WriteLine("Enter station ID to see: ");
-                                    Console.WriteLine("\n" + dalObject.GetStation(int.Parse(Console.ReadLine())));
+                                    Console.WriteLine("\n" + bl.GetStation(int.Parse(Console.ReadLine())));
 
                                     break;
                                 case MenuOptions.DisplayOptions.DRONE:
                                     Console.WriteLine("Enter drone ID to see: ");
-                                    Console.WriteLine("\n" + dalObject.GetDrone(int.Parse(Console.ReadLine())));
+                                    Console.WriteLine("\n" + bl.GetDrone(int.Parse(Console.ReadLine())));
 
                                     break;
                                 case MenuOptions.DisplayOptions.CUSTOMER:
                                     Console.WriteLine("Enter customer ID to see: ");
-                                    Console.WriteLine("\n" + dalObject.GetCustomer(int.Parse(Console.ReadLine())));
+                                    Console.WriteLine("\n" + bl.GetCustomer(int.Parse(Console.ReadLine())));
 
                                     break;
                                 case MenuOptions.DisplayOptions.PACKAGE:
                                     Console.WriteLine("Enter package ID to see: ");
-                                    Console.WriteLine("\n" + dalObject.GetPackage(int.Parse(Console.ReadLine())));
+                                    Console.WriteLine("\n" + bl.GetPackage(int.Parse(Console.ReadLine())));
 
                                     break;
 
@@ -358,7 +358,7 @@ namespace ConsoleUiBL
 
                                     break;
                                 case MenuOptions.ListViewOptions.STATIONS:
-                                    var st1 = dalObject.GetStations();
+                                    var st1 = bl.GetStations();
                                     foreach (var st in st1)
                                     {
                                         Console.WriteLine("\n" + st);
@@ -366,35 +366,35 @@ namespace ConsoleUiBL
 
                                     break;
                                 case MenuOptions.ListViewOptions.DRONES:
-                                    foreach (var dr in dalObject.GetDrones())
+                                    foreach (var dr in bl.GetDrones())
                                     {
                                         Console.WriteLine("\n" + dr);
                                     }
 
                                     break;
                                 case MenuOptions.ListViewOptions.CUSTOMERS:
-                                    foreach (var cus in dalObject.GetCustomers())
+                                    foreach (var cus in bl.GetCustomers())
                                     {
                                         Console.WriteLine("\n" + cus);
                                     }
 
                                     break;
                                 case MenuOptions.ListViewOptions.PACKAGES:
-                                    foreach (var pck in dalObject.GetPackages())
+                                    foreach (var pck in bl.GetPackages())
                                     {
                                         Console.WriteLine("\n" + pck);
                                     }
 
                                     break;
                                 case MenuOptions.ListViewOptions.UNASSIGNED_PACKAGES:
-                                    foreach (var pck in dalObject.GetPackages(x => x.Scheduled == DateTime.MinValue))
+                                    foreach (var pck in bl.GetPackages(pck => pck.PackageStatus == PackageStatus.DEFINED))
                                     {
                                         Console.WriteLine("\n" + pck);
                                     }
 
                                     break;
                                 case MenuOptions.ListViewOptions.AVAILABLE_FOR_CHARGING:
-                                    foreach (var st in dalObject.GetStations(x => x.FreeChargeSlots != 0))
+                                    foreach (var st in bl.GetStations(st => st.SeveralAvailableChargingStations != 0))
                                     {
                                         Console.WriteLine("\n" + st);
                                     }
