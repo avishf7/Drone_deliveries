@@ -80,6 +80,21 @@ namespace IBL
         { return "Too small amount:" + "\n" + Message; }
 
     }
+
+    [Serializable]
+    public class NotEnoughBattery : Exception
+    {
+        public NotEnoughBattery() { }
+        public NotEnoughBattery(string message) : base(message) { }
+        public NotEnoughBattery(string message, Exception inner) : base(message, inner) { }
+        protected NotEnoughBattery(
+          SerializationInfo info,
+          StreamingContext context) : base(info, context) { }
+
+        override public string ToString()
+        { return "There is not enough battery to make the shipment: " + "\n" + Message; }
+
+    }
 }
 
 

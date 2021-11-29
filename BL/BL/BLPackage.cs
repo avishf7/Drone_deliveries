@@ -35,6 +35,11 @@ namespace BL
         }
         public void UpdatePackage(PackageToList Package)
         {
+            try
+            {
+
+            }
+         
             catch (IDAL.NoNumberFoundException ex)
             {
                 throw new IBL.NoNumberFoundException("Package ID not found", ex);
@@ -43,6 +48,10 @@ namespace BL
 
         public Package GetPackage(int packageId)
         {
+            try
+            {
+
+            }
             catch (IDAL.NoNumberFoundException ex)
             {
                 throw new IBL.NoNumberFoundException("Package ID not found", ex);

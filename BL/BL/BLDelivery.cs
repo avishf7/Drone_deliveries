@@ -60,8 +60,19 @@ namespace BL
 
         public void PickUp(int droneId)
         {
-            List<IDAL.DO.Drone> Drone = dal.GetDrone();
-            var d = Drone.FindIndex(x => x.Id == droneId);
+            var dr = DroneLists.Find(d => d.Id == droneId);
+
+            List<IDAL.DO.Package> DoPackage = (List<IDAL.DO.Package>)dal.GetPackages();
+            var PackageInDrone = DoPackage.Find(p => p.DroneId == droneId);
+
+
+            if (dr.PackageNumber== PackageInDrone.Id)
+            {
+                dr.LocationOfDrone = ;
+                PackageInDrone.PickedUp = DateTime.Now;
+
+            }
+
 
         }
 

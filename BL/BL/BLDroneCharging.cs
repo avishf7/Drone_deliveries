@@ -13,8 +13,7 @@ namespace BL
     {
         public void SendDroneForCharge(int DroneId)
         {
-            try
-            {
+           
                 int iDr = DroneLists.FindIndex(x => x.Id == DroneId);
                 var dr = DroneLists.Find(x => x.Id == DroneId);
 
@@ -27,12 +26,12 @@ namespace BL
 
                 Location stLocation = FindClosestStationLocation(dr.LocationOfDrone);                
                 double KM = Distance(stLocation, dr.LocationOfDrone);
-                
 
-                if (KM <dr.BatteryStatus*DroneAvailable)
-                {
-                    //throw
-                }
+
+            if (KM >= dr.BatteryStatus * DroneAvailable)
+            {
+
+
 
                 dr.BatteryStatus = KM + 1;
                 dr.LocationOfDrone = stLocation;
@@ -45,10 +44,12 @@ namespace BL
                 dal.UsingChargingStation(station.Id);
                 dal.AddDroneCharge(new() { DroneId = DroneId, StationId = station.Id });
             }
-            catch (Exception)
+            else
             {
-                throw;
+                throw new NotEnoughBattery();
             }
+            
+
         }
 
 
