@@ -66,12 +66,14 @@ namespace BL
             try
             {
                 IDAL.DO.Station DoStation = dal.GetStation(stationId);
+
                 Station BoStation = new()
                 {
                     Id = DoStation.Id,
                     Name = DoStation.Name,
                     FreeChargeSlots = DoStation.FreeChargeSlots,
                     LocationOfStation = new Location { Lattitude = DoStation.Lattitude, Longitude = DoStation.Longitude },
+                    ChargingDrones = new()
                 };
 
                 List<IDAL.DO.DroneCharge> doDroneCharge = dal.GetDronesCharges(x => x.StationId == stationId).ToList();

@@ -315,22 +315,27 @@ namespace ConsoleUiBL
                                     break;
                                 case MenuOptions.DisplayOptions.STATION:
                                     Console.WriteLine("Enter station ID to see: ");
-                                    Console.WriteLine("\n" + bl.GetStation(int.Parse(Console.ReadLine())));
+                                    try { Console.WriteLine("\n" + bl.GetStation(int.Parse(Console.ReadLine()))); }
+                                    catch (NoNumberFoundException ex) { Console.WriteLine(ex); }
 
                                     break;
                                 case MenuOptions.DisplayOptions.DRONE:
                                     Console.WriteLine("Enter drone ID to see: ");
-                                    Console.WriteLine("\n" + bl.GetDrone(int.Parse(Console.ReadLine())));
+                                    try { Console.WriteLine("\n" + bl.GetDrone(int.Parse(Console.ReadLine()))); }
+                                    catch (NoNumberFoundException ex) { Console.WriteLine(ex); }
 
                                     break;
                                 case MenuOptions.DisplayOptions.CUSTOMER:
                                     Console.WriteLine("Enter customer ID to see: ");
-                                    Console.WriteLine("\n" + bl.GetCustomer(int.Parse(Console.ReadLine())));
+                                    try { Console.WriteLine("\n" + bl.GetCustomer(int.Parse(Console.ReadLine()))); }
+                                    catch (NoNumberFoundException ex) { Console.WriteLine(ex); }
 
                                     break;
                                 case MenuOptions.DisplayOptions.PACKAGE:
                                     Console.WriteLine("Enter package ID to see: ");
-                                    Console.WriteLine("\n" + bl.GetPackage(int.Parse(Console.ReadLine())));
+                                    try { Console.WriteLine("\n" + bl.GetPackage(int.Parse(Console.ReadLine()))); }
+                                    catch (NoNumberFoundException ex) { Console.WriteLine(ex); }
+                                    
 
                                     break;
 

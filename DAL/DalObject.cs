@@ -452,7 +452,6 @@ namespace DalObject
             };
 
             return ChargingRequests;
-        }
-
+        }      
     }
 }

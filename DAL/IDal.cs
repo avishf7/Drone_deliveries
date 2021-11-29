@@ -78,7 +78,6 @@ namespace IDAL
         /// </summary>
         /// <param name="stationId">The id of the station</param>
         void UsingChargingStation(int stationId);
-        List<Drone> GetDrone();
 
         /// <summary>
         /// A function that implements a state of releasing a charging position
