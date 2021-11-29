@@ -103,7 +103,6 @@ namespace IBL
         /// Function of updating a customer.
         /// </summary>
         /// <param name="customer">Customer to update</param>
-        public void UpdateCustomer(int customerId, string name, string phone);
         /// <exception cref="NoNumberFoundException"></exception>
         public void UpdateCustomer(int customerId, string name, string phone);
 

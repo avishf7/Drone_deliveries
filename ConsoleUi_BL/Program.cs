@@ -207,7 +207,7 @@ namespace ConsoleUiBL
                                     try { bl.UpdateStation(stationId, name, ChargeSlots); }
                                     catch (NoNumberFoundException ex) { Console.WriteLine(ex); }
                                     catch (TooSmallAmount ex) { Console.WriteLine(ex); }
-                                    
+
 
 
                                     break;
@@ -406,54 +406,6 @@ namespace ConsoleUiBL
                             }
 
                         } while ((int)LVChoice != 0);
-
-                        break;
-
-                    case MenuOptions.OpeningOptions.DISTANCE:
-                        MenuOptions.DistanceOptions DiChoice;
-
-                        do
-                        {
-
-                            try { DiChoice = MenuOptions.PrintDistanceMenu(); }
-                            catch (FormatException) { DiChoice = MenuOptions.DistanceOptions.DEFAULT; }
-
-                            double lattitude, longitude;
-
-                            switch (DiChoice)
-                            {
-                                case MenuOptions.DistanceOptions.BACK:
-                                    Console.WriteLine("\n");
-                                    break;
-                                case MenuOptions.DistanceOptions.STATION:
-
-                                    Console.WriteLine("Enter lattitude: ");
-                                    lattitude = double.Parse(Console.ReadLine());
-                                    Console.WriteLine("Enter longitude: ");
-                                    longitude = double.Parse(Console.ReadLine());
-                                    Console.WriteLine("Enter station ID to calculate from: ");
-                                    Station station = dalObject.GetStation(int.Parse(Console.ReadLine()));
-                                    Console.WriteLine("\nthe distance between " + lattitude + "\u00B0N ," + longitude + "\u00B0E to station " + station.Id + " is " + Distance(lattitude, longitude, station.Lattitude, station.Longitude) + " KM");
-
-                                    break;
-                                case MenuOptions.DistanceOptions.CUSTOMER:
-                                    Console.WriteLine("Enter lattitude: ");
-                                    lattitude = double.Parse(Console.ReadLine());
-                                    Console.WriteLine("Enter longitude: ");
-                                    longitude = double.Parse(Console.ReadLine());
-                                    Console.WriteLine("Enter customer ID to calculate from: ");
-                                    Customer customer = dalObject.GetCustomer(int.Parse(Console.ReadLine()));
-                                    Console.WriteLine("\nthe distance between " + lattitude + "\u00B0N ," + longitude + "\u00B0E to station " + customer.Id + " is " + Distance(lattitude, longitude, customer.Lattitude, customer.Longitude) + " KM");
-
-                                    break;
-                                case MenuOptions.DistanceOptions.DEFAULT:
-                                    Console.WriteLine("\nERROR: invalid choice\n");
-                                    break;
-                                default:
-                                    break;
-                            }
-
-                        } while ((int)DiChoice != 0);
 
                         break;
                     default:
