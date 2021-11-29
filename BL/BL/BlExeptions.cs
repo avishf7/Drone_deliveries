@@ -19,7 +19,7 @@ namespace IBL
 
 
         override public string ToString()
-        { return "Exists number" + "\n" + Message; }
+        { return "Exists number: " + "\n" + Message; }
     }
 
     [Serializable]
@@ -33,11 +33,11 @@ namespace IBL
      : base(info, context) { }
 
         override public string ToString()
-        { return "Number not found " + "\n" + Message; }
+        { return "Number not found: " + "\n" + Message; }
     }
 
     [Serializable]
-    internal class DroneNotAvailableException : Exception
+    public class DroneNotAvailableException : Exception
     {
         public DroneNotAvailableException() : base() { }
 
@@ -48,11 +48,11 @@ namespace IBL
         protected DroneNotAvailableException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
         override public string ToString()
-        { return "Drone is not available " + "\n" + Message; }
+        { return "Drone is not available: " + "\n" + Message; }
     }
 
     [Serializable]
-    internal class DroneNotMaintenanceException : Exception
+    public class DroneNotMaintenanceException : Exception
     {
         public DroneNotMaintenanceException() : base() { }
 
@@ -106,7 +106,7 @@ namespace IBL
           StreamingContext context) : base(info, context) { }
 
         override public string ToString()
-        { return "There is not enough battery to make the shipment: " + "\n" + Message; }
+        { return "There is not enough battery: " + "\n" + Message; }
 
     }
 }

@@ -199,12 +199,17 @@ namespace IBL
         /// A function that implements a Drone charging
         /// </summary>
         /// <param name="DroneId">The id of the drone</param>
+        /// <exception cref="NoNumberFoundException"></exception>
+        /// <exception cref="DroneNotAvailableException"></exception>
+        /// <exception cref="NotEnoughBattery"></exception>
         void SendDroneForCharge(int DroneId);
 
         /// <summary>
         /// A function that implements a state of releasing a drone from a charge
         /// </summary>
         /// <param name="DroneId">The id of the drone</param>
+        ///  <exception cref="NoNumberFoundException"></exception>
+        ///   <exception cref="DroneNotMaintenanceException"></exception>
         void RealeseDroneFromCharge(int DroneId, TimeSpan time);
 
         #endregion 

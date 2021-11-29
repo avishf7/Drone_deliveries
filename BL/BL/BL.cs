@@ -135,9 +135,14 @@ namespace BL
         /// </summary>
         /// <param name="location"></param>
         /// <returns></returns>
-        Location FindClosestStationLocation(Location location)
+        /// <exception cref="IBL.NoNumberFoundException"></exception>
+        Location FindClosestStationLocation(Location location, Predicate<IDAL.DO.Station> predicate = null)
         {
-            List<IDAL.DO.Station> stations = dal.GetStations().ToList();
+            List<IDAL.DO.Station> stations = dal.GetStations(predicate).ToList();
+
+            if (!stations.Any())
+                throw new IBL.NoNumberFoundException("No station that provided the predicate");
+
             double minDistance = stations.Min(x => Distance(location, new Location() { Lattitude = x.Lattitude, Longitude = x.Longitude }));
 
             IDAL.DO.Station station = stations.Find(x => Distance(location, new Location() { Lattitude = x.Lattitude, Longitude = x.Longitude }) == minDistance);

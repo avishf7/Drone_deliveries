@@ -13,30 +13,34 @@ namespace BL
     {
         public void SendDroneForCharge(int DroneId)
         {
-           
-                int iDr = DroneLists.FindIndex(x => x.Id == DroneId);
-                var dr = DroneLists.Find(x => x.Id == DroneId);
+
+            int iDr = DroneLists.FindIndex(x => x.Id == DroneId);
+            var dr = DroneLists.Find(x => x.Id == DroneId);
 
 
-                if (dr == null)
-                {
-                    throw new IBL.NoNumberFoundException();
-                }
+            if (dr == null)
+            {
+                throw new IBL.NoNumberFoundException("Drone ID not found");
+            }
 
             if (dr.DroneStatus != DroneStatuses.AVAILABLE)
             {
                 throw new DroneNotAvailableException();
             }
 
-               
+            Location stLocation;
+            try { stLocation = FindClosestStationLocation(dr.LocationOfDrone, x => x.FreeChargeSlots > 0); }
+            catch ( IBL.NoNumberFoundException ex) 
+            { 
+                throw new IBL.NoNumberFoundException("There is no station with available charging stations",ex); 
+            }
 
-                Location stLocation = FindClosestStationLocation(dr.LocationOfDrone);                
-                double KM = Distance(stLocation, dr.LocationOfDrone);
+            double KM = Distance(stLocation, dr.LocationOfDrone);
 
 
-            if (KM >= dr.BatteryStatus * DroneAvailable)
+            if (KM <= dr.BatteryStatus * DroneAvailable)
             {
-                dr.BatteryStatus = KM + 1;
+                dr.BatteryStatus = dr.BatteryStatus - KM /DroneAvailable;
                 dr.LocationOfDrone = stLocation;
                 dr.DroneStatus = DroneStatuses.MAINTENANCE;
 
@@ -44,28 +48,27 @@ namespace BL
 
                 List<IDAL.DO.Station> stationsT = dal.GetStations(x => x.FreeChargeSlots > 0).ToList();
                 IDAL.DO.Station station = stationsT.Find(x => x.Lattitude == stLocation.Lattitude && x.Longitude == stLocation.Longitude);
+
                 dal.UsingChargingStation(station.Id);
                 dal.AddDroneCharge(new() { DroneId = DroneId, StationId = station.Id });
             }
             else
             {
-                throw new NotEnoughBattery();
+                throw new NotEnoughBattery("Not enough to get to the nearest available station");
             }
-            
+
 
         }
 
 
         public void RealeseDroneFromCharge(int DroneId, TimeSpan time)
         {
-            try
-            {
                 int iDr = DroneLists.FindIndex(x => x.Id == DroneId);
-                var dr = DroneLists.Find(x => x.Id == DroneId);         
-                                
-                if (dr==null)
+                var dr = DroneLists.Find(x => x.Id == DroneId);
+
+                if (dr == null)
                 {
-                   throw new IBL.NoNumberFoundException();
+                    throw new IBL.NoNumberFoundException("Drone ID not found");
                 }
 
                 if (dr.DroneStatus != DroneStatuses.MAINTENANCE)
@@ -78,17 +81,14 @@ namespace BL
                 dr.DroneStatus = DroneStatuses.AVAILABLE;
 
                 DroneLists.Insert(iDr, dr);
-              
+
                 List<IDAL.DO.Station> stationsT = dal.GetStations(x => x.Lattitude == dr.LocationOfDrone.Lattitude && x.Longitude == dr.LocationOfDrone.Longitude).ToList();
                 IDAL.DO.Station station = stationsT.Find(x => x.Lattitude == dr.LocationOfDrone.Lattitude && x.Longitude == dr.LocationOfDrone.Longitude);
 
                 dal.RealeseChargingStation(station.Id);
                 dal.DeleteDroneCharge(DroneId);
-            }
-            catch (IDAL.NoNumberFoundException ex)
-            {
-                throw new IBL.NoNumberFoundException();
-            }     
+            
+            
         }
     }
 }

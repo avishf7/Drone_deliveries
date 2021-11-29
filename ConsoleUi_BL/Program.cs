@@ -265,7 +265,10 @@ namespace ConsoleUiBL
                                     Console.WriteLine("Enter drone ID : ");
                                     int chDroneId = (int.Parse(Console.ReadLine()));
 
-                                    bl.SendDroneForCharge(chDroneId);
+                                    try { bl.SendDroneForCharge(chDroneId); }
+                                    catch (NoNumberFoundException ex) { Console.WriteLine(ex); }
+                                    catch (DroneNotAvailableException ex) { Console.WriteLine(ex); }
+                                    catch (NotEnoughBattery ex) { Console.WriteLine(ex); }
 
                                     //Output that displays the success of a request:
                                     Console.WriteLine(bl.GetDrone(chDroneId));
@@ -282,7 +285,9 @@ namespace ConsoleUiBL
                                     Console.WriteLine("Enter the number of charging seconds:");
                                     int s = int.Parse(Console.ReadLine());
 
-                                    bl.RealeseDroneFromCharge(reDroneId, new(h, m, s));
+                                    try { bl.RealeseDroneFromCharge(reDroneId, new(h, m, s)); }
+                                    catch (NoNumberFoundException ex) { Console.WriteLine(ex); }
+                                    catch (DroneNotMaintenanceException ex) { Console.WriteLine(ex); }
 
                                     //Output that displays the success of a request:
                                     Console.WriteLine(bl.GetDrone(reDroneId));
