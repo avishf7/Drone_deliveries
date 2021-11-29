@@ -33,18 +33,6 @@ namespace BL
                 throw new IBL.ExistsNumberException("Package already exists ", ex);
             }
         }
-        public void UpdatePackage(PackageToList Package)
-        {
-            try
-            {
-
-            }
-         
-            catch (IDAL.NoNumberFoundException ex)
-            {
-                throw new IBL.NoNumberFoundException("Package ID not found", ex);
-            }
-        }
 
         public Package GetPackage(int packageId)
         {
@@ -89,8 +77,8 @@ namespace BL
                 PackageToList PckToLists = new()
                 {
                     Id = item.Id,
-                    SenderId = item.SenderId,
-                    TargetId = item.TargetId,
+                    SenderName = dal.GetCustomer(item.SenderId).Name,
+                    TargetName = dal.GetCustomer(item.TargetId).Name,
                     Priority = (Priorities)item.Priority,
                     Weight = (Weight)item.Weight,
                     PackageStatus = p

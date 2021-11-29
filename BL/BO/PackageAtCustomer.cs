@@ -11,7 +11,7 @@ namespace IBL.BO
         /// <summary>
         /// Gets customer id
         /// </summary>
-        public int CustomerId { get; set; }
+        public int PackageId { get; set; }
 
         /// <summary>
         /// Gets the weight.
@@ -31,15 +31,15 @@ namespace IBL.BO
         /// <summary>
         /// Gets the other side of the package
         /// </summary>
-        public CustomerInPackage CustomerInPackage { get; set; }
+        public CustomerInPackage OtherSideCustomer { get; set; }
 
 
 
 
         public override string ToString()
         {
-            return "Details of ID:" + CustomerId + "\nWeight: " + Weight + "\nPriority: " + Priority
-                + "\nStatus: " + Status + "\nCustomer in package: " + CustomerInPackage + "\n";
+            return "Details of ID:" + PackageId + "\nWeight: " + Weight + "\nPriority: " + Priority
+                + "\nStatus: " + Status + "\nCustomer in package: " + OtherSideCustomer + "\n";
         }
     }
 }

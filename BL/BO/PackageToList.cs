@@ -18,12 +18,12 @@ namespace IBL.BO
         /// <summary>
         /// Gets the sender id.
         /// </summary>
-        public int SenderId { get; set; }
+        public string SenderName { get; set; }
 
         /// <summary>
         /// Gets the target id.
         /// </summary>
-        public int TargetId { get; set; }
+        public string TargetName { get; set; }
 
         /// <summary>
         /// Gets the weight.
@@ -45,8 +45,8 @@ namespace IBL.BO
   
         public override string ToString()
         {
-            return "Details of ID:" + Id + "\nSender ID: " + SenderId +
-                "\nTarget ID: " + TargetId + "\nWeight: " + Weight + "\nPriority: " + Priority
+            return "Details of ID:" + Id + "\nSender ID: " + SenderName +
+                "\nTarget ID: " + TargetName + "\nWeight: " + Weight + "\nPriority: " + Priority
                 + "\nPackage status: " + PackageStatus + "\n";
         }
     }

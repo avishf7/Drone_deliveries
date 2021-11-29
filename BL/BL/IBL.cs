@@ -136,14 +136,7 @@ namespace IBL
         /// </summary>
         /// <param name="package">Package to add</param>
         /// <exception cref="ExistsNumberException"></exception>
-        public void AddPackage(Package package);
-
-        /// <summary>
-        /// Function of updating a package.
-        /// </summary>
-        /// <param name="Package">Package to update</param>
-        /// <exception cref="NoNumberFoundException"></exception>
-        public void UpdatePackage(PackageToList Package);
+        public void AddPackage(Package package);      
 
         /// <summary>
         ///Function for displaying package.
@@ -177,6 +170,8 @@ namespace IBL
         /// </summary>
         /// <param name="droneId">The id of the drone</param>
         /// <exception cref="NoSuitablePackageForScheduledException"></exception>
+        /// <exception cref="NoNumberFoundException"></exception>
+        /// <exception cref="DroneNotAvailableException"></exception>
         void packageAssigning(int droneId);
 
         /// <summary>

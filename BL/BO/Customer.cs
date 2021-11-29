@@ -29,14 +29,14 @@ namespace IBL.BO
         public Location CustomerLocation { get; set; }
 
         /// <summary>
-        /// Gets a list of customer in package from the customer
+        /// Gets a list of packages from the customer
         /// </summary>
-        public List<CustomerInPackage> CustomerInPackageFromCustomer { get; set; }
+        public List<PackageAtCustomer> PackageAtCustomerFromCustomer { get; set; }
 
         /// <summary>
-        /// Gets a list of customer in package to the customer
+        /// Gets a list of packages to the customer
         /// </summary>
-        public List<CustomerInPackage> CustomerInPackageToCustomer { get; set; }
+        public List<PackageAtCustomer> PackageAtCustomerToCustomer { get; set; }
 
 
 
@@ -45,8 +45,8 @@ namespace IBL.BO
         {
             return "Details of ID :" + Id + "\nName:" + Name + "\nPhone:" +
                 Phone + "\nLocation: "+ CustomerLocation+ "\nCustomer in package from customer: " +
-                string.Join(" " , CustomerInPackageFromCustomer) + "\nCustomer in package to customer: " + 
-                string.Join(" " , CustomerInPackageToCustomer) + "\n";
+                string.Join(" " , PackageAtCustomerFromCustomer) + "\nCustomer in package to customer: " + 
+                string.Join(" " , PackageAtCustomerToCustomer) + "\n";
         }
     }
 }
