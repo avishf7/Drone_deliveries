@@ -60,20 +60,34 @@ namespace BL
 
         public void PickUp(int droneId)
         {
-            var dr = DroneLists.Find(d => d.Id == droneId);
+        //    var dr = DroneLists.Find(d => d.Id == droneId);
 
-        var DoPackage = dal.GetPackages(p => p.DroneId == droneId && p.PickedUp == DateTime.MinValue).First();
-         //   var PackageInDrone = DoPackage.Find(p => p.DroneId == droneId && p.PickedUp==DateTime.MinValue);
+            int index= DroneLists.FindIndex(d => d.Id == droneId);
 
+            var DoPackage = dal.GetPackages(p => p.DroneId == droneId && p.PickedUp == DateTime.MinValue).First();
+            //   var PackageInDrone = DoPackage.Find(p => p.DroneId == droneId && p.PickedUp==DateTime.MinValue);
 
-            if (dr.PackageNumber== DoPackage.Id)
+            if (DoPackage.DroneId==0)
             {
-                dr.LocationOfDrone = ;
-                DoPackage.PickedUp = DateTime.Now;
-
+                throw new NoPackageAssociatedWithDrone();
             }
+            var sender = dal.GetCustomer(DoPackage.SenderId);
+            Location senderLocation = new()
+            {
+                Lattitude = sender.Lattitude,
+                Longitude = sender.Longitude
+            };
 
+           double Km = Distance(DroneLists[index].LocationOfDrone, senderLocation);
 
+            if (DroneLists[index].PackageNumber== DoPackage.Id)
+            {
+                DroneLists[index].LocationOfDrone = senderLocation;
+                DroneLists[index].BatteryStatus = BatteryUsage(Km, 3);
+                DoPackage.PickedUp = DateTime.Now;
+                //כך מעדכנים את החבילה?
+                dal.AddPackage(DoPackage);
+            }
         }
 
         public void Deliver(int droneId)

@@ -109,6 +109,30 @@ namespace IBL
         { return "There is not enough battery: " + "\n" + Message; }
 
     }
+
+    [Serializable]
+    internal class NoPackageAssociatedWithDrone : Exception
+    {
+        public NoPackageAssociatedWithDrone()
+        {
+        }
+
+        public NoPackageAssociatedWithDrone(string message) : base(message)
+        {
+        }
+
+        public NoPackageAssociatedWithDrone(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected NoPackageAssociatedWithDrone(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+        override public string ToString()
+        { return "  There is no package associated with the glider: " + "\n" + Message; }
+    }
+
 }
+
 
 
