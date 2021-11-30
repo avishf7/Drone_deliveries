@@ -92,6 +92,32 @@ namespace BL
 
         public void Deliver(int droneId)
         {
+            int index = DroneLists.FindIndex(d => d.Id == droneId);
+
+            var DoPackage = dal.GetPackages(p => p.DroneId == droneId && p.PickedUp != DateTime.MinValue).First();
+
+
+            var target = dal.GetCustomer(DoPackage.TargetId);
+            Location targetLocation = new()
+            {
+                Lattitude = target.Lattitude,
+                Longitude = target.Longitude
+            };
+
+            double Km = Distance(DroneLists[index].LocationOfDrone, targetLocation);
+
+
+            if (DroneLists[index].PackageNumber == DoPackage.Id)
+            {
+                DroneLists[index].LocationOfDrone = targetLocation;
+                DroneLists[index].BatteryStatus = BatteryUsage(Km, (int)DoPackage.Weight);
+                DroneLists[index].DroneStatus = DroneStatuses.AVAILABLE;
+                DoPackage.Delivered = DateTime.Now;
+                //כך מעדכנים את החבילה?
+                dal.AddPackage(DoPackage);
+            }
+
+
             throw new NotImplementedException();
         }
     }
