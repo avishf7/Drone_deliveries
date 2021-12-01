@@ -9,17 +9,16 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public partial class BL : IBl
+    static class BLExpandingFunctions
     {
-        public CustomerInPackage GetCusomerInPackage(int customerId)
+        public static CustomerInPackage GetCusomerInPackage(this IDAL.DO.Customer customer)
         {
-            var DoCus = dal.GetCustomer(customerId);
-
             CustomerInPackage BoCustomerInPackage = new()
             {
-                CustomerId = DoCus.Id,
-                CustomerName = DoCus.Name
+                CustomerId = customer.Id,
+                CustomerName = customer.Name
             };
+
             return BoCustomerInPackage;
         }
     }

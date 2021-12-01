@@ -2,6 +2,7 @@
 using System.Linq;
 using IBL;
 using IBL.BO;
+using System.Collections.Generic;
 
 namespace ConsoleUiBL
 {
@@ -10,10 +11,7 @@ namespace ConsoleUiBL
         static void Main(string[] args)
         {
             IBl bl = new BL.BL();
-
-
             MenuOptions.OpeningOptions ch;
-
 
             do
             {
@@ -65,14 +63,15 @@ namespace ConsoleUiBL
                                                 Lattitude = lattitude
                                             }
                                         });
+
+                                        //Output that displays the success of a request:
+                                        bl.GetStations().ToList().ForEach(st => Console.WriteLine(st));
                                     }
                                     catch (ExistsNumberException ex)
                                     {
                                         Console.WriteLine(ex);
                                     }
 
-                                    //Output that displays the success of a request:
-                                    bl.GetStations().ToList().ForEach(st => Console.WriteLine(st));
                                     break;
 
                                 case MenuOptions.InsertOptions.DRONE:
@@ -80,7 +79,7 @@ namespace ConsoleUiBL
                                     int droneId = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter drone model: ");
                                     string model = (Console.ReadLine());
-                                    Console.WriteLine("Enter drone Weight - To LIGHT enter 0, to MEDIUM enter 1 and to HEAVY enter 2: ");
+                                    Console.WriteLine("Enter drone Max Weight - To LIGHT enter 0, to MEDIUM enter 1 and to HEAVY enter 2: ");
                                     Weight maxWeight = (Weight)int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter a station ID for initial charging: ");
                                     int firstStationId = int.Parse(Console.ReadLine());
@@ -95,6 +94,9 @@ namespace ConsoleUiBL
                                                 MaxWeight = maxWeight,
                                             },
                                         firstStationId);
+
+                                        //Output that displays the success of a request:
+                                        bl.GetDrones().ToList().ForEach(dr => Console.WriteLine(dr));
                                     }
                                     catch (ExistsNumberException ex)
                                     {
@@ -105,8 +107,6 @@ namespace ConsoleUiBL
                                         Console.WriteLine(ex);
                                     }
 
-                                    //Output that displays the success of a request:
-                                    bl.GetDrones().ToList().ForEach(dr => Console.WriteLine(dr));
                                     break;
 
                                 case MenuOptions.InsertOptions.CUSTOMER:
@@ -133,14 +133,15 @@ namespace ConsoleUiBL
                                                 Lattitude = cusLattitude
                                             }
                                         });
+
+                                        //Output that displays the success of a request:
+                                        bl.GetCustomers().ToList().ForEach(cus => Console.WriteLine(cus));
                                     }
                                     catch (ExistsNumberException ex)
                                     {
                                         Console.WriteLine(ex);
                                     }
 
-                                    //Output that displays the success of a request:
-                                    bl.GetCustomers().ToList().ForEach(cus => Console.WriteLine(cus));
                                     break;
 
                                 case MenuOptions.InsertOptions.PACKAGE:
@@ -156,19 +157,26 @@ namespace ConsoleUiBL
                                     {
                                         bl.AddPackage(new()
                                         {
-                                            SenderCustomerInPackage = sendersId,
-                                            TargetCustomerInPackage = targetsId,
+                                            SenderCustomerInPackage = new()
+                                            {
+                                                CustomerId = sendersId,
+                                            },
+                                            TargetCustomerInPackage = new()
+                                            {
+                                                CustomerId = targetsId,
+                                            },
                                             Weight = weight,
                                             Priority = priority,
                                         });
+
+                                        //Output that displays the success of a request:
+                                        bl.GetPackages().ToList().ForEach(pck => Console.WriteLine(pck));
                                     }
                                     catch (ExistsNumberException ex)
                                     {
                                         Console.WriteLine(ex);
                                     }
 
-                                    //Output that displays the success of a request:
-                                    bl.GetPackages().ToList().ForEach(pck => Console.WriteLine(pck));
                                     break;
 
                                 default:
@@ -204,7 +212,14 @@ namespace ConsoleUiBL
                                     var chSl = Console.ReadLine();
                                     int ChargeSlots = int.Parse(chSl != "" ? chSl : "-1");
 
-                                    try { bl.UpdateStation(stationId, name, ChargeSlots); }
+                                    try
+                                    {
+                                        bl.UpdateStation(stationId, name, ChargeSlots);
+
+                                        //Output that displays the success of a request:
+                                        Console.WriteLine(bl.GetStation(stationId));
+
+                                    }
                                     catch (NoNumberFoundException ex) { Console.WriteLine(ex); }
                                     catch (TooSmallAmount ex) { Console.WriteLine(ex); }
 
@@ -217,8 +232,15 @@ namespace ConsoleUiBL
                                     Console.WriteLine("Enter drone model: ");
                                     string model = (Console.ReadLine());
 
-                                    try { bl.UpdateDrone(droneId, model); }
+                                    try
+                                    {
+                                        bl.UpdateDrone(droneId, model);
+
+                                        //Output that displays the success of a request:
+                                        Console.WriteLine(bl.GetDrone(droneId));
+                                    }
                                     catch (NoNumberFoundException ex) { Console.WriteLine(ex); }
+
                                     break;
                                 case MenuOptions.UpdateOptions.CUSTOMER:
                                     Console.WriteLine("Enter customer ID: ");
@@ -228,7 +250,13 @@ namespace ConsoleUiBL
                                     Console.WriteLine("Enter customer phone: ");
                                     string phone = (Console.ReadLine());
 
-                                    try { bl.UpdateCustomer(cusId, cusName, phone); }
+                                    try
+                                    {
+                                        bl.UpdateCustomer(cusId, cusName, phone);
+
+                                        //Output that displays the success of a request:
+                                        Console.WriteLine(bl.GetCustomer(cusId));
+                                    }
                                     catch (NoNumberFoundException ex) { Console.WriteLine(ex); }
 
                                     break;
@@ -236,42 +264,65 @@ namespace ConsoleUiBL
                                     Console.WriteLine("Enter drone ID: ");
                                     int assoDroneId = int.Parse(Console.ReadLine());
 
-                                    bl.packageAssigning(assoDroneId);
 
-                                    //Output that displays the success of a request:
-                                    Console.WriteLine(bl.GetDrone(assoDroneId));
+                                    try
+                                    {
+                                        bl.packageAssigning(assoDroneId);
+
+                                        //Output that displays the success of a request:
+                                        Console.WriteLine(bl.GetDrone(assoDroneId));
+                                    }
+                                    catch (NoNumberFoundException ex) { Console.WriteLine(ex); }
+                                    catch (NoSuitablePackageForScheduledException ex) { Console.WriteLine(ex); }
+                                    catch (DroneNotAvailableException ex) { Console.WriteLine(ex); }
 
                                     break;
                                 case MenuOptions.UpdateOptions.PICKING_UP:
                                     Console.WriteLine("Enter drone ID: ");
                                     int pickUpDroneId = int.Parse(Console.ReadLine());
-                                    bl.PickUp(pickUpDroneId);
+                                    try
+                                    {
+                                        bl.PickUp(pickUpDroneId);
 
-                                    //Output that displays the success of a request:
-                                    Console.WriteLine(bl.GetDrone(pickUpDroneId));
+                                        //Output that displays the success of a request:
+                                        Console.WriteLine(bl.GetDrone(pickUpDroneId));
+                                    }
+                                    catch (NoNumberFoundException ex) { Console.WriteLine(ex); }
+                                    catch (NoPackageAssociatedWithDrone ex) { Console.WriteLine(ex); }
+                                    catch (PackageAlreadyCollectedException ex) { Console.WriteLine(ex); }
+
 
                                     break;
                                 case MenuOptions.UpdateOptions.SUPPLY:
                                     Console.WriteLine("Enter drone ID: ");
                                     int supDroneId = int.Parse(Console.ReadLine());
 
-                                    bl.Deliver(supDroneId);
+                                    try
+                                    {
+                                        bl.Deliver(supDroneId);
 
-                                    //Output that displays the success of a request:
-                                    Console.WriteLine(bl.GetDrone(supDroneId));
+                                        //Output that displays the success of a request:
+                                        Console.WriteLine(bl.GetDrone(supDroneId));
+                                    }
+                                    catch (NoNumberFoundException ex) { Console.WriteLine(ex); }
+                                    catch (NoPackageAssociatedWithDrone ex) { Console.WriteLine(ex); }
+                                    catch (PackageNotCollectedException ex) { Console.WriteLine(ex); }
 
                                     break;
                                 case MenuOptions.UpdateOptions.CHARGING:
                                     Console.WriteLine("Enter drone ID : ");
                                     int chDroneId = (int.Parse(Console.ReadLine()));
 
-                                    try { bl.SendDroneForCharge(chDroneId); }
+                                    try
+                                    {
+                                        bl.SendDroneForCharge(chDroneId);
+
+                                        //Output that displays the success of a request:
+                                        Console.WriteLine(bl.GetDrone(chDroneId));
+                                    }
                                     catch (NoNumberFoundException ex) { Console.WriteLine(ex); }
                                     catch (DroneNotAvailableException ex) { Console.WriteLine(ex); }
                                     catch (NotEnoughBattery ex) { Console.WriteLine(ex); }
-
-                                    //Output that displays the success of a request:
-                                    Console.WriteLine(bl.GetDrone(chDroneId));
 
                                     break;
                                 case MenuOptions.UpdateOptions.RELEASE:
@@ -285,13 +336,15 @@ namespace ConsoleUiBL
                                     Console.WriteLine("Enter the number of charging seconds:");
                                     int s = int.Parse(Console.ReadLine());
 
-                                    try { bl.RealeseDroneFromCharge(reDroneId, new(h, m, s)); }
+                                    try
+                                    {
+                                        bl.RealeseDroneFromCharge(reDroneId, new(h, m, s));
+
+                                        //Output that displays the success of a request:
+                                        Console.WriteLine(bl.GetDrone(reDroneId));
+                                    }
                                     catch (NoNumberFoundException ex) { Console.WriteLine(ex); }
                                     catch (DroneNotMaintenanceException ex) { Console.WriteLine(ex); }
-
-                                    //Output that displays the success of a request:
-                                    Console.WriteLine(bl.GetDrone(reDroneId));
-
 
                                     break;
 
@@ -340,7 +393,7 @@ namespace ConsoleUiBL
                                     Console.WriteLine("Enter package ID to see: ");
                                     try { Console.WriteLine("\n" + bl.GetPackage(int.Parse(Console.ReadLine()))); }
                                     catch (NoNumberFoundException ex) { Console.WriteLine(ex); }
-                                    
+
 
                                     break;
 

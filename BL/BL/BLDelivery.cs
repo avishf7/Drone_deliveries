@@ -14,7 +14,7 @@ namespace BL
     {
         public void packageAssigning(int droneId)
         {
-            var dr = DroneLists.Find(d => d.Id == droneId);
+            var dr = droneLists.Find(d => d.Id == droneId);
 
             if (dr == null ? throw new IBL.NoNumberFoundException() : true &&
                 dr.DroneStatus != DroneStatuses.AVAILABLE ? throw new DroneNotAvailableException() : true)
@@ -27,6 +27,9 @@ namespace BL
                                     Lattitude = dal.GetCustomer(pck.SenderId).Lattitude,
                                     Longitude = dal.GetCustomer(pck.SenderId).Longitude
                                 }));
+
+                if (!orderPackages.Any())
+                    throw new IBL.NoSuitablePackageForScheduledException("Packages weighing more than the drone's ability to carry");
 
                 bool isFound = false;//for checking if there is a fit package
 
@@ -45,6 +48,7 @@ namespace BL
                     if (isFound = dr.BatteryStatus >= minBattery)
                     {
                         dr.DroneStatus = DroneStatuses.SENDERING;
+                        dr.PackageNumber = pck.Id;
                         var scheduledPck = pck;
                         scheduledPck.DroneId = dr.Id;
                         scheduledPck.Scheduled = DateTime.Now;
@@ -54,71 +58,60 @@ namespace BL
                 }
 
                 if (!isFound)
-                    throw new IBL.NoSuitablePackageForScheduledException();
+                    throw new IBL.NoSuitablePackageForScheduledException("There is not enough battery", new NotEnoughBattery());
             }
         }
 
         public void PickUp(int droneId)
         {
-        //    var dr = DroneLists.Find(d => d.Id == droneId);
+            var dr = droneLists.Find(d => d.Id == droneId);
 
-            int index= DroneLists.FindIndex(d => d.Id == droneId);
-
-            var DoPackage = dal.GetPackages(p => p.DroneId == droneId && p.PickedUp == DateTime.MinValue).First();
-            //   var PackageInDrone = DoPackage.Find(p => p.DroneId == droneId && p.PickedUp==DateTime.MinValue);
-
-            if (DoPackage.DroneId==0)
-            {
+            if (dr == default)
+                throw new IBL.NoNumberFoundException("Drone ID not found");
+            if (dr.PackageNumber == -1)
                 throw new NoPackageAssociatedWithDrone();
-            }
-            var sender = dal.GetCustomer(DoPackage.SenderId);
-            Location senderLocation = new()
-            {
-                Lattitude = sender.Lattitude,
-                Longitude = sender.Longitude
-            };
 
-           double Km = Distance(DroneLists[index].LocationOfDrone, senderLocation);
+            var doPackage = dal.GetPackage(dr.PackageNumber);
 
-            if (DroneLists[index].PackageNumber== DoPackage.Id)
+            if (doPackage.PickedUp != DateTime.MinValue)
+                throw new PackageAlreadyCollectedException("Package ID - " + doPackage.Id);
+
+            var sender = GetCustomer(doPackage.SenderId);
+
+            if (dr.PackageNumber == doPackage.Id)
             {
-                DroneLists[index].LocationOfDrone = senderLocation;
-                DroneLists[index].BatteryStatus = BatteryUsage(Km, 3);
-                DoPackage.PickedUp = DateTime.Now;
-                //כך מעדכנים את החבילה?
-                dal.AddPackage(DoPackage);
+                dr.BatteryStatus = BatteryUsage(Distance(dr.LocationOfDrone, sender.CustomerLocation));
+                dr.LocationOfDrone = sender.CustomerLocation;
+                doPackage.PickedUp = DateTime.Now;
+                dal.UpdatePackage(doPackage);
             }
         }
 
         public void Deliver(int droneId)
         {
-            int index = DroneLists.FindIndex(d => d.Id == droneId);
+            var dr = droneLists.Find(d => d.Id == droneId);
 
-            var DoPackage = dal.GetPackages(p => p.DroneId == droneId && p.PickedUp != DateTime.MinValue).First();
+            if (dr == default)
+                throw new IBL.NoNumberFoundException("Drone ID not found");
+            if (dr.PackageNumber == -1)
+                throw new NoPackageAssociatedWithDrone();
 
+            var doPackage = dal.GetPackage(dr.PackageNumber);
 
-            var target = dal.GetCustomer(DoPackage.TargetId);
-            Location targetLocation = new()
-            {
-                Lattitude = target.Lattitude,
-                Longitude = target.Longitude
-            };
+            if (doPackage.PickedUp == DateTime.MinValue)
+                throw new PackageNotCollectedException("Package ID - " + doPackage.Id);
 
-            double Km = Distance(DroneLists[index].LocationOfDrone, targetLocation);
+            var target = GetCustomer(doPackage.TargetId);
 
-
-            if (DroneLists[index].PackageNumber == DoPackage.Id)
-            {
-                DroneLists[index].LocationOfDrone = targetLocation;
-                DroneLists[index].BatteryStatus = BatteryUsage(Km, (int)DoPackage.Weight);
-                DroneLists[index].DroneStatus = DroneStatuses.AVAILABLE;
-                DoPackage.Delivered = DateTime.Now;
-                //כך מעדכנים את החבילה?
-                dal.AddPackage(DoPackage);
+            if (dr.PackageNumber == doPackage.Id)
+            {               
+                dr.BatteryStatus = BatteryUsage(Distance(dr.LocationOfDrone, target.CustomerLocation),
+                    (int)doPackage.Weight);
+                dr.LocationOfDrone = target.CustomerLocation;
+                dr.DroneStatus = DroneStatuses.AVAILABLE;
+                doPackage.Delivered = DateTime.Now;
+                dal.UpdatePackage(doPackage);
             }
-
-
-            throw new NotImplementedException();
         }
     }
 

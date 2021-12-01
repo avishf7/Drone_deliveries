@@ -22,7 +22,7 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            return "Details of longitude: " + Longitude + "\nLattitude: " + Lattitude + "\n";
+            return "{ longitude: " + Longitude + ", Lattitude: " + Lattitude + "}\n";
         }
     }
 }

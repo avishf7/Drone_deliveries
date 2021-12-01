@@ -25,7 +25,7 @@ namespace BL
                     Model = drone.Model
                 });
 
-                DroneLists.Add(new()
+                droneLists.Add(new()
                 {
                     Id = drone.Id,
                     MaxWeight = drone.MaxWeight,
@@ -52,7 +52,7 @@ namespace BL
                 dr.Model = model;
                 dal.UpdateDrone(dr);
 
-                DroneLists.Find(drone => drone.Id == droneId).Model = model;
+                droneLists.Find(drone => drone.Id == droneId).Model = model;
             }
             catch (IDAL.NoNumberFoundException ex) { throw new IBL.NoNumberFoundException("Drone ID not found", ex); }
         
@@ -60,7 +60,7 @@ namespace BL
 
             public Drone GetDrone(int droneId)
             {
-                var dr = DroneLists.Find(x => x.Id == droneId);
+                var dr = droneLists.Find(x => x.Id == droneId);
                 PackageInTransfer packageInTransfer = null;
 
                 if (dr != null)
@@ -108,7 +108,7 @@ namespace BL
             {
                 List<DroneToList> copyOfDroneLists = new();
 
-                foreach (var item in DroneLists)
+                foreach (var item in droneLists)
                 {
                     if (predicate != null ? predicate(item) : true)
                         copyOfDroneLists.Add(new()

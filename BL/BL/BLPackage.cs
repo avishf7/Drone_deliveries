@@ -11,14 +11,14 @@ namespace BL
 {
     public partial class BL : IBl
     {
-        public void AddPackage(Package package, int senderId, int targetId)
+        public void AddPackage(Package package)
         {
             try
             {
                 dal.AddPackage(new IDAL.DO.Package
                 {
-                    SenderId = senderId,
-                    TargetId = targetId,
+                    SenderId = package.SenderCustomerInPackage.CustomerId,
+                    TargetId = package.TargetCustomerInPackage.CustomerId,
                     Weight = (IDAL.DO.Weight)package.Weight,
                     Priority = (IDAL.DO.Priorities)package.Priority,
                     DroneId = 0,
@@ -26,7 +26,7 @@ namespace BL
                     Scheduled = DateTime.MinValue,
                     PickedUp = DateTime.MinValue,
                     Delivered = DateTime.MinValue
-                }); 
+                });
             }
             catch (IDAL.ExistsNumberException ex)
             {
@@ -39,46 +39,33 @@ namespace BL
             try
             {
                 var DoPackage = dal.GetPackage(packageId);
-
-                var dr = DroneLists.Find(x => x.PackageNumber == packageId);
-
-                DroneInPackage droneInPackage = new()
-                {
-                    Id = dr.Id,
-                    BatteryStatus = dr.BatteryStatus,
-                   LocationOfDrone = dr.LocationOfDrone
-                };
-
-
-
+                var dr = droneLists.Find(x => x.PackageNumber == packageId);                
 
                 Package BoPackage = new()
                 {
-                    Id = DoPackage.Id,         
+                    Id = DoPackage.Id,
                     Weight = (Weight)DoPackage.Weight,
                     Priority = (Priorities)DoPackage.Priority,
                     Scheduled = DoPackage.Scheduled,
                     Requested = DoPackage.Requested,
                     PickedUp = DoPackage.PickedUp,
                     Delivered = DoPackage.Delivered,
-                    droneInPackage = droneInPackage
-                };
-
-               BoPackage.SenderCustomerInPackage =GetCusomerInPackage(DoPackage.SenderId);
-                BoPackage.TargetCustomerInPackage = GetCusomerInPackage(DoPackage.TargetId);
-
-
+                    droneInPackage = new()
+                    {
+                        Id = dr.Id,
+                        BatteryStatus = dr.BatteryStatus,
+                        LocationOfDrone = dr.LocationOfDrone
+                    },
+                    SenderCustomerInPackage = dal.GetCustomer(DoPackage.SenderId).GetCusomerInPackage(),
+                    TargetCustomerInPackage = dal.GetCustomer(DoPackage.TargetId).GetCusomerInPackage()
+                };              
 
                 return BoPackage;
-
             }
             catch (IDAL.NoNumberFoundException ex)
             {
                 throw new IBL.NoNumberFoundException("Package ID not found", ex);
             }
-
-
-            throw new NotImplementedException();
         }
 
         public IEnumerable<PackageToList> GetPackages(Predicate<PackageToList> predicate = null)
@@ -88,23 +75,20 @@ namespace BL
 
             foreach (var item in DoPackage)
             {
-                PackageStatus p=0;
+                PackageStatus p = PackageStatus.DEFINED;
+
                 if (item.Delivered != DateTime.MinValue)
                 {
-                    p  = PackageStatus.PROVIDED;
+                    p = PackageStatus.PROVIDED;
                 }
-                if (item.PickedUp != DateTime.MinValue)
+                else if (item.PickedUp != DateTime.MinValue)
                 {
-                    p  = PackageStatus.COLLECTED;
+                    p = PackageStatus.COLLECTED;
                 }
-                if (item.Scheduled != DateTime.MinValue)
+                else if (item.Scheduled != DateTime.MinValue)
                 {
-                     p = PackageStatus.ASSOCIATED;
-                }
-                if (item.Requested != DateTime.MinValue)
-                {
-                     p = PackageStatus.DEFINED;
-                }
+                    p = PackageStatus.ASSOCIATED;
+                }             
 
                 PackageToList PckToLists = new()
                 {
@@ -115,16 +99,13 @@ namespace BL
                     Weight = (Weight)item.Weight,
                     PackageStatus = p
                 };
-                
-               
 
-            
-            if (predicate != null ? predicate(PckToLists) : true)
+                if (predicate != null ? predicate(PckToLists) : true)
                     BoPackageToLists.Add(PckToLists);
 
             }
-            return BoPackageToLists;
 
+            return BoPackageToLists;
         }
 
         public void DeletePackage(int id)

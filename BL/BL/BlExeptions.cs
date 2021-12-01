@@ -77,7 +77,7 @@ namespace IBL
           StreamingContext context) : base(info, context) { }
 
         override public string ToString()
-        { return "There is no suitable package for scheduled" + "\n" + Message; }
+        { return "There is no suitable package for scheduled: " + "\n" + Message; }
     }
 
     [Serializable]
@@ -111,25 +111,41 @@ namespace IBL
     }
 
     [Serializable]
-    internal class NoPackageAssociatedWithDrone : Exception
+    public class NoPackageAssociatedWithDrone : Exception
     {
-        public NoPackageAssociatedWithDrone()
-        {
-        }
-
-        public NoPackageAssociatedWithDrone(string message) : base(message)
-        {
-        }
-
-        public NoPackageAssociatedWithDrone(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-
-        protected NoPackageAssociatedWithDrone(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        public NoPackageAssociatedWithDrone() { }
+        public NoPackageAssociatedWithDrone(string message) : base(message) { }
+        public NoPackageAssociatedWithDrone(string message, Exception innerException) : base(message, innerException) { }
+        protected NoPackageAssociatedWithDrone(SerializationInfo info, StreamingContext context) : base(info, context) { }
         override public string ToString()
-        { return "  There is no package associated with the glider: " + "\n" + Message; }
+        { return "  There is no package associated with the drone: " + "\n" + Message; }
+    }
+
+
+    [Serializable]
+    public class PackageAlreadyCollectedException : Exception
+    {
+        public PackageAlreadyCollectedException() { }
+        public PackageAlreadyCollectedException(string message) : base(message) { }
+        public PackageAlreadyCollectedException(string message, Exception inner) : base(message, inner) { }
+        protected PackageAlreadyCollectedException(
+          SerializationInfo info,
+          StreamingContext context) : base(info, context) { }
+
+        override public string ToString()
+        { return "The package registered with the drone has already been collected: " + "\n" + Message; }
+    }
+
+    [Serializable]
+    public class PackageNotCollectedException : Exception
+    {
+        public PackageNotCollectedException() { }
+        public PackageNotCollectedException(string message) : base(message) { }
+        public PackageNotCollectedException(string message, Exception innerException) : base(message, innerException) { }
+        protected PackageNotCollectedException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+
+        override public string ToString()
+        { return "The package registered with the drone has not yet been collected: " + "\n" + Message; }
     }
 
 }

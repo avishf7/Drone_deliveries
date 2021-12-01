@@ -15,7 +15,7 @@ namespace BL
 
         Random rd = new Random();
 
-        List<DroneToList> DroneLists = new();
+        List<DroneToList> droneLists = new();
 
 
         internal static double DroneAvailable;
@@ -87,7 +87,7 @@ namespace BL
                         break;
                 }
 
-                DroneLists.Add(new()
+                droneLists.Add(new()
                 {
                     Id = drone.Id,
                     Model = drone.Model,

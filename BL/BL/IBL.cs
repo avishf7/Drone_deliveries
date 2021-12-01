@@ -119,7 +119,7 @@ namespace IBL
         /// </summary>
         /// <param name="predicate">The list will be filtered according to the conditions obtained</param>
         /// <returns>The list of customers</returns>
-        IEnumerable<CustomerToList> GetCustomers(Predicate<Customer> predicate = null);
+        IEnumerable<CustomerToList> GetCustomers(Predicate<CustomerToList> predicate = null);
 
         /// <summary>
         /// Delete a customer from the list
@@ -136,7 +136,7 @@ namespace IBL
         /// </summary>
         /// <param name="package">Package to add</param>
         /// <exception cref="ExistsNumberException"></exception>
-        public void AddPackage(Package package, int senderId, int targetId);
+        public void AddPackage(Package package);
 
         /// <summary>
         ///Function for displaying package.
@@ -178,12 +178,18 @@ namespace IBL
         /// A function that implements the state of a collected package by a drone
         /// </summary>
         /// <param name="droneId">The id of the drone</param>
+        /// <exception cref="NoNumberFoundException"></exception>
+        /// <exception cref="NoPackageAssociatedWithDrone"></exception>
+        /// <exception cref="PackageAlreadyCollectedException"></exception>
         void PickUp(int droneId);
 
         /// <summary>
         /// A function that implements the state of a delivered package
         /// </summary>
         /// <param name="droneId">The id of the drone</param>
+        /// <exception cref="NoNumberFoundException"></exception>
+        /// <exception cref="NoPackageAssociatedWithDrone"></exception>
+        /// <exception cref="PackageNotCollectedException"></exception>
         void Deliver(int droneId);
 
         #endregion
@@ -207,9 +213,7 @@ namespace IBL
         ///   <exception cref="DroneNotMaintenanceException"></exception>
         void RealeseDroneFromCharge(int DroneId, TimeSpan time);
 
-        #endregion 
-
-        public CustomerInPackage GetCusomerInPackage(int customerId);
+        #endregion       
 
     }
 }

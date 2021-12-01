@@ -41,16 +41,16 @@ namespace IBL.BO
         /// <summary>
         /// Gets several packages on way
         /// </summary>
-        public int SeveralPackagesOnWay { get; set; }
+        public int NumOfPackagesNotReceived { get; set; }
 
 
         public override string ToString()
         {
             return "Details customer to list" + "\nCustomer id: " + CustomerId +
                 "\nCustomer name: " + CustomerName + "\nCustomer phone: " + CustomerPhone +
-                "\nNumber of packages provided: " + NumOfPackagesProvided + "\nNumber of packages not provided: " +
+                "\nNumber of packages provided: " + NumOfPackagesProvided + "\nNumber of packages that not provided: " +
                NumOfPackagesNotProvided + "\nNumber of packages received: " + NumOfPackagesReceived +
-               "\nSeveralpPackages on way: " + SeveralPackagesOnWay + "\n";
+               "\nNumber of packages that not received: " + NumOfPackagesNotReceived + "\n";
         }
     }
 }

@@ -110,8 +110,8 @@ namespace DalObject
                     Id = rand.Next(10),
                     Name = stationNames[rand.Next(4)],
                     FreeChargeSlots = rand.Next(4),
-                    Lattitude = 32 + rand.NextDouble(),
-                    Longitude = 35 + rand.NextDouble(),
+                    Lattitude = 32 + rand.NextDouble() / 4,
+                    Longitude = 34.5 + rand.NextDouble() / 4
                 });
             }
 
@@ -123,13 +123,13 @@ namespace DalObject
                     Id = rand.Next(10),
                     Name = customerNames[rand.Next(10)],
                     Phone = phones[rand.Next(10)],
-                    Lattitude = 32 + rand.NextDouble(),
-                    Longitude = 35 + rand.NextDouble(),
+                    Lattitude = 32 + rand.NextDouble()/4,
+                    Longitude = 34.5 + rand.NextDouble()/4
                 });
             }
 
 
-            //################### Add 10 diffrent stations #######################
+            //################### Add 10 diffrent packages #######################
 
             for (int i = 0; i < 5; i++)
             {

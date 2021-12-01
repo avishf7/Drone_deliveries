@@ -82,11 +82,7 @@ namespace BL
                         Weight = (IBL.BO.Weight)pck.Weight,
                         Priority = (IBL.BO.Priorities)pck.Priority,
                         Status = GetPackages(x => x.Id == pck.Id).ToList()[0].PackageStatus,
-                        OtherSideCustomer = new()
-                        {
-                            CustomerId = pck.TargetId,
-                            CustomerName = dal.GetCustomer(pck.TargetId).Name
-                        }
+                        OtherSideCustomer = dal.GetCustomer(pck.TargetId).GetCusomerInPackage()
                     });
 
                 foreach (var pck in dal.GetPackages(x => x.TargetId == customerId))
@@ -96,11 +92,7 @@ namespace BL
                         Weight = (IBL.BO.Weight)pck.Weight,
                         Priority = (IBL.BO.Priorities)pck.Priority,
                         Status = GetPackages(x => x.Id == pck.Id).ToList()[0].PackageStatus,
-                        OtherSideCustomer = new()
-                        {
-                            CustomerId = pck.SenderId,
-                            CustomerName = dal.GetCustomer(pck.SenderId).Name
-                        }
+                        OtherSideCustomer = dal.GetCustomer(pck.SenderId).GetCusomerInPackage()
                     });
 
                 return BoCustomer;
@@ -112,9 +104,37 @@ namespace BL
 
         }
 
-        public IEnumerable<CustomerToList> GetCustomers(Predicate<Customer> predicate = null)
+        public IEnumerable<CustomerToList> GetCustomers(Predicate<CustomerToList> predicate = null)
         {
-            throw new NotImplementedException();
+            var boCustomers = dal.GetCustomers().Select(cus => GetCustomer(cus.Id));
+            List<CustomerToList> boCustomersToList = new();
+
+            foreach (var cus in boCustomers)
+            {
+                CustomerToList customerToList = new()
+                {
+                    CustomerId = cus.Id,
+                    CustomerName = cus.Name,
+                    CustomerPhone = cus.Phone,
+                    NumOfPackagesNotProvided = (from pck in cus.PackageAtCustomerFromCustomer
+                                                where pck.Status != PackageStatus.PROVIDED
+                                                select pck).Count(),
+                    NumOfPackagesProvided = (from pck in cus.PackageAtCustomerFromCustomer
+                                             where pck.Status == PackageStatus.PROVIDED
+                                             select pck).Count(),
+                    NumOfPackagesReceived = (from pck in cus.PackageAtCustomerToCustomer
+                                             where pck.Status == PackageStatus.PROVIDED
+                                             select pck).Count(),
+                    NumOfPackagesNotReceived = (from pck in cus.PackageAtCustomerToCustomer
+                                            where pck.Status != PackageStatus.PROVIDED
+                                            select pck).Count(),
+                };
+
+                if (predicate != null ? predicate(customerToList) : true)
+                    boCustomersToList.Add(customerToList);
+            }
+
+            return boCustomersToList;
         }
 
         public void DeleteCustomer(int id)

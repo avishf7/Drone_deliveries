@@ -49,7 +49,7 @@ namespace IBL.BO
         {
             return "Details of Id :" + Id + "\nModel: " + Model + "\nMax weight: " +
                  MaxWeight + "\nStatus of battery: " + BatteryStatus +
-                 "\nStusus of drone: " + DroneStatus + "Deliver in progress: " + DeliveryInProgress +
+                 "\nStusus of drone: " + DroneStatus + "\nDeliver in progress: " + DeliveryInProgress +
                  "\nCurrent location of drone: " + LocationOfDrone + "\n";
         }
 

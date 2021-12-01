@@ -83,7 +83,7 @@ namespace BL
                     BoStation.ChargingDrones.Add(new DroneCharge
                     {
                         DroneId = i.DroneId,
-                        BatteryStatus = DroneLists.Find(x => x.Id == i.DroneId).BatteryStatus
+                        BatteryStatus = droneLists.Find(x => x.Id == i.DroneId).BatteryStatus
                     });
                 }
                 BoStation.ChargingDrones.OrderBy(i => i.BatteryStatus);
@@ -99,8 +99,8 @@ namespace BL
         public IEnumerable<StationToList> GetStations(Predicate<StationToList> predicate = null)
         {
             List<IDAL.DO.Station> doStations = (List<IDAL.DO.Station>)dal.GetStations();
-
             List<StationToList> boStations = new();
+
             foreach (var st in doStations)
             {
                 StationToList stToList = new()
