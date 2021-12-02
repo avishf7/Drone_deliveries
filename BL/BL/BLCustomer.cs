@@ -139,7 +139,14 @@ namespace BL
 
         public void DeleteCustomer(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                dal.DeleteCustomer(id);
+            }
+            catch (Exception)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

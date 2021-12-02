@@ -77,7 +77,11 @@ namespace BL
                 }
 
 
-                dr.BatteryStatus = time.TotalHours * ChargingRate;
+                dr.BatteryStatus = dr.BatteryStatus + time.TotalHours * ChargingRate;
+            if (dr.BatteryStatus > 100)
+            {
+                dr.BatteryStatus = 100;
+            }
                 dr.DroneStatus = DroneStatuses.AVAILABLE;
 
                 droneLists.Insert(iDr, dr);
@@ -86,9 +90,9 @@ namespace BL
                 IDAL.DO.Station station = stationsT.Find(x => x.Lattitude == dr.LocationOfDrone.Lattitude && x.Longitude == dr.LocationOfDrone.Longitude);
 
                 dal.RealeseChargingStation(station.Id);
-                dal.DeleteDroneCharge(DroneId);
-            
+                dal.DeleteDroneCharge(DroneId);       
             
         }
+
     }
 }

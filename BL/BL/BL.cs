@@ -26,7 +26,7 @@ namespace BL
 
         public BL()
         {
-            
+            //Bring the cinfig from DAL
             List<double> tmp = dal.ChargingRequest();
             DroneAvailable = tmp[0];
             LightWeight = tmp[1];
@@ -131,10 +131,10 @@ namespace BL
         }
 
         /// <summary>
-        /// 
+        /// Find the station closest to the shipped location
         /// </summary>
-        /// <param name="location"></param>
-        /// <returns></returns>
+        /// <param name="location">Drone's location</param>
+        /// <returns> the station closest</returns>
         /// <exception cref="IBL.NoNumberFoundException"></exception>
         Location FindClosestStationLocation(Location location, Predicate<IDAL.DO.Station> predicate = null)
         {
@@ -151,11 +151,11 @@ namespace BL
         }
 
         /// <summary>
-        /// 
+        /// Calculator Battery consumption by km and weight of the package.
         /// </summary>
-        /// <param name="distance"></param>
-        /// <param name="status"></param>
-        /// <returns></returns>
+        /// <param name="distance">The number of miles the drone has made</param>
+        /// <param name="status">What weight the drone carries</param>
+        /// <returns>Battery consumption</returns>
         double BatteryUsage(double distance, int status = 3)
         {
             switch ((Weight)status)

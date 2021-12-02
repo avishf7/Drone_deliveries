@@ -110,7 +110,16 @@ namespace BL
 
         public void DeletePackage(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                dal.DeletePackage(id);
+            }
+            catch (Exception)
+            {
+
+                throw new NotImplementedException();
+            }
+            
         }
     }
 }

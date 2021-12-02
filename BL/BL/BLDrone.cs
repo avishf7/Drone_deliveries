@@ -129,7 +129,15 @@ namespace BL
 
             public void DeleteDrone(int id)
             {
+            try
+            {
+                dal.DeleteDrone(id);
+            }
+            catch (Exception)
+            {
                 throw new NotImplementedException();
             }
+            }
+              
         }
     }
