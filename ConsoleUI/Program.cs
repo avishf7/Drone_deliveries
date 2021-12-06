@@ -21,29 +21,29 @@ namespace ConsoleUI
             do
             {
                 try { ch = MenuOptions.PrintOpeningMenu(); }
-                catch (FormatException) { ch = MenuOptions.OpeningOptions.DEFAULT; }
+                catch (FormatException) { ch = MenuOptions.OpeningOptions.Default; }
 
                 switch (ch)
                 {
-                    case MenuOptions.OpeningOptions.EXIT:
+                    case MenuOptions.OpeningOptions.Exit:
                         Console.WriteLine("\ngood bye!");
                         break;
 
-                    case MenuOptions.OpeningOptions.ADD:
+                    case MenuOptions.OpeningOptions.Add:
                         MenuOptions.InsertOptions IChoice;
 
                         do
                         {
                             try { IChoice = MenuOptions.PrintInsertMenu(); }
-                            catch (FormatException) { IChoice = MenuOptions.InsertOptions.DEFAULT; }
+                            catch (FormatException) { IChoice = MenuOptions.InsertOptions.Default; }
 
                             switch (IChoice)
                             {
-                                case MenuOptions.InsertOptions.BACK:
+                                case MenuOptions.InsertOptions.Back:
                                     Console.WriteLine("\n");
 
                                     break;
-                                case MenuOptions.InsertOptions.STATION:
+                                case MenuOptions.InsertOptions.Station:
                                     Console.WriteLine("Enter station ID: ");
                                     int stationId = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter station name: ");
@@ -73,7 +73,7 @@ namespace ConsoleUI
 
                                     break;
 
-                                case MenuOptions.InsertOptions.DRONE:
+                                case MenuOptions.InsertOptions.Drone:
                                     Console.WriteLine("Enter drone ID: ");
                                     int droneId = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter drone model: ");
@@ -97,7 +97,7 @@ namespace ConsoleUI
                                     }
                                     break;
 
-                                case MenuOptions.InsertOptions.CUSTOMER:
+                                case MenuOptions.InsertOptions.Customer:
                                     Console.WriteLine("Enter customer ID: ");
                                     int cusId = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter customer name: ");
@@ -125,7 +125,7 @@ namespace ConsoleUI
                                     }
                                     break;
 
-                                case MenuOptions.InsertOptions.PACKAGE:
+                                case MenuOptions.InsertOptions.Package:
                                     Console.WriteLine("Enter target ID: ");
                                     int sendersId = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter sender ID: ");
@@ -159,22 +159,22 @@ namespace ConsoleUI
 
                         break;
 
-                    case MenuOptions.OpeningOptions.UPDATE:
+                    case MenuOptions.OpeningOptions.Update:
                         MenuOptions.UpdateOptions UChoice;
 
                         do
                         {
                             try { UChoice = MenuOptions.PrintUpdateMenu(); }
-                            catch (FormatException) { UChoice = MenuOptions.UpdateOptions.DEFAULT; }
+                            catch (FormatException) { UChoice = MenuOptions.UpdateOptions.Default; }
 
                             switch (UChoice)
                             {
-                                case MenuOptions.UpdateOptions.BACK:
+                                case MenuOptions.UpdateOptions.Back:
                                     Console.WriteLine("\n");
 
                                     break;
 
-                                case MenuOptions.UpdateOptions.ASSOCIATION:
+                                case MenuOptions.UpdateOptions.Association:
                                     Console.WriteLine("Enter package ID  for associating: ");
                                     int id = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter drone ID: ");
@@ -183,19 +183,19 @@ namespace ConsoleUI
                                     dalObject.ConnectPackageToDrone(id, droneId);
 
                                     break;
-                                case MenuOptions.UpdateOptions.PICKING_UP:
+                                case MenuOptions.UpdateOptions.PickingUp:
                                     Console.WriteLine("Enter package ID for picking up: ");
                                     dalObject.PickUp(int.Parse(Console.ReadLine()));
 
                                     break;
-                                case MenuOptions.UpdateOptions.SUPPLY:
+                                case MenuOptions.UpdateOptions.Supply:
                                     Console.WriteLine("Enter package ID for supply : ");
                                     Package pck = dalObject.GetPackage(int.Parse(Console.ReadLine()));
 
                                     dalObject.PackageDeliver(pck.Id);
 
                                     break;
-                                case MenuOptions.UpdateOptions.CHARGING:
+                                case MenuOptions.UpdateOptions.Charging:
                                     Console.WriteLine("Enter drone ID for charge : ");
                                     int drId = (int.Parse(Console.ReadLine()));
                                     Console.WriteLine("Enter sttion ID for charge : ");
@@ -208,7 +208,7 @@ namespace ConsoleUI
                                     });
 
                                     break;
-                                case MenuOptions.UpdateOptions.RELEASE:
+                                case MenuOptions.UpdateOptions.Release:
 
                                     Console.WriteLine("Enter drone ID for release : ");
                                     DroneCharge drCh = dalObject.GetDroneCharge(int.Parse(Console.ReadLine()));
@@ -228,36 +228,36 @@ namespace ConsoleUI
 
                         break;
 
-                    case MenuOptions.OpeningOptions.PRINT:
+                    case MenuOptions.OpeningOptions.Print:
                         MenuOptions.DisplayOptions DChoice;
 
                         do
                         {
                             try { DChoice = MenuOptions.PrintDisplayMenu(); }
-                            catch (FormatException) { DChoice = MenuOptions.DisplayOptions.DEFAULT; }
+                            catch (FormatException) { DChoice = MenuOptions.DisplayOptions.Default; }
 
                             switch (DChoice)
                             {
-                                case MenuOptions.DisplayOptions.BACK:
+                                case MenuOptions.DisplayOptions.Back:
                                     Console.WriteLine("\n");
 
                                     break;
-                                case MenuOptions.DisplayOptions.STATION:
+                                case MenuOptions.DisplayOptions.Station:
                                     Console.WriteLine("Enter station ID to see: ");
                                     Console.WriteLine("\n" + dalObject.GetStation(int.Parse(Console.ReadLine())));
 
                                     break;
-                                case MenuOptions.DisplayOptions.DRONE:
+                                case MenuOptions.DisplayOptions.Drone:
                                     Console.WriteLine("Enter drone ID to see: ");
                                     Console.WriteLine("\n" + dalObject.GetDrone(int.Parse(Console.ReadLine())));
 
                                     break;
-                                case MenuOptions.DisplayOptions.CUSTOMER:
+                                case MenuOptions.DisplayOptions.Customer:
                                     Console.WriteLine("Enter customer ID to see: ");
                                     Console.WriteLine("\n" + dalObject.GetCustomer(int.Parse(Console.ReadLine())));
 
                                     break;
-                                case MenuOptions.DisplayOptions.PACKAGE:
+                                case MenuOptions.DisplayOptions.Package:
                                     Console.WriteLine("Enter package ID to see: ");
                                     Console.WriteLine("\n" + dalObject.GetPackage(int.Parse(Console.ReadLine())));
 
@@ -272,21 +272,21 @@ namespace ConsoleUI
 
                         break;
 
-                    case MenuOptions.OpeningOptions.PRINT_LISTS:
+                    case MenuOptions.OpeningOptions.PrintLists:
                         MenuOptions.ListViewOptions LVChoice;
 
                         do
                         {
                             try { LVChoice = MenuOptions.PrintListViewMenu(); }
-                            catch (FormatException) { LVChoice = MenuOptions.ListViewOptions.DEFAULT; }
+                            catch (FormatException) { LVChoice = MenuOptions.ListViewOptions.Default; }
 
                             switch (LVChoice)
                             {
-                                case MenuOptions.ListViewOptions.BACK:
+                                case MenuOptions.ListViewOptions.Back:
                                     Console.WriteLine("\n");
 
                                     break;
-                                case MenuOptions.ListViewOptions.STATIONS:
+                                case MenuOptions.ListViewOptions.Stations:
                                     var st1 = dalObject.GetStations();
                                     foreach (var st in st1)
                                     {
@@ -294,35 +294,35 @@ namespace ConsoleUI
                                     }
 
                                     break;
-                                case MenuOptions.ListViewOptions.DRONES:
+                                case MenuOptions.ListViewOptions.Drones:
                                     foreach (var dr in dalObject.GetDrones())
                                     {
                                         Console.WriteLine("\n" + dr);
                                     }
 
                                     break;
-                                case MenuOptions.ListViewOptions.CUSTOMERS:
+                                case MenuOptions.ListViewOptions.Customers:
                                     foreach (var cus in dalObject.GetCustomers())
                                     {
                                         Console.WriteLine("\n" + cus);
                                     }
 
                                     break;
-                                case MenuOptions.ListViewOptions.PACKAGES:
+                                case MenuOptions.ListViewOptions.Packages:
                                     foreach (var pck in dalObject.GetPackages())
                                     {
                                         Console.WriteLine("\n" + pck);
                                     }
 
                                     break;
-                                case MenuOptions.ListViewOptions.UNASSIGNED_PACKAGES:
+                                case MenuOptions.ListViewOptions.UnassignedPackages:
                                     foreach (var pck in dalObject.GetPackages(x => x.Scheduled == DateTime.MinValue))
                                     {
                                         Console.WriteLine("\n" + pck);
                                     }
 
                                     break;
-                                case MenuOptions.ListViewOptions.AVAILABLE_FOR_CHARGING:
+                                case MenuOptions.ListViewOptions.AvailableForCharging:
                                     foreach (var st in dalObject.GetStations(x => x.FreeChargeSlots != 0))
                                     {
                                         Console.WriteLine("\n" + st);
@@ -338,23 +338,23 @@ namespace ConsoleUI
 
                         break;
 
-                    case MenuOptions.OpeningOptions.DISTANCE:
+                    case MenuOptions.OpeningOptions.Distance:
                         MenuOptions.DistanceOptions DiChoice;
 
                         do
                         {
 
                             try { DiChoice = MenuOptions.PrintDistanceMenu(); }
-                            catch (FormatException) { DiChoice = MenuOptions.DistanceOptions.DEFAULT; }
+                            catch (FormatException) { DiChoice = MenuOptions.DistanceOptions.Default; }
 
                             double lattitude, longitude;
 
                             switch (DiChoice)
                             {
-                                case MenuOptions.DistanceOptions.BACK:
+                                case MenuOptions.DistanceOptions.Back:
                                     Console.WriteLine("\n");
                                     break;
-                                case MenuOptions.DistanceOptions.STATION:
+                                case MenuOptions.DistanceOptions.Station:
 
                                     Console.WriteLine("Enter lattitude: ");
                                     lattitude = double.Parse(Console.ReadLine());
@@ -365,7 +365,7 @@ namespace ConsoleUI
                                     Console.WriteLine("\nthe distance between " + lattitude + "\u00B0N ," + longitude + "\u00B0E to station " + station.Id + " is " + Distance(lattitude, longitude, station.Lattitude, station.Longitude) + " KM");
 
                                     break;
-                                case MenuOptions.DistanceOptions.CUSTOMER:
+                                case MenuOptions.DistanceOptions.Customer:
                                     Console.WriteLine("Enter lattitude: ");
                                     lattitude = double.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter longitude: ");
@@ -375,7 +375,7 @@ namespace ConsoleUI
                                     Console.WriteLine("\nthe distance between " + lattitude + "\u00B0N ," + longitude + "\u00B0E to station " + customer.Id + " is " + Distance(lattitude, longitude, customer.Lattitude, customer.Longitude) + " KM");
 
                                     break;
-                                case MenuOptions.DistanceOptions.DEFAULT:
+                                case MenuOptions.DistanceOptions.Default:
                                     Console.WriteLine("\nERROR: invalid choice\n");
                                     break;
                                 default:

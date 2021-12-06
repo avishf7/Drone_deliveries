@@ -14,42 +14,36 @@ namespace ConsoleUiBL
     {
         public enum OpeningOptions
         {
-            EXIT, ADD, UPDATE, PRINT, PRINT_LISTS,
-            FIRST_MENU_OPTION = EXIT, LAST_MENU_OPTION = PRINT_LISTS, DEFAULT
+            Exit, Add, Update, Print, PrintLists,
+            FirstMenuOption = Exit, LastMenuOption = PrintLists, Default
         };
 
         public enum InsertOptions
         {
-            BACK, STATION, DRONE, CUSTOMER, PACKAGE,
-            FIRST_MENU_OPTION = BACK, LAST_MENU_OPTION = PACKAGE, DEFAULT
+            Back, Station, Drone, Customer, Package,
+            FirstMenuOption = Back, LastMenuOption = Package, Default
         };
 
         public enum UpdateOptions
         {
-            BACK, STATION, DRONE, CUSTOMER, ASSOCIATION, PICKING_UP, SUPPLY, CHARGING, RELEASE,
-            FIRST_MENU_OPTION = BACK, LAST_MENU_OPTION = RELEASE, DEFAULT
+            Back, Station, Drone, Customer, Association, PickingUp, Supply, Charging, Release,
+            FirstMenuOption = Back, LastMenuOption = Release, Default
         };
 
         public enum DisplayOptions
         {
-            BACK, STATION, DRONE, CUSTOMER, PACKAGE, 
-            FIRST_MENU_OPTION = BACK, LAST_MENU_OPTION = PACKAGE, DEFAULT
+            Back, Station, Drone, Customer, Package,
+            FirstMenuOption = Back, LastMenuOption = Package, Default
         };
 
         public enum ListViewOptions
         {
-            BACK, STATIONS, DRONES, CUSTOMERS, PACKAGES, UNASSIGNED_PACKAGES, AVAILABLE_FOR_CHARGING,
-            FIRST_MENU_OPTION = BACK, LAST_MENU_OPTION = AVAILABLE_FOR_CHARGING, DEFAULT
-        };
-
-        public enum DistanceOptions
-        {
-            BACK, STATION, CUSTOMER,
-            FIRST_MENU_OPTION = BACK, LAST_MENU_OPTION = CUSTOMER, DEFAULT
+            Back, Stations, Drones, CUSTOMERS, Packages, UnassignedPackages, AvailableForCharging,
+            FirstMenuOption = Back, LastMenuOption = AvailableForCharging, Default
         };
 
 
-        private static string[] OpeningMenuOptionLine = new string[(int)OpeningOptions.LAST_MENU_OPTION + 1]
+        private static string[] OpeningMenuOptionLine = new string[(int)OpeningOptions.LastMenuOption + 1]
         {
             "Exit",
             "Insert options",
@@ -58,7 +52,7 @@ namespace ConsoleUiBL
             "List View options",
         };
 
-        private static string[] InsertMenuOptionLine = new string[(int)InsertOptions.LAST_MENU_OPTION + 1]
+        private static string[] InsertMenuOptionLine = new string[(int)InsertOptions.LastMenuOption + 1]
         {
             "Back to the main menu",
             "Add station",
@@ -67,7 +61,7 @@ namespace ConsoleUiBL
             "Add package"
         };
 
-        private static string[] UpdateMenuOptionLine = new string[(int)UpdateOptions.LAST_MENU_OPTION + 1]
+        private static string[] UpdateMenuOptionLine = new string[(int)UpdateOptions.LastMenuOption + 1]
         {
             "Back to the main menu",
             "Update station",
@@ -80,7 +74,7 @@ namespace ConsoleUiBL
             "Releasing a Drone from a Charger",
         };
 
-        private static string[] DispalyMenuOptionLine = new string[(int)DisplayOptions.LAST_MENU_OPTION + 1]
+        private static string[] DispalyMenuOptionLine = new string[(int)DisplayOptions.LastMenuOption + 1]
         {
             "Back to the main menu",
             "Show station",
@@ -89,7 +83,7 @@ namespace ConsoleUiBL
             "Show package"
         };
 
-        private static string[] ListViewMenuOptionLine = new string[(int)ListViewOptions.LAST_MENU_OPTION + 1]
+        private static string[] ListViewMenuOptionLine = new string[(int)ListViewOptions.LastMenuOption + 1]
        {
             "Back to the main menu",
             "Show a list of stations",
@@ -100,21 +94,13 @@ namespace ConsoleUiBL
             "Show of stations with available charging stations",
        };
 
-        private static string[] DistanceMenuOptionLine = new string[(int)DistanceOptions.LAST_MENU_OPTION + 1]
-       {
-            "Back to the main menu",
-            "Calculate distance from station",
-            "Calculate distance from customer"
-       };
-
-
         public static OpeningOptions PrintOpeningMenu()
         {
             OpeningOptions chosen;
 
             Console.WriteLine("Menu options:\n");
 
-            for (chosen = OpeningOptions.FIRST_MENU_OPTION; chosen <= OpeningOptions.LAST_MENU_OPTION; ++chosen)
+            for (chosen = OpeningOptions.FirstMenuOption; chosen <= OpeningOptions.LastMenuOption; ++chosen)
                 Console.WriteLine("{0,10}\t--\t" + OpeningMenuOptionLine[(int)chosen], (int)chosen);
 
             Console.Write("\nPlease choose a menu option: ");
@@ -132,7 +118,7 @@ namespace ConsoleUiBL
 
             Console.WriteLine("\nInsert options:\n");
 
-            for (chosen = InsertOptions.FIRST_MENU_OPTION; chosen <= InsertOptions.LAST_MENU_OPTION; ++chosen)
+            for (chosen = InsertOptions.FirstMenuOption; chosen <= InsertOptions.LastMenuOption; ++chosen)
                 Console.WriteLine("{0,10}\t--\t" + InsertMenuOptionLine[(int)chosen], (int)chosen);
 
             Console.Write("\nPlease choose an option: ");
@@ -150,7 +136,7 @@ namespace ConsoleUiBL
 
             Console.WriteLine("\nUpdate options:\n");
 
-            for (chosen = UpdateOptions.FIRST_MENU_OPTION; chosen <= UpdateOptions.LAST_MENU_OPTION; ++chosen)
+            for (chosen = UpdateOptions.FirstMenuOption; chosen <= UpdateOptions.LastMenuOption; ++chosen)
                 Console.WriteLine("{0,10}\t--\t" + UpdateMenuOptionLine[(int)chosen], (int)chosen);
 
             Console.Write("\nPlease choose an option: ");
@@ -168,7 +154,7 @@ namespace ConsoleUiBL
 
             Console.WriteLine("\nDisplay options:\n");
 
-            for (chosen = DisplayOptions.FIRST_MENU_OPTION; chosen <= DisplayOptions.LAST_MENU_OPTION; ++chosen)
+            for (chosen = DisplayOptions.FirstMenuOption; chosen <= DisplayOptions.LastMenuOption; ++chosen)
                 Console.WriteLine("{0,10}\t--\t" + DispalyMenuOptionLine[(int)chosen], (int)chosen);
 
             Console.Write("\nPlease choose an option: ");
@@ -177,7 +163,7 @@ namespace ConsoleUiBL
             else
                 throw new FormatException();
 
-            
+
             return chosen;
         }
 
@@ -187,7 +173,7 @@ namespace ConsoleUiBL
 
             Console.WriteLine("\nList View options:\n");
 
-            for (chosen = ListViewOptions.FIRST_MENU_OPTION; chosen <= ListViewOptions.LAST_MENU_OPTION; ++chosen)
+            for (chosen = ListViewOptions.FirstMenuOption; chosen <= ListViewOptions.LastMenuOption; ++chosen)
                 Console.WriteLine("{0,10}\t--\t" + ListViewMenuOptionLine[(int)chosen], (int)chosen);
 
             Console.Write("\nPlease choose an option: ");
@@ -198,24 +184,5 @@ namespace ConsoleUiBL
 
             return chosen;
         }
-
-        public static DistanceOptions PrintDistanceMenu()
-        {
-            DistanceOptions chosen;
-
-            Console.WriteLine("\nDistance options:\n");
-
-            for (chosen = DistanceOptions.FIRST_MENU_OPTION; chosen <= DistanceOptions.LAST_MENU_OPTION; ++chosen)
-                Console.WriteLine("{0,10}\t--\t" + DistanceMenuOptionLine[(int)chosen], (int)chosen);
-
-            Console.Write("\nPlease choose an option: ");
-            if (int.TryParse(Console.ReadLine(), out int s))
-                chosen = (DistanceOptions)s;
-            else
-                throw new FormatException();
-
-            return chosen;
-        }
-
     }
 }

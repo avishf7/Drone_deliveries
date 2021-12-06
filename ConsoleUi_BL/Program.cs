@@ -16,29 +16,29 @@ namespace ConsoleUiBL
             do
             {
                 try { ch = MenuOptions.PrintOpeningMenu(); }
-                catch (FormatException) { ch = MenuOptions.OpeningOptions.DEFAULT; }
+                catch (FormatException) { ch = MenuOptions.OpeningOptions.Default; }
 
                 switch (ch)
                 {
-                    case MenuOptions.OpeningOptions.EXIT:
+                    case MenuOptions.OpeningOptions.Exit:
                         Console.WriteLine("\ngood bye!");
                         break;
 
-                    case MenuOptions.OpeningOptions.ADD:
+                    case MenuOptions.OpeningOptions.Add:
                         MenuOptions.InsertOptions IChoice;
 
                         do
                         {
                             try { IChoice = MenuOptions.PrintInsertMenu(); }
-                            catch (FormatException) { IChoice = MenuOptions.InsertOptions.DEFAULT; }
+                            catch (FormatException) { IChoice = MenuOptions.InsertOptions.Default; }
 
                             switch (IChoice)
                             {
-                                case MenuOptions.InsertOptions.BACK:
+                                case MenuOptions.InsertOptions.Back:
                                     Console.WriteLine("\n");
 
                                     break;
-                                case MenuOptions.InsertOptions.STATION:
+                                case MenuOptions.InsertOptions.Station:
                                     Console.WriteLine("Enter station ID: ");
                                     int stationId = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter station name: ");
@@ -74,7 +74,7 @@ namespace ConsoleUiBL
 
                                     break;
 
-                                case MenuOptions.InsertOptions.DRONE:
+                                case MenuOptions.InsertOptions.Drone:
                                     Console.WriteLine("Enter drone ID: ");
                                     int droneId = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter drone model: ");
@@ -109,7 +109,7 @@ namespace ConsoleUiBL
 
                                     break;
 
-                                case MenuOptions.InsertOptions.CUSTOMER:
+                                case MenuOptions.InsertOptions.Customer:
                                     Console.WriteLine("Enter customer ID: ");
                                     int cusId = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter customer name: ");
@@ -144,7 +144,7 @@ namespace ConsoleUiBL
 
                                     break;
 
-                                case MenuOptions.InsertOptions.PACKAGE:
+                                case MenuOptions.InsertOptions.Package:
                                     Console.WriteLine("Enter target ID: ");
                                     int sendersId = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter sender ID: ");
@@ -188,22 +188,22 @@ namespace ConsoleUiBL
 
                         break;
 
-                    case MenuOptions.OpeningOptions.UPDATE:
+                    case MenuOptions.OpeningOptions.Update:
                         MenuOptions.UpdateOptions UChoice;
 
                         do
                         {
                             try { UChoice = MenuOptions.PrintUpdateMenu(); }
-                            catch (FormatException) { UChoice = MenuOptions.UpdateOptions.DEFAULT; }
+                            catch (FormatException) { UChoice = MenuOptions.UpdateOptions.Default; }
 
                             switch (UChoice)
                             {
-                                case MenuOptions.UpdateOptions.BACK:
+                                case MenuOptions.UpdateOptions.Back:
                                     Console.WriteLine("\n");
 
                                     break;
 
-                                case MenuOptions.UpdateOptions.STATION:
+                                case MenuOptions.UpdateOptions.Station:
                                     Console.WriteLine("Enter station ID: ");
                                     int stationId = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter new station name: ");
@@ -226,7 +226,7 @@ namespace ConsoleUiBL
 
 
                                     break;
-                                case MenuOptions.UpdateOptions.DRONE:
+                                case MenuOptions.UpdateOptions.Drone:
                                     Console.WriteLine("Enter drone ID: ");
                                     int droneId = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter drone model: ");
@@ -242,7 +242,7 @@ namespace ConsoleUiBL
                                     catch (NoNumberFoundException ex) { Console.WriteLine(ex); }
 
                                     break;
-                                case MenuOptions.UpdateOptions.CUSTOMER:
+                                case MenuOptions.UpdateOptions.Customer:
                                     Console.WriteLine("Enter customer ID: ");
                                     int cusId = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter customer name: ");
@@ -260,7 +260,7 @@ namespace ConsoleUiBL
                                     catch (NoNumberFoundException ex) { Console.WriteLine(ex); }
 
                                     break;
-                                case MenuOptions.UpdateOptions.ASSOCIATION:
+                                case MenuOptions.UpdateOptions.Association:
                                     Console.WriteLine("Enter drone ID: ");
                                     int assoDroneId = int.Parse(Console.ReadLine());
 
@@ -277,7 +277,7 @@ namespace ConsoleUiBL
                                     catch (DroneNotAvailableException ex) { Console.WriteLine(ex); }
 
                                     break;
-                                case MenuOptions.UpdateOptions.PICKING_UP:
+                                case MenuOptions.UpdateOptions.PickingUp:
                                     Console.WriteLine("Enter drone ID: ");
                                     int pickUpDroneId = int.Parse(Console.ReadLine());
                                     try
@@ -293,7 +293,7 @@ namespace ConsoleUiBL
 
 
                                     break;
-                                case MenuOptions.UpdateOptions.SUPPLY:
+                                case MenuOptions.UpdateOptions.Supply:
                                     Console.WriteLine("Enter drone ID: ");
                                     int supDroneId = int.Parse(Console.ReadLine());
 
@@ -309,7 +309,7 @@ namespace ConsoleUiBL
                                     catch (PackageNotCollectedException ex) { Console.WriteLine(ex); }
 
                                     break;
-                                case MenuOptions.UpdateOptions.CHARGING:
+                                case MenuOptions.UpdateOptions.Charging:
                                     Console.WriteLine("Enter drone ID : ");
                                     int chDroneId = (int.Parse(Console.ReadLine()));
 
@@ -325,7 +325,7 @@ namespace ConsoleUiBL
                                     catch (NotEnoughBattery ex) { Console.WriteLine(ex); }
 
                                     break;
-                                case MenuOptions.UpdateOptions.RELEASE:
+                                case MenuOptions.UpdateOptions.Release:
 
                                     Console.WriteLine("Enter drone ID : ");
                                     int reDroneId = (int.Parse(Console.ReadLine()));
@@ -357,39 +357,39 @@ namespace ConsoleUiBL
 
                         break;
 
-                    case MenuOptions.OpeningOptions.PRINT:
+                    case MenuOptions.OpeningOptions.Print:
                         MenuOptions.DisplayOptions DChoice;
 
                         do
                         {
                             try { DChoice = MenuOptions.PrintDisplayMenu(); }
-                            catch (FormatException) { DChoice = MenuOptions.DisplayOptions.DEFAULT; }
+                            catch (FormatException) { DChoice = MenuOptions.DisplayOptions.Default; }
 
                             switch (DChoice)
                             {
-                                case MenuOptions.DisplayOptions.BACK:
+                                case MenuOptions.DisplayOptions.Back:
                                     Console.WriteLine("\n");
 
                                     break;
-                                case MenuOptions.DisplayOptions.STATION:
+                                case MenuOptions.DisplayOptions.Station:
                                     Console.WriteLine("Enter station ID to see: ");
                                     try { Console.WriteLine("\n" + bl.GetStation(int.Parse(Console.ReadLine()))); }
                                     catch (NoNumberFoundException ex) { Console.WriteLine(ex); }
 
                                     break;
-                                case MenuOptions.DisplayOptions.DRONE:
+                                case MenuOptions.DisplayOptions.Drone:
                                     Console.WriteLine("Enter drone ID to see: ");
                                     try { Console.WriteLine("\n" + bl.GetDrone(int.Parse(Console.ReadLine()))); }
                                     catch (NoNumberFoundException ex) { Console.WriteLine(ex); }
 
                                     break;
-                                case MenuOptions.DisplayOptions.CUSTOMER:
+                                case MenuOptions.DisplayOptions.Customer:
                                     Console.WriteLine("Enter customer ID to see: ");
                                     try { Console.WriteLine("\n" + bl.GetCustomer(int.Parse(Console.ReadLine()))); }
                                     catch (NoNumberFoundException ex) { Console.WriteLine(ex); }
 
                                     break;
-                                case MenuOptions.DisplayOptions.PACKAGE:
+                                case MenuOptions.DisplayOptions.Package:
                                     Console.WriteLine("Enter package ID to see: ");
                                     try { Console.WriteLine("\n" + bl.GetPackage(int.Parse(Console.ReadLine()))); }
                                     catch (NoNumberFoundException ex) { Console.WriteLine(ex); }
@@ -406,21 +406,21 @@ namespace ConsoleUiBL
 
                         break;
 
-                    case MenuOptions.OpeningOptions.PRINT_LISTS:
+                    case MenuOptions.OpeningOptions.PrintLists:
                         MenuOptions.ListViewOptions LVChoice;
 
                         do
                         {
                             try { LVChoice = MenuOptions.PrintListViewMenu(); }
-                            catch (FormatException) { LVChoice = MenuOptions.ListViewOptions.DEFAULT; }
+                            catch (FormatException) { LVChoice = MenuOptions.ListViewOptions.Default; }
 
                             switch (LVChoice)
                             {
-                                case MenuOptions.ListViewOptions.BACK:
+                                case MenuOptions.ListViewOptions.Back:
                                     Console.WriteLine("\n");
 
                                     break;
-                                case MenuOptions.ListViewOptions.STATIONS:
+                                case MenuOptions.ListViewOptions.Stations:
                                     var st1 = bl.GetStations();
                                     foreach (var st in st1)
                                     {
@@ -428,7 +428,7 @@ namespace ConsoleUiBL
                                     }
 
                                     break;
-                                case MenuOptions.ListViewOptions.DRONES:
+                                case MenuOptions.ListViewOptions.Drones:
                                     foreach (var dr in bl.GetDrones())
                                     {
                                         Console.WriteLine("\n" + dr);
@@ -442,21 +442,21 @@ namespace ConsoleUiBL
                                     }
 
                                     break;
-                                case MenuOptions.ListViewOptions.PACKAGES:
+                                case MenuOptions.ListViewOptions.Packages:
                                     foreach (var pck in bl.GetPackages())
                                     {
                                         Console.WriteLine("\n" + pck);
                                     }
 
                                     break;
-                                case MenuOptions.ListViewOptions.UNASSIGNED_PACKAGES:
+                                case MenuOptions.ListViewOptions.UnassignedPackages:
                                     foreach (var pck in bl.GetPackages(pck => pck.PackageStatus == PackageStatus.DEFINED))
                                     {
                                         Console.WriteLine("\n" + pck);
                                     }
 
                                     break;
-                                case MenuOptions.ListViewOptions.AVAILABLE_FOR_CHARGING:
+                                case MenuOptions.ListViewOptions.AvailableForCharging:
                                     foreach (var st in bl.GetStations(st => st.SeveralAvailableChargingStations != 0))
                                     {
                                         Console.WriteLine("\n" + st);

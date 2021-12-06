@@ -14,42 +14,42 @@ namespace ConsoleUI
     {
         public enum OpeningOptions
         {
-            EXIT, ADD, UPDATE, PRINT, PRINT_LISTS, DISTANCE,
-            FIRST_MENU_OPTION = EXIT, LAST_MENU_OPTION = DISTANCE, DEFAULT
+            Exit, Add, Update, Print, PrintLists, Distance,
+            FirstMenuOption = Exit, LastMenuOption = Distance, Default
         };
 
         public enum InsertOptions
         {
-            BACK, STATION, DRONE, CUSTOMER, PACKAGE,
-            FIRST_MENU_OPTION = BACK, LAST_MENU_OPTION = PACKAGE, DEFAULT
+            Back, Station, Drone, Customer, Package,
+            FirstMenuOption = Back, LastMenuOption = Package, Default
         };
 
         public enum UpdateOptions
         {
-            BACK, ASSOCIATION, PICKING_UP, SUPPLY, CHARGING, RELEASE,
-            FIRST_MENU_OPTION = BACK, LAST_MENU_OPTION = RELEASE, DEFAULT
+            Back, Association, PickingUp, Supply, Charging, Release,
+            FirstMenuOption = Back, LastMenuOption = Release, Default
         };
 
         public enum DisplayOptions
         {
-            BACK, STATION, DRONE, CUSTOMER, PACKAGE, 
-            FIRST_MENU_OPTION = BACK, LAST_MENU_OPTION = PACKAGE, DEFAULT
+            Back, Station, Drone, Customer, Package, 
+            FirstMenuOption = Back, LastMenuOption = Package, Default
         };
 
         public enum ListViewOptions
         {
-            BACK, STATIONS, DRONES, CUSTOMERS, PACKAGES, UNASSIGNED_PACKAGES, AVAILABLE_FOR_CHARGING,
-            FIRST_MENU_OPTION = BACK, LAST_MENU_OPTION = AVAILABLE_FOR_CHARGING, DEFAULT
+            Back, Stations, Drones, Customers, Packages, UnassignedPackages, AvailableForCharging,
+            FirstMenuOption = Back, LastMenuOption = AvailableForCharging, Default
         };
 
         public enum DistanceOptions
         {
-            BACK, STATION, CUSTOMER,
-            FIRST_MENU_OPTION = BACK, LAST_MENU_OPTION = CUSTOMER, DEFAULT
+            Back, Station, Customer,
+            FirstMenuOption = Back, LastMenuOption = Customer, Default
         };
 
 
-        private static string[] OpeningMenuOptionLine = new string[(int)OpeningOptions.LAST_MENU_OPTION + 1]
+        private static string[] OpeningMenuOptionLine = new string[(int)OpeningOptions.LastMenuOption + 1]
         {
             "Exit",
             "Insert options",
@@ -59,7 +59,7 @@ namespace ConsoleUI
             "Distance options(bonus)"
         };
 
-        private static string[] InsertMenuOptionLine = new string[(int)InsertOptions.LAST_MENU_OPTION + 1]
+        private static string[] InsertMenuOptionLine = new string[(int)InsertOptions.LastMenuOption + 1]
         {
             "Back to the main menu",
             "Add station",
@@ -68,7 +68,7 @@ namespace ConsoleUI
             "Add package"
         };
 
-        private static string[] UpdateMenuOptionLine = new string[(int)UpdateOptions.LAST_MENU_OPTION + 1]
+        private static string[] UpdateMenuOptionLine = new string[(int)UpdateOptions.LastMenuOption + 1]
         {
             "Back to the main menu",
             "Assigning a Package to a Drone",
@@ -78,7 +78,7 @@ namespace ConsoleUI
             "Releasing a Drone from a Charger",
         };
 
-        private static string[] DispalyMenuOptionLine = new string[(int)DisplayOptions.LAST_MENU_OPTION + 1]
+        private static string[] DispalyMenuOptionLine = new string[(int)DisplayOptions.LastMenuOption + 1]
         {
             "Back to the main menu",
             "Show station",
@@ -87,7 +87,7 @@ namespace ConsoleUI
             "Show package"
         };
 
-        private static string[] ListViewMenuOptionLine = new string[(int)ListViewOptions.LAST_MENU_OPTION + 1]
+        private static string[] ListViewMenuOptionLine = new string[(int)ListViewOptions.LastMenuOption + 1]
        {
             "Back to the main menu",
             "Show a list of stations",
@@ -98,7 +98,7 @@ namespace ConsoleUI
             "Show of stations with available charging stations",
        };
 
-        private static string[] DistanceMenuOptionLine = new string[(int)DistanceOptions.LAST_MENU_OPTION + 1]
+        private static string[] DistanceMenuOptionLine = new string[(int)DistanceOptions.LastMenuOption + 1]
        {
             "Back to the main menu",
             "Calculate distance from station",
@@ -112,7 +112,7 @@ namespace ConsoleUI
 
             Console.WriteLine("Menu options:\n");
 
-            for (chosen = OpeningOptions.FIRST_MENU_OPTION; chosen <= OpeningOptions.LAST_MENU_OPTION; ++chosen)
+            for (chosen = OpeningOptions.FirstMenuOption; chosen <= OpeningOptions.LastMenuOption; ++chosen)
                 Console.WriteLine("{0,10}\t--\t" + OpeningMenuOptionLine[(int)chosen], (int)chosen);
 
             Console.Write("\nPlease choose a menu option: ");
@@ -130,7 +130,7 @@ namespace ConsoleUI
 
             Console.WriteLine("\nInsert options:\n");
 
-            for (chosen = InsertOptions.FIRST_MENU_OPTION; chosen <= InsertOptions.LAST_MENU_OPTION; ++chosen)
+            for (chosen = InsertOptions.FirstMenuOption; chosen <= InsertOptions.LastMenuOption; ++chosen)
                 Console.WriteLine("{0,10}\t--\t" + InsertMenuOptionLine[(int)chosen], (int)chosen);
 
             Console.Write("\nPlease choose an option: ");
@@ -148,7 +148,7 @@ namespace ConsoleUI
 
             Console.WriteLine("\nUpdate options:\n");
 
-            for (chosen = UpdateOptions.FIRST_MENU_OPTION; chosen <= UpdateOptions.LAST_MENU_OPTION; ++chosen)
+            for (chosen = UpdateOptions.FirstMenuOption; chosen <= UpdateOptions.LastMenuOption; ++chosen)
                 Console.WriteLine("{0,10}\t--\t" + UpdateMenuOptionLine[(int)chosen], (int)chosen);
 
             Console.Write("\nPlease choose an option: ");
@@ -166,7 +166,7 @@ namespace ConsoleUI
 
             Console.WriteLine("\nDisplay options:\n");
 
-            for (chosen = DisplayOptions.FIRST_MENU_OPTION; chosen <= DisplayOptions.LAST_MENU_OPTION; ++chosen)
+            for (chosen = DisplayOptions.FirstMenuOption; chosen <= DisplayOptions.LastMenuOption; ++chosen)
                 Console.WriteLine("{0,10}\t--\t" + DispalyMenuOptionLine[(int)chosen], (int)chosen);
 
             Console.Write("\nPlease choose an option: ");
@@ -185,7 +185,7 @@ namespace ConsoleUI
 
             Console.WriteLine("\nList View options:\n");
 
-            for (chosen = ListViewOptions.FIRST_MENU_OPTION; chosen <= ListViewOptions.LAST_MENU_OPTION; ++chosen)
+            for (chosen = ListViewOptions.FirstMenuOption; chosen <= ListViewOptions.LastMenuOption; ++chosen)
                 Console.WriteLine("{0,10}\t--\t" + ListViewMenuOptionLine[(int)chosen], (int)chosen);
 
             Console.Write("\nPlease choose an option: ");
@@ -203,7 +203,7 @@ namespace ConsoleUI
 
             Console.WriteLine("\nDistance options:\n");
 
-            for (chosen = DistanceOptions.FIRST_MENU_OPTION; chosen <= DistanceOptions.LAST_MENU_OPTION; ++chosen)
+            for (chosen = DistanceOptions.FirstMenuOption; chosen <= DistanceOptions.LastMenuOption; ++chosen)
                 Console.WriteLine("{0,10}\t--\t" + DistanceMenuOptionLine[(int)chosen], (int)chosen);
 
             Console.Write("\nPlease choose an option: ");
