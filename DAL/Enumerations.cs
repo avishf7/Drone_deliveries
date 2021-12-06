@@ -11,6 +11,6 @@ namespace IDAL
         /// <summary>
         /// Delivery priority
         /// </summary>
-        public enum Priorities { Normal, Fast, Emerency  }
+        public enum Priorities { Normal, Fast, Emerency }
     }
 }
