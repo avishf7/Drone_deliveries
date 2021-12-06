@@ -450,7 +450,7 @@ namespace ConsoleUiBL
 
                                     break;
                                 case MenuOptions.ListViewOptions.UnassignedPackages:
-                                    foreach (var pck in bl.GetPackages(pck => pck.PackageStatus == PackageStatus.DEFINED))
+                                    foreach (var pck in bl.GetPackages(pck => pck.PackageStatus == PackageStatus.Defined))
                                     {
                                         Console.WriteLine("\n" + pck);
                                     }
