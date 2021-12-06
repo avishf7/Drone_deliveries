@@ -157,7 +157,7 @@ namespace IBL
         /// Delete a package from the list
         /// </summary>
         /// <param name="id">The id of the package</param>
-        void DeletePackage(int id);
+      public void DeletePackage(int id);
 
 
 
@@ -172,7 +172,7 @@ namespace IBL
         /// <exception cref="NoSuitablePackageForScheduledException"></exception>
         /// <exception cref="NoNumberFoundException"></exception>
         /// <exception cref="DroneNotAvailableException"></exception>
-        void packageAssigning(int droneId);
+        public void packageAssigning(int droneId);
 
         /// <summary>
         /// A function that implements the state of a collected package by a drone
@@ -181,7 +181,7 @@ namespace IBL
         /// <exception cref="NoNumberFoundException"></exception>
         /// <exception cref="NoPackageAssociatedWithDrone"></exception>
         /// <exception cref="PackageAlreadyCollectedException"></exception>
-        void PickUp(int droneId);
+        public void PickUp(int droneId);
 
         /// <summary>
         /// A function that implements the state of a delivered package
@@ -190,7 +190,7 @@ namespace IBL
         /// <exception cref="NoNumberFoundException"></exception>
         /// <exception cref="NoPackageAssociatedWithDrone"></exception>
         /// <exception cref="PackageNotCollectedException"></exception>
-        void Deliver(int droneId);
+        public void Deliver(int droneId);
 
         #endregion
 
@@ -203,7 +203,7 @@ namespace IBL
         /// <exception cref="NoNumberFoundException"></exception>
         /// <exception cref="DroneNotAvailableException"></exception>
         /// <exception cref="NotEnoughBattery"></exception>
-        void SendDroneForCharge(int DroneId);
+        public void SendDroneForCharge(int DroneId);
 
         /// <summary>
         /// A function that implements a state of releasing a drone from a charge
@@ -211,7 +211,8 @@ namespace IBL
         /// <param name="DroneId">The id of the drone</param>
         ///  <exception cref="NoNumberFoundException"></exception>
         ///   <exception cref="DroneNotMaintenanceException"></exception>
-        void RealeseDroneFromCharge(int DroneId, TimeSpan time);
+        public void RealeseDroneFromCharge(int DroneId, TimeSpan time);
+
 
         #endregion       
 

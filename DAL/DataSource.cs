@@ -97,7 +97,7 @@ namespace DalObject
                 dronesList.Add(new()
                 {
                     Id = rand.Next(10),
-                    MaxWeight = Weight.HEAVY,
+                    MaxWeight = Weight.Heavy,
                     Model = models[rand.Next(3)]
                 });
 

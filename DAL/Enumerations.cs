@@ -7,10 +7,10 @@ namespace IDAL
         /// <summary>
         /// Weight types
         /// </summary>
-        public enum Weight { LIGHT, MEDIUM, HEAVY }
+        public enum Weight { Light, Medum, Heavy }
         /// <summary>
         /// Delivery priority
         /// </summary>
-        public enum Priorities { NORMAL, FAST, EMERENCY }
+        public enum Priorities { Normal, Fast, Emerency  }
     }
 }

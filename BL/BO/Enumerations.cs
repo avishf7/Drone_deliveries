@@ -16,16 +16,16 @@ namespace IBL.BO
         /// <summary>
         /// Situations where the drone can be
         /// </summary>
-        public enum DroneStatuses { AVAILABLE, MAINTENANCE, SENDERING }
+        public enum DroneStatuses { Available , Maintenance , Sendering  }
 
         /// <summary>
         /// Delivery priority
         /// </summary>
-        public enum Priorities { NORMAL, FAST, EMERENCY }
+        public enum Priorities { Normal, Fast, Emerency }    
 
         /// <summary>
         /// Status of package
         /// </summary>
-        public enum PackageStatus { DEFINED, ASSOCIATED, COLLECTED, PROVIDED }
+        public enum PackageStatus { Defined, Associated, Collected, Provided }  
     
 }

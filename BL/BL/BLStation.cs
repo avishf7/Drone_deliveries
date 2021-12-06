@@ -120,7 +120,15 @@ namespace BL
 
         public void DeleteStation(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                dal.DeleteStation(id);
+            }
+            catch (Exception)
+            {
+                throw new NotImplementedException(); 
+            }
+           
         }
     }
 }

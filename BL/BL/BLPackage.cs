@@ -75,19 +75,19 @@ namespace BL
 
             foreach (var item in DoPackage)
             {
-                PackageStatus p = PackageStatus.DEFINED;
+                PackageStatus p = PackageStatus.Defined;
 
                 if (item.Delivered != DateTime.MinValue)
                 {
-                    p = PackageStatus.PROVIDED;
+                    p = PackageStatus.Provided;
                 }
                 else if (item.PickedUp != DateTime.MinValue)
                 {
-                    p = PackageStatus.COLLECTED;
+                    p = PackageStatus.Collected;
                 }
                 else if (item.Scheduled != DateTime.MinValue)
                 {
-                    p = PackageStatus.ASSOCIATED;
+                    p = PackageStatus.Associated;
                 }             
 
                 PackageToList PckToLists = new()
@@ -110,7 +110,16 @@ namespace BL
 
         public void DeletePackage(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                dal.DeletePackage(id);
+            }
+            catch (Exception)
+            {
+
+                throw new NotImplementedException();
+            }
+            
         }
     }
 }
