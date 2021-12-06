@@ -76,7 +76,7 @@ namespace BL
                         packageInTransfer = new PackageInTransfer()
                         {
                             Id = package.Id,
-                            IsCollected = package.PickedUp != DateTime.MinValue,
+                            IsCollected = package.PickedUp != null,
                             Priority = (Priorities)package.Priority,
                             SenderCustomerInPackage = new() { CustomerId = sender.Id, CustomerName = sender.Name },
                             TargetCustomerInPackage = new() { CustomerId = target.Id, CustomerName = target.Name },
@@ -88,7 +88,6 @@ namespace BL
                 }
                 else
                 {
-                    //לא צריך לשלוח חריגה אלאלשלוח את כל הרחפן ללא הישות או עם ישות מאותחלת לNULL
                     throw new IBL.NoNumberFoundException();
                 }
 

@@ -23,9 +23,9 @@ namespace BL
                     Priority = (IDAL.DO.Priorities)package.Priority,
                     DroneId = 0,
                     Requested = DateTime.Now,
-                    Scheduled = DateTime.MinValue,
-                    PickedUp = DateTime.MinValue,
-                    Delivered = DateTime.MinValue
+                    Scheduled = null,
+                    PickedUp = null,
+                    Delivered = null
                 });
             }
             catch (IDAL.ExistsNumberException ex)
@@ -77,15 +77,15 @@ namespace BL
             {
                 PackageStatus p = PackageStatus.Defined;
 
-                if (item.Delivered != DateTime.MinValue)
+                if (item.Delivered != null)
                 {
                     p = PackageStatus.Provided;
                 }
-                else if (item.PickedUp != DateTime.MinValue)
+                else if (item.PickedUp != null)
                 {
                     p = PackageStatus.Collected;
                 }
-                else if (item.Scheduled != DateTime.MinValue)
+                else if (item.Scheduled != null)
                 {
                     p = PackageStatus.Associated;
                 }             

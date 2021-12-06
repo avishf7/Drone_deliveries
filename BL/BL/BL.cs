@@ -35,8 +35,8 @@ namespace BL
             ChargingRate = tmp[4];
 
             List<IDAL.DO.Drone> drones = dal.GetDrones().ToList();
-            List<IDAL.DO.Package> senderingPackages = dal.GetPackages(x => x.DroneId != 0 && x.Delivered == DateTime.MinValue).ToList();
-            List<IDAL.DO.Package> deliveredPackages = dal.GetPackages(x => x.Delivered != DateTime.MinValue).ToList();
+            List<IDAL.DO.Package> senderingPackages = dal.GetPackages(x => x.DroneId != 0 && x.Delivered == null).ToList();
+            List<IDAL.DO.Package> deliveredPackages = dal.GetPackages(x => x.Delivered != null).ToList();
             List<IDAL.DO.Station> stations = dal.GetStations().ToList();
 
             foreach (var drone in drones)
@@ -70,7 +70,7 @@ namespace BL
                         Location senderLocation = new() { Lattitude = sender.Lattitude, Longitude = sender.Longitude },
                                  targetLocation = new() { Lattitude = target.Lattitude, Longitude = target.Longitude };
                                                 
-                        if (senderingPackages[iPck].PickedUp == DateTime.MinValue)
+                        if (senderingPackages[iPck].PickedUp == null)
                         {
                             droneLocation = FindClosestStationLocation(senderLocation);
                             minBattery = BatteryUsage(Distance(droneLocation, senderLocation))

@@ -36,19 +36,19 @@ namespace IDAL
             /// <summary>
             /// Gets the requested.
             /// </summary>
-            public DateTime Requested { get; set; }
+            public DateTime? Requested { get; set; }
             /// <summary>
             /// Gets the scheduled.
             /// </summary>
-            public DateTime Scheduled { get; set; }
+            public DateTime? Scheduled { get; set; }
             /// <summary>
             /// Gets the picked up.
             /// </summary>
-            public DateTime PickedUp { get; set; }
+            public DateTime? PickedUp { get; set; }
             /// <summary>
             /// Gets the delivered.
             /// </summary>
-            public DateTime Delivered { get; set; }
+            public DateTime? Delivered { get; set; }
             /// <summary>
             /// Gets the drone id.
             /// </summary>

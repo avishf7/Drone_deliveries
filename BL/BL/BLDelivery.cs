@@ -73,7 +73,7 @@ namespace BL
 
             var doPackage = dal.GetPackage(dr.PackageNumber);
 
-            if (doPackage.PickedUp != DateTime.MinValue)
+            if (doPackage.PickedUp != null)
                 throw new PackageAlreadyCollectedException("Package ID - " + doPackage.Id);
 
             var sender = GetCustomer(doPackage.SenderId);
@@ -98,7 +98,7 @@ namespace BL
 
             var doPackage = dal.GetPackage(dr.PackageNumber);
 
-            if (doPackage.PickedUp == DateTime.MinValue)
+            if (doPackage.PickedUp == null)
                 throw new PackageNotCollectedException("Package ID - " + doPackage.Id);
 
             var target = GetCustomer(doPackage.TargetId);

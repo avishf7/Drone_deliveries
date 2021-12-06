@@ -316,7 +316,7 @@ namespace ConsoleUI
 
                                     break;
                                 case MenuOptions.ListViewOptions.UnassignedPackages:
-                                    foreach (var pck in dalObject.GetPackages(x => x.Scheduled == DateTime.MinValue))
+                                    foreach (var pck in dalObject.GetPackages(x => x.Scheduled == null))
                                     {
                                         Console.WriteLine("\n" + pck);
                                     }
