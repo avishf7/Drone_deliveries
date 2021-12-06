@@ -78,7 +78,7 @@ namespace ConsoleUI
                                     int droneId = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter drone model: ");
                                     string model = (Console.ReadLine());
-                                    Console.WriteLine("Enter drone Weight - To LIGHT enter 0, to MEDIUM enter 1 and to HEAVY enter 2: ");
+                                    Console.WriteLine("Enter drone Weight - To Light enter 0, to Medum enter 1 and to Heavy enter 2: ");
                                     Weight maxWeight = (Weight)int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter drone status - To  AVAILABLE  enter 0, to MAINTENANCE enter 1 and to DELIVERY enter 2: ");
 
@@ -130,9 +130,9 @@ namespace ConsoleUI
                                     int sendersId = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter sender ID: ");
                                     int targetsId = int.Parse(Console.ReadLine());
-                                    Console.WriteLine("Enter package Weight - To LIGHT enter 0, to MEDIUM enter 1 and to HEAVY enter 2: ");
+                                    Console.WriteLine("Enter package Weight - To Light enter 0, to Medum enter 1 and to Heavy enter 2: ");
                                     Weight weight = (Weight)int.Parse(Console.ReadLine());
-                                    Console.WriteLine("Enter pariority - To NORMAL enter 0, to FAST enter 1 and to EMERENCY enter 2: ");
+                                    Console.WriteLine("Enter pariority - To Normal enter 0, to Fast enter 1 and to Emerency enter 2: ");
                                     Priorities priority = (Priorities)int.Parse(Console.ReadLine());
 
                                     dalObject.AddPackage(new()

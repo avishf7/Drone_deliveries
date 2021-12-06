@@ -17,7 +17,7 @@ namespace BL
             var dr = droneLists.Find(d => d.Id == droneId);
 
             if (dr == null ? throw new IBL.NoNumberFoundException() : true &&
-                dr.DroneStatus != DroneStatuses.AVAILABLE ? throw new DroneNotAvailableException() : true)
+                dr.DroneStatus != DroneStatuses.Available ? throw new DroneNotAvailableException() : true)
             {
                 var orderPackages = dal.GetPackages().Where(pck => (int)pck.Weight <= (int)dr.MaxWeight)
                                 .OrderByDescending(pck => pck.Priority)
@@ -47,7 +47,7 @@ namespace BL
 
                     if (isFound = dr.BatteryStatus >= minBattery)
                     {
-                        dr.DroneStatus = DroneStatuses.SENDERING;
+                        dr.DroneStatus = DroneStatuses.Sendering;
                         dr.PackageNumber = pck.Id;
                         var scheduledPck = pck;
                         scheduledPck.DroneId = dr.Id;
@@ -108,7 +108,7 @@ namespace BL
                 dr.BatteryStatus = dr.BatteryStatus - BatteryUsage(Distance(dr.LocationOfDrone, target.CustomerLocation),
                     (int)doPackage.Weight);
                 dr.LocationOfDrone = target.CustomerLocation;
-                dr.DroneStatus = DroneStatuses.AVAILABLE;
+                dr.DroneStatus = DroneStatuses.Available;
                 doPackage.Delivered = DateTime.Now;
                 dal.UpdatePackage(doPackage);
             }

@@ -117,16 +117,16 @@ namespace BL
                     CustomerName = cus.Name,
                     CustomerPhone = cus.Phone,
                     NumOfPackagesNotProvided = (from pck in cus.PackageAtCustomerFromCustomer
-                                                where pck.Status != PackageStatus.PROVIDED
+                                                where pck.Status != PackageStatus.Provided
                                                 select pck).Count(),
                     NumOfPackagesProvided = (from pck in cus.PackageAtCustomerFromCustomer
-                                             where pck.Status == PackageStatus.PROVIDED
+                                             where pck.Status == PackageStatus.Provided
                                              select pck).Count(),
                     NumOfPackagesReceived = (from pck in cus.PackageAtCustomerToCustomer
-                                             where pck.Status == PackageStatus.PROVIDED
+                                             where pck.Status == PackageStatus.Provided
                                              select pck).Count(),
                     NumOfPackagesNotReceived = (from pck in cus.PackageAtCustomerToCustomer
-                                            where pck.Status != PackageStatus.PROVIDED
+                                            where pck.Status != PackageStatus.Provided
                                             select pck).Count(),
                 };
 

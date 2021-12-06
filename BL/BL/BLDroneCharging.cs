@@ -23,7 +23,7 @@ namespace BL
                 throw new IBL.NoNumberFoundException("Drone ID not found");
             }
 
-            if (dr.DroneStatus != DroneStatuses.AVAILABLE)
+            if (dr.DroneStatus != DroneStatuses.Available)
             {
                 throw new DroneNotAvailableException();
             }
@@ -42,7 +42,7 @@ namespace BL
             {
                 dr.BatteryStatus = dr.BatteryStatus - KM /DroneAvailable;
                 dr.LocationOfDrone = stLocation;
-                dr.DroneStatus = DroneStatuses.MAINTENANCE;
+                dr.DroneStatus = DroneStatuses.Maintenance;
 
                 droneLists.Insert(iDr, dr);
 
@@ -71,7 +71,7 @@ namespace BL
                     throw new IBL.NoNumberFoundException("Drone ID not found");
                 }
 
-                if (dr.DroneStatus != DroneStatuses.MAINTENANCE)
+                if (dr.DroneStatus != DroneStatuses.Maintenance)
                 {
                     throw new DroneNotMaintenanceException();
                 }
@@ -82,7 +82,7 @@ namespace BL
             {
                 dr.BatteryStatus = 100;
             }
-                dr.DroneStatus = DroneStatuses.AVAILABLE;
+                dr.DroneStatus = DroneStatuses.Available;
 
                 droneLists.Insert(iDr, dr);
 

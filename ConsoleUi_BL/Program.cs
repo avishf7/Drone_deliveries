@@ -79,7 +79,7 @@ namespace ConsoleUiBL
                                     int droneId = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter drone model: ");
                                     string model = (Console.ReadLine());
-                                    Console.WriteLine("Enter drone Max Weight - To LIGHT enter 0, to MEDIUM enter 1 and to HEAVY enter 2: ");
+                                    Console.WriteLine("Enter drone Max Weight - To Light enter 0, to Medum enter 1 and to Heavy enter 2: ");
                                     Weight maxWeight = (Weight)int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter a station ID for initial charging: ");
                                     int firstStationId = int.Parse(Console.ReadLine());
@@ -149,9 +149,9 @@ namespace ConsoleUiBL
                                     int sendersId = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter sender ID: ");
                                     int targetsId = int.Parse(Console.ReadLine());
-                                    Console.WriteLine("Enter package Weight - To LIGHT enter 0, to MEDIUM enter 1 and to HEAVY enter 2: ");
+                                    Console.WriteLine("Enter package Weight - To Light enter 0, to Medum enter 1 and to Heavy enter 2: ");
                                     Weight weight = (Weight)int.Parse(Console.ReadLine());
-                                    Console.WriteLine("Enter pariority - To NORMAL enter 0, to FAST enter 1 and to EMERENCY enter 2: ");
+                                    Console.WriteLine("Enter pariority - To Normal enter 0, to Fast enter 1 and to Emerency enter 2: ");
                                     Priorities priority = (Priorities)int.Parse(Console.ReadLine());
                                     try
                                     {
@@ -450,7 +450,7 @@ namespace ConsoleUiBL
 
                                     break;
                                 case MenuOptions.ListViewOptions.UNASSIGNED_PACKAGES:
-                                    foreach (var pck in bl.GetPackages(pck => pck.PackageStatus == PackageStatus.DEFINED))
+                                    foreach (var pck in bl.GetPackages(pck => pck.PackageStatus == PackageStatus.Defined))
                                     {
                                         Console.WriteLine("\n" + pck);
                                     }

@@ -31,7 +31,7 @@ namespace BL
                     MaxWeight = drone.MaxWeight,
                     Model = drone.Model,
                     BatteryStatus = rd.NextDouble() * rd.Next(20) + 20,
-                    DroneStatus = DroneStatuses.MAINTENANCE,
+                    DroneStatus = DroneStatuses.Maintenance,
                     LocationOfDrone = new() { Lattitude = st.Lattitude, Longitude = st.Longitude },
                     PackageNumber = -1
                 });
@@ -65,7 +65,7 @@ namespace BL
 
                 if (dr != null)
                 {
-                    if (dr.DroneStatus == DroneStatuses.SENDERING)
+                    if (dr.DroneStatus == DroneStatuses.Sendering)
                     {
                         IDAL.DO.Package package = dal.GetPackage(dr.PackageNumber);
                         IDAL.DO.Customer sender = dal.GetCustomer(package.SenderId),

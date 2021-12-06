@@ -44,26 +44,26 @@ namespace BL
                 Location droneLocation = null;
                 double minBattery = 0, maxBattery = 100;
                 int iPck = senderingPackages.FindIndex(x => x.DroneId == drone.Id);
-                DroneStatuses droneStatus = iPck != -1 ? DroneStatuses.SENDERING : (DroneStatuses)rd.Next(2);
+                DroneStatuses droneStatus = iPck != -1 ? DroneStatuses.Sendering : (DroneStatuses)rd.Next(2);
 
 
                 switch (droneStatus)
                 {
-                    case DroneStatuses.AVAILABLE:
+                    case DroneStatuses.Available:
                         IDAL.DO.Customer randomCustomer = dal.GetCustomer(deliveredPackages[rd.Next(deliveredPackages.Count)].TargetId);
 
                         droneLocation = new() { Lattitude = randomCustomer.Lattitude, Longitude = randomCustomer.Longitude };
                         minBattery = BatteryUsage(Distance(droneLocation, FindClosestStationLocation(droneLocation)));
 
                         break;
-                    case DroneStatuses.MAINTENANCE:
+                    case DroneStatuses.Maintenance:
                         IDAL.DO.Station randomStation = stations[rd.Next(stations.Count)];
 
                         droneLocation = new() { Lattitude = randomStation.Lattitude, Longitude = randomStation.Longitude };
                         maxBattery = 20.0;
 
                         break;
-                    case DroneStatuses.SENDERING:
+                    case DroneStatuses.Sendering:
                         IDAL.DO.Customer sender = dal.GetCustomer(senderingPackages[iPck].SenderId),
                                          target = dal.GetCustomer(senderingPackages[iPck].TargetId);
 
