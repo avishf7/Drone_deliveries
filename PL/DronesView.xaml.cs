@@ -24,27 +24,56 @@ namespace PL
     public partial class DronesView : Window
     {
         IBl bl;
-        public DronesView(IBl bl)
+        Window sender;
+
+        public DronesView(IBl bl, Window sender)
         {
             InitializeComponent();
             this.bl = bl;
+            this.sender = sender;
+
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
-            MaxWeigth.ItemsSource = Enum.GetValues(typeof(Weight)); 
+            MaxWeigth.ItemsSource = Enum.GetValues(typeof(Weight));
 
 
-          DronesListView.ItemsSource = bl.GetDrones();
+            DronesListView.ItemsSource = bl.GetDrones();
 
         }
 
         private void MaxWeigth_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DronesListView.ItemsSource = bl.GetDrones(dr => dr.MaxWeight == (Weight)((ComboBox)sender).SelectedItem);
+            var weight = ((ComboBox)sender).SelectedItem;
+            var status = StatusSelector.SelectedItem;
 
+            DronesListView.ItemsSource = bl.GetDrones(dr => (status != null ? dr.DroneStatus == (DroneStatuses)status : true) &&
+                                                            (weight != null ? dr.MaxWeight == (Weight)weight : true));
         }
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DronesListView.ItemsSource = bl.GetDrones(dr => dr.DroneStatus == (DroneStatuses)((ComboBox)sender).SelectedItem);
+            var weight = MaxWeigth.SelectedItem;
+            var status = ((ComboBox)sender).SelectedItem;
+
+            DronesListView.ItemsSource = bl.GetDrones(dr => (status != null ? dr.DroneStatus == (DroneStatuses)status : true) &&
+                                                            (weight != null ? dr.MaxWeight == (Weight)weight : true));
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            this.sender.IsEnabled = true;
+        }
+
+        private void Reset_Click(object sender, RoutedEventArgs e)
+        {
+            MaxWeigth.Text = "";
+            MaxWeigth.SelectedIndex = -1;
+            MaxWeigth.SelectedItem = null;
+
+            StatusSelector.Text = "";
+            StatusSelector.SelectedIndex = -1;
+            StatusSelector.SelectedItem = null;
+
+            DronesListView.ItemsSource = bl.GetDrones();
         }
     }
 }

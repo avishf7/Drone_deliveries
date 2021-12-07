@@ -35,7 +35,7 @@ namespace BL
             ChargingRate = tmp[4];
 
             List<IDAL.DO.Drone> drones = dal.GetDrones().ToList();
-            List<IDAL.DO.Package> senderingPackages = dal.GetPackages(x => x.DroneId != 0 && x.Delivered == null).ToList();
+            List<IDAL.DO.Package> senderingPackages = dal.GetPackages(x => x.DroneId != -1).ToList();
             List<IDAL.DO.Package> deliveredPackages = dal.GetPackages(x => x.Delivered != null).ToList();
             List<IDAL.DO.Station> stations = dal.GetStations().ToList();
 
@@ -86,6 +86,7 @@ namespace BL
 
                         break;
                 }
+
 
                 droneLists.Add(new()
                 {
@@ -160,11 +161,11 @@ namespace BL
         {
             switch ((Weight)status)
             {
-                case Weight.LIGHT:
+                case Weight.Light:
                     return distance * LightWeight;
-                case Weight.MEDIUM:
+                case Weight.Medium:
                     return distance * MediumWeight;
-                case Weight.HEAVY:
+                case Weight.Heavy:
                     return distance * HeavyWeight;
                 default:
                     return distance * DroneAvailable;

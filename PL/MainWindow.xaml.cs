@@ -31,9 +31,10 @@ namespace PL
 
         private void ShowDrones_Click(object sender, RoutedEventArgs e)
         {
-            new DronesView(bl).Show();
+            new DronesView(bl,this).Show();
             //  this.Visibility = Visibility.Hidden;
-            ShowDrones.IsEnabled = false;
+            this.IsEnabled = false;
+            this.Opacity = 0.1;
         }
     }
 }

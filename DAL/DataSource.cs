@@ -96,7 +96,7 @@ namespace DalObject
             {
                 dronesList.Add(new()
                 {
-                    Id = rand.Next(10),
+                    Id = rand.Next(i * 10, (i + 1) * 10),
                     MaxWeight = Weight.Heavy,
                     Model = models[rand.Next(3)]
                 });
@@ -107,9 +107,9 @@ namespace DalObject
             {
                 stations.Add(new()
                 {
-                    Id = rand.Next(10),
-                    Name = stationNames[rand.Next(4)],
-                    FreeChargeSlots = rand.Next(4),
+                    Id = rand.Next(i * 10, (i + 1) * 10),
+                    Name = stationNames[i],
+                    FreeChargeSlots = 4,
                     Lattitude = 32 + rand.NextDouble() / 4,
                     Longitude = 34.5 + rand.NextDouble() / 4
                 });
@@ -120,11 +120,11 @@ namespace DalObject
             {
                 customers.Add(new()
                 {
-                    Id = rand.Next(10),
+                    Id = rand.Next(i * 10, (i + 1) * 10),
                     Name = customerNames[rand.Next(10)],
-                    Phone = phones[rand.Next(10)],
-                    Lattitude = 32 + rand.NextDouble()/4,
-                    Longitude = 34.5 + rand.NextDouble()/4
+                    Phone = phones[i],
+                    Lattitude = 32 + rand.NextDouble() / 4,
+                    Longitude = 34.5 + rand.NextDouble() / 4
                 });
             }
 
@@ -135,7 +135,7 @@ namespace DalObject
             {
                 packages.Add(new()
                 {
-                    Id = rand.Next(10),
+                    Id = i  + 1,
                     SenderId = customers[rand.Next(10)].Id,
                     TargetId = customers[rand.Next(10)].Id,
                     Weight = (Weight)rand.Next(3),
@@ -152,7 +152,7 @@ namespace DalObject
             {
                 packages.Add(new()
                 {
-                    Id = rand.Next(10),
+                    Id = i + 1,
                     SenderId = customers[rand.Next(10)].Id,
                     TargetId = customers[rand.Next(10)].Id,
                     Weight = (Weight)rand.Next(3),
@@ -169,7 +169,7 @@ namespace DalObject
             {
                 packages.Add(new()
                 {
-                    Id = rand.Next(10),
+                    Id = i + 1,
                     SenderId = customers[rand.Next(10)].Id,
                     TargetId = customers[rand.Next(10)].Id,
                     Weight = (Weight)rand.Next(3),
@@ -184,7 +184,7 @@ namespace DalObject
 
             packages.Add(new()
             {
-                Id = rand.Next(10),
+                Id = 10,
                 SenderId = customers[rand.Next(10)].Id,
                 TargetId = customers[rand.Next(10)].Id,
                 Weight = (Weight)rand.Next(3),
@@ -193,12 +193,12 @@ namespace DalObject
                 Scheduled = DateTime.Now.AddHours(-6),
                 PickedUp = DateTime.Now.AddHours(-3),
                 Delivered = DateTime.Now,
-                DroneId = dronesList[4].Id
+                DroneId = -1
             });
 
             //####################################################################
 
-            Config.PackageIdCounter = packages.Max(pck => pck.Id) + 1;
+            Config.PackageIdCounter = 11;
         }
 
     }

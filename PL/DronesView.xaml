@@ -5,28 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DronesView" Height="500" Width="800">
+        Title="DronesView" Height="500" Width="800" Closed="Window_Closed">
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="\Styels\CirculeButton.xaml">
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
             <RowDefinition Height="400*"/>
+            <RowDefinition Height="80*"/>
         </Grid.RowDefinitions>
         <Grid x:Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
               VerticalAlignment="Stretch" Width="auto">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="25*"/>
-                <ColumnDefinition Width="25*"/>
-                <ColumnDefinition Width="25*"/>
-                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="20*"/>
             </Grid.ColumnDefinitions >
-            <TextBlock Text="Status selector:" Grid.Column="0" FontSize="18" FontFamily="Arial Black" Margin="10,20" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-            <ComboBox x:Name="StatusSelector" Grid.Column="1" Margin="10" Width="100" HorizontalAlignment="Left" SelectionChanged="StatusSelector_SelectionChanged" />
-            <TextBlock Text="Max weigth:" Grid.Column="2" FontSize="18" FontFamily="Arial Black" Margin="10,20" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-            <ComboBox x:Name="MaxWeigth" Grid.Column="3" Margin="10" Width="100" HorizontalAlignment="Left" SelectionChanged="MaxWeigth_SelectionChanged"/>
-            
+            <TextBlock Text="Status selector:" Grid.Column="0" FontSize="18" FontFamily="Arial Black" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="#FFDDD81E"/>
+            <ComboBox x:Name="StatusSelector" Grid.Column="1" FontSize="18" Margin="10,5" Width="130" HorizontalAlignment="Left" SelectionChanged="StatusSelector_SelectionChanged"  />
+            <TextBlock Text="Max weigth:" Grid.Column="2" FontSize="18" FontFamily="Arial Black" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right"  Foreground="#FFDDD81E"/>
+            <ComboBox x:Name="MaxWeigth" Grid.Column="3" FontSize="18" Margin="10,5" Width="100" HorizontalAlignment="Left" SelectionChanged="MaxWeigth_SelectionChanged"/>
+            <Button x:Name="AddDrone" Content="Add Drone" Grid.Column="4" FontSize="18" Margin="10,5" FontFamily="Arial Black">
+                <Button.Foreground>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+                </Button.Foreground>
+            </Button>
 
         </Grid>
             <ListView x:Name="DronesListView" Grid.Row="1" Opacity="0.5" />
+        <Button x:Name="Reset" Content=" Reset view " Grid.Row="2" Margin="180,10" FontSize="40" FontFamily="Arial Black" Click="Reset_Click" />
 
     </Grid>
     <Window.Background>

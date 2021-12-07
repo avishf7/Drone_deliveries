@@ -49,10 +49,7 @@ namespace BL
                     {
                         dr.DroneStatus = DroneStatuses.Sendering;
                         dr.PackageNumber = pck.Id;
-                        var scheduledPck = pck;
-                        scheduledPck.DroneId = dr.Id;
-                        scheduledPck.Scheduled = DateTime.Now;
-                        dal.UpdatePackage(scheduledPck);
+                        dal.ConnectPackageToDrone(pck.Id, droneId);
                         break;
                     }
                 }
@@ -81,9 +78,8 @@ namespace BL
             if (dr.PackageNumber == doPackage.Id)
             {
                 dr.BatteryStatus = dr.BatteryStatus - BatteryUsage(Distance(dr.LocationOfDrone, sender.CustomerLocation));
-                dr.LocationOfDrone = sender.CustomerLocation;
-                doPackage.PickedUp = DateTime.Now;
-                dal.UpdatePackage(doPackage);
+                dr.LocationOfDrone = sender.CustomerLocation;               
+                dal.PickUp(doPackage.Id);
             }
         }
 
@@ -109,8 +105,8 @@ namespace BL
                     (int)doPackage.Weight);
                 dr.LocationOfDrone = target.CustomerLocation;
                 dr.DroneStatus = DroneStatuses.Available;
-                doPackage.Delivered = DateTime.Now;
-                dal.UpdatePackage(doPackage);
+                dr.PackageNumber = -1;
+                dal.PackageDeliver(doPackage.Id); ;
             }
         }
     }
