@@ -61,6 +61,7 @@ namespace PL
         private void Window_Closed(object sender, EventArgs e)
         {
             this.sender.IsEnabled = true;
+            this.sender.Opacity = 1;
         }
 
         private void Reset_Click(object sender, RoutedEventArgs e)
