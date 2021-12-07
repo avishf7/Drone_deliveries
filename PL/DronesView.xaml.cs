@@ -62,6 +62,7 @@ namespace PL
         {
             this.sender.IsEnabled = true;
             this.sender.Opacity = 1;
+            this.sender.WindowStyle = WindowStyle.ThreeDBorderWindow;
         }
 
         private void Reset_Click(object sender, RoutedEventArgs e)

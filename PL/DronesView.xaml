@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DronesView" Height="500" Width="800" Closed="Window_Closed">
+        Title="DronesView" Height="500" Width="800" Closed="Window_Closed" Topmost="True">
     
     <Window.Resources>
         <ResourceDictionary>
@@ -35,19 +35,34 @@
             <ComboBox x:Name="StatusSelector" Grid.Column="1" FontSize="18" Margin="10,5" Width="130" HorizontalAlignment="Left" SelectionChanged="StatusSelector_SelectionChanged"  />
             <TextBlock Text="Max weigth:" Grid.Column="2" FontSize="18" FontFamily="Arial Black" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right"  Foreground="#FFDDD81E"/>
             <ComboBox x:Name="MaxWeigth" Grid.Column="3" FontSize="18" Margin="10,5" Width="100" HorizontalAlignment="Left" SelectionChanged="MaxWeigth_SelectionChanged"/>
-            <Button x:Name="AddDrone" Content="Add Drone" Grid.Column="4" FontSize="18" Margin="10,5" FontFamily="Arial Black">
+            <Button x:Name="AddDrone" Grid.Column="4" Margin="10,5" FontFamily="Arial Black" Padding="5">
                 <Button.Foreground>
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
                 </Button.Foreground>
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <Viewbox>
+                            <TextBlock>Add Drone</TextBlock>
+                        </Viewbox>
+                    </DataTemplate>
+                </Button.ContentTemplate>
             </Button>
 
         </Grid>
             <ListView x:Name="DronesListView" Grid.Row="1" Opacity="0.5" />
-        <Button x:Name="Reset" Content=" Reset view " Grid.Row="2" Margin="180,10" FontSize="40" FontFamily="Arial Black" Click="Reset_Click" />
+        <Button x:Name="Reset" Grid.Row="2" Margin="180,10" FontFamily="Arial Black" Click="Reset_Click" >
+            <Button.ContentTemplate>
+                <DataTemplate>
+                    <Viewbox>
+                        <TextBlock>Reset view</TextBlock>
+                    </Viewbox>
+                </DataTemplate>
+            </Button.ContentTemplate>
+        </Button>
 
     </Grid>
     <Window.Background>
-        <ImageBrush ImageSource="https://img.wisebuy.co.il/data/images/Guide/ThinkstockPhotos-668766928131508931264610000.jpg" Opacity="0.7"/>
+        <ImageBrush ImageSource="https://img.wisebuy.co.il/data/images/Guide/ThinkstockPhotos-668766928131508931264610000.jpg" />
     </Window.Background>
 
 </Window>
