@@ -11,6 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IBL;
+using IBL.BO;
+
+
 
 namespace PL
 {
@@ -19,9 +23,28 @@ namespace PL
     /// </summary>
     public partial class DronesView : Window
     {
-        public DronesView()
+        IBl bl;
+        public DronesView(IBl bl)
         {
             InitializeComponent();
+            this.bl = bl;
+            StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
+            MaxWeigth.ItemsSource = Enum.GetValues(typeof(Weight)); 
+
+
+          DronesListView.ItemsSource = bl.GetDrones();
+
+        }
+
+        private void MaxWeigth_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DronesListView.ItemsSource = bl.GetDrones(dr => dr.MaxWeight == (Weight)((ComboBox)sender).SelectedItem);
+
+        }
+
+        private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DronesListView.ItemsSource = bl.GetDrones(dr => dr.DroneStatus == (DroneStatuses)((ComboBox)sender).SelectedItem);
         }
     }
 }

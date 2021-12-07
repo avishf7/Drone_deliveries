@@ -9,4 +9,8 @@
     <Grid>
         
     </Grid>
+
+    <Window.Background>
+        <ImageBrush ImageSource="https://img.wisebuy.co.il/data/images/Guide/ThinkstockPhotos-668766928131508931264610000.jpg" Opacity="0.7"/>
+    </Window.Background>
 </Window>
