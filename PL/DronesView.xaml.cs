@@ -80,10 +80,11 @@ namespace PL
 
         private void AddDrone_Click(object sender, RoutedEventArgs e)
         {
-            new DronesView(bl, this).Show();
+            new Drone(bl, this).Show();
             this.IsEnabled = false;
             WindowStyle = WindowStyle.None;
-
+            Topmost = false;
+            ResizeMode = ResizeMode.NoResize;
         }
     }
 }

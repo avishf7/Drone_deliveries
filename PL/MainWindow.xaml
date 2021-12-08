@@ -32,9 +32,6 @@
 
 
         <Button x:Name="ShowDrones" Grid.Column="1" Grid.Row="1" FontFamily="Aharoni" Click="ShowDrones_Click" Padding="5" Opacity="0.6">
-            <Button.Foreground>
-                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
-            </Button.Foreground>
             <Button.ContentTemplate>
                 <DataTemplate>
                     <Viewbox>

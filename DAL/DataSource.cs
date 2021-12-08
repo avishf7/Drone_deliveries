@@ -27,7 +27,7 @@ namespace DalObject
         /// <summary>
         /// Create a static array that contains stations name.
         /// </summary>
-        static string[] stationNames = new string[4] { "Electric Charging Station", "Gnrgy Charging Station", "VIRTA Charging Station", "EV-Edge Charging Station" };
+        static string[] stationNames = new string[2] { "VIRTA Charging Station", "EV-Edge Charging Station" };
         /// <summary>
         ///  Create a static array that contains drone's model.
         /// </summary>

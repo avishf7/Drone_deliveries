@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using IBL;
+using IBL.BO;
 
 namespace PL
 {
@@ -19,9 +21,18 @@ namespace PL
     /// </summary>
     public partial class Drone : Window
     {
-        public Drone()
+        IBl bl;
+        Window sender;
+
+        public Drone(IBl bl, Window sender)
         {
             InitializeComponent();
+            this.bl = bl;
+            this.sender = sender;
+
+            maxWeight.ItemsSource = Enum.GetValues(typeof(Weight));
+            stations.ItemsSource = bl.GetStations();
+
         }
 
         private void IntTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -31,13 +42,39 @@ namespace PL
 
         }
 
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        private void Window_Closed(object sender, EventArgs e)
         {
-            if (!DateTime.TryParse((sender as TextBox).Text, out DateTime i) && !int.TryParse((sender as TextBox).Text, out int j))
+            this.sender.IsEnabled = true;
+            this.sender.WindowStyle = WindowStyle.ThreeDBorderWindow;
+            this.sender.Topmost = true;
+            this.sender.ResizeMode = ResizeMode.CanResize;
+        }
+
+        private void cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void add_Click(object sender, RoutedEventArgs e)
+        {
+            try
             {
-                (sender as TextBox).Text = "";
-                (sender as TextBox).Foreground = new SolidColorBrush(Colors.Black);
+                if (droneId.Text != "" && model.Text != "" && maxWeight.SelectedItem != null && stations.SelectedItem != null)
+                    bl.AddDrone(new()
+                    {
+                        Id = int.Parse(droneId.Text),
+                        Model = model.Text,
+                        MaxWeight = (Weight)maxWeight.SelectedItem,
+                    }, ((StationToList)stations.SelectedItem).Id);
+                else
+                    MessageBox.Show("There are unfilled fields", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            catch (NoNumberFoundException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
+            catch (ExistsNumberException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
+
+            ((ListBox)this.sender.FindName("DronesListView")).ItemsSource = bl.GetDrones(); 
+
+            this.Close();
         }
     }
 }
