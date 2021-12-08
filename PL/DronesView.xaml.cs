@@ -77,5 +77,13 @@ namespace PL
 
             DronesListView.ItemsSource = bl.GetDrones();
         }
+
+        private void AddDrone_Click(object sender, RoutedEventArgs e)
+        {
+            new DronesView(bl, this).Show();
+            this.IsEnabled = false;
+            WindowStyle = WindowStyle.None;
+
+        }
     }
 }
