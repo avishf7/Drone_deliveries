@@ -23,5 +23,21 @@ namespace PL
         {
             InitializeComponent();
         }
+
+        private void IntTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (e.Handled = !(int.TryParse(e.Text, out int d)) && e.Text != "")
+                MessageBox.Show("Please enter only numbers.");
+
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (!DateTime.TryParse((sender as TextBox).Text, out DateTime i) && !int.TryParse((sender as TextBox).Text, out int j))
+            {
+                (sender as TextBox).Text = "";
+                (sender as TextBox).Foreground = new SolidColorBrush(Colors.Black);
+            }
+        }
     }
 }

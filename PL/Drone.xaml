@@ -5,9 +5,87 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Drone" Height="450" Width="800">
-    <Grid>
+        Title="Drone" Height="500" Width="500">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="\Styels\CirculeButton.xaml"/>
+                <ResourceDictionary Source="\Styels\Colors.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    
+    <Grid ShowGridLines="True" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock x:Name="droneId" 
+                   Width="auto"
+                   Height="auto" 
+                   Text="Drone ID" 
+                   Grid.Row="0" 
+                   Background="{StaticResource Static.Background}" 
+                   Foreground="DarkGray" 
+                   GotFocus="TextBox_GotFocus" 
+                   PreviewTextInput="IntTextBox_PreviewTextInput" 
+                   Margin="20">
+            
+        </TextBlock>
+        <TextBlock x:Name="startDate" 
+                 Grid.Row="1" 
+                 Foreground="DarkGray" 
+                 Background="{StaticResource Static.Background}" 
+                 TextWrapping="Wrap" 
+                 Text="Date of start"  
+                 GotFocus="TextBox_GotFocus"                  
+                 Margin="20"  >
+        </TextBlock>
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="50*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+
+            <ComboBox x:Name="lastTrtDate"  
+                      Grid.Row="0" Grid.Column="1" 
+                      Foreground="DarkGray" Background="{StaticResource staticBackground}"  
+                      Text="Date of last treatment" 
+                      FontSize="40" 
+                      HorizontalContentAlignment="Center" 
+                      VerticalContentAlignment="Center" 
+                      Margin="20"  />
+
+            <ComboBox x:Name="KMfromLastTrt" 
+                      Grid.Row="1" 
+                      Grid.Column="1" 
+                      Foreground="DarkGray"  
+                      Text="KM from the last treatment" 
+                      FontSize="40" 
+                      HorizontalContentAlignment="Center" 
+                      VerticalContentAlignment="Center" 
+                      Margin="20" />
+
+        </Grid>
         
+        
+
+
+
+
     </Grid>
 
     <Window.Background>
