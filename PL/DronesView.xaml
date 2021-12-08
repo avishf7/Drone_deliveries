@@ -35,7 +35,7 @@
             <ComboBox x:Name="StatusSelector" Grid.Column="1" FontSize="18" Margin="10,5" Width="130" HorizontalAlignment="Left" SelectionChanged="StatusSelector_SelectionChanged"  />
             <TextBlock Text="Max weigth:" Grid.Column="2" FontSize="18" FontFamily="Arial Black" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right"  Foreground="#FFDDD81E"/>
             <ComboBox x:Name="MaxWeigth" Grid.Column="3" FontSize="18" Margin="10,5" Width="100" HorizontalAlignment="Left" SelectionChanged="MaxWeigth_SelectionChanged"/>
-            <Button x:Name="AddDrone" Grid.Column="4" Margin="10,5" FontFamily="Arial Black" Padding="5">
+            <Button x:Name="AddDrone" Grid.Column="4" Margin="10,5" FontFamily="Arial Black" Padding="5" Click="AddDrone_Click">
                 <Button.Foreground>
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
                 </Button.Foreground>
