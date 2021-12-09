@@ -51,7 +51,7 @@
             </Button>
 
         </Grid>
-        <ListView x:Name="DronesListView" Grid.Row="1" Opacity="0.5" />
+        <ListView x:Name="DronesListView" Grid.Row="1" Opacity="0.5" MouseDoubleClick="DronesListView_MouseDoubleClick" />
         <Button x:Name="Reset" Grid.Row="2" Margin="180,10" FontFamily="Arial Black" Click="Reset_Click" >
             <Button.ContentTemplate>
                 <DataTemplate>

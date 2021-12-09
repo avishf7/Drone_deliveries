@@ -9,8 +9,7 @@
         Height="400" 
         Width="500" 
         WindowStartupLocation="CenterScreen"
-        WindowStyle="None"
-        Closed="Window_Closed" >
+        WindowStyle="None" >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -21,7 +20,7 @@
     </Window.Resources>
 
 
-    <Grid ShowGridLines="True" >
+    <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="80*" />
             <RowDefinition Height="20*" />
@@ -30,7 +29,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="0">
+        <Grid x:Name="UpGrid" Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="25*"/>
                 <RowDefinition Height="25*"/>
@@ -119,7 +118,7 @@
 
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid x:Name="AddDownGrid" Grid.Row="1" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40*"/>
                 <ColumnDefinition Width="20*"/>
@@ -137,13 +136,119 @@
                     Margin="15,5" 
                     FontFamily="Arial Black"
                     Click="add_Click"/>
-            <Button x:Name="cancel" 
+            <Button x:Name="cancelAdd" 
                     Content="Cancel" 
                     Grid.Column="1"
                     Grid.Row="1"
                     Margin="15,5" 
                     FontFamily="Arial Black"
                     Click="cancel_Click"/>
+        </Grid>
+
+        <Grid x:Name="DroneInfoDownGrid" Grid.Row="1" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="21*"/>
+                <RowDefinition Height="21*"/>
+                <RowDefinition Height="21*"/>
+                <RowDefinition Height="37*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label x:Name="labalBattaryStatus" 
+                   FontSize="20"
+                 VerticalContentAlignment="Center"
+                 HorizontalContentAlignment="Center"
+                   Content="Battary Status:" 
+                   Grid.Row="0" 
+                     Grid.Column="0"                   
+                   Foreground="#FFDDD81E" 
+                   FontFamily="Arial Black"
+                   Margin="20"/>
+
+            <TextBlock x:Name="BattaryStatus" 
+                   FontSize="20"
+                       Text="{Binding Path=BatteryStatus, Mode=OneWay}"
+                   Grid.Row="0" 
+                     Grid.Column="1"
+                   Background="{StaticResource Static.Background}" 
+                   Margin="20">
+
+            </TextBlock>
+
+            <Label x:Name="labalDroneStatus" 
+                   FontSize="20"
+                 VerticalContentAlignment="Center"
+                 HorizontalContentAlignment="Center"
+                   Content="Drone Status:" 
+                   Grid.Row="1" 
+                     Grid.Column="0"                   
+                   Foreground="#FFDDD81E" 
+                   FontFamily="Arial Black"
+                   Margin="20"/>
+
+            <TextBlock x:Name="DroneStatus" 
+                 Grid.Row="1"
+                 Grid.Column="1"
+                 FontSize="20"
+                Text="{Binding Path=DroneStatus}"
+                 Background="{StaticResource Static.Background}"                  
+                 Margin="20"  >
+            </TextBlock>
+
+            <TextBlock Text="Package In Progress:" 
+                      Grid.Row="2" Grid.Column="0" 
+                       FontSize="20" 
+                       FontFamily="Arial Black" 
+                       Margin="20" 
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center"  
+                       Foreground="#FFDDD81E"/>
+
+            <TextBlock x:Name="PackageInProgress"
+                       
+                      Grid.Row="2" Grid.Column="1" 
+                      FontSize="5" 
+                      Text="{Binding Path=PackageInProgress}"
+                       Background="{StaticResource Static.Background}" 
+                      Margin="20"  />
+
+
+            <Grid x:Name="DroneInfoDownInDownGrid" Grid.Row="3" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="25*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="33*"/>
+                    <RowDefinition Height="33*"/>
+                    <RowDefinition Height="33*"/>
+                </Grid.RowDefinitions>
+
+                <Button x:Name="Charge" 
+                    Content="Charge" 
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Margin="15,5" 
+                    FontFamily="Arial Black" />
+                <Button x:Name="Delivery" 
+                    Content="Charge" 
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    Margin="15,5" 
+                    FontFamily="Arial Black" />
+                <Button x:Name="cancelActions" 
+                    Content="Cancel" 
+                    Grid.Column="1"
+                    Grid.Row="2"
+                    Margin="15,5" 
+                    FontFamily="Arial Black"
+                    Click="cancel_Click"/>
+            </Grid>
+
         </Grid>
 
     </Grid>

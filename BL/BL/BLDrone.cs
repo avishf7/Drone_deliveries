@@ -98,7 +98,7 @@ namespace BL
                     MaxWeight = dr.MaxWeight,
                     BatteryStatus = dr.BatteryStatus,
                     DroneStatus = dr.DroneStatus,
-                    DeliveryInProgress = packageInTransfer,
+                    PackageInProgress = packageInTransfer,
                     LocationOfDrone = dr.LocationOfDrone
                 };
             }

@@ -23,6 +23,7 @@ namespace PL
     {
         IBl bl;
         Window sender;
+        IBL.BO.Drone drone;
 
         public Drone(IBl bl, Window sender)
         {
@@ -30,9 +31,30 @@ namespace PL
             this.bl = bl;
             this.sender = sender;
 
+            MainGrid.ShowGridLines = true;
+            AddDownGrid.Visibility = Visibility.Visible;
             maxWeight.ItemsSource = Enum.GetValues(typeof(Weight));
             stations.ItemsSource = bl.GetStations();
+            
 
+        }
+
+        public Drone(IBl bl, Window sender, int droneId)
+        {
+            InitializeComponent();
+            this.bl = bl;
+            this.sender = sender;
+            this.drone = bl.GetDrone(droneId);
+
+            MainGrid.RowDefinitions[0].Height = new(50, GridUnitType.Star);
+            MainGrid.RowDefinitions[1].Height = new(50, GridUnitType.Star);
+
+            DroneInfoDownGrid.Visibility = Visibility.Visible;
+            this.Height = 680;
+            this.Width = 550;
+            this.DataContext = drone;
+
+           
         }
 
         private void IntTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -40,12 +62,6 @@ namespace PL
             if (e.Handled = !(int.TryParse(e.Text, out int d)) && e.Text != "")
                 MessageBox.Show("Please enter only numbers.");
 
-        }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            //this.sender.IsEnabled = true;
-            //this.sender.WindowStyle = WindowStyle.ThreeDBorderWindow;
         }
 
         private void cancel_Click(object sender, RoutedEventArgs e)

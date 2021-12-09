@@ -37,7 +37,7 @@ namespace IBL.BO
         /// <summary>
         /// Gets number of delivery in progress
         /// </summary>
-        public PackageInTransfer DeliveryInProgress { get; set; }
+        public PackageInTransfer PackageInProgress { get; set; }
 
         /// <summary>
         /// Gets the location of drone
@@ -49,7 +49,7 @@ namespace IBL.BO
         {
             return "Details of Id :" + Id + "\nModel: " + Model + "\nMax weight: " +
                  MaxWeight + "\nStatus of battery: " + BatteryStatus +
-                 "\nStusus of drone: " + DroneStatus + "\nDeliver in progress: " + DeliveryInProgress +
+                 "\nStusus of drone: " + DroneStatus + "\nDeliver in progress: " + PackageInProgress +
                  "\nCurrent location of drone: " + LocationOfDrone + "\n";
         }
 
