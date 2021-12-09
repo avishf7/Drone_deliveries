@@ -8,13 +8,13 @@
         Title="Drone" 
         Height="400" 
         Width="500" 
+        WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Closed="Window_Closed" >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="\Styels\CirculeButton.xaml"/>
-                <ResourceDictionary Source="\Styels\Colors.xaml"/>
+                <ResourceDictionary Source="\Styels\FullCirculeButton.xaml"/>
                 <ResourceDictionary Source="\Styels\Templates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

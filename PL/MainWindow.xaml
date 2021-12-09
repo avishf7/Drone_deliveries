@@ -12,30 +12,29 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="\Styels\CirculeButton.xaml">
-                </ResourceDictionary>
+                <ResourceDictionary Source="\Styels\FullCirculeButton.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
 
     <Grid  >
         <Grid.RowDefinitions>
-            <RowDefinition Height="30*" />
-            <RowDefinition Height="60*"/>
-            <RowDefinition Height="10*" />
+            <RowDefinition Height="50*" />
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="5*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*" />
             <ColumnDefinition Width="30*" />
-            <ColumnDefinition Width="40*" />
-            <ColumnDefinition Width="30*" />
+            <ColumnDefinition Width="60*" />
         </Grid.ColumnDefinitions>
 
 
-        <Button x:Name="ShowDrones" Grid.Column="1" Grid.Row="1" FontFamily="Aharoni" Click="ShowDrones_Click" Padding="5" Opacity="0.6">
+        <Button x:Name="ShowDrones" Grid.Column="1" Grid.Row="1" FontFamily="Aharoni" Click="ShowDrones_Click" Padding="30" Opacity="0.8" >
             <Button.ContentTemplate>
                 <DataTemplate>
                     <Viewbox>
-                        <TextBlock TextAlignment="Center" >Show <LineBreak/> drones</TextBlock>
+                        <TextBlock TextAlignment="Center">Show <LineBreak/> Drones</TextBlock>
                     </Viewbox>
                 </DataTemplate>
             </Button.ContentTemplate>
@@ -43,7 +42,7 @@
 
     </Grid>
     <Window.Background>
-        <ImageBrush ImageSource="https://img.wisebuy.co.il/data/images/Guide/ThinkstockPhotos-668766928131508931264610000.jpg" />
+        <ImageBrush ImageSource="https://img.wisebuy.co.il/data/images/Guide/e-drone/shutterstock_533991019132541713394323269.jpg" />
     </Window.Background>
 
 </Window>

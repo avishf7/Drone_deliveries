@@ -60,8 +60,7 @@ namespace PL
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            this.sender.IsEnabled = true;
-            this.sender.Opacity = 1;
+            ((Button)this.sender.FindName("ShowDrones")).Visibility = Visibility.Visible;
             this.sender.WindowStyle = WindowStyle.ThreeDBorderWindow;
         }
 
@@ -80,11 +79,8 @@ namespace PL
 
         private void AddDrone_Click(object sender, RoutedEventArgs e)
         {
-            new Drone(bl, this).Show();
-            this.IsEnabled = false;
-            WindowStyle = WindowStyle.None;
-            Topmost = false;
-            ResizeMode = ResizeMode.NoResize;
+            new Drone(bl, this).ShowDialog();
+
         }
     }
 }

@@ -44,10 +44,8 @@ namespace PL
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            this.sender.IsEnabled = true;
-            this.sender.WindowStyle = WindowStyle.ThreeDBorderWindow;
-            this.sender.Topmost = true;
-            this.sender.ResizeMode = ResizeMode.CanResize;
+            //this.sender.IsEnabled = true;
+            //this.sender.WindowStyle = WindowStyle.ThreeDBorderWindow;
         }
 
         private void cancel_Click(object sender, RoutedEventArgs e)
@@ -72,8 +70,9 @@ namespace PL
             catch (NoNumberFoundException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
             catch (ExistsNumberException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
 
-            ((ListBox)this.sender.FindName("DronesListView")).ItemsSource = bl.GetDrones(); 
+            ((ListBox)this.sender.FindName("DronesListView")).ItemsSource = bl.GetDrones();
 
+            MessageBox.Show("Adding the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
         }
     }

@@ -5,12 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DronesView" Height="500" Width="800" Closed="Window_Closed" Topmost="True">
+        Title="DronesView"
+        Height="500" 
+        Width="800" 
+        Closed="Window_Closed" 
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
     
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="\Styels\CirculeButton.xaml">
+                <ResourceDictionary Source="\Styels\SemiCirculeButton.xaml">
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
