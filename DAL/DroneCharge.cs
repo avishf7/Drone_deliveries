@@ -14,20 +14,24 @@ namespace IDAL
         public struct DroneCharge
         {
             /// <summary>
-            /// Gets the droneId;
+            /// the droneId;
             /// </summary>
             public int DroneId { get; set; }
             /// <summary>
-            /// Gets the stationId;
+            /// the stationId;
             /// </summary>
             public int StationId { get; set; }
+            /// <summary>
+            /// Charging start time
+            /// </summary>
+            public DateTime? ChargeStart { get; set; }
 
 
-           
+
             public override string ToString()
             {
                 return "Details of DroneCharge: " + "\nDrone ID: " + DroneId + "\nStation ID: "
-                    + StationId + "\n";
+                    + StationId + "\nCharging start time: " + ChargeStart + "\n";
             }
         }
     }

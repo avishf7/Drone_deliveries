@@ -30,9 +30,9 @@ namespace BL
 
             Location stLocation;
             try { stLocation = FindClosestStationLocation(dr.LocationOfDrone, x => x.FreeChargeSlots > 0); }
-            catch ( IBL.NoNumberFoundException ex) 
-            { 
-                throw new IBL.NoNumberFoundException("There is no station with available charging stations",ex); 
+            catch (IBL.NoNumberFoundException ex)
+            {
+                throw new IBL.NoNumberFoundException("There is no station with available charging stations", ex);
             }
 
             double KM = Distance(stLocation, dr.LocationOfDrone);
@@ -40,7 +40,7 @@ namespace BL
 
             if (KM <= dr.BatteryStatus * DroneAvailable)
             {
-                dr.BatteryStatus = dr.BatteryStatus - KM /DroneAvailable;
+                dr.BatteryStatus = dr.BatteryStatus - KM / DroneAvailable;
                 dr.LocationOfDrone = stLocation;
                 dr.DroneStatus = DroneStatuses.Maintenance;
 
@@ -50,7 +50,7 @@ namespace BL
                 IDAL.DO.Station station = stationsT.Find(x => x.Lattitude == stLocation.Lattitude && x.Longitude == stLocation.Longitude);
 
                 dal.UsingChargingStation(station.Id);
-                dal.AddDroneCharge(new() { DroneId = DroneId, StationId = station.Id });
+                dal.AddDroneCharge(new() { DroneId = DroneId, StationId = station.Id, ChargeStart = DateTime.Now });
             }
             else
             {
@@ -63,36 +63,42 @@ namespace BL
 
         public void RealeseDroneFromCharge(int DroneId, TimeSpan time)
         {
-                int iDr = droneLists.FindIndex(x => x.Id == DroneId);
-                var dr = droneLists.Find(x => x.Id == DroneId);
+            int iDr = droneLists.FindIndex(x => x.Id == DroneId);
+            var dr = droneLists.Find(x => x.Id == DroneId);
 
-                if (dr == null)
-                {
-                    throw new IBL.NoNumberFoundException("Drone ID not found");
-                }
+            if (dr == null)
+            {
+                throw new IBL.NoNumberFoundException("Drone ID not found");
+            }
 
-                if (dr.DroneStatus != DroneStatuses.Maintenance)
-                {
-                    throw new DroneNotMaintenanceException();
-                }
+            if (dr.DroneStatus != DroneStatuses.Maintenance)
+            {
+                throw new DroneNotMaintenanceException();
+            }
 
 
-                dr.BatteryStatus = dr.BatteryStatus + time.TotalHours * ChargingRate;
+            dr.BatteryStatus = dr.BatteryStatus + time.TotalHours * ChargingRate;
             if (dr.BatteryStatus > 100)
             {
                 dr.BatteryStatus = 100;
             }
-                dr.DroneStatus = DroneStatuses.Available;
+            dr.DroneStatus = DroneStatuses.Available;
 
-                droneLists.Insert(iDr, dr);
+            droneLists.Insert(iDr, dr);
 
-                List<IDAL.DO.Station> stationsT = dal.GetStations(x => x.Lattitude == dr.LocationOfDrone.Lattitude && x.Longitude == dr.LocationOfDrone.Longitude).ToList();
-                IDAL.DO.Station station = stationsT.Find(x => x.Lattitude == dr.LocationOfDrone.Lattitude && x.Longitude == dr.LocationOfDrone.Longitude);
+            List<IDAL.DO.Station> stationsT = dal.GetStations(x => x.Lattitude == dr.LocationOfDrone.Lattitude && x.Longitude == dr.LocationOfDrone.Longitude).ToList();
+            IDAL.DO.Station station = stationsT.Find(x => x.Lattitude == dr.LocationOfDrone.Lattitude && x.Longitude == dr.LocationOfDrone.Longitude);
 
-                dal.RealeseChargingStation(station.Id);
-                dal.DeleteDroneCharge(DroneId);       
-            
+            dal.RealeseChargingStation(station.Id);
+            dal.DeleteDroneCharge(DroneId);
+
         }
 
+        public void RealeseDroneFromCharge(int DroneId)
+        {
+            var timeOfCharge = DateTime.Now - dal.GetDroneCharge(DroneId).ChargeStart;
+
+            RealeseDroneFromCharge(DroneId, (TimeSpan)timeOfCharge);
+        }
     }
 }

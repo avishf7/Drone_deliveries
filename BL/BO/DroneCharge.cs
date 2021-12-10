@@ -9,12 +9,12 @@ namespace IBL.BO
     public class DroneCharge
     {
         /// <summary>
-        /// Gets the droneId;
+        /// the droneId;
         /// </summary>
         public int DroneId { get; set; }
 
         /// <summary>
-        /// Gets the drone's battery stutus;
+        /// drone's battery stutus;
         /// </summary>
         public double BatteryStatus { get; set; }
 
@@ -22,7 +22,7 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            return "Details of DroneCharge: " + "\nDrone ID: " + DroneId + "\nDrone's battery stutus: "
+            return "Details of DroneCharge: " + "\nDrone ID: " + DroneId + "\nDrone's battery status: "
                 + BatteryStatus + "\n";
         }
     }
