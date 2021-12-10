@@ -10,7 +10,7 @@
         Width="800" 
         Closed="Window_Closed" 
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" Closing="Window_Closing">
     
     <Window.Resources>
         <ResourceDictionary>
@@ -40,27 +40,50 @@
             <ComboBox x:Name="StatusSelector" Grid.Column="1" FontSize="18" Margin="10,5" Width="130" HorizontalAlignment="Left" SelectionChanged="StatusSelector_SelectionChanged"  />
             <TextBlock Text="Max weigth:" Grid.Column="2" FontSize="18" FontFamily="Arial Black" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right"  Foreground="#FFDDD81E"/>
             <ComboBox x:Name="MaxWeigth" Grid.Column="3" FontSize="18" Margin="10,5" Width="100" HorizontalAlignment="Left" SelectionChanged="MaxWeigth_SelectionChanged"/>
-            <Button x:Name="AddDrone" Grid.Column="4" Margin="10,5" FontFamily="Arial Black" Padding="5" Click="AddDrone_Click">
+            <Button x:Name="Reset" Grid.Column="4" Margin="10,5" FontFamily="Arial Black" Padding="5" Click="Reset_Click">
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <Viewbox>
-                            <TextBlock>Add Drone</TextBlock>
+                            <TextBlock>Reset view</TextBlock>
+                        </Viewbox>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+            
+        </Grid>
+        <Grid x:Name="DownGrid" Grid.Row="2">
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="10*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="AddDrone" Grid.Column="1" Margin="12" Padding="5" FontFamily="Arial Black" Click="AddDrone_Click" >
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <Viewbox>
+                            <TextBlock>Add drone</TextBlock>
                         </Viewbox>
                     </DataTemplate>
                 </Button.ContentTemplate>
             </Button>
 
+
+            <Button x:Name="Exit" Grid.Column="3" Margin="12" Padding="10" FontFamily="Arial Black" Click="Exit_Click"  >
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <Viewbox>
+                            <TextBlock>Exit</TextBlock>
+                        </Viewbox>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
         </Grid>
+        
         <ListView x:Name="DronesListView" Grid.Row="1" Opacity="0.5" MouseDoubleClick="DronesListView_MouseDoubleClick" />
-        <Button x:Name="Reset" Grid.Row="2" Margin="180,10" FontFamily="Arial Black" Click="Reset_Click" >
-            <Button.ContentTemplate>
-                <DataTemplate>
-                    <Viewbox>
-                        <TextBlock>Reset view</TextBlock>
-                    </Viewbox>
-                </DataTemplate>
-            </Button.ContentTemplate>
-        </Button>
+       
 
     </Grid>
     <Window.Background>

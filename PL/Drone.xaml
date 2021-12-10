@@ -9,7 +9,8 @@
         Height="400" 
         Width="500" 
         WindowStartupLocation="CenterScreen"
-        WindowStyle="None" >
+        WindowStyle="None" 
+        ResizeMode="NoResize">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -170,11 +171,12 @@
 
             <TextBlock x:Name="BattaryStatus" 
                    FontSize="20"
-                       Text="{Binding Path=BatteryStatus, Mode=OneWay}"
+                       Text="{Binding Path=BatteryStatus, Mode=OneWay, StringFormat={}{0:F1}%}"
                    Grid.Row="0" 
                      Grid.Column="1"
                    Background="{StaticResource Static.Background}" 
-                   Margin="20">
+                   Margin="20" 
+                       TextAlignment="Center">
 
             </TextBlock>
 
@@ -195,7 +197,8 @@
                  FontSize="20"
                 Text="{Binding Path=DroneStatus}"
                  Background="{StaticResource Static.Background}"                  
-                 Margin="20"  >
+                 Margin="20"
+                       TextAlignment="Center">
             </TextBlock>
 
             <TextBlock Text="Package In Progress:" 
@@ -213,7 +216,8 @@
                       FontSize="5" 
                       Text="{Binding Path=PackageInProgress}"
                        Background="{StaticResource Static.Background}" 
-                      Margin="20"  />
+                      Margin="20" 
+                       TextAlignment="Center"/>
 
 
             <Grid x:Name="DroneInfoDownInDownGrid" Grid.Row="3" Grid.Column="1">

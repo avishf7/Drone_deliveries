@@ -25,6 +25,7 @@ namespace PL
     {
         IBl bl;
         Window sender;
+        bool isCloseClick = true;
 
         public DronesView(IBl bl, Window sender)
         {
@@ -86,6 +87,17 @@ namespace PL
         private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             new Drone(bl, this, (DronesListView.SelectedItem as IBL.BO.DroneToList).Id).ShowDialog(); 
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            isCloseClick = false;
+            this.Close();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = isCloseClick;
         }
     }
 }

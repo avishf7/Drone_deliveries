@@ -24,7 +24,7 @@ namespace PL
         IBl bl;
         Window sender;
         IBL.BO.Drone drone;
-
+        
         public Drone(IBl bl, Window sender)
         {
             InitializeComponent();
@@ -36,7 +36,6 @@ namespace PL
             maxWeight.ItemsSource = Enum.GetValues(typeof(Weight));
             stations.ItemsSource = bl.GetStations();
             
-
         }
 
         public Drone(IBl bl, Window sender, int droneId)
