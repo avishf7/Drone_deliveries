@@ -92,7 +92,7 @@ namespace BL
             dal.RealeseChargingStation(station.Id);
             dal.DeleteDroneCharge(DroneId);
 
-        }
+        }   
 
         public void RealeseDroneFromCharge(int DroneId)
         {
