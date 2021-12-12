@@ -22,10 +22,10 @@ namespace PL
     public partial class Drone : Window
     {
         IBl bl;
-        Window sender;
+        DronesView sender;
         IBL.BO.Drone drone;
 
-        public Drone(IBl bl, Window sender)
+        public Drone(IBl bl, DronesView sender)
         {
             InitializeComponent();
             this.bl = bl;
@@ -39,7 +39,7 @@ namespace PL
 
         }
 
-        public Drone(IBl bl, Window sender, int droneId)
+        public Drone(IBl bl, DronesView sender, int droneId)
         {
             InitializeComponent();
             this.bl = bl;
@@ -86,7 +86,7 @@ namespace PL
             catch (NoNumberFoundException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
             catch (ExistsNumberException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
 
-            ((ListBox)this.sender.FindName("DronesListView")).ItemsSource = bl.GetDrones();
+            this.sender.Filtering();
 
             MessageBox.Show("Adding the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();

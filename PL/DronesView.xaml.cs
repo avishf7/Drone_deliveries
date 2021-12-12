@@ -42,20 +42,12 @@ namespace PL
 
         private void MaxWeigth_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var weight = ((ComboBox)sender).SelectedItem;
-            var status = StatusSelector.SelectedItem;
-
-            DronesListView.ItemsSource = bl.GetDrones(dr => (status != null ? dr.DroneStatus == (DroneStatuses)status : true) &&
-                                                            (weight != null ? dr.MaxWeight == (Weight)weight : true));
+            Filtering();
         }
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var weight = MaxWeigth.SelectedItem;
-            var status = ((ComboBox)sender).SelectedItem;
-
-            DronesListView.ItemsSource = bl.GetDrones(dr => (status != null ? dr.DroneStatus == (DroneStatuses)status : true) &&
-                                                            (weight != null ? dr.MaxWeight == (Weight)weight : true));
+            Filtering();
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -85,7 +77,17 @@ namespace PL
 
         private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new Drone(bl, this, (DronesListView.SelectedItem as IBL.BO.DroneToList).Id).ShowDialog(); 
+            if (DronesListView.SelectedItem != null)
+                new Drone(bl, this, (DronesListView.SelectedItem as IBL.BO.DroneToList).Id).ShowDialog();
+        }
+
+        public void Filtering()
+        {
+            var weight = MaxWeigth.SelectedItem;
+            var status = StatusSelector.SelectedItem;
+
+            DronesListView.ItemsSource = bl.GetDrones(dr => (status != null ? dr.DroneStatus == (DroneStatuses)status : true) &&
+                                                           (weight != null ? dr.MaxWeight == (Weight)weight : true));
         }
     }
 }
