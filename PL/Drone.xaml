@@ -213,8 +213,8 @@
             <TextBlock x:Name="PackageInProgress"
                        
                       Grid.Row="2" Grid.Column="1" 
-                      FontSize="5" 
-                      Text="{Binding Path=PackageInProgress}"
+                      FontSize="20" 
+                      Text="{Binding Path=PackageInProgress, TargetNullValue='None'}"
                        Background="{StaticResource Static.Background}" 
                       Margin="20" 
                        TextAlignment="Center"/>
