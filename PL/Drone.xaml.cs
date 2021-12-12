@@ -36,7 +36,6 @@ namespace PL
             maxWeight.ItemsSource = Enum.GetValues(typeof(Weight));
             stations.ItemsSource = bl.GetStations();
             
-
         }
 
         public Drone(IBl bl, DronesView sender, int droneId)

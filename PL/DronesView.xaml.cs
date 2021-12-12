@@ -25,6 +25,7 @@ namespace PL
     {
         IBl bl;
         Window sender;
+        bool isCloseClick = true;
 
         public DronesView(IBl bl, Window sender)
         {
@@ -88,6 +89,17 @@ namespace PL
 
             DronesListView.ItemsSource = bl.GetDrones(dr => (status != null ? dr.DroneStatus == (DroneStatuses)status : true) &&
                                                            (weight != null ? dr.MaxWeight == (Weight)weight : true));
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            isCloseClick = false;
+            this.Close();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = isCloseClick;
         }
     }
 }
