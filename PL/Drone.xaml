@@ -82,9 +82,38 @@
                  FontSize="20"
                  VerticalContentAlignment="Center"
                  HorizontalContentAlignment="Center"
-                 Background="{StaticResource Static.Background}"                  
-                 Margin="20"  >
+                 Background="{StaticResource Static.Background}"  
+                 Margin="20">
+
             </TextBox>
+
+            <Grid x:Name="updatemodel" Grid.Row="1" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70*"/>
+                    <ColumnDefinition Width="30*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="updateModel"
+                           
+                                FontSize="20"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                 Background="{StaticResource Static.Background}" Width="135" Height="38"/>
+                <Button x:Name="update"
+                         Content="update" 
+                    Grid.Column="1"
+                    Margin="10,3,20,7"
+                    FontFamily="Arial Black"
+                    Click="add_Click"/>
+
+
+            </Grid>
+
+
+
+
+
+
 
             <TextBlock Text="Max weigth:" 
                       Grid.Row="2" Grid.Column="0" 
@@ -128,6 +157,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="45*"/>
                 <RowDefinition Height="45*"/>
+
             </Grid.RowDefinitions>
 
             <Button x:Name="add" 
@@ -145,6 +175,8 @@
                     FontFamily="Arial Black"
                     Click="cancel_Click"/>
         </Grid>
+
+
 
         <Grid x:Name="DroneInfoDownGrid" Grid.Row="1" Visibility="Hidden">
             <Grid.RowDefinitions>
@@ -218,6 +250,9 @@
                        Background="{StaticResource Static.Background}" 
                       Margin="20" 
                        TextAlignment="Center"/>
+            <Label x:Name="upDateMOdel"
+                   FontSize="20"
+                   />
 
 
             <Grid x:Name="DroneInfoDownInDownGrid" Grid.Row="3" Grid.Column="1">
@@ -252,6 +287,7 @@
                     FontFamily="Arial Black"
                     Click="cancel_Click"/>
             </Grid>
+
 
         </Grid>
 
