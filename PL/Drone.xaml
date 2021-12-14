@@ -102,7 +102,7 @@
                 <Button x:Name="update"
                          Content="update" 
                     Grid.Column="1"
-                    Margin="10,3,20,7"
+                    Margin="20"
                     FontFamily="Arial Black"
                     Click="add_Click"/>
 
