@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BL
+namespace IBL.BO
 {
     public class PackageInTransfer
     {
@@ -13,6 +13,11 @@ namespace BL
         /// Gets the id.
         /// </summary>
         public int Id { get; set; }
+
+        /// <summary>
+        /// Gets the weight.
+        /// </summary>
+        public Weight Weight { get; set; }
 
         /// <summary>
         /// Gets if package is provided

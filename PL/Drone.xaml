@@ -173,16 +173,16 @@
                       Margin="20" 
                          Visibility="Hidden"/>
 
-            <TextBlock x:Name="DroneLocationInfo" 
+            <TextBox x:Name="DroneLocationInfo" 
                  Grid.Row="3"
                  Grid.Column="1"
                  FontSize="20"
-                Text="{Binding Path=LocationOfDrone}"
-                 Background="{StaticResource Static.Background}"                  
-                         Margin="20,27"
+                DataContext="{Binding Path=LocationOfDrone}"
+                  Template="{StaticResource LocationTemplate}"
+                         Margin="20,10"
                  TextAlignment="Center"
                        Visibility="Hidden">
-            </TextBlock>
+            </TextBox>
 
         </Grid>
 
@@ -280,14 +280,15 @@
                        HorizontalAlignment="Center"  
                        Foreground="#FFDDD81E"/>
 
-            <TextBlock x:Name="PackageInProgress"
-                       
+            <TextBox x:Name="PackageInProgress"
+                       DataContext="{Binding Path=PackageInProgress, TargetNullValue='None'}"
                       Grid.Row="2" Grid.Column="1" 
                       FontSize="20" 
-                      Text="{Binding Path=PackageInProgress, TargetNullValue='None'}"
-                       Background="{StaticResource Static.Background}" 
-                      Margin="20" 
-                       TextAlignment="Center"
+                     Template="{StaticResource PackageInTransferTemplate}"
+                       Background="{StaticResource Static.Background}"
+                     Margin="20,0"
+ 
+
                        />
 
 

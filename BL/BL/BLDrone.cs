@@ -76,6 +76,7 @@ namespace BL
                         packageInTransfer = new PackageInTransfer()
                         {
                             Id = package.Id,
+                            Weight = (Weight)package.Weight,
                             IsCollected = package.PickedUp != null,
                             Priority = (Priorities)package.Priority,
                             SenderCustomerInPackage = new() { CustomerId = sender.Id, CustomerName = sender.Name },
