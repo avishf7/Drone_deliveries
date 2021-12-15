@@ -33,9 +33,13 @@ namespace PL
 
             MainGrid.ShowGridLines = true;
             AddDownGrid.Visibility = Visibility.Visible;
+            droneId.Visibility = Visibility.Visible;
+            model.Visibility = Visibility.Visible;
+            maxWeight.Visibility = Visibility.Visible;
+            stations.Visibility = Visibility.Visible;
             maxWeight.ItemsSource = Enum.GetValues(typeof(Weight));
             stations.ItemsSource = bl.GetStations();
-            
+
         }
 
         public Drone(IBl bl, DronesView sender, int droneId)
@@ -48,12 +52,18 @@ namespace PL
             MainGrid.RowDefinitions[0].Height = new(50, GridUnitType.Star);
             MainGrid.RowDefinitions[1].Height = new(50, GridUnitType.Star);
 
+
             DroneInfoDownGrid.Visibility = Visibility.Visible;
+            DroneIdInfo.Visibility = Visibility.Visible;
+            UpdateModelGrid.Visibility = Visibility.Visible;
+            MaxWeightInfo.Visibility = Visibility.Visible;
+            DroneLocationInfo.Visibility = Visibility.Visible;
+           
             this.Height = 680;
             this.Width = 550;
             this.DataContext = drone;
 
-           
+
         }
 
         private void IntTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -73,22 +83,56 @@ namespace PL
             try
             {
                 if (droneId.Text != "" && model.Text != "" && maxWeight.SelectedItem != null && stations.SelectedItem != null)
+                {
                     bl.AddDrone(new()
                     {
                         Id = int.Parse(droneId.Text),
                         Model = model.Text,
                         MaxWeight = (Weight)maxWeight.SelectedItem,
                     }, ((StationToList)stations.SelectedItem).Id);
+
+                    this.sender.Filtering();
+
+                    MessageBox.Show("Adding the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.Close();
+                }
                 else
                     MessageBox.Show("There are unfilled fields", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (NoNumberFoundException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
             catch (ExistsNumberException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
 
-            this.sender.Filtering();
+           
+        }
 
-            MessageBox.Show("Adding the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
-            this.Close();
+        private void Update_Click(object sender, RoutedEventArgs e)
+        {
+            Update.Content = "OK";
+            UpdateModel.IsReadOnly = false;
+            UpdateModel.Text = "";
+            
+            Update.Click -= Update_Click;
+            Update.Click += OK_Click;
+        }
+
+        private void OK_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (UpdateModel.Text != "")
+            {
+                bl.UpdateDrone(drone.Id, UpdateModel.Text);
+                this.sender.Filtering();
+                MessageBox.Show("Updating the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                Update.Content = "Update";
+                UpdateModel.IsReadOnly = true;
+
+                Update.Click -= OK_Click;
+                Update.Click += Update_Click;
+            }
+            else
+                MessageBox.Show("empty field", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
         }
     }
 }

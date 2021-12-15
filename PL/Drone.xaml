@@ -61,9 +61,21 @@
                      Grid.Column="1"
                    Background="{StaticResource Static.Background}" 
                    PreviewTextInput="IntTextBox_PreviewTextInput" 
-                   Margin="20">
-
+                   Margin="20"
+                        Visibility="Hidden">
             </TextBox>
+
+
+            <TextBlock x:Name="DroneIdInfo" 
+                 Grid.Row="0"
+                 Grid.Column="1"
+                 FontSize="20"
+                Text="{Binding Path=Id}"
+                 Background="{StaticResource Static.Background}"                  
+                         Margin="20,27"
+                       TextAlignment="Center"
+                          Visibility="Hidden">
+            </TextBlock>
 
             <Label x:Name="labalModel" 
                    FontSize="20"
@@ -83,36 +95,37 @@
                  VerticalContentAlignment="Center"
                  HorizontalContentAlignment="Center"
                  Background="{StaticResource Static.Background}"  
-                 Margin="20">
+                 Margin="20"
+                        Visibility="Hidden">
 
             </TextBox>
 
-            <Grid x:Name="updatemodel" Grid.Row="1" Grid.Column="1">
+            <Grid x:Name="UpdateModelGrid" Grid.Row="1" Grid.Column="1" Visibility="Hidden">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="70*"/>
                     <ColumnDefinition Width="30*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock x:Name="updateModel"
-                           
+                <TextBox x:Name="UpdateModel" 
+                         Text="{Binding Path=Model}"
                                 FontSize="20"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                 Background="{StaticResource Static.Background}" Width="135" Height="38"/>
-                <Button x:Name="update"
-                         Content="update" 
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Stretch"
+                 Background="{StaticResource Static.Background}"
+                         Margin="20,27"
+                         TextAlignment="Center"
+                         IsReadOnly="True"/>
+
+                <Button x:Name="Update"
+                         Content="Update" 
                     Grid.Column="1"
-                    Margin="20"
-                    FontFamily="Arial Black"
-                    Click="add_Click"/>
+                    Margin="10,27"
+                    FontFamily="Arial Black" Click="Update_Click"
+                        />
+
+
 
             </Grid>
-
-
-
-
-
-
 
             <TextBlock Text="Max weigth:" 
                       Grid.Row="2" Grid.Column="0" 
@@ -127,8 +140,22 @@
                       FontSize="20" 
                       HorizontalContentAlignment="Center" 
                       VerticalContentAlignment="Center" 
-                      Margin="20"  />
-            <TextBlock Text="Drone Location:" 
+                      Margin="20"
+                         Visibility="Hidden"/>
+
+
+            <TextBlock x:Name="MaxWeightInfo" 
+                 Grid.Row="2"
+                 Grid.Column="1"
+                 FontSize="20"
+                Text="{Binding Path=MaxWeight}"
+                 Background="{StaticResource Static.Background}"                  
+                         Margin="20,27"
+                       TextAlignment="Center"
+                          Visibility="Hidden">
+            </TextBlock>
+            
+            <TextBlock  Text="Drone Location:" 
                       Grid.Row="3" Grid.Column="0" 
                        FontSize="20" 
                        FontFamily="Arial Black" 
@@ -136,14 +163,26 @@
                        VerticalAlignment="Center" 
                        HorizontalAlignment="Center"  
                        Foreground="#FFDDD81E"/>
-            <ComboBox ItemTemplate="{StaticResource stationTemplate}"
-                x:Name="stations" 
+            <ComboBox x:Name="stations" 
+                      ItemTemplate="{StaticResource stationTemplate}"
                       Grid.Row="3" 
                       Grid.Column="1"
                       FontSize="20" 
                       HorizontalContentAlignment="Center" 
                       VerticalContentAlignment="Center" 
-                      Margin="20" />
+                      Margin="20" 
+                         Visibility="Hidden"/>
+
+            <TextBlock x:Name="DroneLocationInfo" 
+                 Grid.Row="3"
+                 Grid.Column="1"
+                 FontSize="20"
+                Text="{Binding Path=LocationOfDrone}"
+                 Background="{StaticResource Static.Background}"                  
+                         Margin="20,27"
+                 TextAlignment="Center"
+                       Visibility="Hidden">
+            </TextBlock>
 
         </Grid>
 
@@ -249,10 +288,7 @@
                        Background="{StaticResource Static.Background}" 
                       Margin="20" 
                        TextAlignment="Center"/>
-            <Label x:Name="upDateMOdel"
-                   FontSize="20"
-                   />
-
+           
 
             <Grid x:Name="DroneInfoDownInDownGrid" Grid.Row="3" Grid.Column="1">
                 <Grid.ColumnDefinitions>
@@ -273,13 +309,13 @@
                     Margin="15,5" 
                     FontFamily="Arial Black" />
                 <Button x:Name="Delivery" 
-                    Content="Charge" 
+                    Content="Delivery" 
                     Grid.Column="1"
                     Grid.Row="1"
                     Margin="15,5" 
                     FontFamily="Arial Black" />
-                <Button x:Name="cancelActions" 
-                    Content="Cancel" 
+                <Button x:Name="Exit" 
+                    Content="Exit" 
                     Grid.Column="1"
                     Grid.Row="2"
                     Margin="15,5" 
