@@ -217,7 +217,8 @@
                       Text="{Binding Path=PackageInProgress, TargetNullValue='None'}"
                        Background="{StaticResource Static.Background}" 
                       Margin="20" 
-                       TextAlignment="Center"/>
+                       TextAlignment="Center"
+                       />
 
 
             <Grid x:Name="DroneInfoDownInDownGrid" Grid.Row="3" Grid.Column="1">
