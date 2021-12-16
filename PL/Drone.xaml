@@ -309,7 +309,8 @@
                     Grid.Column="1"
                     Grid.Row="0"
                     Margin="15,5" 
-                    FontFamily="Arial Black" />
+                    FontFamily="Arial Black" 
+                        Click="Charge_Click"/>
                 <Button x:Name="Delivery" 
                     Content="Delivery" 
                     Grid.Column="1"
