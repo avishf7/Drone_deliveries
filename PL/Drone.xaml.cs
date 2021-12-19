@@ -58,7 +58,7 @@ namespace PL
             UpdateModelGrid.Visibility = Visibility.Visible;
             MaxWeightInfo.Visibility = Visibility.Visible;
             DroneLocationInfo.Visibility = Visibility.Visible;
-           
+
             this.Height = 680;
             this.Width = 550;
             this.DataContext = drone;
@@ -66,8 +66,14 @@ namespace PL
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void IntTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
+            //Checks that entered numbers only
             if (e.Handled = !(int.TryParse(e.Text, out int d)) && e.Text != "")
                 MessageBox.Show("Please enter only numbers.");
 
@@ -102,7 +108,7 @@ namespace PL
             catch (NoNumberFoundException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
             catch (ExistsNumberException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
 
-           
+
         }
 
         private void Update_Click(object sender, RoutedEventArgs e)
@@ -110,7 +116,7 @@ namespace PL
             Update.Content = "OK";
             UpdateModel.IsReadOnly = false;
             UpdateModel.Text = "";
-            
+
             Update.Click -= Update_Click;
             Update.Click += OK_Click;
         }
@@ -132,7 +138,7 @@ namespace PL
             else
                 MessageBox.Show("empty field", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
-        }       
+        }
 
         private void Charge_Click(object sender, RoutedEventArgs e)
         {
@@ -145,17 +151,51 @@ namespace PL
                         this.DataContext = drone = bl.GetDrone(drone.Id);
                         this.sender.Filtering();
                     }
-                    catch(NotEnoughBattery ex) 
-                    { 
-                        MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); 
+                    catch (NotEnoughBattery ex)
+                    {
+                        MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
 
                     break;
-                case DroneStatuses.Maintenance:                    
+                case DroneStatuses.Maintenance:
                     bl.RealeseDroneFromCharge(drone.Id);
                     this.DataContext = drone = bl.GetDrone(drone.Id);
                     this.sender.Filtering();
 
+                    break;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Delivery_Click(object sender, RoutedEventArgs e)
+        {
+            switch (drone.DroneStatus)
+            {
+                case DroneStatuses.Available:
+                    try
+                    {
+                        bl.packageAssigning(drone.Id);
+                        this.DataContext = drone = bl.GetDrone(drone.Id);
+                        this.sender.Filtering();
+                    }
+                    catch(NoSuitablePackageForScheduledException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
+                    break;
+                case DroneStatuses.Sendering:
+                    if (drone.PackageInProgress.IsCollected)
+                    {
+                        bl.Deliver(drone.Id);
+                        this.DataContext = drone = bl.GetDrone(drone.Id);
+                        this.sender.Filtering();
+                    }
+                    else
+                    {
+                        bl.PickUp(drone.Id);
+                        this.DataContext = drone = bl.GetDrone(drone.Id);
+                        this.sender.Filtering();
+                    }
                     break;
             }
         }

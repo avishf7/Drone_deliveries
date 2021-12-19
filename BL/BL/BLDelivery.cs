@@ -32,30 +32,40 @@ namespace BL
                     throw new IBL.NoSuitablePackageForScheduledException("Packages weighing more than the drone's ability to carry");
 
                 bool isFound = false;//for checking if there is a fit package
+                bool isEnoughBattary = true;
 
                 foreach (var pck in orderPackages)
                 {
-                    IDAL.DO.Customer sender = dal.GetCustomer(pck.SenderId),
-                                     target = dal.GetCustomer(pck.TargetId);
-
-                    Location senderLocation = new() { Lattitude = sender.Lattitude, Longitude = sender.Longitude },
-                             targetLocation = new() { Lattitude = target.Lattitude, Longitude = target.Longitude };
-
-                    double minBattery = BatteryUsage(Distance(dr.LocationOfDrone, senderLocation))
-                                      + BatteryUsage(Distance(senderLocation, targetLocation), (int)pck.Weight)
-                                      + BatteryUsage(Distance(targetLocation, FindClosestStationLocation(targetLocation)));
-
-                    if (isFound = dr.BatteryStatus >= minBattery)
+                    if (isFound = pck.Scheduled == null)
                     {
-                        dr.DroneStatus = DroneStatuses.Sendering;
-                        dr.PackageNumber = pck.Id;
-                        dal.ConnectPackageToDrone(pck.Id, droneId);
-                        break;
+                        IDAL.DO.Customer sender = dal.GetCustomer(pck.SenderId),
+                                         target = dal.GetCustomer(pck.TargetId);
+
+                        Location senderLocation = new() { Lattitude = sender.Lattitude, Longitude = sender.Longitude },
+                                 targetLocation = new() { Lattitude = target.Lattitude, Longitude = target.Longitude };
+
+                        double minBattery = BatteryUsage(Distance(dr.LocationOfDrone, senderLocation))
+                                          + BatteryUsage(Distance(senderLocation, targetLocation), (int)pck.Weight)
+                                          + BatteryUsage(Distance(targetLocation, FindClosestStationLocation(targetLocation)));
+
+
+                        if (isEnoughBattary = dr.BatteryStatus >= minBattery)
+                        {
+                            dr.DroneStatus = DroneStatuses.Sendering;
+                            dr.PackageNumber = pck.Id;
+                            dal.ConnectPackageToDrone(pck.Id, droneId);
+                            break;
+                        }
                     }
                 }
 
-                if (!isFound)
+                if (!isEnoughBattary)
                     throw new IBL.NoSuitablePackageForScheduledException("There is not enough battery", new NotEnoughBattery());
+
+                if (!isFound)
+                    throw new IBL.NoSuitablePackageForScheduledException("There are no packages waiting to be assigned");
+
+                
             }
         }
 

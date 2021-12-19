@@ -22,6 +22,7 @@ namespace PL.Converters
                 case DroneStatuses.Sendering:
                     return false;
             }
+
             throw new NotImplementedException();
         }
 

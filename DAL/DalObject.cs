@@ -315,6 +315,7 @@ namespace DalObject
             Package package = GetPackage(id);
             int indexPackage = DataSource.packages.FindIndex(pck => pck.Id == id);
 
+
             package.DroneId = droneId;
             package.Scheduled = DateTime.Now;
 

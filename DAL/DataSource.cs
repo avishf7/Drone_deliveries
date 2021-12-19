@@ -82,7 +82,7 @@ namespace DalObject
             /// <summary>
             /// Percentage of skimmer charge per hour
             /// </summary>
-            internal static double ChargingRate = 30;
+            internal static double ChargingRate = 10000;
 
         }
 
