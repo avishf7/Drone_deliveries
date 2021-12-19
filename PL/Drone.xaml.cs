@@ -134,19 +134,26 @@ namespace PL
 
         }       
 
-        private void Charge_Click_1(object sender, RoutedEventArgs e)
+        private void Charge_Click(object sender, RoutedEventArgs e)
         {
             switch (drone.DroneStatus)
             {
                 case DroneStatuses.Available:
-                    bl.SendDroneForCharge(drone.Id);
-                    this.DataContext = drone = bl.GetDrone(drone.Id);
+                    try
+                    {
+                        bl.SendDroneForCharge(drone.Id);
+                        this.DataContext = drone = bl.GetDrone(drone.Id);
+                    }
+                    catch(NotEnoughBattery ex) 
+                    { 
+                        MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); 
+                    }
+
                     break;
                 case DroneStatuses.Maintenance:                    
                     bl.RealeseDroneFromCharge(drone.Id);
                     this.DataContext = drone = bl.GetDrone(drone.Id);
-                    break;
-                case DroneStatuses.Sendering:
+
                     break;
             }
         }

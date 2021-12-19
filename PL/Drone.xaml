@@ -304,7 +304,7 @@
                         Grid.Row="0"
                         Margin="15,5" 
                         FontFamily="Arial Black"
-                        IsEnabled="{Binding Path=DroneStatus, Mode=OneWay, Converter={StaticResource StatusToEnabledCharge}}" Click="Charge_Click_1">
+                        IsEnabled="{Binding Path=DroneStatus, Mode=OneWay, Converter={StaticResource StatusToEnabledCharge}}" Click="Charge_Click">
                     <Image Source="{Binding Path=DroneStatus, Mode=OneWay, Converter={StaticResource StatusToPictureCharge}}"/>
                 </Button>
 
