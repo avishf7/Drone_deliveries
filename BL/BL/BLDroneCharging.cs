@@ -14,7 +14,6 @@ namespace BL
         public void SendDroneForCharge(int DroneId)
         {
 
-            int iDr = droneLists.FindIndex(x => x.Id == DroneId);
             var dr = droneLists.Find(x => x.Id == DroneId);
 
 
@@ -44,8 +43,6 @@ namespace BL
                 dr.LocationOfDrone = stLocation;
                 dr.DroneStatus = DroneStatuses.Maintenance;
 
-                droneLists.Insert(iDr, dr);
-
                 List<IDAL.DO.Station> stationsT = dal.GetStations(x => x.FreeChargeSlots > 0).ToList();
                 IDAL.DO.Station station = stationsT.Find(x => x.Lattitude == stLocation.Lattitude && x.Longitude == stLocation.Longitude);
 
@@ -63,7 +60,6 @@ namespace BL
 
         public void RealeseDroneFromCharge(int DroneId, TimeSpan time)
         {
-            int iDr = droneLists.FindIndex(x => x.Id == DroneId);
             var dr = droneLists.Find(x => x.Id == DroneId);
 
             if (dr == null)
@@ -83,8 +79,6 @@ namespace BL
                 dr.BatteryStatus = 100;
             }
             dr.DroneStatus = DroneStatuses.Available;
-
-            droneLists.Insert(iDr, dr);
 
             List<IDAL.DO.Station> stationsT = dal.GetStations(x => x.Lattitude == dr.LocationOfDrone.Lattitude && x.Longitude == dr.LocationOfDrone.Longitude).ToList();
             IDAL.DO.Station station = stationsT.Find(x => x.Lattitude == dr.LocationOfDrone.Lattitude && x.Longitude == dr.LocationOfDrone.Longitude);
