@@ -143,6 +143,7 @@ namespace PL
                     {
                         bl.SendDroneForCharge(drone.Id);
                         this.DataContext = drone = bl.GetDrone(drone.Id);
+                        this.sender.Filtering();
                     }
                     catch(NotEnoughBattery ex) 
                     { 
@@ -153,6 +154,7 @@ namespace PL
                 case DroneStatuses.Maintenance:                    
                     bl.RealeseDroneFromCharge(drone.Id);
                     this.DataContext = drone = bl.GetDrone(drone.Id);
+                    this.sender.Filtering();
 
                     break;
             }
