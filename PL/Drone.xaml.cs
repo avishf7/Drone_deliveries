@@ -139,12 +139,23 @@ namespace PL
         {
             try
             {
-                if (drone.DroneStatus == DroneStatuses.Available && drone.BatteryStatus < 75.0)
+                switch (drone.DroneStatus)
                 {
-                    bl.SendDroneForCharge(drone.Id);
-                    MessageBox.Show("Successfully shipped for loading!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
-                    this.Close();
-                }
+                    case DroneStatuses.Available:
+                        bl.SendDroneForCharge(drone.Id);
+                        MessageBox.Show("Successfully shipped for loading!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+                        this.Close();
+
+                        break;
+                    case DroneStatuses.Maintenance:
+
+                        break;
+                    case DroneStatuses.Sendering:
+
+                        break;
+                    default:
+                        break;
+                }            
             }
             catch (Exception)
             {
