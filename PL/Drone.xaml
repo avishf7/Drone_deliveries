@@ -1,9 +1,9 @@
-﻿<Window x:Class="PL.Drone"
+﻿<Window x:Class="PL.Drone"        
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL"
+        xmlns:local="clr-namespace:PL"        
         mc:Ignorable="d"
         Title="Drone" 
         Height="400" 
@@ -16,6 +16,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="\Styels\FullCirculeButton.xaml"/>
                 <ResourceDictionary Source="\Styels\Templates.xaml"/>
+                <ResourceDictionary Source="\Converters\Converters.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -299,11 +300,13 @@
                 </Grid.RowDefinitions>
 
                 <Button x:Name="Charge" 
-                        Content="Charge" 
                         Grid.Column="1"
                         Grid.Row="0"
                         Margin="15,5" 
-                        FontFamily="Arial Black" />
+                        FontFamily="Arial Black"
+                        IsEnabled="{Binding Path=DroneStatus, Mode=OneWay, Converter={StaticResource StatusToEnabledCharge}}" Click="Charge_Click_1">
+                    <Image Source="{Binding Path=DroneStatus, Mode=OneWay, Converter={StaticResource StatusToPictureCharge}}"/>
+                </Button>
 
                 <Button x:Name="Delivery" 
                         Content="Delivery" 

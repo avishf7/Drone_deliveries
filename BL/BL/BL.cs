@@ -62,6 +62,12 @@ namespace BL
                         droneLocation = new() { Lattitude = randomStation.Lattitude, Longitude = randomStation.Longitude };
                         maxBattery = 20.0;
 
+                        dal.AddDroneCharge(new()
+                        {
+                            DroneId = drone.Id,
+                            StationId = randomStation.Id,
+                            ChargeStart = DateTime.Now
+                        });
                         break;
                     case DroneStatuses.Sendering:
                         IDAL.DO.Customer sender = dal.GetCustomer(senderingPackages[iPck].SenderId),

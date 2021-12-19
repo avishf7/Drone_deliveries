@@ -110,7 +110,6 @@ namespace PL
             Update.Content = "OK";
             UpdateModel.IsReadOnly = false;
             UpdateModel.Text = "";
-            Exit.Content = "Cancel";
             
             Update.Click -= Update_Click;
             Update.Click += OK_Click;
@@ -133,23 +132,22 @@ namespace PL
             else
                 MessageBox.Show("empty field", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
-        }
+        }       
 
-        private void Charge_Click(object sender, RoutedEventArgs e)
+        private void Charge_Click_1(object sender, RoutedEventArgs e)
         {
-            try
+            switch (drone.DroneStatus)
             {
-                if (drone.DroneStatus == DroneStatuses.Available && drone.BatteryStatus < 75.0)
-                {
+                case DroneStatuses.Available:
                     bl.SendDroneForCharge(drone.Id);
-                    MessageBox.Show("Successfully shipped for loading!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
-                    this.Close();
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
+                    this.DataContext = drone = bl.GetDrone(drone.Id);
+                    break;
+                case DroneStatuses.Maintenance:                    
+                    bl.RealeseDroneFromCharge(drone.Id);
+                    this.DataContext = drone = bl.GetDrone(drone.Id);
+                    break;
+                case DroneStatuses.Sendering:
+                    break;
             }
         }
     }
