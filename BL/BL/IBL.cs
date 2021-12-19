@@ -213,6 +213,13 @@ namespace IBL
         ///   <exception cref="DroneNotMaintenanceException"></exception>
         public void RealeseDroneFromCharge(int DroneId, TimeSpan time);
 
+        /// <summary>
+        /// A function that implements a state of releasing a drone from a charge
+        /// </summary>
+        /// <param name="DroneId">The id of the drone</param>
+        /// ///  <exception cref="NoNumberFoundException"></exception>
+        ///   <exception cref="DroneNotMaintenanceException"></exception>
+        public void RealeseDroneFromCharge(int DroneId);
 
         #endregion       
 
