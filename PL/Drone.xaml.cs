@@ -150,6 +150,8 @@ namespace PL
                         bl.SendDroneForCharge(drone.Id);
                         this.DataContext = drone = bl.GetDrone(drone.Id);
                         this.sender.Filtering();
+                        MessageBox.Show("Sent for charging", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+
                     }
                     catch (NotEnoughBattery ex)
                     {
@@ -161,6 +163,8 @@ namespace PL
                     bl.RealeseDroneFromCharge(drone.Id);
                     this.DataContext = drone = bl.GetDrone(drone.Id);
                     this.sender.Filtering();
+                    MessageBox.Show("Released from charging", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+
 
                     break;
             }
@@ -180,8 +184,11 @@ namespace PL
                         bl.packageAssigning(drone.Id);
                         this.DataContext = drone = bl.GetDrone(drone.Id);
                         this.sender.Filtering();
+                        MessageBox.Show("The package was successfully associated", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+
+
                     }
-                    catch(NoSuitablePackageForScheduledException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
+                    catch (NoSuitablePackageForScheduledException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
                     break;
                 case DroneStatuses.Sendering:
                     if (drone.PackageInProgress.IsCollected)
@@ -189,12 +196,16 @@ namespace PL
                         bl.Deliver(drone.Id);
                         this.DataContext = drone = bl.GetDrone(drone.Id);
                         this.sender.Filtering();
+                        MessageBox.Show("The package was delivered to its destination, good day", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+
                     }
                     else
                     {
                         bl.PickUp(drone.Id);
                         this.DataContext = drone = bl.GetDrone(drone.Id);
                         this.sender.Filtering();
+                        MessageBox.Show("The package was successfully collected by the drone", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+
                     }
                     break;
             }
