@@ -27,6 +27,11 @@ namespace PL
         Window sender;
         bool isCloseClick = true;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bl"></param>
+        /// <param name="sender"></param>
         public DronesView(IBl bl, Window sender)
         {
             InitializeComponent();
@@ -41,22 +46,42 @@ namespace PL
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MaxWeigth_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Filtering();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Filtering();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closed(object sender, EventArgs e)
         {
             ((Button)this.sender.FindName("ShowDrones")).Visibility = Visibility.Visible;
             this.sender.WindowStyle = WindowStyle.ThreeDBorderWindow;
         }
 
+        /// <summary>
+        /// A button that resets the filters.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Reset_Click(object sender, RoutedEventArgs e)
         {
             MaxWeigth.Text = "";
@@ -70,18 +95,31 @@ namespace PL
             DronesListView.ItemsSource = bl.GetDrones();
         }
 
+        /// <summary>
+        /// A button that opens a window for adding a new drone.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddDrone_Click(object sender, RoutedEventArgs e)
         {
             new Drone(bl, this).ShowDialog();
 
         }
 
+        /// <summary>
+        /// Sets that by double-clicking a skimmer from the list it will see the data on the skimmer.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (DronesListView.SelectedItem != null)
                 new Drone(bl, this, (DronesListView.SelectedItem as IBL.BO.DroneToList).Id).ShowDialog();
         }
 
+        /// <summary>
+        /// Filter the display according to the combo box selection.
+        /// </summary>
         public void Filtering()
         {
             var weight = MaxWeigth.SelectedItem;
@@ -91,12 +129,22 @@ namespace PL
                                                            (weight != null ? dr.MaxWeight == (Weight)weight : true));
         }
 
+        /// <summary>
+        /// Window Close Button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             isCloseClick = false;
             this.Close();
         }
 
+        /// <summary>
+        /// Prevent the window from closing by a non-cancel button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = isCloseClick;

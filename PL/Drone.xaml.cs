@@ -24,7 +24,12 @@ namespace PL
         IBl bl;
         DronesView sender;
         IBL.BO.Drone drone;
-
+         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bl"></param>
+        /// <param name="sender"></param>
         public Drone(IBl bl, DronesView sender)
         {
             InitializeComponent();
@@ -42,6 +47,12 @@ namespace PL
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bl"></param>
+        /// <param name="sender"></param>
+        /// <param name="droneId"></param>
         public Drone(IBl bl, DronesView sender, int droneId)
         {
             InitializeComponent();
@@ -67,7 +78,7 @@ namespace PL
         }
 
         /// <summary>
-        /// 
+        /// A button that alerts if the user has entered characters rather than numbers.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -79,11 +90,21 @@ namespace PL
 
         }
 
+        /// <summary>
+        /// Window Close Button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Add drone button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void add_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -111,6 +132,11 @@ namespace PL
 
         }
 
+        /// <summary>
+        /// A button pressed opens the option to update the drone model and changes the button to OK at the touch of a button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Update_Click(object sender, RoutedEventArgs e)
         {
             Update.Content = "OK";
@@ -121,6 +147,11 @@ namespace PL
             Update.Click += OK_Click;
         }
 
+        /// <summary>
+        /// Confirmation button for updating the model.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OK_Click(object sender, RoutedEventArgs e)
         {
             if (UpdateModel.Text != "")
@@ -140,6 +171,11 @@ namespace PL
 
         }
 
+        /// <summary>
+        /// Button for sending drone for charging and release from charging according to the status of the drone.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Charge_Click(object sender, RoutedEventArgs e)
         {
             switch (drone.DroneStatus)
@@ -170,7 +206,7 @@ namespace PL
             }
         }
         /// <summary>
-        /// 
+        /// A button that handles the delivery of the package according to the status of the drone.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
