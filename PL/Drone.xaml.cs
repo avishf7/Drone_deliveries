@@ -24,9 +24,9 @@ namespace PL
         IBl bl;
         DronesView sender;
         IBL.BO.Drone drone;
-         
+
         /// <summary>
-        /// 
+        /// Consructor for drone display window.
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="sender"></param>
@@ -48,7 +48,7 @@ namespace PL
         }
 
         /// <summary>
-        /// 
+        /// constructor to window add drone.
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="sender"></param>
