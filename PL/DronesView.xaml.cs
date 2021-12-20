@@ -28,7 +28,7 @@ namespace PL
         bool isCloseClick = true;
 
         /// <summary>
-        /// 
+        /// constructor to create window of drones view.
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="sender"></param>
@@ -43,11 +43,10 @@ namespace PL
 
 
             DronesListView.ItemsSource = bl.GetDrones();
-
         }
 
         /// <summary>
-        /// 
+        /// Filter the display by weight in the combobox.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -57,7 +56,7 @@ namespace PL
         }
 
         /// <summary>
-        /// 
+        /// Filter the display by status in the combobox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -67,7 +66,7 @@ namespace PL
         }
 
         /// <summary>
-        /// 
+        /// Closing the window
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -118,7 +117,7 @@ namespace PL
         }
 
         /// <summary>
-        /// Filter the display according to the combo box selection.
+        /// Filter the display according to the combo boxs selection.
         /// </summary>
         public void Filtering()
         {
