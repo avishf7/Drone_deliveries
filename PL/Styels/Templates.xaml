@@ -4,13 +4,13 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="\Styels\Colors.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-    
-    
+
+    <!--Station-type object reception template-->
     <DataTemplate x:Key="stationTemplate" DataType="local:StationToList">
         <TextBlock Text="{Binding Path=Name}"/>
     </DataTemplate>
 
-    <!---->
+    <!--Representation template of package in transfer-->
     <ControlTemplate x:Key="PackageInTransferTemplate">
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <Grid Background="{StaticResource Static.Background}">
@@ -36,7 +36,7 @@
         </ScrollViewer>
     </ControlTemplate>
 
-    
+    <!--Representation template of location-->
     <ControlTemplate x:Key="LocationTemplate">
         <Grid Background="{StaticResource Static.Background}">
                 <Grid.RowDefinitions>

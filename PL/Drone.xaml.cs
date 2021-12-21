@@ -29,7 +29,7 @@ namespace PL
         /// Consructor for drone display window.
         /// </summary>
         /// <param name="bl"></param>
-        /// <param name="sender"></param>
+        /// <param name="sender">The element that activates the function</param>
         public Drone(IBl bl, DronesView sender)
         {
             InitializeComponent();
@@ -51,7 +51,7 @@ namespace PL
         /// constructor to window add drone.
         /// </summary>
         /// <param name="bl"></param>
-        /// <param name="sender"></param>
+        /// <param name="sender">The element that activates the function</param>
         /// <param name="droneId"></param>
         public Drone(IBl bl, DronesView sender, int droneId)
         {
@@ -80,7 +80,7 @@ namespace PL
         /// <summary>
         /// A button that alerts if the user has entered characters rather than numbers.
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
         private void IntTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
@@ -93,7 +93,7 @@ namespace PL
         /// <summary>
         /// Window Close Button.
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
         private void cancel_Click(object sender, RoutedEventArgs e)
         {
@@ -103,7 +103,7 @@ namespace PL
         /// <summary>
         /// Add drone button
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
         private void add_Click(object sender, RoutedEventArgs e)
         {
@@ -135,7 +135,7 @@ namespace PL
         /// <summary>
         /// A button pressed opens the option to update the drone model and changes the button to OK at the touch of a button.
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
         private void Update_Click(object sender, RoutedEventArgs e)
         {
@@ -150,7 +150,7 @@ namespace PL
         /// <summary>
         /// Confirmation button for updating the model.
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
         private void OK_Click(object sender, RoutedEventArgs e)
         {
@@ -174,7 +174,7 @@ namespace PL
         /// <summary>
         /// Button for sending drone for charging and release from charging according to the status of the drone.
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
         private void Charge_Click(object sender, RoutedEventArgs e)
         {
@@ -208,7 +208,7 @@ namespace PL
         /// <summary>
         /// A button that handles the delivery of the package according to the status of the drone.
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
         private void Delivery_Click(object sender, RoutedEventArgs e)
         {

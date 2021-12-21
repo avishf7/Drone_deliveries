@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
+    <!--Sets the button to be round-->
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="\Styels\Colors.xaml"/>
     </ResourceDictionary.MergedDictionaries>
