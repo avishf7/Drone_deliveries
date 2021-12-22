@@ -28,7 +28,7 @@ namespace PL
         /// <summary>
         /// Consructor for drone display window.
         /// </summary>
-        /// <param name="bl"></param>
+        /// <param name="bl">The variable of access to the logic layer</param>
         /// <param name="sender">The element that activates the function</param>
         public Drone(IBl bl, DronesView sender)
         {
@@ -50,7 +50,7 @@ namespace PL
         /// <summary>
         /// constructor to window add drone.
         /// </summary>
-        /// <param name="bl"></param>
+        /// <param name="bl">The variable of access to the logic layer</param>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="droneId">The ID of the drone intended for display</param>
         public Drone(IBl bl, DronesView sender, int droneId)

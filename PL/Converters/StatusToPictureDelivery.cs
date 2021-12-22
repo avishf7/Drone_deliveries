@@ -12,14 +12,8 @@ namespace PL.Converters
 {
     class StatusToPictureDelivery : IMultiValueConverter
     {
-        /// <summary>
+
         /// Dividing the display of buttons according to the status of the drone.
-        /// </summary>
-        /// <param name="values"></param>
-        /// <param name="targetType"></param>
-        /// <param name="parameter"></param>
-        /// <param name="culture"></param>
-        /// <returns></returns>
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
 

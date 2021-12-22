@@ -11,14 +11,8 @@ namespace PL.Converters
 {
     class StatusToEnabledCharge : IValueConverter
     {
-        /// <summary>
+
         /// Defines whether the button can be pressed according to the status
-        /// </summary>
-        /// <param name="value"></param>
-        /// <param name="targetType"></param>
-        /// <param name="parameter"></param>
-        /// <param name="culture"></param>
-        /// <returns></returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             switch ((DroneStatuses)value)
