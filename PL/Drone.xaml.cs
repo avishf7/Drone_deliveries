@@ -52,7 +52,7 @@ namespace PL
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="sender">The element that activates the function</param>
-        /// <param name="droneId"></param>
+        /// <param name="droneId">The ID of the drone intended for display</param>
         public Drone(IBl bl, DronesView sender, int droneId)
         {
             InitializeComponent();
