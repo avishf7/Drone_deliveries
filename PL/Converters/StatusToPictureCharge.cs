@@ -11,10 +11,9 @@ using System.Windows.Media.Imaging;
 
 namespace PL.Converters
 {
+    /// Distribution of the charge button display according to the drone mode.
     class StatusToPictureCharge : IValueConverter
     {
-
-        /// Sets the button image according to the drone mode
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             switch ((DroneStatuses)value)

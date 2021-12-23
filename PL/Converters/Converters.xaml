@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:PL.Converters">
 
-    
+    <!--Import converters from code to XML-->
     <local:StatusToPictureCharge x:Key="StatusToPictureCharge"/>
     <local:StatusToEnabledCharge x:Key="StatusToEnabledCharge"/>
     <local:StatusToPictureDelivery x:Key="StatusToPictureDelivery"/>

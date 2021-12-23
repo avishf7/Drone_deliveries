@@ -10,10 +10,9 @@ using System.Windows.Media.Imaging;
 
 namespace PL.Converters
 {
+    /// Distribution of the delivery button display according to the drone mode.
     class StatusToPictureDelivery : IMultiValueConverter
     {
-
-        /// Dividing the display of buttons according to the status of the drone.
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
 

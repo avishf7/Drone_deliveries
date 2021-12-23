@@ -9,10 +9,9 @@ using IBL.BO;
 
 namespace PL.Converters
 {
+    /// Defines whether the charge button can be pressed according to the status
     class StatusToEnabledCharge : IValueConverter
-    {
-
-        /// Defines whether the button can be pressed according to the status
+    {       
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             switch ((DroneStatuses)value)

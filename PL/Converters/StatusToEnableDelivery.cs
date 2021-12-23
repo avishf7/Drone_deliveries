@@ -9,10 +9,9 @@ using System.Globalization;
 
 namespace PL.Converters
 {
+    /// Defines whether the delivery button can be pressed according to the status.
     class StatusToEnableDelivery : IValueConverter
-    {
-
-        /// Defines whether the button can be pressed according to the status.
+    {        
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             switch ((DroneStatuses)value)
