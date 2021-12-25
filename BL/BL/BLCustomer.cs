@@ -1,4 +1,4 @@
-﻿using IDAL;
+﻿using DalApi;
 using BlApi;
 using BlApi.BO;
 using System;
@@ -16,7 +16,7 @@ namespace BL
         {
             try
             {
-                dal.AddCustomer(new IDAL.DO.Customer
+                dal.AddCustomer(new DO.Customer
                 {
                     Id = customer.Id,
                     Name = customer.Name,
@@ -26,7 +26,7 @@ namespace BL
 
                 });
             }
-            catch (IDAL.ExistsNumberException ex)
+            catch (DalApi.ExistsNumberException ex)
             {
                 throw new BlApi.NoNumberFoundException("Customer already exists", ex);
             }
@@ -34,7 +34,7 @@ namespace BL
 
         public void UpdateCustomer(int customerId, string name, string phone)
         {
-            IDAL.DO.Customer dalCus;
+            DO.Customer dalCus;
             Customer blCus;
 
             try
@@ -43,7 +43,7 @@ namespace BL
                 blCus = GetCustomer(customerId);
 
             }
-            catch (IDAL.NoNumberFoundException ex)
+            catch (DalApi.NoNumberFoundException ex)
             {
                 throw new BlApi.NoNumberFoundException("Customer ID not found", ex);
             }
@@ -97,7 +97,7 @@ namespace BL
 
                 return BoCustomer;
             }
-            catch (IDAL.NoNumberFoundException ex)
+            catch (DalApi.NoNumberFoundException ex)
             {
                 throw new BlApi.NoNumberFoundException("Customer ID not found", ex);
             }

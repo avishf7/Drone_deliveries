@@ -38,7 +38,7 @@ namespace BL
                 {
                     if (isFound = pck.Scheduled == null)
                     {
-                        IDAL.DO.Customer sender = dal.GetCustomer(pck.SenderId),
+                        DO.Customer sender = dal.GetCustomer(pck.SenderId),
                                          target = dal.GetCustomer(pck.TargetId);
 
                         Location senderLocation = new() { Lattitude = sender.Lattitude, Longitude = sender.Longitude },
