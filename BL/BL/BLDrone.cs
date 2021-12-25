@@ -1,6 +1,6 @@
 ﻿using IDAL;
-using IBL;
-using IBL.BO;
+using BlApi;
+using BlApi.BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,8 +39,8 @@ namespace BL
                 dal.UsingChargingStation(st.Id);
 
             }
-            catch (IDAL.NoNumberFoundException ex) { throw new IBL.NoNumberFoundException("Station ID not found", ex); }
-            catch (IDAL.ExistsNumberException ex) { throw new IBL.ExistsNumberException("Drone already exists", ex); }
+            catch (IDAL.NoNumberFoundException ex) { throw new BlApi.NoNumberFoundException("Station ID not found", ex); }
+            catch (IDAL.ExistsNumberException ex) { throw new BlApi.ExistsNumberException("Drone already exists", ex); }
         }
 
         public void UpdateDrone(int droneId, string model)
@@ -54,7 +54,7 @@ namespace BL
 
                 droneLists.Find(drone => drone.Id == droneId).Model = model;
             }
-            catch (IDAL.NoNumberFoundException ex) { throw new IBL.NoNumberFoundException("Drone ID not found", ex); }
+            catch (IDAL.NoNumberFoundException ex) { throw new BlApi.NoNumberFoundException("Drone ID not found", ex); }
         
         }
 
@@ -89,7 +89,7 @@ namespace BL
                 }
                 else
                 {
-                    throw new IBL.NoNumberFoundException();
+                    throw new BlApi.NoNumberFoundException();
                 }
 
                 return new()

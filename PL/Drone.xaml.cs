@@ -11,8 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using IBL;
-using IBL.BO;
+using BlApi;
+using BlApi.BO;
 
 namespace PL
 {
@@ -23,7 +23,7 @@ namespace PL
     {
         IBl bl;
         DronesView sender;
-        IBL.BO.Drone drone;
+        BlApi.BO.Drone drone;
 
         /// <summary>
         /// Consructor for drone display window.

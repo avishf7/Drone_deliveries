@@ -1,6 +1,6 @@
 ﻿using IDAL;
-using IBL;
-using IBL.BO;
+using BlApi;
+using BlApi.BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +26,7 @@ namespace BL
             }
             catch (IDAL.ExistsNumberException ex)
             {
-                throw new IBL.ExistsNumberException("Station already exists ", ex);
+                throw new BlApi.ExistsNumberException("Station already exists ", ex);
             }
         }
 
@@ -43,7 +43,7 @@ namespace BL
             }
             catch (IDAL.NoNumberFoundException ex)
             {
-                throw new IBL.NoNumberFoundException("Station ID not found", ex);
+                throw new BlApi.NoNumberFoundException("Station ID not found", ex);
             }
 
             if (name != "")
@@ -92,7 +92,7 @@ namespace BL
             }
             catch (IDAL.NoNumberFoundException ex)
             {
-                throw new IBL.NoNumberFoundException("Station ID not found", ex);
+                throw new BlApi.NoNumberFoundException("Station ID not found", ex);
             }
         }
 

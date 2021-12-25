@@ -1,6 +1,6 @@
 ﻿using IDAL;
-using IBL;
-using IBL.BO;
+using BlApi;
+using BlApi.BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +16,7 @@ namespace BL
         {
             var dr = droneLists.Find(d => d.Id == droneId);
 
-            if (dr == null ? throw new IBL.NoNumberFoundException() : true &&
+            if (dr == null ? throw new BlApi.NoNumberFoundException() : true &&
                 dr.DroneStatus != DroneStatuses.Available ? throw new DroneNotAvailableException() : true)
             {
                 var orderPackages = dal.GetPackages().Where(pck => (int)pck.Weight <= (int)dr.MaxWeight)
@@ -29,7 +29,7 @@ namespace BL
                                 }));
 
                 if (!orderPackages.Any())
-                    throw new IBL.NoSuitablePackageForScheduledException("Packages weighing more than the drone's ability to carry");
+                    throw new BlApi.NoSuitablePackageForScheduledException("Packages weighing more than the drone's ability to carry");
 
                 bool isFound = false;//for checking if there is a fit package
                 bool isEnoughBattary = true;
@@ -60,10 +60,10 @@ namespace BL
                 }
 
                 if (!isEnoughBattary)
-                    throw new IBL.NoSuitablePackageForScheduledException("There is not enough battery", new NotEnoughBattery());
+                    throw new BlApi.NoSuitablePackageForScheduledException("There is not enough battery", new NotEnoughBattery());
 
                 if (!isFound)
-                    throw new IBL.NoSuitablePackageForScheduledException("There are no packages waiting to be assigned");
+                    throw new BlApi.NoSuitablePackageForScheduledException("There are no packages waiting to be assigned");
 
                 
             }
@@ -74,7 +74,7 @@ namespace BL
             var dr = droneLists.Find(d => d.Id == droneId);
 
             if (dr == default)
-                throw new IBL.NoNumberFoundException("Drone ID not found");
+                throw new BlApi.NoNumberFoundException("Drone ID not found");
             if (dr.PackageNumber == -1)
                 throw new NoPackageAssociatedWithDrone();
 
@@ -98,7 +98,7 @@ namespace BL
             var dr = droneLists.Find(d => d.Id == droneId);
 
             if (dr == default)
-                throw new IBL.NoNumberFoundException("Drone ID not found");
+                throw new BlApi.NoNumberFoundException("Drone ID not found");
             if (dr.PackageNumber == -1)
                 throw new NoPackageAssociatedWithDrone();
 

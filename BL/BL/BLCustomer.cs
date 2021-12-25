@@ -1,6 +1,6 @@
 ﻿using IDAL;
-using IBL;
-using IBL.BO;
+using BlApi;
+using BlApi.BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +28,7 @@ namespace BL
             }
             catch (IDAL.ExistsNumberException ex)
             {
-                throw new IBL.NoNumberFoundException("Customer already exists", ex);
+                throw new BlApi.NoNumberFoundException("Customer already exists", ex);
             }
         }
 
@@ -45,7 +45,7 @@ namespace BL
             }
             catch (IDAL.NoNumberFoundException ex)
             {
-                throw new IBL.NoNumberFoundException("Customer ID not found", ex);
+                throw new BlApi.NoNumberFoundException("Customer ID not found", ex);
             }
 
             if (name != "")
@@ -79,8 +79,8 @@ namespace BL
                     BoCustomer.PackageAtCustomerFromCustomer.Add(new()
                     {
                         PackageId = pck.Id,
-                        Weight = (IBL.BO.Weight)pck.Weight,
-                        Priority = (IBL.BO.Priorities)pck.Priority,
+                        Weight = (BlApi.BO.Weight)pck.Weight,
+                        Priority = (BlApi.BO.Priorities)pck.Priority,
                         Status = GetPackages(x => x.Id == pck.Id).ToList()[0].PackageStatus,
                         OtherSideCustomer = dal.GetCustomer(pck.TargetId).GetCusomerInPackage()
                     });
@@ -89,8 +89,8 @@ namespace BL
                     BoCustomer.PackageAtCustomerToCustomer.Add(new()
                     {
                         PackageId = pck.Id,
-                        Weight = (IBL.BO.Weight)pck.Weight,
-                        Priority = (IBL.BO.Priorities)pck.Priority,
+                        Weight = (BlApi.BO.Weight)pck.Weight,
+                        Priority = (BlApi.BO.Priorities)pck.Priority,
                         Status = GetPackages(x => x.Id == pck.Id).ToList()[0].PackageStatus,
                         OtherSideCustomer = dal.GetCustomer(pck.SenderId).GetCusomerInPackage()
                     });
@@ -99,7 +99,7 @@ namespace BL
             }
             catch (IDAL.NoNumberFoundException ex)
             {
-                throw new IBL.NoNumberFoundException("Customer ID not found", ex);
+                throw new BlApi.NoNumberFoundException("Customer ID not found", ex);
             }
 
         }

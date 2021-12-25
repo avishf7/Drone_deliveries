@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
-using IBL;
-using IBL.BO;
+using BlApi;
+using BlApi.BO;
 using System.Collections.Generic;
 
 namespace ConsoleUiBL

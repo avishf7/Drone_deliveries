@@ -1,6 +1,6 @@
 ﻿using IDAL;
-using IBL;
-using IBL.BO;
+using BlApi;
+using BlApi.BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +30,7 @@ namespace BL
             }
             catch (IDAL.ExistsNumberException ex)
             {
-                throw new IBL.ExistsNumberException("Package already exists ", ex);
+                throw new BlApi.ExistsNumberException("Package already exists ", ex);
             }
         }
 
@@ -64,7 +64,7 @@ namespace BL
             }
             catch (IDAL.NoNumberFoundException ex)
             {
-                throw new IBL.NoNumberFoundException("Package ID not found", ex);
+                throw new BlApi.NoNumberFoundException("Package ID not found", ex);
             }
         }
 

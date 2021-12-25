@@ -1,10 +1,10 @@
 ﻿using IDAL.DO;
 using System;
 using System.Collections.Generic;
-using IDAL;
+using ;
 using System.Linq;
 
-namespace DalObject
+namespace Dal
 {
     /// <summary>
     /// A class in which we will make the changes in all parts of the code

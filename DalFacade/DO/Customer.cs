@@ -1,7 +1,5 @@
 ﻿using System;
 
-namespace IDAL
-{
     namespace DO
     {
         /// <summary>
@@ -31,4 +29,4 @@ namespace IDAL
             public double Lattitude { get; set; }
         }
     }
-}
+

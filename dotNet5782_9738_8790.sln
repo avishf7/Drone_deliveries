@@ -12,13 +12,32 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleUI", "ConsoleUI\ConsoleUI.csproj", "{0B18305F-6AD0-4C1E-85B3-284BEAB1BC85}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{1490B269-1767-4D82-9C5B-BA7BC57D91A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalObject", "DAL\DalObject.csproj", "{1490B269-1767-4D82-9C5B-BA7BC57D91A9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{97217384-8401-4EC8-BF0B-BDEA85BB752F} = {97217384-8401-4EC8-BF0B-BDEA85BB752F}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BL\BL.csproj", "{63D65CB1-F63D-45BC-9CAC-C6DE4A91FD2D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{97217384-8401-4EC8-BF0B-BDEA85BB752F} = {97217384-8401-4EC8-BF0B-BDEA85BB752F}
+		{8083DBE1-3148-43B3-8F39-7593D610FFB6} = {8083DBE1-3148-43B3-8F39-7593D610FFB6}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleUiBL", "ConsoleUi_BL\ConsoleUiBL.csproj", "{6D3E3EED-CA67-4CD5-A146-63C36266A6C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PL", "PL\PL.csproj", "{EA4C0466-5BFD-4F43-AD96-7BDB09C8D5BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{EA4C0466-5BFD-4F43-AD96-7BDB09C8D5BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalXml", "DalXml\DalXml.csproj", "{8083DBE1-3148-43B3-8F39-7593D610FFB6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{97217384-8401-4EC8-BF0B-BDEA85BB752F} = {97217384-8401-4EC8-BF0B-BDEA85BB752F}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalFacade", "DalFacade\DalFacade.csproj", "{97217384-8401-4EC8-BF0B-BDEA85BB752F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{B4E269D8-274F-4F82-A143-DF5E6FF9C756}"
+	ProjectSection(SolutionItems) = preProject
+		dal-config.xml = dal-config.xml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +69,14 @@ Global
 		{EA4C0466-5BFD-4F43-AD96-7BDB09C8D5BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA4C0466-5BFD-4F43-AD96-7BDB09C8D5BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA4C0466-5BFD-4F43-AD96-7BDB09C8D5BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8083DBE1-3148-43B3-8F39-7593D610FFB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8083DBE1-3148-43B3-8F39-7593D610FFB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8083DBE1-3148-43B3-8F39-7593D610FFB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8083DBE1-3148-43B3-8F39-7593D610FFB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97217384-8401-4EC8-BF0B-BDEA85BB752F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97217384-8401-4EC8-BF0B-BDEA85BB752F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97217384-8401-4EC8-BF0B-BDEA85BB752F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97217384-8401-4EC8-BF0B-BDEA85BB752F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

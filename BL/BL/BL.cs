@@ -1,6 +1,6 @@
 ﻿using IDAL;
-using IBL;
-using IBL.BO;
+using BlApi;
+using BlApi.BO;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -142,13 +142,13 @@ namespace BL
         /// </summary>
         /// <param name="location">Drone's location</param>
         /// <returns> the station closest</returns>
-        /// <exception cref="IBL.NoNumberFoundException"></exception>
+        /// <exception cref="BlApi.NoNumberFoundException"></exception>
         Location FindClosestStationLocation(Location location, Predicate<IDAL.DO.Station> predicate = null)
         {
             List<IDAL.DO.Station> stations = dal.GetStations(predicate).ToList();
 
             if (!stations.Any())
-                throw new IBL.NoNumberFoundException("No station that provided the predicate");
+                throw new BlApi.NoNumberFoundException("No station that provided the predicate");
 
             double minDistance = stations.Min(x => Distance(location, new Location() { Lattitude = x.Lattitude, Longitude = x.Longitude }));
 

@@ -1,6 +1,6 @@
 ﻿using IDAL;
-using IBL;
-using IBL.BO;
+using BlApi;
+using BlApi.BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +19,7 @@ namespace BL
 
             if (dr == null)
             {
-                throw new IBL.NoNumberFoundException("Drone ID not found");
+                throw new BlApi.NoNumberFoundException("Drone ID not found");
             }
 
             if (dr.DroneStatus != DroneStatuses.Available)
@@ -29,9 +29,9 @@ namespace BL
 
             Location stLocation;
             try { stLocation = FindClosestStationLocation(dr.LocationOfDrone, x => x.FreeChargeSlots > 0); }
-            catch (IBL.NoNumberFoundException ex)
+            catch (BlApi.NoNumberFoundException ex)
             {
-                throw new IBL.NoNumberFoundException("There is no station with available charging stations", ex);
+                throw new BlApi.NoNumberFoundException("There is no station with available charging stations", ex);
             }
 
             double KM = Distance(stLocation, dr.LocationOfDrone);
@@ -64,7 +64,7 @@ namespace BL
 
             if (dr == null)
             {
-                throw new IBL.NoNumberFoundException("Drone ID not found");
+                throw new BlApi.NoNumberFoundException("Drone ID not found");
             }
 
             if (dr.DroneStatus != DroneStatuses.Maintenance)

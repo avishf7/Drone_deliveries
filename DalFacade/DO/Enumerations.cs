@@ -1,7 +1,6 @@
 ﻿using System;
 
-namespace IDAL
-{
+
     namespace DO
     {
         /// <summary>
@@ -13,4 +12,4 @@ namespace IDAL
         /// </summary>
         public enum Priorities { Normal, Fast, Emergency }
     }
-}
+

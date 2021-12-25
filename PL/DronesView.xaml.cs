@@ -11,8 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using IBL;
-using IBL.BO;
+using BlApi;
+using BlApi.BO;
 
 
 
@@ -113,7 +113,7 @@ namespace PL
         private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (DronesListView.SelectedItem != null)
-                new Drone(bl, this, (DronesListView.SelectedItem as IBL.BO.DroneToList).Id).ShowDialog();
+                new Drone(bl, this, (DronesListView.SelectedItem as BlApi.BO.DroneToList).Id).ShowDialog();
         }
 
         /// <summary>
