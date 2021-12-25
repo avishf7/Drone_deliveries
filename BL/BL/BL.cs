@@ -9,11 +9,11 @@ using Dal;
 
 namespace BL
 {
-    partial class BL : IBl
+   public partial class BL : IBl
     {
         static BL() { }
 
-        internal static BL Instance { get; }
+        public static BL Instance { get; } = new BL();
 
         IDal dal = new DalObject();
 
