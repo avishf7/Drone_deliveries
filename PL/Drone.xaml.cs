@@ -74,7 +74,6 @@ namespace PL
             this.Width = 550;
             this.DataContext = drone;
 
-
         }
 
         /// <summary>
