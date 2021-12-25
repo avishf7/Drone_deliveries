@@ -1,4 +1,5 @@
-﻿using IDAL;
+﻿using DO;
+using DalApi;
 using BlApi;
 using BlApi.BO;
 using System;

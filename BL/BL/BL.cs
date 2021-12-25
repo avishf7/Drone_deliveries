@@ -1,17 +1,21 @@
-﻿using IDAL;
+﻿using DalApi;
 using BlApi;
 using BlApi.BO;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
+using Dal;
 
 namespace BL
 {
-    public partial class BL : IBl
+    partial class BL : IBl
     {
-        IDal dal = new DalObject.DalObject();
+        static BL() { }
+
+        internal static BL Instance { get; }
+
+        IDal dal = new DalObject();
 
         Random rd = new Random();
 
@@ -24,7 +28,7 @@ namespace BL
         internal static double HeavyWeight;
         internal static double ChargingRate;
 
-        public BL()
+        private BL()
         {
             //Bring the cinfig from DAL
             List<double> tmp = dal.ChargingRequest();
@@ -34,10 +38,10 @@ namespace BL
             HeavyWeight = tmp[3];
             ChargingRate = tmp[4];
 
-            List<IDAL.DO.Drone> drones = dal.GetDrones().ToList();
-            List<IDAL.DO.Package> senderingPackages = dal.GetPackages(x => x.DroneId != -1).ToList();
-            List<IDAL.DO.Package> deliveredPackages = dal.GetPackages(x => x.Delivered != null).ToList();
-            List<IDAL.DO.Station> stations = dal.GetStations().ToList();
+            List<DO.Drone> drones = dal.GetDrones().ToList();
+            List<DO.Package> senderingPackages = dal.GetPackages(x => x.DroneId != -1).ToList();
+            List<DO.Package> deliveredPackages = dal.GetPackages(x => x.Delivered != null).ToList();
+            List<DO.Station> stations = dal.GetStations().ToList();
 
             foreach (var drone in drones)
             {
@@ -50,14 +54,14 @@ namespace BL
                 switch (droneStatus)
                 {
                     case DroneStatuses.Available:
-                        IDAL.DO.Customer randomCustomer = dal.GetCustomer(deliveredPackages[rd.Next(deliveredPackages.Count)].TargetId);
+                        DO.Customer randomCustomer = dal.GetCustomer(deliveredPackages[rd.Next(deliveredPackages.Count)].TargetId);
 
                         droneLocation = new() { Lattitude = randomCustomer.Lattitude, Longitude = randomCustomer.Longitude };
                         minBattery = BatteryUsage(Distance(droneLocation, FindClosestStationLocation(droneLocation)));
 
                         break;
                     case DroneStatuses.Maintenance:
-                        IDAL.DO.Station randomStation = stations[rd.Next(stations.Count)];
+                        DO.Station randomStation = stations[rd.Next(stations.Count)];
 
                         droneLocation = new() { Lattitude = randomStation.Lattitude, Longitude = randomStation.Longitude };
                         maxBattery = 20.0;
@@ -70,7 +74,7 @@ namespace BL
                         });
                         break;
                     case DroneStatuses.Sendering:
-                        IDAL.DO.Customer sender = dal.GetCustomer(senderingPackages[iPck].SenderId),
+                        DO.Customer sender = dal.GetCustomer(senderingPackages[iPck].SenderId),
                                          target = dal.GetCustomer(senderingPackages[iPck].TargetId);
 
                         Location senderLocation = new() { Lattitude = sender.Lattitude, Longitude = sender.Longitude },
@@ -143,16 +147,16 @@ namespace BL
         /// <param name="location">Drone's location</param>
         /// <returns> the station closest</returns>
         /// <exception cref="BlApi.NoNumberFoundException"></exception>
-        Location FindClosestStationLocation(Location location, Predicate<IDAL.DO.Station> predicate = null)
+        Location FindClosestStationLocation(Location location, Predicate<DO.Station> predicate = null)
         {
-            List<IDAL.DO.Station> stations = dal.GetStations(predicate).ToList();
+            List<DO.Station> stations = dal.GetStations(predicate).ToList();
 
             if (!stations.Any())
                 throw new BlApi.NoNumberFoundException("No station that provided the predicate");
 
             double minDistance = stations.Min(x => Distance(location, new Location() { Lattitude = x.Lattitude, Longitude = x.Longitude }));
 
-            IDAL.DO.Station station = stations.Find(x => Distance(location, new Location() { Lattitude = x.Lattitude, Longitude = x.Longitude }) == minDistance);
+            DO.Station station = stations.Find(x => Distance(location, new Location() { Lattitude = x.Lattitude, Longitude = x.Longitude }) == minDistance);
 
             return new Location() { Lattitude = station.Lattitude, Longitude = station.Longitude };
         }

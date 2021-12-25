@@ -1,4 +1,4 @@
-﻿using IDAL;
+﻿using DalApi;
 using BlApi;
 using BlApi.BO;
 using System;
@@ -16,12 +16,12 @@ namespace BL
         {
             try
             {
-                List<IDAL.DO.Station> stations = dal.GetStations().ToList();
-                IDAL.DO.Station st = stations.Find(x => x.Id == staionId);
-                dal.AddDrone(new IDAL.DO.Drone
+                List<DO.Station> stations = dal.GetStations().ToList();
+                DO.Station st = stations.Find(x => x.Id == staionId);
+                dal.AddDrone(new DO.Drone
                 {
                     Id = drone.Id,
-                    MaxWeight = (IDAL.DO.Weight)drone.MaxWeight,
+                    MaxWeight = (DO.Weight)drone.MaxWeight,
                     Model = drone.Model
                 });
 
@@ -39,22 +39,22 @@ namespace BL
                 dal.UsingChargingStation(st.Id);
 
             }
-            catch (IDAL.NoNumberFoundException ex) { throw new BlApi.NoNumberFoundException("Station ID not found", ex); }
-            catch (IDAL.ExistsNumberException ex) { throw new BlApi.ExistsNumberException("Drone already exists", ex); }
+            catch (DalApi.NoNumberFoundException ex) { throw new BlApi.NoNumberFoundException("Station ID not found", ex); }
+            catch (DalApi.ExistsNumberException ex) { throw new BlApi.ExistsNumberException("Drone already exists", ex); }
         }
 
         public void UpdateDrone(int droneId, string model)
         {
             try
             {
-                IDAL.DO.Drone dr = dal.GetDrone(droneId);
+                DO.Drone dr = dal.GetDrone(droneId);
 
                 dr.Model = model;
                 dal.UpdateDrone(dr);
 
                 droneLists.Find(drone => drone.Id == droneId).Model = model;
             }
-            catch (IDAL.NoNumberFoundException ex) { throw new BlApi.NoNumberFoundException("Drone ID not found", ex); }
+            catch (DalApi.NoNumberFoundException ex) { throw new BlApi.NoNumberFoundException("Drone ID not found", ex); }
         
         }
 
@@ -67,8 +67,8 @@ namespace BL
                 {
                     if (dr.DroneStatus == DroneStatuses.Sendering)
                     {
-                        IDAL.DO.Package package = dal.GetPackage(dr.PackageNumber);
-                        IDAL.DO.Customer sender = dal.GetCustomer(package.SenderId),
+                        DO.Package package = dal.GetPackage(dr.PackageNumber);
+                        DO.Customer sender = dal.GetCustomer(package.SenderId),
                                          target = dal.GetCustomer(package.TargetId);
                         Location senderLocation = new() { Lattitude = sender.Lattitude, Longitude = sender.Longitude },
                                  targetLocation = new() { Lattitude = target.Lattitude, Longitude = target.Longitude };

@@ -11,6 +11,9 @@ namespace Dal
     /// </summary>
     public class DalObject : IDal
     {
+        static DalObject() { }
+
+        internal static DalObject Instance { get; }
 
         /// <summary>
         /// CTOR
