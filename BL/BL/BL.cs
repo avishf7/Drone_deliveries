@@ -9,13 +9,11 @@ using Dal;
 
 namespace BL
 {
-   public partial class BL : IBl
+    sealed partial class BL : IBL
     {
-        static BL() { }
+        internal static BL Instance { get; } = new BL();
 
-        public static BL Instance { get; } = new BL();
-
-        IDal dal = new DalObject();
+        IDal dal = DalFactory.GetDal();
 
         Random rd = new Random();
 
@@ -79,7 +77,7 @@ namespace BL
 
                         Location senderLocation = new() { Lattitude = sender.Lattitude, Longitude = sender.Longitude },
                                  targetLocation = new() { Lattitude = target.Lattitude, Longitude = target.Longitude };
-                                                
+
                         if (senderingPackages[iPck].PickedUp == null)
                         {
                             droneLocation = FindClosestStationLocation(senderLocation);

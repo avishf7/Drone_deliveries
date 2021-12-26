@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DalApi
 {
-    class DalFactory
+    public static class DalFactory
     {
         public static IDal GetDal()
         {

@@ -11,7 +11,7 @@ using System.Runtime.Serialization;
 
 namespace BL
 {
-    public partial class BL : IBl
+    public partial class BL : IBL
     {
         public void packageAssigning(int droneId)
         {

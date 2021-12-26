@@ -23,7 +23,7 @@ namespace PL
     /// </summary>
     public partial class DronesView : Window
     {
-        IBl bl;
+        IBL bl;
         Window sender;
         bool isCloseClick = true;
 
@@ -32,7 +32,7 @@ namespace PL
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="sender">The element that activates the function</param>
-        public DronesView(IBl bl, Window sender)
+        public DronesView(IBL bl, Window sender)
         {
             InitializeComponent();
             this.bl = bl;

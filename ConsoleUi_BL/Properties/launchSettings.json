@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ConsoleUiBL": {
+      "commandName": "Project",
+      "workingDirectory": "$(SolutionDir)"
+    }
+  }
+}

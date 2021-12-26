@@ -10,7 +10,8 @@ namespace ConsoleUiBL
     {
         static void Main(string[] args)
         {
-            IBl bl = new BL.BL();
+            IBL bl = BlFactory.GetBl();
+
             MenuOptions.OpeningOptions ch;
 
             do

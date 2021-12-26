@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlApi
 {
-    public interface IBl
+    public interface IBL
     {
 
         #region Drone functions
