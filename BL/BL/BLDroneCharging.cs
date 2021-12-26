@@ -24,7 +24,7 @@ namespace BL
 
             if (dr.DroneStatus != DroneStatuses.Available)
             {
-                throw new DroneNotAvailableException();
+                throw new DroneNotAvailableException("");
             }
 
             Location stLocation;
@@ -69,7 +69,7 @@ namespace BL
 
             if (dr.DroneStatus != DroneStatuses.Maintenance)
             {
-                throw new DroneNotMaintenanceException();
+                throw new DroneNotMaintenanceException("");
             }
 
 

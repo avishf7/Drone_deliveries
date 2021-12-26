@@ -17,8 +17,8 @@ namespace BL
         {
             var dr = droneLists.Find(d => d.Id == droneId);
 
-            if (dr == null ? throw new BlApi.NoNumberFoundException() : true &&
-                dr.DroneStatus != DroneStatuses.Available ? throw new DroneNotAvailableException() : true)
+            if (dr == null ? throw new BlApi.NoNumberFoundException("") : true &&
+                dr.DroneStatus != DroneStatuses.Available ? throw new DroneNotAvailableException("") : true)
             {
                 var orderPackages = dal.GetPackages().Where(pck => (int)pck.Weight <= (int)dr.MaxWeight)
                                 .OrderByDescending(pck => pck.Priority)
@@ -77,7 +77,7 @@ namespace BL
             if (dr == default)
                 throw new BlApi.NoNumberFoundException("Drone ID not found");
             if (dr.PackageNumber == -1)
-                throw new NoPackageAssociatedWithDrone();
+                throw new NoPackageAssociatedWithDrone("");
 
             var doPackage = dal.GetPackage(dr.PackageNumber);
 

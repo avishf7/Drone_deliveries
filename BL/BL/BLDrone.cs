@@ -16,8 +16,8 @@ namespace BL
         {
             try
             {
-                List<DO.Station> stations = dal.GetStations().ToList();
-                DO.Station st = stations.Find(x => x.Id == staionId);
+
+                DO.Station st = dal.GetStation(staionId);
                 dal.AddDrone(new DO.Drone
                 {
                     Id = drone.Id,
@@ -36,7 +36,7 @@ namespace BL
                     PackageNumber = -1
                 });
 
-                dal.UsingChargingStation(st.Id);
+                dal.UsingChargingStation(staionId);
 
             }
             catch (DalApi.NoNumberFoundException ex) { throw new BlApi.NoNumberFoundException("Station ID not found", ex); }
@@ -89,7 +89,7 @@ namespace BL
                 }
                 else
                 {
-                    throw new BlApi.NoNumberFoundException();
+                    throw new BlApi.NoNumberFoundException("");
                 }
 
                 return new()
