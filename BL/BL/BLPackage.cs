@@ -1,4 +1,4 @@
-﻿using IDAL;
+﻿using DalApi;
 using BlApi;
 using BlApi.BO;
 using System;
@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public partial class BL : IBl
+    public partial class BL : IBL
     {
         public void AddPackage(Package package)
         {
             try
             {
-                dal.AddPackage(new IDAL.DO.Package
+                dal.AddPackage(new DO.Package
                 {
                     SenderId = package.SenderCustomerInPackage.CustomerId,
                     TargetId = package.TargetCustomerInPackage.CustomerId,
-                    Weight = (IDAL.DO.Weight)package.Weight,
-                    Priority = (IDAL.DO.Priorities)package.Priority,
+                    Weight = (DO.Weight)package.Weight,
+                    Priority = (DO.Priorities)package.Priority,
                     DroneId = 0,
                     Requested = DateTime.Now,
                     Scheduled = null,
@@ -28,7 +28,7 @@ namespace BL
                     Delivered = null
                 });
             }
-            catch (IDAL.ExistsNumberException ex)
+            catch (DalApi.ExistsNumberException ex)
             {
                 throw new BlApi.ExistsNumberException("Package already exists ", ex);
             }
@@ -62,7 +62,7 @@ namespace BL
 
                 return BoPackage;
             }
-            catch (IDAL.NoNumberFoundException ex)
+            catch (DalApi.NoNumberFoundException ex)
             {
                 throw new BlApi.NoNumberFoundException("Package ID not found", ex);
             }
@@ -70,7 +70,7 @@ namespace BL
 
         public IEnumerable<PackageToList> GetPackages(Predicate<PackageToList> predicate = null)
         {
-            List<IDAL.DO.Package> DoPackage = (List<IDAL.DO.Package>)dal.GetPackages();
+            List<DO.Package> DoPackage = (List<DO.Package>)dal.GetPackages();
             List<PackageToList> BoPackageToLists = new();
 
             foreach (var item in DoPackage)

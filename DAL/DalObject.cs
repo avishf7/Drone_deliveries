@@ -9,13 +9,15 @@ namespace Dal
     /// <summary>
     /// A class in which we will make the changes in all parts of the code
     /// </summary>
-    public class DalObject : IDal
+    sealed class DalObject : IDal
     {
+
+        public static DalObject Instance { get; } = new DalObject();
 
         /// <summary>
         /// CTOR
         /// </summary>
-        public DalObject()
+        private DalObject()
         {
             DataSource.Initialize();
         }

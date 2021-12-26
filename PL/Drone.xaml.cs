@@ -21,7 +21,7 @@ namespace PL
     /// </summary>
     public partial class Drone : Window
     {
-        IBl bl;
+        IBL bl;
         DronesView sender;
         BlApi.BO.Drone drone;
 
@@ -30,7 +30,7 @@ namespace PL
         /// </summary>
         /// <param name="bl">The variable of access to the logic layer</param>
         /// <param name="sender">The element that activates the function</param>
-        public Drone(IBl bl, DronesView sender)
+        public Drone(IBL bl, DronesView sender)
         {
             InitializeComponent();
             this.bl = bl;
@@ -53,7 +53,7 @@ namespace PL
         /// <param name="bl">The variable of access to the logic layer</param>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="droneId">The ID of the drone intended for display</param>
-        public Drone(IBl bl, DronesView sender, int droneId)
+        public Drone(IBL bl, DronesView sender, int droneId)
         {
             InitializeComponent();
             this.bl = bl;
@@ -73,7 +73,6 @@ namespace PL
             this.Height = 680;
             this.Width = 550;
             this.DataContext = drone;
-
 
         }
 

@@ -22,7 +22,7 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        IBl bl = new BL.BL();
+        IBL bl = BlFactory.GetBl();
         const int WM_SYSCOMMAND = 0x0112;
         const int SC_MOVE = 0xF010;
 

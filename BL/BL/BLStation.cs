@@ -1,4 +1,4 @@
-﻿using IDAL;
+﻿using DalApi;
 using BlApi;
 using BlApi.BO;
 using System;
@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public partial class BL : IBl
+    public partial class BL : IBL
     {
         public void AddStation(Station station)
         {
             try
             {
-                dal.AddStation(new IDAL.DO.Station
+                dal.AddStation(new DO.Station
                 {
                     Id = station.Id,
                     Name = station.Name,
@@ -24,7 +24,7 @@ namespace BL
                     FreeChargeSlots = station.FreeChargeSlots,
                 });
             }
-            catch (IDAL.ExistsNumberException ex)
+            catch (DalApi.ExistsNumberException ex)
             {
                 throw new BlApi.ExistsNumberException("Station already exists ", ex);
             }
@@ -32,7 +32,7 @@ namespace BL
 
         public void UpdateStation(int stationId, string name, int numOfChargeStation)
         {
-            IDAL.DO.Station dalSt;
+            DO.Station dalSt;
             Station blSt;
 
             try
@@ -41,7 +41,7 @@ namespace BL
                 blSt = GetStation(stationId);
 
             }
-            catch (IDAL.NoNumberFoundException ex)
+            catch (DalApi.NoNumberFoundException ex)
             {
                 throw new BlApi.NoNumberFoundException("Station ID not found", ex);
             }
@@ -65,7 +65,7 @@ namespace BL
         {
             try
             {
-                IDAL.DO.Station DoStation = dal.GetStation(stationId);
+                DO.Station DoStation = dal.GetStation(stationId);
 
                 Station BoStation = new()
                 {
@@ -76,7 +76,7 @@ namespace BL
                     ChargingDrones = new()
                 };
 
-                List<IDAL.DO.DroneCharge> doDroneCharge = dal.GetDronesCharges(x => x.StationId == stationId).ToList();
+                List<DO.DroneCharge> doDroneCharge = dal.GetDronesCharges(x => x.StationId == stationId).ToList();
 
                 foreach (var i in doDroneCharge)
                 {
@@ -90,7 +90,7 @@ namespace BL
 
                 return BoStation;
             }
-            catch (IDAL.NoNumberFoundException ex)
+            catch (DalApi.NoNumberFoundException ex)
             {
                 throw new BlApi.NoNumberFoundException("Station ID not found", ex);
             }
@@ -98,7 +98,7 @@ namespace BL
 
         public IEnumerable<StationToList> GetStations(Predicate<StationToList> predicate = null)
         {
-            List<IDAL.DO.Station> doStations = (List<IDAL.DO.Station>)dal.GetStations();
+            List<DO.Station> doStations = (List<DO.Station>)dal.GetStations();
             List<StationToList> boStations = new();
 
             foreach (var st in doStations)

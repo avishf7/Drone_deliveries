@@ -1,4 +1,5 @@
-﻿using IDAL;
+﻿using DO;
+using DalApi;
 using BlApi;
 using BlApi.BO;
 using System;
@@ -10,7 +11,7 @@ using System.Runtime.Serialization;
 
 namespace BL
 {
-    public partial class BL : IBl
+    public partial class BL : IBL
     {
         public void packageAssigning(int droneId)
         {

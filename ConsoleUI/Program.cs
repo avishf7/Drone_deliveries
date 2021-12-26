@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using IDAL;
-using IDAL.DO;
+using DalApi;
+using DO;
 
 
 
@@ -13,7 +13,7 @@ namespace ConsoleUI
 
         static void Main(string[] args)
         {
-            IDal dalObject = new DalObject.DalObject();
+            IDal dalObject = DalFactory.GetDal();
 
             MenuOptions.OpeningOptions ch;
 
