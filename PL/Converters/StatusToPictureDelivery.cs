@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BlApi.BO;
+using BO;
 using System.Windows.Data;
 using System.Globalization;
 using System.Windows.Media.Imaging;
@@ -25,14 +25,16 @@ namespace PL.Converters
                     case DroneStatuses.Maintenance:
                         return new BitmapImage(new Uri("https://deqn8kzyud5pf.cloudfront.net/assets/hamburgerX-blue-21400e6344ec76c3618c6ad6ae3d1f765d30715e49db6178b40fc1da45fded71.png"));
                     case DroneStatuses.Sendering:
-                        if (((PackageInTransfer)values[1]).IsCollected)
-                            return new BitmapImage(new Uri("https://cdn2.iconfinder.com/data/icons/drone-for-commercial-and-industrial-usage-and-appl/468/drone-commercial-11-512.png"));
-                        else
-                            return new BitmapImage(new Uri("https://cdn2.iconfinder.com/data/icons/drone-for-commercial-and-industrial-usage-and-appl/416/drone-commercial-10-512.png"));
+                        if (values[1] != null)
+                            if (((PackageInTransfer)values[1]).IsCollected)
+                                return new BitmapImage(new Uri("https://cdn2.iconfinder.com/data/icons/drone-for-commercial-and-industrial-usage-and-appl/468/drone-commercial-11-512.png"));
+                            else
+                                return new BitmapImage(new Uri("https://cdn2.iconfinder.com/data/icons/drone-for-commercial-and-industrial-usage-and-appl/416/drone-commercial-10-512.png"));
+                        break;
                 }
 
 
-            return null;       
+            return null;
         }
 
 

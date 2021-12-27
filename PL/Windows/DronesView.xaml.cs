@@ -13,7 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
-using BlApi.BO;
+using BO;
+
 
 
 
@@ -25,18 +26,18 @@ namespace PL
     public partial class DronesView : Window
     {
         IBL bl;
-        Window sender;
+        MainWindow sender;
         bool isCloseClick = true;
-        internal ObservableCollection<DroneToList> Drones { get; set; }
 
         
+
 
         /// <summary>
         /// constructor to create window of drones view.
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="sender">The element that activates the function</param>
-        public DronesView(IBL bl, Window sender)
+        public DronesView(IBL bl, MainWindow sender)
         {
             InitializeComponent();
             this.bl = bl;
@@ -45,10 +46,9 @@ namespace PL
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             MaxWeigth.ItemsSource = Enum.GetValues(typeof(Weight));
 
-            
-            Drones = new ObservableCollection<DroneToList>(bl.GetDrones());
-            DataContext = Drones;
 
+            
+            DataContext = this.sender.Drones;
         }
 
 
@@ -80,7 +80,6 @@ namespace PL
         private void Window_Closed(object sender, EventArgs e)
         {
             ((Button)this.sender.FindName("ShowDrones")).Visibility = Visibility.Visible;
-            this.sender.WindowStyle = WindowStyle.ThreeDBorderWindow;
         }
 
         /// <summary>
@@ -98,7 +97,7 @@ namespace PL
             StatusSelector.SelectedIndex = -1;
             StatusSelector.SelectedItem = null;
 
-            Drones = new ObservableCollection<DroneToList>(bl.GetDrones());
+            Filtering();
         }
 
         /// <summary>
@@ -120,7 +119,15 @@ namespace PL
         private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (DronesListView.SelectedItem != null)
-                new Drone(bl, this, (DronesListView.SelectedItem as BlApi.BO.DroneToList).Id).ShowDialog();
+            {
+                BO.Drone BODrone = bl.GetDrone((DronesListView.SelectedItem as BO.DroneToList).Id);
+                PO.Drone PODrone = this.sender.PODrones.Find(dr => dr.Id == BODrone.Id);
+                if (PODrone == null)
+                    this.sender.PODrones.Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));
+                    
+                new Drone(bl, this, PODrone).Show();
+
+            }
         }
 
         /// <summary>
@@ -131,10 +138,10 @@ namespace PL
             var weight = MaxWeigth.SelectedItem;
             var status = StatusSelector.SelectedItem;
 
-            Drones.Clear();
+            this.sender.Drones.Clear();
             foreach (var drone in bl.GetDrones(dr => (status != null ? dr.DroneStatus == (DroneStatuses)status : true) &&
                                                      (weight != null ? dr.MaxWeight == (Weight)weight : true)))
-                Drones.Add(drone);
+                this.sender.Drones.Add(drone);
         }
 
         /// <summary>

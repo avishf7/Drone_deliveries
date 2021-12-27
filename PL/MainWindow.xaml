@@ -6,8 +6,10 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="DronesShipments"
+        WindowStyle="None"
         WindowState="Maximized"
-        ResizeMode="NoResize" SourceInitialized="Window_SourceInitialized" SizeChanged="Window_SizeChanged">
+        ResizeMode="NoResize"
+        SizeChanged="Window_SizeChanged">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -19,18 +21,20 @@
 
     <Grid  >
         <Grid.RowDefinitions>
-            <RowDefinition Height="50*" />
-            <RowDefinition Height="45*"/>
+            <RowDefinition Height="65*" />
+            <RowDefinition Height="30*"/>
             <RowDefinition Height="5*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="30*" />
-            <ColumnDefinition Width="60*" />
+            <ColumnDefinition Width="20*" />
+            <ColumnDefinition Width="20*" />
+            <ColumnDefinition Width="20*" />
+            <ColumnDefinition Width="20*" />
+            <ColumnDefinition Width="20*" />
         </Grid.ColumnDefinitions>
 
 
-        <Button x:Name="ShowDrones" Grid.Column="1" Grid.Row="1" FontFamily="Aharoni" Click="ShowDrones_Click" Padding="30" Opacity="0.8" >
+        <Button x:Name="ShowDrones" Margin="20,5" Grid.Column="0" Grid.Row="1" FontFamily="Aharoni" Click="ShowDrones_Click" Padding="30" Opacity="0.8" >
             <Button.ContentTemplate>
                 <DataTemplate>
                     <Viewbox>
@@ -38,6 +42,40 @@
                     </Viewbox>
                 </DataTemplate>
             </Button.ContentTemplate>
+        </Button>
+
+        <Button x:Name="ShowDrones1"  Margin="20,5" Grid.Column="1" Grid.Row="1" FontFamily="Aharoni" Click="ShowDrones_Click" Padding="30" Opacity="0.8" >
+            <Button.ContentTemplate>
+                <DataTemplate>
+                    <Viewbox>
+                        <TextBlock TextAlignment="Center">Show <LineBreak/> Drones</TextBlock>
+                    </Viewbox>
+                </DataTemplate>
+            </Button.ContentTemplate>
+        </Button>
+
+        <Button x:Name="ShowDrones2" Margin="20,5" Grid.Column="2" Grid.Row="1" FontFamily="Aharoni" Click="ShowDrones_Click" Padding="30" Opacity="0.8" >
+            <Button.ContentTemplate>
+                <DataTemplate>
+                    <Viewbox>
+                        <TextBlock TextAlignment="Center">Show <LineBreak/> Drones</TextBlock>
+                    </Viewbox>
+                </DataTemplate>
+            </Button.ContentTemplate>
+        </Button>
+
+        <Button x:Name="t" Margin="20,5" Grid.Column="3" Grid.Row="1" FontFamily="Aharoni" Padding="30" Opacity="0.8"   >
+            <Button.ContentTemplate>
+                <DataTemplate>
+                    <Viewbox>
+                        <TextBlock TextAlignment="Center">Show <LineBreak/> Drones</TextBlock>
+                    </Viewbox>
+                </DataTemplate>
+            </Button.ContentTemplate>
+        </Button>
+
+        <Button x:Name="Exit" Margin="20,5" Grid.Column="4" Grid.Row="1" FontFamily="Aharoni" Click="Exit_Click" Padding="30" Opacity="0.8" >
+            <Image Source="https://cdn-icons-png.flaticon.com/512/1828/1828479.png" Margin="10"/>
         </Button>
 
     </Grid>

@@ -9,7 +9,7 @@
         Height="400" 
         Width="500" 
         WindowStartupLocation="CenterScreen"
-        WindowStyle="None" 
+        WindowStyle="SingleBorderWindow" 
         ResizeMode="NoResize">
     <Window.Resources>
         <ResourceDictionary>
@@ -239,7 +239,7 @@
                    FontFamily="Arial Black"
                    Margin="20"/>
 
-            <TextBlock x:Name="BattaryStatus" 
+            <!--<TextBlock x:Name="BattaryStatus" 
                    FontSize="20"
                    Text="{Binding Path=BatteryStatus, Mode=OneWay, StringFormat={}{0:F1}%}"
                    Grid.Row="0" 
@@ -247,7 +247,17 @@
                    Background="{StaticResource Static.Background}" 
                    Margin="20" 
                    TextAlignment="Center">
-            </TextBlock>
+            </TextBlock>-->
+
+            <ProgressBar x:Name="BattaryStatus" 
+                   FontSize="20"
+                   Value="{Binding Path=BatteryStatus, Mode=OneWay}"
+                   Grid.Row="0" 
+                   Grid.Column="1"
+                   Background="{StaticResource Static.Background}" 
+                   Margin="20" 
+                   >
+            </ProgressBar>
 
             <Label x:Name="labalDroneStatus" 
                    FontSize="20"

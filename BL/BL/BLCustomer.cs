@@ -1,6 +1,6 @@
 ﻿using DalApi;
 using BlApi;
-using BlApi.BO;
+using BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,8 +79,8 @@ namespace BL
                     BoCustomer.PackageAtCustomerFromCustomer.Add(new()
                     {
                         PackageId = pck.Id,
-                        Weight = (BlApi.BO.Weight)pck.Weight,
-                        Priority = (BlApi.BO.Priorities)pck.Priority,
+                        Weight = (BO.Weight)pck.Weight,
+                        Priority = (BO.Priorities)pck.Priority,
                         Status = GetPackages(x => x.Id == pck.Id).ToList()[0].PackageStatus,
                         OtherSideCustomer = dal.GetCustomer(pck.TargetId).GetCusomerInPackage()
                     });
@@ -89,8 +89,8 @@ namespace BL
                     BoCustomer.PackageAtCustomerToCustomer.Add(new()
                     {
                         PackageId = pck.Id,
-                        Weight = (BlApi.BO.Weight)pck.Weight,
-                        Priority = (BlApi.BO.Priorities)pck.Priority,
+                        Weight = (BO.Weight)pck.Weight,
+                        Priority = (BO.Priorities)pck.Priority,
                         Status = GetPackages(x => x.Id == pck.Id).ToList()[0].PackageStatus,
                         OtherSideCustomer = dal.GetCustomer(pck.SenderId).GetCusomerInPackage()
                     });

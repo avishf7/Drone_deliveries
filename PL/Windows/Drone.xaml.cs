@@ -12,7 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
-using BlApi.BO;
+using BO;
+
 
 namespace PL
 {
@@ -24,7 +25,7 @@ namespace PL
 
         IBL bl;
         DronesView sender;
-        BlApi.BO.Drone drone;
+        PO.Drone drone;
 
         /// <summary>
         /// Consructor for drone display window.
@@ -54,12 +55,12 @@ namespace PL
         /// <param name="bl">The variable of access to the logic layer</param>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="droneId">The ID of the drone intended for display</param>
-        public Drone(IBL bl, DronesView sender, int droneId)
+        public Drone(IBL bl, DronesView sender, PO.Drone drone)
         {
             InitializeComponent();
             this.bl = bl;
             this.sender = sender;
-            this.drone = bl.GetDrone(droneId);
+            this.drone = drone;
 
             MainGrid.RowDefinitions[0].Height = new(50, GridUnitType.Star);
             MainGrid.RowDefinitions[1].Height = new(50, GridUnitType.Star);
@@ -71,7 +72,7 @@ namespace PL
             MaxWeightInfo.Visibility = Visibility.Visible;
             DroneLocationInfo.Visibility = Visibility.Visible;
 
-            this.Height = 680;
+            this.Height = 700;
             this.Width = 550;
             this.DataContext = drone;
 
@@ -184,7 +185,7 @@ namespace PL
                     try
                     {
                         bl.SendDroneForCharge(drone.Id);
-                        this.DataContext = drone = bl.GetDrone(drone.Id);
+                        drone.CopyFromBODrone(bl.GetDrone(drone.Id));
                         this.sender.Filtering();
                         MessageBox.Show("Sent for charging", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -197,7 +198,7 @@ namespace PL
                     break;
                 case DroneStatuses.Maintenance:
                     bl.RealeseDroneFromCharge(drone.Id);
-                    this.DataContext = drone = bl.GetDrone(drone.Id);
+                    drone.CopyFromBODrone(bl.GetDrone(drone.Id));
                     this.sender.Filtering();
                     MessageBox.Show("Released from charging", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -218,7 +219,7 @@ namespace PL
                     try
                     {
                         bl.packageAssigning(drone.Id);
-                        this.DataContext = drone = bl.GetDrone(drone.Id);
+                        drone.CopyFromBODrone(bl.GetDrone(drone.Id));
                         this.sender.Filtering();
                         MessageBox.Show("The package was successfully associated", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -230,7 +231,7 @@ namespace PL
                     if (drone.PackageInProgress.IsCollected)
                     {
                         bl.Deliver(drone.Id);
-                        this.DataContext = drone = bl.GetDrone(drone.Id);
+                        drone.CopyFromBODrone(bl.GetDrone(drone.Id));
                         this.sender.Filtering();
                         MessageBox.Show("The package was delivered to its destination, good day", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -238,7 +239,7 @@ namespace PL
                     else
                     {
                         bl.PickUp(drone.Id);
-                        this.DataContext = drone = bl.GetDrone(drone.Id);
+                        drone.CopyFromBODrone(bl.GetDrone(drone.Id));
                         this.sender.Filtering();
                         MessageBox.Show("The package was successfully collected by the drone", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 

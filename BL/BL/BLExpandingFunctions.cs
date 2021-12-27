@@ -1,6 +1,6 @@
 ﻿using DalApi;
 using BlApi;
-using BlApi.BO;
+using BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +11,11 @@ namespace BL
 {
     static class BLExpandingFunctions
     {
+        /// <summary>
+        /// The function converts a "customer" object to a "customer in a package" object
+        /// </summary>
+        /// <param name="customer">"customer" object</param>
+        /// <returns>"customer in a package" object</returns>
         public static CustomerInPackage GetCusomerInPackage(this DO.Customer customer)
         {
             CustomerInPackage BoCustomerInPackage = new()
