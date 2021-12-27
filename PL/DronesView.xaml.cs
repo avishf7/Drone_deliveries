@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,9 @@ namespace PL
         IBL bl;
         Window sender;
         bool isCloseClick = true;
+        internal ObservableCollection<DroneToList> Drones { get; set; }
+
+        
 
         /// <summary>
         /// constructor to create window of drones view.
@@ -41,9 +45,12 @@ namespace PL
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             MaxWeigth.ItemsSource = Enum.GetValues(typeof(Weight));
 
+            
+            Drones = new ObservableCollection<DroneToList>(bl.GetDrones());
+            DataContext = Drones;
 
-            DronesListView.ItemsSource = bl.GetDrones();
         }
+
 
         /// <summary>
         /// Filter the display by weight in the combobox.
@@ -91,7 +98,7 @@ namespace PL
             StatusSelector.SelectedIndex = -1;
             StatusSelector.SelectedItem = null;
 
-            DronesListView.ItemsSource = bl.GetDrones();
+            Drones = new ObservableCollection<DroneToList>(bl.GetDrones());
         }
 
         /// <summary>
@@ -124,8 +131,10 @@ namespace PL
             var weight = MaxWeigth.SelectedItem;
             var status = StatusSelector.SelectedItem;
 
-            DronesListView.ItemsSource = bl.GetDrones(dr => (status != null ? dr.DroneStatus == (DroneStatuses)status : true) &&
-                                                           (weight != null ? dr.MaxWeight == (Weight)weight : true));
+            Drones.Clear();
+            foreach (var drone in bl.GetDrones(dr => (status != null ? dr.DroneStatus == (DroneStatuses)status : true) &&
+                                                     (weight != null ? dr.MaxWeight == (Weight)weight : true)))
+                Drones.Add(drone);
         }
 
         /// <summary>

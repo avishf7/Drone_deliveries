@@ -21,6 +21,7 @@ namespace PL
     /// </summary>
     public partial class Drone : Window
     {
+
         IBL bl;
         DronesView sender;
         BlApi.BO.Drone drone;
