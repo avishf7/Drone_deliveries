@@ -54,11 +54,11 @@
             </Button.ContentTemplate>
         </Button>
 
-        <Button x:Name="ShowDrones2" Margin="20,5" Grid.Column="2" Grid.Row="1" FontFamily="Aharoni" Click="ShowDrones_Click" Padding="30" Opacity="0.8" >
+        <Button x:Name="ShowStations" Margin="20,5" Grid.Column="2" Grid.Row="1" FontFamily="Aharoni" Click="ShowStations_Click" Padding="30" Opacity="0.8" >
             <Button.ContentTemplate>
                 <DataTemplate>
                     <Viewbox>
-                        <TextBlock TextAlignment="Center">Show <LineBreak/> Drones</TextBlock>
+                        <TextBlock TextAlignment="Center">Show <LineBreak/> Stations</TextBlock>
                     </Viewbox>
                 </DataTemplate>
             </Button.ContentTemplate>
