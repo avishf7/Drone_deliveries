@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BO;
 
-namespace PO
+namespace PL.PO
 {
 
     public class Drone : INotifyPropertyChanged
