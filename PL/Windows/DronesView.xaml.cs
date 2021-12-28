@@ -45,8 +45,12 @@ namespace PL
             this.sender = sender;
 
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
-            MaxWeigth.ItemsSource = Enum.GetValues(typeof(Weight));           
-            DataContext = this.sender.Drones;
+            MaxWeigth.ItemsSource = Enum.GetValues(typeof(Weight));
+            this.NormalView.DataContext = this.sender.Drones;
+            this.GroupingView.DataContext = from drone in this.sender.Drones
+                                                     group drone by drone.DroneStatus into DroneGroup
+                                                     orderby DroneGroup.Key descending
+                                                     select new { Name = DroneGroup.Key, Values = DroneGroup.ToList() };
 
             this.sender.Closing += Sender_Closing;
             this.sender.Activated += Sender_Activated;
