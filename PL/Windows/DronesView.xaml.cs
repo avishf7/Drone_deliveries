@@ -27,6 +27,7 @@ namespace PL
     {
         IBL bl;
         MainWindow sender;
+
         bool isCloseClick = true;
 
         
@@ -44,11 +45,27 @@ namespace PL
             this.sender = sender;
 
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
-            MaxWeigth.ItemsSource = Enum.GetValues(typeof(Weight));
-
-
-            
+            MaxWeigth.ItemsSource = Enum.GetValues(typeof(Weight));           
             DataContext = this.sender.Drones;
+
+            this.sender.Closing += Sender_Closing;
+            this.sender.Activated += Sender_Activated;
+            this.sender.Deactivated += Sender_Deactivated;
+        }
+
+        private void Sender_Deactivated(object sender, EventArgs e)
+        {
+            this.Topmost = false;
+        }
+
+        private void Sender_Activated(object sender, EventArgs e)
+        {
+            this.Topmost = true;
+        }
+
+        private void Sender_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Exit_Click(sender, null);
         }
 
 
@@ -79,7 +96,7 @@ namespace PL
         /// <param name="e"></param>
         private void Window_Closed(object sender, EventArgs e)
         {
-            ((Button)this.sender.FindName("ShowDrones")).Visibility = Visibility.Visible;
+            ((Button)this.sender.FindName("ShowDrones")).IsEnabled = true;
         }
 
         /// <summary>

@@ -82,7 +82,7 @@ namespace PO
             {
                 freeChargeSlots = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("freeChargeSlots"));
+                    PropertyChanged(this, new PropertyChangedEventArgs("FreeChargeSlots"));
             }
         }
 
