@@ -32,17 +32,15 @@ namespace PL.Windows
             InitializeComponent();
         }
 
-        public Station(IBL bl, StationsView stationsview)
+        public Station(IBL bl, StationsView sender)
         {
             this.bl = bl;
-            Stationsview = stationsview;
+            this.sender = sender;
         }
 
         public Station(IBL bl, StationsView stationsview, PO.Station pOStation) : this(bl, stationsview)
         {
             this.POStation = pOStation;
         }
-
-        public StationsView Stationsview { get; }
     }
 }
