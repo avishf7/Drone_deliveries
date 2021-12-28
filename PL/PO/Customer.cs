@@ -102,5 +102,23 @@ namespace PL.PO
             }
         }
 
+        /// <summary>
+        ///  PackageAtCustomerToCustomer
+        /// </summary>
+        private List<PackageAtCustomer> packageAtCustomerToCustomer;
+        /// <summary>
+        /// property for packageAtCustomerToCustomer
+        /// </summary>
+        public List<PackageAtCustomer> PackageAtCustomerToCustomer
+        {
+            get => packageAtCustomerToCustomer;
+            set
+            {
+                packageAtCustomerToCustomer = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("packageAtCustomerToCustomer "));
+            }
+        }
+
     }
 }
