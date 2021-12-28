@@ -48,8 +48,8 @@ namespace PL
         private void ShowDrones_Click(object sender, RoutedEventArgs e)
         {
             //  this.Visibility = Visibility.Hidden;
-            this.ShowDrones.Visibility = Visibility.Hidden;
-            WindowStyle = WindowStyle.None;
+            this.ShowDrones.IsEnabled = false;
+
             new DronesView(bl, this).Show();
 
         }
@@ -91,7 +91,7 @@ namespace PL
 
         private void ShowStations_Click(object sender, RoutedEventArgs e)
         {
-            this.ShowStations.Visibility = Visibility.Hidden;
+            this.ShowStations.IsEnabled = false; ;
             WindowStyle = WindowStyle.None;
             new StationsView(bl, this).Show();
 

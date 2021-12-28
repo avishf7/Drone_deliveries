@@ -23,6 +23,7 @@ namespace PL.Windows
     {
         IBL bl;
         MainWindow sender;
+
         bool isCloseClick = true;
 
 
@@ -39,6 +40,24 @@ namespace PL.Windows
 
             DataContext = this.sender.Stations;
 
+            this.sender.Closing += Sender_Closing;
+            this.sender.Activated += Sender_Activated;
+            this.sender.Deactivated += Sender_Deactivated;
+        }
+
+        private void Sender_Deactivated(object sender, EventArgs e)
+        {
+            this.Topmost = false;
+        }
+
+        private void Sender_Activated(object sender, EventArgs e)
+        {
+            this.Topmost = true;
+        }
+
+        private void Sender_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Exit_Click(sender, null);
         }
 
         /// <summary>
@@ -48,7 +67,7 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void Window_Closed(object sender, EventArgs e)
         {
-            ((Button)this.sender.FindName("ShowStations")).Visibility = Visibility.Visible;
+            ((Button)this.sender.FindName("ShowStations")).IsEnabled = true;
         }
 
         /// <summary>

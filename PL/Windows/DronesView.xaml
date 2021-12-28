@@ -11,8 +11,7 @@
         Closed="Window_Closed" 
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Closing="Window_Closing"
-        >
+        Closing="Window_Closing"        >
 
     <Window.Resources>
         <ResourceDictionary>
