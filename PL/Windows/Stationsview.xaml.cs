@@ -19,7 +19,7 @@ namespace PL.Windows
     /// <summary>
     /// Interaction logic for Stationsview.xaml
     /// </summary>
-    public partial class Stationsview : Window
+    public partial class StationsView : Window
     {
         IBL bl;
         MainWindow sender;
@@ -31,7 +31,7 @@ namespace PL.Windows
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="sender">The element that activates the function</param>
-        public Stationsview(IBL bl, MainWindow sender)
+        public StationsView(IBL bl, MainWindow sender)
         {
             InitializeComponent();
             this.bl = bl;
@@ -80,7 +80,7 @@ namespace PL.Windows
         {
             if (StationsListView.SelectedItem != null)
             {
-                BO.Station BOStation = bl.GetStation((StationsListView.SelectedItem as BO.DroneToList).Id);
+                BO.Station BOStation = bl.GetStation((StationsListView.SelectedItem as BO.StationToList).Id);
                 PO.Station POStation = this.sender.POStations.Find(st => st.Id == BOStation.Id);
                 if (POStation == null)
                     this.sender.POStations.Add(POStation = new PO.Station().CopyFromBOStation(BOStation));
@@ -109,5 +109,4 @@ namespace PL.Windows
         {
             e.Cancel = isCloseClick;
         }
-    }
-}
+    }}

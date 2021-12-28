@@ -1,4 +1,4 @@
-﻿<Window x:Class="PL.Windows.Stationsview"
+﻿<Window x:Class="PL.Windows.StationsView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -67,7 +67,7 @@
                 <ColumnDefinition Width="20*"/>
                 <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="AddStation" Grid.Column="1" Margin="12" Padding="5" FontFamily="Arial Black" Click="AddDrone_Click" >
+            <Button x:Name="AddStation" Grid.Column="1" Margin="12" Padding="5" FontFamily="Arial Black" Click="AddStation_Click" >
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <Viewbox>

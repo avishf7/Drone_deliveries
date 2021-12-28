@@ -27,5 +27,18 @@ namespace PL
 
             return PODrone;
         }
+
+        public static PO.Station CopyFromBOStation(this PO.Station POStation, BO.Station BOStation)
+        {
+            POStation.Id = BOStation.Id;
+            POStation.Name = BOStation.Name;
+            POStation.LocationOfStation = BOStation.LocationOfStation;
+            POStation.FreeChargeSlots = BOStation.FreeChargeSlots;
+            POStation.ChargingDrones = BOStation.ChargingDrones;
+
+
+            return POStation;
+        }
+
     }
 }

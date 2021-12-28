@@ -40,15 +40,70 @@ namespace PO
         /// </summary>
         public string Name
         {
-            get => Name;
+            get => name;
             set
             {
-                Name = value;
+                name = value;
                 if (PropertyChanged != null)
                     PropertyChanged(this, new PropertyChangedEventArgs("Name"));
             }
         }
 
+        /// <summary>
+        /// location of station
+        /// </summary>
+        private Location locationOfStation;
+        /// <summary>
+        /// property for location of station
+        /// </summary>
+        public Location LocationOfStation
+        {
+            get => locationOfStation;
+            set
+            {
+                locationOfStation = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("LocationOfStation"));
+            }
+
+        }
+
+        /// <summary>
+        ///  FreeChargeSlots
+        /// </summary>
+        private int freeChargeSlots;
+        /// <summary>
+        /// property for freeChargeSlots
+        /// </summary>
+        public int FreeChargeSlots
+        {
+            get => freeChargeSlots;
+            set
+            {
+                freeChargeSlots = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("freeChargeSlots"));
+            }
+        }
+
+
+        /// <summary>
+        ///  ChargingDrones
+        /// </summary>
+        private List<DroneCharge> chargingDrones;
+        /// <summary>
+        /// property for chargingDrones
+        /// </summary>
+        public List <DroneCharge>ChargingDrones
+        {
+            get => chargingDrones;
+            set
+            {
+                chargingDrones = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("ChargingDrones"));
+            }
+        }
 
     }
 }

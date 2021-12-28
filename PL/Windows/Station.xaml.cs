@@ -24,11 +24,25 @@ namespace PL.Windows
 
         IBL bl;
         StationsView sender;
-        PO.Station drone;
+        PO.Station station;
+        private PO.Station POStation;
 
         public Station()
         {
             InitializeComponent();
         }
+
+        public Station(IBL bl, StationsView stationsview)
+        {
+            this.bl = bl;
+            Stationsview = stationsview;
+        }
+
+        public Station(IBL bl, StationsView stationsview, PO.Station pOStation) : this(bl, stationsview)
+        {
+            this.POStation = pOStation;
+        }
+
+        public StationsView Stationsview { get; }
     }
 }
