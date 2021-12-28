@@ -50,7 +50,7 @@ namespace BL
                     Requested = DoPackage.Requested,
                     PickedUp = DoPackage.PickedUp,
                     Delivered = DoPackage.Delivered,
-                    droneInPackage = new()
+                    DroneInPackage = new()
                     {
                         Id = dr.Id,
                         BatteryStatus = dr.BatteryStatus,

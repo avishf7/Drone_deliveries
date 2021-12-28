@@ -163,6 +163,42 @@ namespace PO
             }
         }
 
+        /// <summary>
+        /// PickedUp
+        /// </summary>
+        private DateTime? pickedUp;
+        /// <summary>
+        /// property for pickedUp
+        /// </summary>
+        public DateTime? PickedUp
+        {
+            get => pickedUp;
+            set
+            {
+                pickedUp = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("PickedUp"));
+            }
+        }
+
+        /// <summary>
+        /// Delivered
+        /// </summary>
+        private DateTime? delivered;
+        /// <summary>
+        /// property for pickedUp
+        /// </summary>
+        public DateTime? Delivered
+        {
+            get => delivered;
+            set
+            {
+                delivered = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Delivered"));
+            }
+        }
+
 
     }
 }
