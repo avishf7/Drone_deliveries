@@ -77,11 +77,11 @@
                                 <Expander IsExpanded="True">
                                     <Expander.Header>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Name}" FontWeight="Bold" />
+                                            <TextBlock Text="{Binding Key}" FontWeight="Bold" />
                                         </StackPanel>
                                     </Expander.Header>
 
-                                    <ListView ItemsSource="{Binding Values}" 
+                                    <ListView ItemsSource="{Binding}" 
                                                  Background="{x:Null}"
                                                   MouseDoubleClick="DronesListView_MouseDoubleClick"/>
                                 </Expander>

@@ -30,7 +30,7 @@ namespace PL
 
         bool isCloseClick = true;
 
-        
+
 
 
         /// <summary>
@@ -48,13 +48,18 @@ namespace PL
             MaxWeigth.ItemsSource = Enum.GetValues(typeof(Weight));
             this.NormalView.DataContext = this.sender.Drones;
             this.GroupingView.DataContext = from drone in this.sender.Drones
-                                                     group drone by drone.DroneStatus into DroneGroup
-                                                     orderby DroneGroup.Key descending
-                                                     select new { Name = DroneGroup.Key, Values = DroneGroup.ToList() };
+                                            group drone by drone.DroneStatus;
 
+            this.sender.Drones.CollectionChanged += Drones_CollectionChanged;
             this.sender.Closing += Sender_Closing;
             this.sender.Activated += Sender_Activated;
             this.sender.Deactivated += Sender_Deactivated;
+        }
+
+        private void Drones_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            this.GroupingView.DataContext = from drone in this.sender.Drones
+                                            group drone by drone.DroneStatus;
         }
 
         private void Sender_Deactivated(object sender, EventArgs e)
@@ -144,7 +149,7 @@ namespace PL
                 PO.Drone PODrone = this.sender.PODrones.Find(dr => dr.Id == BODrone.Id);
                 if (PODrone == null)
                     this.sender.PODrones.Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));
-                    
+
                 new Drone(bl, this, PODrone).Show();
 
             }
