@@ -28,7 +28,7 @@ namespace PL
 
         public ObservableCollection<DroneToList> Drones { get; set; }
         public List<PO.Drone> PODrones { get; set; } = new();
-        //public ObservableCollection<StationToList> Stations { get; set; }
+        public ObservableCollection<StationToList> Stations { get; set; }
         //public List<PO.Station> POStations { get; set; } = new();
 
 
