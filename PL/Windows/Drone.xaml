@@ -134,7 +134,7 @@
                        VerticalAlignment="Center" 
                        HorizontalAlignment="Center"  
                        Foreground="#FFDDD81E"/>
-            
+
             <ComboBox x:Name="maxWeight"  
                       Grid.Row="2" Grid.Column="1" 
                       FontSize="20" 
@@ -154,7 +154,7 @@
                        TextAlignment="Center"
                        Visibility="Hidden">
             </TextBlock>
-            
+
             <TextBlock Text="Drone Location:" 
                        Grid.Row="3" Grid.Column="0" 
                        FontSize="20" 
@@ -163,7 +163,7 @@
                        VerticalAlignment="Center" 
                        HorizontalAlignment="Center"  
                        Foreground="#FFDDD81E"/>
-            
+
             <ComboBox x:Name="stations" 
                       ItemTemplate="{StaticResource stationTemplate}"
                       Grid.Row="3" 
@@ -206,7 +206,7 @@
                     Margin="15,5" 
                     FontFamily="Arial Black"
                     Click="add_Click"/>
-            
+
             <Button x:Name="cancelAdd" 
                     Content="Cancel" 
                     Grid.Column="1"
@@ -305,7 +305,7 @@
                         Click="cancel_Click">
                 <Image Source="https://cdn-icons-png.flaticon.com/512/1828/1828479.png" Margin="10"/>
             </Button>
-            
+
             <Grid x:Name="DroneInfoDownInDownGrid" Grid.Row="3" Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="25*"/>

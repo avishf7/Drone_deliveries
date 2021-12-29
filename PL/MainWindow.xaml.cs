@@ -16,7 +16,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BlApi;
 using BO;
-using PL.Windows;
 
 namespace PL
 {
@@ -29,8 +28,8 @@ namespace PL
 
         public ObservableCollection<DroneToList> Drones { get; set; }
         public List<PO.Drone> PODrones { get; set; } = new();
-        public ObservableCollection<StationToList> Stations { get; set; }
-        public List<PO.Station> POStations { get; set; } = new();
+        //public ObservableCollection<StationToList> Stations { get; set; }
+        //public List<PO.Station> POStations { get; set; } = new();
 
 
         //const int WM_SYSCOMMAND = 0x0112;
@@ -42,7 +41,7 @@ namespace PL
 
             Drones = new ObservableCollection<DroneToList>(bl.GetDrones());
 
-            Stations = new ObservableCollection<StationToList>(bl.GetStations());
+          //  Stations = new ObservableCollection<StationToList>(bl.GetStations());
         }
 
         private void ShowDrones_Click(object sender, RoutedEventArgs e)
@@ -89,12 +88,12 @@ namespace PL
             this.Close();
         }
 
-        private void ShowStations_Click(object sender, RoutedEventArgs e)
-        {
-            this.ShowStations.IsEnabled = false; ;
-            WindowStyle = WindowStyle.None;
-            new StationsView(bl, this).Show();
+        //private void ShowStations_Click(object sender, RoutedEventArgs e)
+        //{
+        //    this.ShowStations.IsEnabled = false; ;
+        //    WindowStyle = WindowStyle.None;
+        //    new StationsView(bl, this).Show();
 
-        }
+        //}
     }
 }
