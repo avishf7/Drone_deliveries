@@ -54,7 +54,7 @@
             </Button.ContentTemplate>
         </Button>
 
-        <Button x:Name="ShowStations" Margin="20,5" Grid.Column="2" Grid.Row="1" FontFamily="Aharoni" Click="ShowStations_Click" Padding="30" Opacity="0.8" >
+        <Button x:Name="ShowStations" Margin="20,5" Grid.Column="2" Grid.Row="1" FontFamily="Aharoni" Padding="30" Opacity="0.8" >
             <Button.ContentTemplate>
                 <DataTemplate>
                     <Viewbox>
