@@ -27,20 +27,18 @@ namespace PL.Windows
         PO.Station station;
         private PO.Station POStation;
 
-        public Station()
-        {
-            InitializeComponent();
-        }
 
         public Station(IBL bl, StationsView sender)
         {
+            InitializeComponent();
             this.bl = bl;
             this.sender = sender;
         }
 
-        public Station(IBL bl, StationsView stationsview, PO.Station pOStation) : this(bl, stationsview)
+        public Station(IBL bl, StationsView sender, PO.Station POStation) 
         {
-            this.POStation = pOStation;
+            InitializeComponent();
+            this.POStation = POStation;
         }
     }
 }
