@@ -35,7 +35,7 @@ namespace BO
         /// <summary>
         /// Gets the id of the drone
         /// </summary>
-        public DroneInPackage droneInPackage { get; set; }
+        public DroneInPackage DroneInPackage { get; set; }
 
         /// <summary>
         /// Gets the requested
@@ -64,7 +64,7 @@ namespace BO
             return "Details of ID:" + Id + "\nSender customer in package: " + SenderCustomerInPackage +
                 "\nTarget customer in package: " + TargetCustomerInPackage + "\nWeight: " + Weight + "\nPriority: " + Priority
                 + "\nRequested: " + Requested + "\nScheduled: " + Scheduled + "\nPicked up: "
-                + PickedUp + "\nDelivered: " + Delivered + "\nDrone in package: " + droneInPackage + "\n";
+                + PickedUp + "\nDelivered: " + Delivered + "\nDrone in package: " + DroneInPackage + "\n";
         }
     }
 }

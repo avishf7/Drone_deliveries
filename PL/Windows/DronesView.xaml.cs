@@ -134,7 +134,6 @@ namespace PL
         private void AddDrone_Click(object sender, RoutedEventArgs e)
         {
             new Drone(bl, this).ShowDialog();
-
         }
 
         /// <summary>
