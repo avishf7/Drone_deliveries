@@ -30,28 +30,30 @@
 
         <Grid x:Name="UpGrid" Grid.Row="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="25*"/>
-                <RowDefinition Height="25*"/>
-                <RowDefinition Height="25*"/>
-                <RowDefinition Height="25*"/>
+                <RowDefinition Height="16.66*"/>
+                <RowDefinition Height="16.66*"/>
+                <RowDefinition Height="16.66*"/>
+                <RowDefinition Height="16.66*"/>
+                <RowDefinition Height="16.66*"/>
+                <RowDefinition Height="16.66*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50*"/>
                 <ColumnDefinition Width="50*"/>
             </Grid.ColumnDefinitions>
 
-            <Label x:Name="labalDroneId" 
+            <Label x:Name="labalStationId" 
                    FontSize="20"
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
-                   Content="Drone ID:" 
+                   Content="Station ID:" 
                    Grid.Row="0" 
                    Grid.Column="0"                   
                    Foreground="#FFDDD81E" 
                    FontFamily="Arial Black"
-                   Margin="20"/>
+                   Margin="10"/>
 
-            <TextBox x:Name="droneId" 
+            <TextBox x:Name="stationId" 
                      FontSize="20"
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"                   
@@ -63,7 +65,7 @@
                      Visibility="Hidden">
             </TextBox>
 
-            <TextBlock x:Name="DroneIdInfo" 
+            <TextBlock x:Name="StationIdInfo" 
                        Grid.Row="0"
                        Grid.Column="1"
                        FontSize="20"
@@ -74,113 +76,191 @@
                        Visibility="Hidden">
             </TextBlock>
 
-            <Label x:Name="labalModel" 
+            <Label x:Name="labalName" 
                    FontSize="20"
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
-                   Content="Model:" 
+                   Content="Name:" 
                    Grid.Row="1" 
                    Grid.Column="0"                   
                    Foreground="#FFDDD81E" 
                    FontFamily="Arial Black"
-                   Margin="20"/>
+                   Margin="10"/>
 
-            <TextBox x:Name="model" 
-                     Grid.Row="1"
-                     Grid.Column="1"
+            <TextBox x:Name="name" 
                      FontSize="20"
                      VerticalContentAlignment="Center"
-                     HorizontalContentAlignment="Center"
-                     Background="{StaticResource Static.Background}"  
+                     HorizontalContentAlignment="Center"                   
+                     Grid.Row="1" 
+                     Grid.Column="1"
+                     Background="{StaticResource Static.Background}" 
+                     PreviewTextInput="IntTextBox_PreviewTextInput" 
                      Margin="20"
                      Visibility="Hidden">
-
             </TextBox>
 
-            <Grid x:Name="UpdateModelGrid" Grid.Row="1" Grid.Column="1" Visibility="Hidden">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="70*"/>
-                    <ColumnDefinition Width="30*"/>
-                </Grid.ColumnDefinitions>
 
-                <TextBox x:Name="UpdateModel" 
-                         Text="{Binding Path=Model}"
-                         FontSize="20"
-                         VerticalAlignment="Stretch"
-                         HorizontalAlignment="Stretch"
-                         Background="{StaticResource Static.Background}"
-                         Margin="20,27"
-                         TextAlignment="Center"
-                         IsReadOnly="True"/>
-
-                <Button x:Name="Update"
-                        Content="Update" 
-                        Grid.Column="1"
-                        Margin="10,27"
-                        FontFamily="Arial Black" 
-                        Click="Update_Click"
-                        />
-            </Grid>
-
-            <TextBlock Text="Max weigth:" 
-                       Grid.Row="2" 
-                       Grid.Column="0" 
-                       FontSize="20" 
-                       FontFamily="Arial Black" 
-                       Margin="20" 
-                       VerticalAlignment="Center" 
-                       HorizontalAlignment="Center"  
-                       Foreground="#FFDDD81E"/>
-
-            <ComboBox x:Name="maxWeight"  
-                      Grid.Row="2" Grid.Column="1" 
-                      FontSize="20" 
-                      HorizontalContentAlignment="Center" 
-                      VerticalContentAlignment="Center" 
-                      Margin="20"
-                      Visibility="Hidden"/>
-
-
-            <TextBlock x:Name="MaxWeightInfo" 
-                       Grid.Row="2"
+            <TextBlock x:Name="NameInfo" 
+                       Grid.Row="1"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=MaxWeight}"
+                       Text="{Binding Path=Name}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="20,27"
                        TextAlignment="Center"
                        Visibility="Hidden">
             </TextBlock>
 
-            <TextBlock Text="Drone Location:" 
-                       Grid.Row="3" Grid.Column="0" 
-                       FontSize="20" 
-                       FontFamily="Arial Black" 
-                       Margin="10" 
-                       VerticalAlignment="Center" 
-                       HorizontalAlignment="Center"  
-                       Foreground="#FFDDD81E"/>
 
-            <ComboBox x:Name="stations" 
-                      ItemTemplate="{StaticResource stationTemplate}"
-                      Grid.Row="3" 
-                      Grid.Column="1"
-                      FontSize="20" 
-                      HorizontalContentAlignment="Center" 
-                      VerticalContentAlignment="Center" 
-                      Margin="20" 
-                         Visibility="Hidden"/>
+            <Label x:Name="labalStationLocation" 
+                   FontSize="20"
+                   VerticalContentAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   Content="Station Location:" 
+                   Grid.Row="2" 
+                   Grid.Column="0"                   
+                   Foreground="#FFDDD81E" 
+                   FontFamily="Arial Black"
+                   Margin="10"/>
 
-            <TextBox x:Name="DroneLocationInfo" 
-                 Grid.Row="3"
-                 Grid.Column="1"
-                 FontSize="20"
-                 DataContext="{Binding Path=LocationOfDrone}"
-                 Template="{StaticResource LocationTemplate}"         
-                 Margin="20,10"
-                 TextAlignment="Center"
-                 Visibility="Hidden">
+
+            <TextBox x:Name="stationLocation" 
+                     FontSize="20"
+                     VerticalContentAlignment="Center"
+                     HorizontalContentAlignment="Center"                   
+                     Grid.Row="2" 
+                     Grid.Column="1"
+                     Background="{StaticResource Static.Background}" 
+                     PreviewTextInput="IntTextBox_PreviewTextInput" 
+                     Margin="20"
+                     Visibility="Hidden">
             </TextBox>
+
+
+            <TextBlock x:Name="StationLocationInfo" 
+                       Grid.Row="2"
+                       Grid.Column="1"
+                       FontSize="20"
+                       Text="{Binding Path=StationLocation}"
+                       Background="{StaticResource Static.Background}"                  
+                       Margin="20,27"
+                       TextAlignment="Center"
+                       Visibility="Hidden">
+            </TextBlock>
+
+
+            <Label x:Name="labalFreeChargeSlots" 
+                   FontSize="20"
+                   VerticalContentAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   Content="Free charge slots:" 
+                   Grid.Row="3" 
+                   Grid.Column="0"                   
+                   Foreground="#FFDDD81E" 
+                   FontFamily="Arial Black"
+                   Margin="10"/>
+
+
+            <TextBox x:Name="freeChargeSlots" 
+                     FontSize="20"
+                     VerticalContentAlignment="Center"
+                     HorizontalContentAlignment="Center"                   
+                     Grid.Row="3" 
+                     Grid.Column="1"
+                     Background="{StaticResource Static.Background}" 
+                     PreviewTextInput="IntTextBox_PreviewTextInput" 
+                     Margin="20"
+                     Visibility="Hidden">
+            </TextBox>
+
+
+
+            <TextBlock x:Name="FreeChargeSlotsInfo" 
+                       Grid.Row="3"
+                       Grid.Column="1"
+                       FontSize="20"
+                       Text="{Binding Path=FreeChargeSlots}"
+                       Background="{StaticResource Static.Background}"                  
+                       Margin="20,27"
+                       TextAlignment="Center"
+                       Visibility="Hidden">
+            </TextBlock>
+
+
+            <Label x:Name="labalChargingDrones" 
+                   FontSize="20"
+                   VerticalContentAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   Content="Charging drones:" 
+                   Grid.Row="4" 
+                   Grid.Column="0"                   
+                   Foreground="#FFDDD81E" 
+                   FontFamily="Arial Black"
+                   Margin="10"/>
+
+
+            <TextBox x:Name="chargingDrones" 
+                     FontSize="20"
+                     VerticalContentAlignment="Center"
+                     HorizontalContentAlignment="Center"                   
+                     Grid.Row="4" 
+                     Grid.Column="1"
+                     Background="{StaticResource Static.Background}" 
+                     PreviewTextInput="IntTextBox_PreviewTextInput" 
+                     Margin="20"
+                     Visibility="Hidden">
+            </TextBox>
+
+
+
+            <TextBlock x:Name="ChargingDronesInfo" 
+                       Grid.Row="4"
+                       Grid.Column="1"
+                       FontSize="20"
+                       Text="{Binding Path=ChargingDrones}"
+                       Background="{StaticResource Static.Background}"                  
+                       Margin="20,27"
+                       TextAlignment="Center"
+                       Visibility="Hidden">
+            </TextBlock>
+
+
+            <Label x:Name="labalrones" 
+                   FontSize="20"
+                   VerticalContentAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   Content="Charging drones:" 
+                   Grid.Row="5" 
+                   Grid.Column="0"                   
+                   Foreground="#FFDDD81E" 
+                   FontFamily="Arial Black"
+                   Margin="10"/>
+
+
+            <TextBox x:Name="rones" 
+                     FontSize="20"
+                     VerticalContentAlignment="Center"
+                     HorizontalContentAlignment="Center"                   
+                     Grid.Row="5" 
+                     Grid.Column="1"
+                     Background="{StaticResource Static.Background}" 
+                     PreviewTextInput="IntTextBox_PreviewTextInput" 
+                     Margin="20"
+                     Visibility="Hidden">
+            </TextBox>
+
+
+
+            <TextBlock x:Name="ronesInfo" 
+                       Grid.Row="5"
+                       Grid.Column="1"
+                       FontSize="20"
+                       Text="{Binding Path=ChargingDrones}"
+                       Background="{StaticResource Static.Background}"                  
+                       Margin="20,27"
+                       TextAlignment="Center"
+                       Visibility="Hidden">
+            </TextBlock>
 
         </Grid>
 
@@ -213,7 +293,7 @@
                     Click="cancel_Click"/>
         </Grid>
 
-        <Grid x:Name="DroneInfoDownGrid" Grid.Row="1" Visibility="Hidden">
+        <!--<Grid x:Name="StationInfoDownGrid" Grid.Row="1" Visibility="Hidden">
             <Grid.RowDefinitions>
                 <RowDefinition Height="21*"/>
                 <RowDefinition Height="21*"/>
@@ -236,26 +316,7 @@
                    FontFamily="Arial Black"
                    Margin="20"/>
 
-            <!--<TextBlock x:Name="BattaryStatus" 
-                   FontSize="20"
-                   Text="{Binding Path=BatteryStatus, Mode=OneWay, StringFormat={}{0:F1}%}"
-                   Grid.Row="0" 
-                   Grid.Column="1"
-                   Background="{StaticResource Static.Background}" 
-                   Margin="20" 
-                   TextAlignment="Center">
-            </TextBlock>-->
-
-            <ProgressBar x:Name="BattaryStatus" 
-                   FontSize="20"
-                   Value="{Binding Path=BatteryStatus, Mode=OneWay}"
-                   Grid.Row="0" 
-                   Grid.Column="1"
-                   Background="{StaticResource Static.Background}" 
-                   Margin="20" 
-                   >
-            </ProgressBar>
-
+           
             <Label x:Name="labalDroneStatus" 
                    FontSize="20"
                    VerticalContentAlignment="Center"
@@ -301,9 +362,9 @@
                         FontFamily="Arial Black"
                         Click="cancel_Click">
                 <Image Source="https://cdn-icons-png.flaticon.com/512/1828/1828479.png" Margin="10"/>
-            </Button>
+            </Button>-->
 
-            <Grid x:Name="DroneInfoDownInDownGrid" Grid.Row="3" Grid.Column="1">
+        <!--<Grid x:Name="DroneInfoDownInDownGrid" Grid.Row="3" Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="25*"/>
                     <ColumnDefinition Width="50*"/>
@@ -338,10 +399,9 @@
                         </Image.Source>
                     </Image>
                 </Button>
-            </Grid>
-        </Grid>
+            </Grid>-->
+        <!--</Grid>-->
     </Grid>
-
     <Window.Background>
         <ImageBrush ImageSource="https://img.wisebuy.co.il/data/images/Guide/ThinkstockPhotos-668766928131508931264610000.jpg" />
     </Window.Background></Window>

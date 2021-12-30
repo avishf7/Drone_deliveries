@@ -42,32 +42,32 @@ namespace PL
             POStation.Name = BOStation.Name;
             POStation.LocationOfStation = BOStation.LocationOfStation;
             POStation.FreeChargeSlots = BOStation.FreeChargeSlots;
-            POStation.ChargingDrones = BOStation.ChargingDrones;
+            POStation.ChargingDrones = (List<BO.DroneCharge>)BOStation.ChargingDrones;
 
 
             return POStation;
         }
 
 
-        ///// <summary>
-        ///// The function copies properties from a BL Customer object to a PL Customer object
-        ///// and returns the PL Customer object after copy
-        ///// </summary>
-        ///// <param name="POCustomer">PL Customer object</param>
-        ///// <param name="BOCustomer">BL Customer object</param>
-        ///// <returns>this PL Station object</returns>
-        //public static PO.Customer CopyFromBOCustomer(this PO.Customer POCustomer, BO.Customer BOCustomer)
-        //{
-        //    POCustomer.Id = BOCustomer.Id;
-        //    POCustomer.Name = BOCustomer.Name;
-        //    POCustomer.Phone = BOCustomer.Phone;
-        //    POCustomer.CustomerLocation = BOCustomer.CustomerLocation;
-        //    POCustomer.PackageAtCustomerFromCustomer = BOCustomer.PackageAtCustomerFromCustomer;
-        //    POCustomer.PackageAtCustomerToCustomer = BOCustomer.PackageAtCustomerToCustomer;
+        /// <summary>
+        /// The function copies properties from a BL Customer object to a PL Customer object
+        /// and returns the PL Customer object after copy
+        /// </summary>
+        /// <param name="POCustomer">PL Customer object</param>
+        /// <param name="BOCustomer">BL Customer object</param>
+        /// <returns>this PL Station object</returns>
+        public static PO.Customer CopyFromBOCustomer(this PO.Customer POCustomer, BO.Customer BOCustomer)
+        {
+            POCustomer.Id = BOCustomer.Id;
+            POCustomer.Name = BOCustomer.Name;
+            POCustomer.Phone = BOCustomer.Phone;
+            POCustomer.CustomerLocation = BOCustomer.CustomerLocation;
+            POCustomer.PackageAtCustomerFromCustomer = (List<BO.PackageAtCustomer>)BOCustomer.PackageAtCustomerFromCustomer;
+            POCustomer.PackageAtCustomerToCustomer = (List<BO.PackageAtCustomer>)BOCustomer.PackageAtCustomerToCustomer;
 
 
-        //    return POCustomer;
-        //}
+            return POCustomer;
+        }
 
         ///// <summary>
         ///// The function copies properties from a BL Package object to a PL Package object
