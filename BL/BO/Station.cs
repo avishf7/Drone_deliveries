@@ -31,7 +31,7 @@ namespace BO
         /// <summary>
         /// Gets num of charging drones
         /// </summary>
-        public List<DroneCharge> ChargingDrones { get; set; }
+        public IEnumerable<DroneCharge> ChargingDrones { get; set; }
 
 
 

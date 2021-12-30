@@ -14,7 +14,7 @@ namespace BL
         public void SendDroneForCharge(int DroneId)
         {
 
-            var dr = droneLists.Find(x => x.Id == DroneId);
+            var dr = droneLists.SingleOrDefault(x => x.Id == DroneId);
 
 
             if (dr == null)
@@ -43,8 +43,8 @@ namespace BL
                 dr.LocationOfDrone = stLocation;
                 dr.DroneStatus = DroneStatuses.Maintenance;
 
-                List<DO.Station> stationsT = dal.GetStations(x => x.FreeChargeSlots > 0).ToList();
-                DO.Station station = stationsT.Find(x => x.Lattitude == stLocation.Lattitude && x.Longitude == stLocation.Longitude);
+                IEnumerable<DO.Station> stationsT = dal.GetStations(x => x.FreeChargeSlots > 0);
+                DO.Station station = stationsT.SingleOrDefault(x => x.Lattitude == stLocation.Lattitude && x.Longitude == stLocation.Longitude);
 
                 dal.UsingChargingStation(station.Id);
                 dal.AddDroneCharge(new() { DroneId = DroneId, StationId = station.Id, ChargeStart = DateTime.Now });
@@ -80,8 +80,8 @@ namespace BL
             }
             dr.DroneStatus = DroneStatuses.Available;
 
-            List<DO.Station> stationsT = dal.GetStations(x => x.Lattitude == dr.LocationOfDrone.Lattitude && x.Longitude == dr.LocationOfDrone.Longitude).ToList();
-            DO.Station station = stationsT.Find(x => x.Lattitude == dr.LocationOfDrone.Lattitude && x.Longitude == dr.LocationOfDrone.Longitude);
+            IEnumerable<DO.Station> stationsT = dal.GetStations(x => x.Lattitude == dr.LocationOfDrone.Lattitude && x.Longitude == dr.LocationOfDrone.Longitude);
+            DO.Station station = stationsT.SingleOrDefault(x => x.Lattitude == dr.LocationOfDrone.Lattitude && x.Longitude == dr.LocationOfDrone.Longitude);
 
             dal.RealeseChargingStation(station.Id);
             dal.DeleteDroneCharge(DroneId);

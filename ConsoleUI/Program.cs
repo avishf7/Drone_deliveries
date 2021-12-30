@@ -13,7 +13,7 @@ namespace ConsoleUI
 
         static void Main(string[] args)
         {
-            IDal dalObject = DalFactory.GetDal();
+            IDal dalObject = DalFactory.GetDal();         
 
             MenuOptions.OpeningOptions ch;
 

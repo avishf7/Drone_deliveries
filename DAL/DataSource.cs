@@ -10,7 +10,7 @@ namespace Dal
     /// <summary>
     /// A class that stores the data of all objects.
     /// </summary>
-    class DataSource
+    static class DataSource
     {
         /// <summary>
         /// Create a static random show.

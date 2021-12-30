@@ -55,80 +55,73 @@ namespace BL
                 droneLists.Find(drone => drone.Id == droneId).Model = model;
             }
             catch (DalApi.NoNumberFoundException ex) { throw new BlApi.NoNumberFoundException("Drone ID not found", ex); }
-        
+
         }
 
-            public Drone GetDrone(int droneId)
-            {
-                var dr = droneLists.Find(x => x.Id == droneId);
-                PackageInTransfer packageInTransfer = null;
+        public Drone GetDrone(int droneId)
+        {
+            var dr = droneLists.Find(x => x.Id == droneId);
+            PackageInTransfer packageInTransfer = null;
 
-                if (dr != null)
+            if (dr != null)
+            {
+                if (dr.DroneStatus == DroneStatuses.Sendering)
                 {
-                    if (dr.DroneStatus == DroneStatuses.Sendering)
+                    DO.Package package = dal.GetPackage(dr.PackageNumber);
+                    DO.Customer sender = dal.GetCustomer(package.SenderId),
+                                     target = dal.GetCustomer(package.TargetId);
+                    Location senderLocation = new() { Lattitude = sender.Lattitude, Longitude = sender.Longitude },
+                             targetLocation = new() { Lattitude = target.Lattitude, Longitude = target.Longitude };
+
+                    packageInTransfer = new PackageInTransfer()
                     {
-                        DO.Package package = dal.GetPackage(dr.PackageNumber);
-                        DO.Customer sender = dal.GetCustomer(package.SenderId),
-                                         target = dal.GetCustomer(package.TargetId);
-                        Location senderLocation = new() { Lattitude = sender.Lattitude, Longitude = sender.Longitude },
-                                 targetLocation = new() { Lattitude = target.Lattitude, Longitude = target.Longitude };
-
-                        packageInTransfer = new PackageInTransfer()
-                        {
-                            Id = package.Id,
-                            Weight = (Weight)package.Weight,
-                            IsCollected = package.PickedUp != null,
-                            Priority = (Priorities)package.Priority,
-                            SenderCustomerInPackage = new() { CustomerId = sender.Id, CustomerName = sender.Name },
-                            TargetCustomerInPackage = new() { CustomerId = target.Id, CustomerName = target.Name },
-                            CollectionLocation = senderLocation,
-                            DeliveryDestinationLocation = targetLocation,
-                            DistanceCollectionToDestination = Distance(senderLocation, targetLocation)
-                        };
-                    }
+                        Id = package.Id,
+                        Weight = (Weight)package.Weight,
+                        IsCollected = package.PickedUp != null,
+                        Priority = (Priorities)package.Priority,
+                        SenderCustomerInPackage = new() { CustomerId = sender.Id, CustomerName = sender.Name },
+                        TargetCustomerInPackage = new() { CustomerId = target.Id, CustomerName = target.Name },
+                        CollectionLocation = senderLocation,
+                        DeliveryDestinationLocation = targetLocation,
+                        DistanceCollectionToDestination = Distance(senderLocation, targetLocation)
+                    };
                 }
-                else
-                {
-                    throw new BlApi.NoNumberFoundException("");
-                }
-
-                return new()
-                {
-                    Id = dr.Id,
-                    Model = dr.Model,
-                    MaxWeight = dr.MaxWeight,
-                    BatteryStatus = dr.BatteryStatus,
-                    DroneStatus = dr.DroneStatus,
-                    PackageInProgress = packageInTransfer,
-                    LocationOfDrone = dr.LocationOfDrone
-                };
+            }
+            else
+            {
+                throw new BlApi.NoNumberFoundException("");
             }
 
-            public IEnumerable<DroneToList> GetDrones(Predicate<DroneToList> predicate = null)
+            return new()
             {
-                List<DroneToList> copyOfDroneLists = new();
+                Id = dr.Id,
+                Model = dr.Model,
+                MaxWeight = dr.MaxWeight,
+                BatteryStatus = dr.BatteryStatus,
+                DroneStatus = dr.DroneStatus,
+                PackageInProgress = packageInTransfer,
+                LocationOfDrone = dr.LocationOfDrone
+            };
+        }
 
-                foreach (var item in droneLists)
-                {
-                    if (predicate != null ? predicate(item) : true)
-                        copyOfDroneLists.Add(new()
-                        {
-                            Id = item.Id,
-                            Model = item.Model,
-                            MaxWeight = item.MaxWeight,
-                            BatteryStatus = item.BatteryStatus,
-                            DroneStatus = item.DroneStatus,
-                            LocationOfDrone = item.LocationOfDrone,
-                            PackageNumber = item.PackageNumber,
-                        });
-                }
-
-                return copyOfDroneLists;
-            }
+        public IEnumerable<DroneToList> GetDrones(Predicate<DroneToList> predicate = null)
+        {
+            return droneLists.Where(dr => predicate != null ? predicate(dr) : true)
+                             .Select(dr => new DroneToList()
+                             {
+                                 Id = dr.Id,
+                                 Model = dr.Model,
+                                 MaxWeight = dr.MaxWeight,
+                                 BatteryStatus = dr.BatteryStatus,
+                                 DroneStatus = dr.DroneStatus,
+                                 LocationOfDrone = dr.LocationOfDrone,
+                                 PackageNumber = dr.PackageNumber,
+                             });
+        }
 
 
-            public void DeleteDrone(int id)
-            {
+        public void DeleteDrone(int id)
+        {
             try
             {
                 dal.DeleteDrone(id);
@@ -137,7 +130,7 @@ namespace BL
             {
                 throw new NotImplementedException();
             }
-            }
-              
         }
+
     }
+}

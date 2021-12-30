@@ -31,12 +31,12 @@ namespace BO
         /// <summary>
         /// Gets a list of packages from the customer
         /// </summary>
-        public List<PackageAtCustomer> PackageAtCustomerFromCustomer { get; set; }
+        public IEnumerable<PackageAtCustomer> PackageAtCustomerFromCustomer { get; set; }
 
         /// <summary>
         /// Gets a list of packages to the customer
         /// </summary>
-        public List<PackageAtCustomer> PackageAtCustomerToCustomer { get; set; }
+        public IEnumerable<PackageAtCustomer> PackageAtCustomerToCustomer { get; set; }
 
 
 

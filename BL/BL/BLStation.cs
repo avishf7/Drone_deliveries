@@ -47,18 +47,18 @@ namespace BL
             }
 
             if (name != "")
-                    dalSt.Name = name;
-                if (numOfChargeStation != -1)
+                dalSt.Name = name;
+            if (numOfChargeStation != -1)
+            {
+                if (numOfChargeStation < blSt.ChargingDrones.Count())
                 {
-                    if (numOfChargeStation < blSt.ChargingDrones.Count)
-                    {
-                        throw new TooSmallAmount("There is more drones in charge then new charge slots");
-                    }
-                    dalSt.FreeChargeSlots = numOfChargeStation - blSt.ChargingDrones.Count;
+                    throw new TooSmallAmount("There is more drones in charge then new charge slots");
                 }
+                dalSt.FreeChargeSlots = numOfChargeStation - blSt.ChargingDrones.Count();
+            }
 
-                dal.UpdateStation(dalSt);
-            
+            dal.UpdateStation(dalSt);
+
         }
 
         public Station GetStation(int stationId)
@@ -67,28 +67,19 @@ namespace BL
             {
                 DO.Station DoStation = dal.GetStation(stationId);
 
-                Station BoStation = new()
+                return new()
                 {
                     Id = DoStation.Id,
                     Name = DoStation.Name,
                     FreeChargeSlots = DoStation.FreeChargeSlots,
                     LocationOfStation = new Location { Lattitude = DoStation.Lattitude, Longitude = DoStation.Longitude },
-                    ChargingDrones = new()
+                    ChargingDrones = dal.GetDronesCharges(x => x.StationId == stationId)
+                                     .Select(drCh => new DroneCharge
+                                     {
+                                         DroneId = drCh.DroneId,
+                                         BatteryStatus = droneLists.Find(x => x.Id == drCh.DroneId).BatteryStatus
+                                     }).OrderBy(drCh => drCh.BatteryStatus)
                 };
-
-                List<DO.DroneCharge> doDroneCharge = dal.GetDronesCharges(x => x.StationId == stationId).ToList();
-
-                foreach (var i in doDroneCharge)
-                {
-                    BoStation.ChargingDrones.Add(new DroneCharge
-                    {
-                        DroneId = i.DroneId,
-                        BatteryStatus = droneLists.Find(x => x.Id == i.DroneId).BatteryStatus
-                    });
-                }
-                BoStation.ChargingDrones.OrderBy(i => i.BatteryStatus);
-
-                return BoStation;
             }
             catch (DalApi.NoNumberFoundException ex)
             {
@@ -98,24 +89,13 @@ namespace BL
 
         public IEnumerable<StationToList> GetStations(Predicate<StationToList> predicate = null)
         {
-            List<DO.Station> doStations = (List<DO.Station>)dal.GetStations();
-            List<StationToList> boStations = new();
-
-            foreach (var st in doStations)
+            return dal.GetStations().Select(st => new StationToList()
             {
-                StationToList stToList = new()
-                {
-                    Id = st.Id,
-                    Name = st.Name,
-                    NumberOfChargingStationsOccupied = dal.GetDronesCharges(drCh => drCh.StationId == st.Id).ToList().Count,
-                    SeveralAvailableChargingStations = st.FreeChargeSlots
-                };
-
-                if (predicate != null ? predicate(stToList) : true)
-                    boStations.Add(stToList);
-            }
-
-            return boStations;
+                Id = st.Id,
+                Name = st.Name,
+                NumberOfChargingStationsOccupied = dal.GetDronesCharges(drCh => drCh.StationId == st.Id).Count(),
+                SeveralAvailableChargingStations = st.FreeChargeSlots
+            }).Where(st => predicate != null ? predicate(st) : true);
         }
 
         public void DeleteStation(int id)
@@ -126,9 +106,9 @@ namespace BL
             }
             catch (Exception)
             {
-                throw new NotImplementedException(); 
+                throw new NotImplementedException();
             }
-           
+
         }
     }
 }

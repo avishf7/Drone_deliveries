@@ -64,7 +64,7 @@ namespace Dal
                 throw new NoNumberFoundException(" ");
             }
 
-            return DataSource.dronesList.Find(dr => dr.Id == droneId);
+            return DataSource.dronesList.First(dr => dr.Id == droneId);
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Dal
         /// <returns>The list of dronesList</returns>
         public IEnumerable<Drone> GetDrones(Predicate<Drone> predicate = null)
         {
-            return DataSource.dronesList.FindAll(i => predicate == null ? true : predicate(i));
+            return DataSource.dronesList.Where(i => predicate == null ? true : predicate(i));
 
         }
 
@@ -132,7 +132,7 @@ namespace Dal
                 throw new NoNumberFoundException();
             }
 
-            return DataSource.stations.Find(st => st.Id == stationId);
+            return DataSource.stations.First(st => st.Id == stationId);
 
 
         }
@@ -145,7 +145,7 @@ namespace Dal
         /// <returns>The list of stations</returns>
         public IEnumerable<Station> GetStations(Predicate<Station> predicate = null)
         {
-            return DataSource.stations.FindAll(i => predicate == null ? true : predicate(i)).ToList();
+            return DataSource.stations.Where(i => predicate == null ? true : predicate(i));
         }
 
         /// <summary>
@@ -226,9 +226,7 @@ namespace Dal
                 throw new NoNumberFoundException();
             }
 
-            Customer tmp = DataSource.customers.Find(cus => cus.Id == customerId);
-
-            return tmp;
+            return DataSource.customers.First(cus => cus.Id == customerId);
         }
 
 
@@ -239,7 +237,7 @@ namespace Dal
         /// <returns>The list of customers</returns>
         public IEnumerable<Customer> GetCustomers(Predicate<Customer> predicate = null)
         {
-            return DataSource.customers.FindAll(i => predicate == null ? true : predicate(i)).ToList();
+            return DataSource.customers.Where(i => predicate == null ? true : predicate(i));
         }
 
         /// <summary>
@@ -293,7 +291,7 @@ namespace Dal
                 throw new NoNumberFoundException();
             }
 
-            return DataSource.packages.Find(pck => pck.Id == packageId);
+            return DataSource.packages.First(pck => pck.Id == packageId);
         }
 
 
@@ -304,7 +302,7 @@ namespace Dal
         /// <returns>The list of packages</returns>
         public IEnumerable<Package> GetPackages(Predicate<Package> predicate = null)
         {
-            return DataSource.packages.FindAll(i => predicate == null ? true : predicate(i)).ToList();
+            return DataSource.packages.Where(i => predicate == null ? true : predicate(i));
         }
 
         /// <summary>
@@ -408,7 +406,7 @@ namespace Dal
                 throw new NoNumberFoundException();
             }
 
-            return DataSource.droneCharges.Find(dr => dr.DroneId == droneId);
+            return DataSource.droneCharges.First(dr => dr.DroneId == droneId);
         }
 
         /// <summary>
@@ -418,7 +416,7 @@ namespace Dal
         /// <returns>The list of dronesList</returns>
         public IEnumerable<DroneCharge> GetDronesCharges(Predicate<DroneCharge> predicate = null)
         {
-            return DataSource.droneCharges.FindAll(i => predicate == null ? true : predicate(i)).ToList();
+            return DataSource.droneCharges.Where(i => predicate == null ? true : predicate(i));
         }
 
         /// <summary>

@@ -70,42 +70,19 @@ namespace BL
 
         public IEnumerable<PackageToList> GetPackages(Predicate<PackageToList> predicate = null)
         {
-            List<DO.Package> DoPackage = (List<DO.Package>)dal.GetPackages();
-            List<PackageToList> BoPackageToLists = new();
-
-            foreach (var item in DoPackage)
+            return dal.GetPackages().Select(pck => new PackageToList()
             {
-                PackageStatus p = PackageStatus.Defined;
-
-                if (item.Delivered != null)
-                {
-                    p = PackageStatus.Provided;
-                }
-                else if (item.PickedUp != null)
-                {
-                    p = PackageStatus.Collected;
-                }
-                else if (item.Scheduled != null)
-                {
-                    p = PackageStatus.Associated;
-                }             
-
-                PackageToList PckToLists = new()
-                {
-                    Id = item.Id,
-                    SenderName = dal.GetCustomer(item.SenderId).Name,
-                    TargetName = dal.GetCustomer(item.TargetId).Name,
-                    Priority = (Priorities)item.Priority,
-                    Weight = (Weight)item.Weight,
-                    PackageStatus = p
-                };
-
-                if (predicate != null ? predicate(PckToLists) : true)
-                    BoPackageToLists.Add(PckToLists);
-
-            }
-
-            return BoPackageToLists;
+                Id = pck.Id,
+                SenderName = dal.GetCustomer(pck.SenderId).Name,
+                TargetName = dal.GetCustomer(pck.TargetId).Name,
+                Priority = (Priorities)pck.Priority,
+                Weight = (Weight)pck.Weight,
+                PackageStatus = pck.Delivered != null ? PackageStatus.Provided :
+                                pck.PickedUp != null ? PackageStatus.Collected :
+                                pck.Scheduled != null ? PackageStatus.Associated :
+                                PackageStatus.Defined
+            }).Where(pck => predicate != null ? predicate(pck) : true);
+            
         }
 
         public void DeletePackage(int id)

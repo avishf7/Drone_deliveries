@@ -13,7 +13,7 @@ namespace BL
     {
         internal static BL Instance { get; } = new BL();
 
-        IDal dal = DalFactory.GetDal();
+        internal IDal dal = DalFactory.GetDal();
 
         Random rd = new Random();
 
@@ -36,30 +36,32 @@ namespace BL
             HeavyWeight = tmp[3];
             ChargingRate = tmp[4];
 
-            List<DO.Drone> drones = dal.GetDrones().ToList();
-            List<DO.Package> senderingPackages = dal.GetPackages(x => x.DroneId != -1).ToList();
-            List<DO.Package> deliveredPackages = dal.GetPackages(x => x.Delivered != null).ToList();
-            List<DO.Station> stations = dal.GetStations().ToList();
+            var drones = dal.GetDrones();
+            var senderingPackages = dal.GetPackages(x => x.DroneId != -1);
+            var deliveredPackages = dal.GetPackages(x => x.Delivered != null);
+            var stations = dal.GetStations();
 
             foreach (var drone in drones)
             {
                 Location droneLocation = null;
                 double minBattery = 0, maxBattery = 100;
-                int iPck = senderingPackages.FindIndex(x => x.DroneId == drone.Id);
-                DroneStatuses droneStatus = iPck != -1 ? DroneStatuses.Sendering : (DroneStatuses)rd.Next(2);
+                DO.Package Pck = senderingPackages.SingleOrDefault(x => x.DroneId == drone.Id);
+
+                bool isScheduled = !Pck.Equals(default(DO.Package));//If there is a package associated with the drone
+                DroneStatuses droneStatus = isScheduled ? DroneStatuses.Sendering : (DroneStatuses)rd.Next(2);
 
 
                 switch (droneStatus)
                 {
                     case DroneStatuses.Available:
-                        DO.Customer randomCustomer = dal.GetCustomer(deliveredPackages[rd.Next(deliveredPackages.Count)].TargetId);
+                        DO.Customer randomCustomer = dal.GetCustomer(deliveredPackages.Take(rd.Next(deliveredPackages.Count())).Last().TargetId);
 
                         droneLocation = new() { Lattitude = randomCustomer.Lattitude, Longitude = randomCustomer.Longitude };
                         minBattery = BatteryUsage(Distance(droneLocation, FindClosestStationLocation(droneLocation)));
 
                         break;
                     case DroneStatuses.Maintenance:
-                        DO.Station randomStation = stations[rd.Next(stations.Count)];
+                        DO.Station randomStation = stations.Take(rd.Next(stations.Count())).Last();
 
                         droneLocation = new() { Lattitude = randomStation.Lattitude, Longitude = randomStation.Longitude };
                         maxBattery = 20.0;
@@ -72,23 +74,23 @@ namespace BL
                         });
                         break;
                     case DroneStatuses.Sendering:
-                        DO.Customer sender = dal.GetCustomer(senderingPackages[iPck].SenderId),
-                                         target = dal.GetCustomer(senderingPackages[iPck].TargetId);
+                        DO.Customer sender = dal.GetCustomer(Pck.SenderId),
+                                         target = dal.GetCustomer(Pck.TargetId);
 
                         Location senderLocation = new() { Lattitude = sender.Lattitude, Longitude = sender.Longitude },
                                  targetLocation = new() { Lattitude = target.Lattitude, Longitude = target.Longitude };
 
-                        if (senderingPackages[iPck].PickedUp == null)
+                        if (Pck.PickedUp == null)
                         {
                             droneLocation = FindClosestStationLocation(senderLocation);
                             minBattery = BatteryUsage(Distance(droneLocation, senderLocation))
-                                       + BatteryUsage(Distance(senderLocation, targetLocation), (int)senderingPackages[iPck].Weight)
+                                       + BatteryUsage(Distance(senderLocation, targetLocation), (int)Pck.Weight)
                                        + BatteryUsage(Distance(targetLocation, FindClosestStationLocation(targetLocation)));
                         }
                         else
                         {
                             droneLocation = senderLocation;
-                            minBattery = BatteryUsage(Distance(senderLocation, targetLocation), (int)senderingPackages[iPck].Weight)
+                            minBattery = BatteryUsage(Distance(senderLocation, targetLocation), (int)Pck.Weight)
                                        + BatteryUsage(Distance(targetLocation, FindClosestStationLocation(targetLocation)));
                         }
 
@@ -104,7 +106,7 @@ namespace BL
                     BatteryStatus = rd.NextDouble() * rd.Next((int)(maxBattery - Math.Ceiling(minBattery))) + Math.Ceiling(minBattery),
                     DroneStatus = droneStatus,
                     LocationOfDrone = droneLocation,
-                    PackageNumber = (iPck != -1) ? senderingPackages[iPck].Id : iPck
+                    PackageNumber = isScheduled ? Pck.Id : -1
                 });
             }
         }
@@ -147,14 +149,14 @@ namespace BL
         /// <exception cref="BlApi.NoNumberFoundException"></exception>
         Location FindClosestStationLocation(Location location, Predicate<DO.Station> predicate = null)
         {
-            List<DO.Station> stations = dal.GetStations(predicate).ToList();
+            var stations = dal.GetStations(predicate);
 
             if (!stations.Any())
                 throw new BlApi.NoNumberFoundException("No station that provided the predicate");
 
             double minDistance = stations.Min(x => Distance(location, new Location() { Lattitude = x.Lattitude, Longitude = x.Longitude }));
 
-            DO.Station station = stations.Find(x => Distance(location, new Location() { Lattitude = x.Lattitude, Longitude = x.Longitude }) == minDistance);
+            DO.Station station = stations.SingleOrDefault(x => Distance(location, new Location() { Lattitude = x.Lattitude, Longitude = x.Longitude }) == minDistance);
 
             return new Location() { Lattitude = station.Lattitude, Longitude = station.Longitude };
         }

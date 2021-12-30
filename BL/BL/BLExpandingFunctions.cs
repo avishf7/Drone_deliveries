@@ -12,10 +12,10 @@ namespace BL
     static class BLExpandingFunctions
     {
         /// <summary>
-        /// The function converts a "customer" object to a "customer in a package" object
+        /// The function converts a "DO.Customer" object to a "CustomerInPackage" object
         /// </summary>
-        /// <param name="customer">"customer" object</param>
-        /// <returns>"customer in a package" object</returns>
+        /// <param name="customer">"DO.Customer" object</param>
+        /// <returns>"CustomerInPackage" object</returns>
         public static CustomerInPackage GetCusomerInPackage(this DO.Customer customer)
         {
             CustomerInPackage BoCustomerInPackage = new()
@@ -26,5 +26,7 @@ namespace BL
 
             return BoCustomerInPackage;
         }
+
+
     }
 }

@@ -23,7 +23,6 @@ namespace BL
                     Phone = customer.Phone,
                     Longitude = customer.CustomerLocation.Longitude,
                     Lattitude = customer.CustomerLocation.Lattitude
-
                 });
             }
             catch (DalApi.ExistsNumberException ex)
@@ -52,7 +51,7 @@ namespace BL
                 dalCus.Name = name;
             if (phone != "")
                 dalCus.Phone = phone;
-            
+
 
             dal.UpdateCustomer(dalCus);
 
@@ -60,10 +59,11 @@ namespace BL
 
         public Customer GetCustomer(int customerId)
         {
-            try {
+            try
+            {
 
                 var DoCustomer = dal.GetCustomer(customerId);
-                
+
 
                 Customer BoCustomer = new()
                 {
@@ -71,29 +71,23 @@ namespace BL
                     Name = DoCustomer.Name,
                     Phone = DoCustomer.Phone,
                     CustomerLocation = new Location { Lattitude = DoCustomer.Lattitude, Longitude = DoCustomer.Longitude },
-                    PackageAtCustomerFromCustomer = new(),
-                    PackageAtCustomerToCustomer = new()                       
-                };
-
-                foreach (var pck in dal.GetPackages(x => x.SenderId == customerId))
-                    BoCustomer.PackageAtCustomerFromCustomer.Add(new()
+                    PackageAtCustomerFromCustomer = dal.GetPackages(x => x.SenderId == customerId).Select(pck => new PackageAtCustomer()
                     {
                         PackageId = pck.Id,
                         Weight = (BO.Weight)pck.Weight,
                         Priority = (BO.Priorities)pck.Priority,
-                        Status = GetPackages(x => x.Id == pck.Id).ToList()[0].PackageStatus,
+                        Status = GetPackages(x => x.Id == pck.Id).Single().PackageStatus,
                         OtherSideCustomer = dal.GetCustomer(pck.TargetId).GetCusomerInPackage()
-                    });
-
-                foreach (var pck in dal.GetPackages(x => x.TargetId == customerId))
-                    BoCustomer.PackageAtCustomerToCustomer.Add(new()
+                    }),
+                    PackageAtCustomerToCustomer = dal.GetPackages(x => x.TargetId == customerId).Select(pck => new PackageAtCustomer()
                     {
                         PackageId = pck.Id,
                         Weight = (BO.Weight)pck.Weight,
                         Priority = (BO.Priorities)pck.Priority,
-                        Status = GetPackages(x => x.Id == pck.Id).ToList()[0].PackageStatus,
+                        Status = GetPackages(x => x.Id == pck.Id).Single().PackageStatus,
                         OtherSideCustomer = dal.GetCustomer(pck.SenderId).GetCusomerInPackage()
-                    });
+                    })
+                };
 
                 return BoCustomer;
             }
@@ -106,35 +100,26 @@ namespace BL
 
         public IEnumerable<CustomerToList> GetCustomers(Predicate<CustomerToList> predicate = null)
         {
-            var boCustomers = dal.GetCustomers().Select(cus => GetCustomer(cus.Id));
-            List<CustomerToList> boCustomersToList = new();
+            return dal.GetCustomers().Select(cus => GetCustomer(cus.Id))
+                                     .Select(cus => new CustomerToList()
+                                     {
+                                         CustomerId = cus.Id,
+                                         CustomerName = cus.Name,
+                                         CustomerPhone = cus.Phone,
+                                         NumOfPackagesNotProvided = (from pck in cus.PackageAtCustomerFromCustomer
+                                                                     where pck.Status != PackageStatus.Provided
+                                                                     select pck).Count(),
+                                         NumOfPackagesProvided = (from pck in cus.PackageAtCustomerFromCustomer
+                                                                  where pck.Status == PackageStatus.Provided
+                                                                  select pck).Count(),
+                                         NumOfPackagesReceived = (from pck in cus.PackageAtCustomerToCustomer
+                                                                  where pck.Status == PackageStatus.Provided
+                                                                  select pck).Count(),
+                                         NumOfPackagesNotReceived = (from pck in cus.PackageAtCustomerToCustomer
+                                                                     where pck.Status != PackageStatus.Provided
+                                                                     select pck).Count(),
+                                     }).Where(cus => predicate != null ? predicate(cus) : true);
 
-            foreach (var cus in boCustomers)
-            {
-                CustomerToList customerToList = new()
-                {
-                    CustomerId = cus.Id,
-                    CustomerName = cus.Name,
-                    CustomerPhone = cus.Phone,
-                    NumOfPackagesNotProvided = (from pck in cus.PackageAtCustomerFromCustomer
-                                                where pck.Status != PackageStatus.Provided
-                                                select pck).Count(),
-                    NumOfPackagesProvided = (from pck in cus.PackageAtCustomerFromCustomer
-                                             where pck.Status == PackageStatus.Provided
-                                             select pck).Count(),
-                    NumOfPackagesReceived = (from pck in cus.PackageAtCustomerToCustomer
-                                             where pck.Status == PackageStatus.Provided
-                                             select pck).Count(),
-                    NumOfPackagesNotReceived = (from pck in cus.PackageAtCustomerToCustomer
-                                            where pck.Status != PackageStatus.Provided
-                                            select pck).Count(),
-                };
-
-                if (predicate != null ? predicate(customerToList) : true)
-                    boCustomersToList.Add(customerToList);
-            }
-
-            return boCustomersToList;
         }
 
         public void DeleteCustomer(int id)
