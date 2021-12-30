@@ -38,16 +38,16 @@ namespace PL.Windows
             this.GroupingView.DataContext = from station in this.sender.Stations
                                             group station by station.SeveralAvailableChargingStations;
 
-            this.sender.Drones.CollectionChanged += Drones_CollectionChanged;
+            this.sender.Stations.CollectionChanged += Stations_CollectionChanged;
             this.sender.Closing += Sender_Closing;
             this.sender.Activated += Sender_Activated;
             this.sender.Deactivated += Sender_Deactivated;
         }
 
-        private void Drones_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void Stations_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            this.GroupingView.DataContext = from drone in this.sender.Drones
-                                            group drone by drone.DroneStatus;
+            this.GroupingView.DataContext = from station in this.sender.Stations
+                                            group station by station.SeveralAvailableChargingStations;
         }
 
         private void Sender_Deactivated(object sender, EventArgs e)
@@ -77,18 +77,10 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void Window_Closed(object sender, EventArgs e)
         {
-            ((Button)this.sender.FindName("ShowDrones")).IsEnabled = true;
+            ((Button)this.sender.FindName("ShowStations")).IsEnabled = true;
         }
 
-        /// <summary>
-        /// A button that resets the filters.
-        /// </summary>
-        /// <param name="sender">The element that activates the function</param>
-        /// <param name="e"></param>
-        private void Reset_Click(object sender, RoutedEventArgs e)
-        {
-           
-        }
+
 
         /// <summary>
         /// A button that opens a window for adding a new drone.
