@@ -29,7 +29,7 @@ namespace PL
         public ObservableCollection<DroneToList> Drones { get; set; }
         public List<PO.Drone> PODrones { get; set; } = new();
         public ObservableCollection<StationToList> Stations { get; set; }
-        //public List<PO.Station> POStations { get; set; } = new();
+        public List<PO.Station> POStations { get; set; } = new();
 
 
         //const int WM_SYSCOMMAND = 0x0112;
@@ -41,7 +41,7 @@ namespace PL
 
             Drones = new ObservableCollection<DroneToList>(bl.GetDrones());
 
-          //  Stations = new ObservableCollection<StationToList>(bl.GetStations());
+            //  Stations = new ObservableCollection<StationToList>(bl.GetStations());
         }
 
         private void ShowDrones_Click(object sender, RoutedEventArgs e)

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace PL.Windows
 {
     /// <summary>
@@ -34,8 +35,8 @@ namespace PL.Windows
             this.sender = sender;
 
             this.NormalView.DataContext = this.sender.Stations;
-            this.GroupingView.DataContext = from drone in this.sender.Stations
-                                            group drone by drone.DroneStatus;
+            this.GroupingView.DataContext = from station in this.sender.Stations
+                                            group station by station.SeveralAvailableChargingStations;
 
             this.sender.Drones.CollectionChanged += Drones_CollectionChanged;
             this.sender.Closing += Sender_Closing;
@@ -65,25 +66,9 @@ namespace PL.Windows
         }
 
 
-        /// <summary>
-        /// Filter the display by weight in the combobox.
-        /// </summary>
-        /// <param name="sender">The element that activates the function</param>
-        /// <param name="e"></param>
-        private void MaxWeigth_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Filtering();
-        }
+      
 
-        /// <summary>
-        /// Filter the display by status in the combobox
-        /// </summary>
-        /// <param name="sender">The element that activates the function</param>
-        /// <param name="e"></param>
-        private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Filtering();
-        }
+      
 
         /// <summary>
         /// Closing the window
@@ -102,15 +87,7 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void Reset_Click(object sender, RoutedEventArgs e)
         {
-            MaxWeigth.Text = "";
-            MaxWeigth.SelectedIndex = -1;
-            MaxWeigth.SelectedItem = null;
-
-            StatusSelector.Text = "";
-            StatusSelector.SelectedIndex = -1;
-            StatusSelector.SelectedItem = null;
-
-            Filtering();
+           
         }
 
         /// <summary>
@@ -118,9 +95,9 @@ namespace PL.Windows
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
-        private void AddDrone_Click(object sender, RoutedEventArgs e)
+        private void AddStation_Click(object sender, RoutedEventArgs e)
         {
-            new Drone(bl, this).ShowDialog();
+           new Station(bl, this).ShowDialog();
         }
 
         /// <summary>
@@ -128,33 +105,21 @@ namespace PL.Windows
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
-        private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void StationsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (DronesListView.SelectedItem != null)
+            if (StationsListView.SelectedItem != null)
             {
-                BO.Drone BODrone = bl.GetDrone((DronesListView.SelectedItem as BO.DroneToList).Id);
-                PO.Drone PODrone = this.sender.PODrones.Find(dr => dr.Id == BODrone.Id);
-                if (PODrone == null)
-                    this.sender.PODrones.Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));
+                BO.Station BOStation = bl.GetStation((StationsListView.SelectedItem as BO.StationToList).Id);
+              PO.Station POStation = this.sender.POStations.Find(dr => dr.Id == BOStation.Id);
+                if (POStation == null)
+                    this.sender.POStations.Add(POStation = new PO.Station().CopyFromBOStation(BOStation));
 
-                new Drone(bl, this, PODrone).Show();
+               new Station(bl, this, POStation).Show();
 
             }
         }
 
-        /// <summary>
-        /// Filter the display according to the combo boxs selection.
-        /// </summary>
-        public void Filtering()
-        {
-            var weight = MaxWeigth.SelectedItem;
-            var status = StatusSelector.SelectedItem;
-
-            this.sender.Drones.Clear();
-            foreach (var drone in bl.GetDrones(dr => (status != null ? dr.DroneStatus == (DroneStatuses)status : true) &&
-                                                     (weight != null ? dr.MaxWeight == (Weight)weight : true)))
-                this.sender.Drones.Add(drone);
-        }
+     
 
         /// <summary>
         /// Window Close Button.

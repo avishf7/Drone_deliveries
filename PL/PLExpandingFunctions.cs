@@ -29,24 +29,24 @@ namespace PL
         }
 
 
-        ///// <summary>
-        ///// The function copies properties from a BL Station object to a PL Station object
-        ///// and returns the PL Station object after copy
-        ///// </summary>
-        ///// <param name="POStation">PL Station object</param>
-        ///// <param name="BOStation">BL Station object</param>
-        ///// <returns>this PL Station object</returns>
-        //public static PO.Station CopyFromBOStation(this PO.Station POStation, BO.Station BOStation)
-        //{
-        //    POStation.Id = BOStation.Id;
-        //    POStation.Name = BOStation.Name;
-        //    POStation.LocationOfStation = BOStation.LocationOfStation;
-        //    POStation.FreeChargeSlots = BOStation.FreeChargeSlots;
-        //    POStation.ChargingDrones = BOStation.ChargingDrones;
+        /// <summary>
+        /// The function copies properties from a BL Station object to a PL Station object
+        /// and returns the PL Station object after copy
+        /// </summary>
+        /// <param name="POStation">PL Station object</param>
+        /// <param name="BOStation">BL Station object</param>
+        /// <returns>this PL Station object</returns>
+        public static PO.Station CopyFromBOStation(this PO.Station POStation, BO.Station BOStation)
+        {
+            POStation.Id = BOStation.Id;
+            POStation.Name = BOStation.Name;
+            POStation.LocationOfStation = BOStation.LocationOfStation;
+            POStation.FreeChargeSlots = BOStation.FreeChargeSlots;
+            POStation.ChargingDrones = BOStation.ChargingDrones;
 
 
-        //    return POStation;
-        //}
+            return POStation;
+        }
 
 
         ///// <summary>

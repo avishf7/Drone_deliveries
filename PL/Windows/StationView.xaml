@@ -47,10 +47,8 @@
                             <ColumnDefinition Width="207*"/>
                         </Grid.ColumnDefinitions >
 
-                        <TextBlock Text="Status selector:" Grid.Column="0" FontSize="18" FontFamily="Arial Black" Margin="12,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FFDDD81E" Grid.ColumnSpan="2"/>
-                        <ComboBox x:Name="StatusSelector" Grid.Column="2" FontSize="18" Margin="10,5,0,5" Width="130" HorizontalAlignment="Left" SelectionChanged="StatusSelector_SelectionChanged"  />
-                        <TextBlock Text="Max weigth:" Grid.Column="3" FontSize="18" FontFamily="Arial Black" Margin="14,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"  Foreground="#FFDDD81E"/>
-                        <ComboBox x:Name="MaxWeigth" Grid.Column="4" FontSize="18" Margin="10,5,0,5" Width="100" HorizontalAlignment="Left" SelectionChanged="MaxWeigth_SelectionChanged"/>
+                        <TextBlock Text="Sort by the number of charging positions available:" Grid.Column="0" FontSize="18" FontFamily="Arial Black" Margin="12,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FFDDD81E" Grid.ColumnSpan="2"/>
+
                         <Button x:Name="Reset" Grid.Column="5" Margin="10,5,10,5" FontFamily="Arial Black" Padding="5" Click="Reset_Click">
                             <Button.ContentTemplate>
                                 <DataTemplate>
@@ -63,10 +61,10 @@
 
                     </Grid>
 
-                    <ListView x:Name="DronesListView"
+                    <ListView x:Name="StationsListView"
                           ItemsSource="{Binding}" 
                           Grid.Row="1" Opacity="0.5" 
-                          MouseDoubleClick="DronesListView_MouseDoubleClick" />
+                          MouseDoubleClick="StationsListView_MouseDoubleClick" />
                 </Grid>
             </TabItem>
             <TabItem x:Name="GroupingView" Header="Grouping" Background="{StaticResource Static.Background}"  >
@@ -83,7 +81,7 @@
 
                                     <ListView ItemsSource="{Binding}" 
                                                  Background="{x:Null}"
-                                                  MouseDoubleClick="DronesListView_MouseDoubleClick"/>
+                                                  MouseDoubleClick="StationsListView_MouseDoubleClick"/>
                                 </Expander>
                             </Border>
                         </DataTemplate>
@@ -102,11 +100,11 @@
                 <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="AddDrone" Grid.Column="1" Margin="12" Padding="5" FontFamily="Arial Black" Click="AddDrone_Click" >
+            <Button x:Name="AddStation" Grid.Column="1" Margin="12" Padding="5" FontFamily="Arial Black" Click="AddStation_Click" >
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <Viewbox>
-                            <TextBlock>Add drone</TextBlock>
+                            <TextBlock>Add station</TextBlock>
                         </Viewbox>
                     </DataTemplate>
                 </Button.ContentTemplate>
