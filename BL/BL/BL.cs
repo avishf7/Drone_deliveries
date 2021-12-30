@@ -54,14 +54,14 @@ namespace BL
                 switch (droneStatus)
                 {
                     case DroneStatuses.Available:
-                        DO.Customer randomCustomer = dal.GetCustomer(deliveredPackages.Take(rd.Next(deliveredPackages.Count())).Last().TargetId);
+                        DO.Customer randomCustomer = dal.GetCustomer(deliveredPackages.Take(rd.Next(1,deliveredPackages.Count() + 1)).Last().TargetId);
 
                         droneLocation = new() { Lattitude = randomCustomer.Lattitude, Longitude = randomCustomer.Longitude };
                         minBattery = BatteryUsage(Distance(droneLocation, FindClosestStationLocation(droneLocation)));
 
                         break;
                     case DroneStatuses.Maintenance:
-                        DO.Station randomStation = stations.Take(rd.Next(stations.Count())).Last();
+                        DO.Station randomStation = stations.Take(rd.Next(1,stations.Count() + 1)).Last();
 
                         droneLocation = new() { Lattitude = randomStation.Lattitude, Longitude = randomStation.Longitude };
                         maxBattery = 20.0;
