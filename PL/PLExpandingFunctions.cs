@@ -69,28 +69,28 @@ namespace PL
             return POCustomer;
         }
 
-        ///// <summary>
-        ///// The function copies properties from a BL Package object to a PL Package object
-        ///// and returns the PL Package object after copy
-        ///// </summary>
-        ///// <param name="POPackage">PL Package object</param>
-        ///// <param name="BOPackage">BL Package object</param>
-        ///// <returns>this PL Station object</returns>
-        //public static PO.Package CopyFromBOPackage(this PO.Package POPackage, BO.Package BOPackage)
-        //{
-        //    POPackage.Id = BOPackage.Id;
-        //    POPackage.SenderCustomerInPackage = BOPackage.SenderCustomerInPackage;
-        //    POPackage.TargetCustomerInPackage = BOPackage.TargetCustomerInPackage;
-        //    POPackage.Weight = BOPackage.Weight;
-        //    POPackage.Priority = BOPackage.Priority;
-        //    POPackage.DroneInPackage = BOPackage.DroneInPackage;
-        //    POPackage.Requested = BOPackage.Requested;
-        //    POPackage.Scheduled = BOPackage.Scheduled;
-        //    POPackage.PickedUp = BOPackage.PickedUp;
-        //    POPackage.Delivered = BOPackage.Delivered;
+        /// <summary>
+        /// The function copies properties from a BL Package object to a PL Package object
+        /// and returns the PL Package object after copy
+        /// </summary>
+        /// <param name="POPackage">PL Package object</param>
+        /// <param name="BOPackage">BL Package object</param>
+        /// <returns>this PL Station object</returns>
+        public static PO.Package CopyFromBOPackage(this PO.Package POPackage, BO.Package BOPackage)
+        {
+            POPackage.Id = BOPackage.Id;
+            POPackage.SenderCustomerInPackage = BOPackage.SenderCustomerInPackage;
+            POPackage.TargetCustomerInPackage = BOPackage.TargetCustomerInPackage;
+            POPackage.Weight = BOPackage.Weight;
+            POPackage.Priority = BOPackage.Priority;
+            POPackage.DroneInPackage = BOPackage.DroneInPackage;
+            POPackage.Requested = BOPackage.Requested;
+            POPackage.Scheduled = BOPackage.Scheduled;
+            POPackage.PickedUp = BOPackage.PickedUp;
+            POPackage.Delivered = BOPackage.Delivered;
 
-        //    return POPackage;
-        //}
+            return POPackage;
+        }
 
 
 

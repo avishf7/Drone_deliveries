@@ -42,18 +42,18 @@
                 <ColumnDefinition Width="50*"/>
             </Grid.ColumnDefinitions>
 
-            <Label x:Name="labalStationId" 
+            <Label x:Name="labalCustomerId" 
                    FontSize="20"
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
-                   Content="Station ID:" 
+                   Content="Customer ID:" 
                    Grid.Row="0" 
                    Grid.Column="0"                   
                    Foreground="#FFDDD81E" 
                    FontFamily="Arial Black"
-                   Margin="10"/>
+                   Margin="8"/>
 
-            <TextBox x:Name="stationId" 
+            <TextBox x:Name="customerId" 
                      FontSize="20"
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"                   
@@ -65,7 +65,7 @@
                      Visibility="Hidden">
             </TextBox>
 
-            <TextBlock x:Name="StationIdInfo" 
+            <TextBlock x:Name="CustomerIdInfo" 
                        Grid.Row="0"
                        Grid.Column="1"
                        FontSize="20"
@@ -112,11 +112,11 @@
             </TextBlock>
 
 
-            <Label x:Name="labalStationLocation" 
+            <Label x:Name="labalPhone" 
                    FontSize="20"
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
-                   Content="Station Location:" 
+                   Content="Phone:" 
                    Grid.Row="2" 
                    Grid.Column="0"                   
                    Foreground="#FFDDD81E" 
@@ -124,7 +124,7 @@
                    Margin="10"/>
 
 
-            <TextBox x:Name="stationLocation" 
+            <TextBox x:Name="phone" 
                      FontSize="20"
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"                   
@@ -137,11 +137,11 @@
             </TextBox>
 
 
-            <TextBlock x:Name="StationLocationInfo" 
+            <TextBlock x:Name="PhoneInfo" 
                        Grid.Row="2"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=StationLocation}"
+                       Text="{Binding Path=Phone}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="20,27"
                        TextAlignment="Center"
@@ -149,19 +149,19 @@
             </TextBlock>
 
 
-            <Label x:Name="labalFreeChargeSlots" 
+            <Label x:Name="labalCustomerLocation" 
                    FontSize="20"
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
-                   Content="Free charge slots:" 
+                   Content="Customer location:" 
                    Grid.Row="3" 
                    Grid.Column="0"                   
                    Foreground="#FFDDD81E" 
                    FontFamily="Arial Black"
-                   Margin="10"/>
+                   Margin="8"/>
 
 
-            <TextBox x:Name="freeChargeSlots" 
+            <TextBox x:Name="customerLocation" 
                      FontSize="20"
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"                   
@@ -175,11 +175,11 @@
 
 
 
-            <TextBlock x:Name="FreeChargeSlotsInfo" 
+            <TextBlock x:Name="CustomerLocationInfo" 
                        Grid.Row="3"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=FreeChargeSlots}"
+                       Text="{Binding Path=CustomerLocation}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="20,27"
                        TextAlignment="Center"
@@ -187,11 +187,11 @@
             </TextBlock>
 
 
-            <Label x:Name="labalChargingDrones" 
+            <Label x:Name="labalPackageAtCustomerFromCustomer" 
                    FontSize="20"
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
-                   Content="Charging drones:" 
+                   Content="Packages sent from customer:" 
                    Grid.Row="4" 
                    Grid.Column="0"                   
                    Foreground="#FFDDD81E" 
@@ -199,7 +199,7 @@
                    Margin="10"/>
 
 
-            <TextBox x:Name="chargingDrones" 
+            <TextBox x:Name="packageAtCustomerFromCustomer" 
                      FontSize="20"
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"                   
@@ -213,11 +213,11 @@
 
 
 
-            <TextBlock x:Name="ChargingDronesInfo" 
+            <TextBlock x:Name="PackageAtCustomerFromCustomerInfo" 
                        Grid.Row="4"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=ChargingDrones}"
+                       Text="{Binding Path=packageAtCustomerFromCustomer}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="20,27"
                        TextAlignment="Center"
@@ -225,11 +225,11 @@
             </TextBlock>
 
 
-            <Label x:Name="labalrones" 
+            <Label x:Name="labalPackageAtCustomerToCustomer" 
                    FontSize="20"
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
-                   Content="Charging drones:" 
+                   Content="Packages sent to customer:" 
                    Grid.Row="5" 
                    Grid.Column="0"                   
                    Foreground="#FFDDD81E" 
@@ -237,7 +237,7 @@
                    Margin="10"/>
 
 
-            <TextBox x:Name="rones" 
+            <TextBox x:Name="packageAtCustomerToCustomer" 
                      FontSize="20"
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"                   
@@ -251,11 +251,11 @@
 
 
 
-            <TextBlock x:Name="ronesInfo" 
+            <TextBlock x:Name="PackageAtCustomerToCustomerInfo" 
                        Grid.Row="5"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=ChargingDrones}"
+                       Text="{Binding Path=PackageAtCustomerToCustomer}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="20,27"
                        TextAlignment="Center"

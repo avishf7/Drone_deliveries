@@ -30,6 +30,10 @@ namespace PL
         public List<PO.Drone> PODrones { get; set; } = new();
         public ObservableCollection<StationToList> Stations { get; set; }
         public List<PO.Station> POStations { get; set; } = new();
+        public ObservableCollection<CustomerToList> Customers { get; set; }
+        public List<PO.Customer> POCustomers { get; set; } = new();
+        public ObservableCollection<PackageToList> Packages { get; set; }
+        public List<PO.Package> POPackages { get; set; } = new();
 
 
         //const int WM_SYSCOMMAND = 0x0112;
@@ -41,7 +45,11 @@ namespace PL
 
             Drones = new ObservableCollection<DroneToList>(bl.GetDrones());
 
-            //  Stations = new ObservableCollection<StationToList>(bl.GetStations());
+            Stations = new ObservableCollection<StationToList>(bl.GetStations());
+
+            Customers = new ObservableCollection<CustomerToList>(bl.GetCustomers());
+
+            Packages = new ObservableCollection<PackageToList>(bl.GetPackages());
         }
 
         private void ShowDrones_Click(object sender, RoutedEventArgs e)

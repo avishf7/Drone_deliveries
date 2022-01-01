@@ -22,8 +22,8 @@ namespace PL.Windows
     public partial class Customer : Window
     {
         IBL bl;
-        DronesView sender;
-        PO.Drone drone;
+        CustomersView sender;
+        PO.Customer customer;
 
         /// <summary>
         /// Consructor for drone display window.
@@ -38,12 +38,12 @@ namespace PL.Windows
 
             MainGrid.ShowGridLines = true;
             AddDownGrid.Visibility = Visibility.Visible;
-            droneId.Visibility = Visibility.Visible;
-            model.Visibility = Visibility.Visible;
-            maxWeight.Visibility = Visibility.Visible;
-            stations.Visibility = Visibility.Visible;
-            maxWeight.ItemsSource = Enum.GetValues(typeof(Weight));
-            stations.ItemsSource = bl.GetStations();
+            customerId.Visibility = Visibility.Visible;
+            name.Visibility = Visibility.Visible;
+            phone.Visibility = Visibility.Visible;
+            customerLocation.Visibility = Visibility.Visible;
+            packageAtCustomerFromCustomer.Visibility = Visibility.Visible;
+            packageAtCustomerToCustomer.Visibility = Visibility.Visible;
 
         }
 
@@ -53,26 +53,26 @@ namespace PL.Windows
         /// <param name="bl">The variable of access to the logic layer</param>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="droneId">The ID of the drone intended for display</param>
-        public Drone(IBL bl, DronesView sender, PO.Drone drone)
+        public Customer(IBL bl, CustomersView sender, PO.Customer customer)
         {
             InitializeComponent();
             this.bl = bl;
             this.sender = sender;
-            this.drone = drone;
+            this.customer = customer;
 
             MainGrid.RowDefinitions[0].Height = new(50, GridUnitType.Star);
             MainGrid.RowDefinitions[1].Height = new(50, GridUnitType.Star);
 
 
-            DroneInfoDownGrid.Visibility = Visibility.Visible;
-            DroneIdInfo.Visibility = Visibility.Visible;
-            UpdateModelGrid.Visibility = Visibility.Visible;
-            MaxWeightInfo.Visibility = Visibility.Visible;
-            DroneLocationInfo.Visibility = Visibility.Visible;
+            //DroneInfoDownGrid.Visibility = Visibility.Visible;
+            //DroneIdInfo.Visibility = Visibility.Visible;
+            //UpdateModelGrid.Visibility = Visibility.Visible;
+            //MaxWeightInfo.Visibility = Visibility.Visible;
+            //DroneLocationInfo.Visibility = Visibility.Visible;
 
             this.Height = 700;
             this.Width = 550;
-            this.DataContext = drone;
+            this.DataContext = customer;
 
         }
 
@@ -108,18 +108,21 @@ namespace PL.Windows
         {
             try
             {
-                if (droneId.Text != "" && model.Text != "" && maxWeight.SelectedItem != null && stations.SelectedItem != null)
+                if (customerId.Text != "" && name.Text != "" && phone.Text != "" && customerLocation.Text != "")
                 {
-                    bl.AddDrone(new()
+                    bl.AddCustomer(new()
                     {
-                        Id = int.Parse(droneId.Text),
-                        Model = model.Text,
-                        MaxWeight = (Weight)maxWeight.SelectedItem,
-                    }, ((StationToList)stations.SelectedItem).Id);
+                        Id = int.Parse(customerId.Text),
+                        Name = name.Text,
+                        Phone = phone.Text,
 
-                    this.sender.Filtering();
+                        PackageAtCustomerFromCustomer = new List<PackageAtCustomer>(),
+                        PackageAtCustomerToCustomer = new List<PackageAtCustomer>()
+                    });
 
-                    MessageBox.Show("Adding the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+                   // this.sender.Filtering();
+
+                    MessageBox.Show("Adding the customer was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
                 }
                 else
@@ -131,119 +134,81 @@ namespace PL.Windows
 
         }
 
-        /// <summary>
-        /// A button pressed opens the option to update the drone model and changes the button to OK at the touch of a button.
-        /// </summary>
-        /// <param name="sender">The element that activates the function</param>
-        /// <param name="e"></param>
-        private void Update_Click(object sender, RoutedEventArgs e)
-        {
-            Update.Content = "OK";
-            UpdateModel.IsReadOnly = false;
-            UpdateModel.Text = "";
+   
+        ///// <summary>
+        ///// Button for sending drone for charging and release from charging according to the status of the drone.
+        ///// </summary>
+        ///// <param name="sender">The element that activates the function</param>
+        ///// <param name="e"></param>
+        //private void Charge_Click(object sender, RoutedEventArgs e)
+        //{
+        //    switch (drone.DroneStatus)
+        //    {
+        //        case DroneStatuses.Available:
+        //            try
+        //            {
+        //                bl.SendDroneForCharge(drone.Id);
+        //                drone.CopyFromBODrone(bl.GetDrone(drone.Id));
+        //                this.sender.Filtering();
+        //                MessageBox.Show("Sent for charging", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
-            Update.Click -= Update_Click;
-            Update.Click += OK_Click;
-        }
+        //            }
+        //            catch (NotEnoughBattery ex)
+        //            {
+        //                MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+        //            }
 
-        /// <summary>
-        /// Confirmation button for updating the model.
-        /// </summary>
-        /// <param name="sender">The element that activates the function</param>
-        /// <param name="e"></param>
-        private void OK_Click(object sender, RoutedEventArgs e)
-        {
-            if (UpdateModel.Text != "")
-            {
-                bl.UpdateDrone(drone.Id, UpdateModel.Text);
-                this.sender.Filtering();
-                MessageBox.Show("Updating the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                Update.Content = "Update";
-                UpdateModel.IsReadOnly = true;
-
-                Update.Click -= OK_Click;
-                Update.Click += Update_Click;
-            }
-            else
-                MessageBox.Show("empty field", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-        }
-
-        /// <summary>
-        /// Button for sending drone for charging and release from charging according to the status of the drone.
-        /// </summary>
-        /// <param name="sender">The element that activates the function</param>
-        /// <param name="e"></param>
-        private void Charge_Click(object sender, RoutedEventArgs e)
-        {
-            switch (drone.DroneStatus)
-            {
-                case DroneStatuses.Available:
-                    try
-                    {
-                        bl.SendDroneForCharge(drone.Id);
-                        drone.CopyFromBODrone(bl.GetDrone(drone.Id));
-                        this.sender.Filtering();
-                        MessageBox.Show("Sent for charging", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                    }
-                    catch (NotEnoughBattery ex)
-                    {
-                        MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-
-                    break;
-                case DroneStatuses.Maintenance:
-                    bl.RealeseDroneFromCharge(drone.Id);
-                    drone.CopyFromBODrone(bl.GetDrone(drone.Id));
-                    this.sender.Filtering();
-                    MessageBox.Show("Released from charging", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+        //            break;
+        //        case DroneStatuses.Maintenance:
+        //            bl.RealeseDroneFromCharge(drone.Id);
+        //            drone.CopyFromBODrone(bl.GetDrone(drone.Id));
+        //            this.sender.Filtering();
+        //            MessageBox.Show("Released from charging", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
 
-                    break;
-            }
-        }
-        /// <summary>
-        /// A button that handles the delivery of the package according to the status of the drone.
-        /// </summary>
-        /// <param name="sender">The element that activates the function</param>
-        /// <param name="e"></param>
-        private void Delivery_Click(object sender, RoutedEventArgs e)
-        {
-            switch (drone.DroneStatus)
-            {
-                case DroneStatuses.Available:
-                    try
-                    {
-                        bl.packageAssigning(drone.Id);
-                        drone.CopyFromBODrone(bl.GetDrone(drone.Id));
-                        this.sender.Filtering();
-                        MessageBox.Show("The package was successfully associated", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+        //            break;
+        //    }
+        //}
+        ///// <summary>
+        ///// A button that handles the delivery of the package according to the status of the drone.
+        ///// </summary>
+        ///// <param name="sender">The element that activates the function</param>
+        ///// <param name="e"></param>
+        //private void Delivery_Click(object sender, RoutedEventArgs e)
+        //{
+        //    switch (drone.DroneStatus)
+        //    {
+        //        case DroneStatuses.Available:
+        //            try
+        //            {
+        //                bl.packageAssigning(drone.Id);
+        //                drone.CopyFromBODrone(bl.GetDrone(drone.Id));
+        //                this.sender.Filtering();
+        //                MessageBox.Show("The package was successfully associated", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
 
-                    }
-                    catch (NoSuitablePackageForScheduledException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
-                    break;
-                case DroneStatuses.Sendering:
-                    if (drone.PackageInProgress.IsCollected)
-                    {
-                        bl.Deliver(drone.Id);
-                        drone.CopyFromBODrone(bl.GetDrone(drone.Id));
-                        this.sender.Filtering();
-                        MessageBox.Show("The package was delivered to its destination, good day", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+        //            }
+        //            catch (NoSuitablePackageForScheduledException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
+        //            break;
+        //        case DroneStatuses.Sendering:
+        //            if (drone.PackageInProgress.IsCollected)
+        //            {
+        //                bl.Deliver(drone.Id);
+        //                drone.CopyFromBODrone(bl.GetDrone(drone.Id));
+        //                this.sender.Filtering();
+        //                MessageBox.Show("The package was delivered to its destination, good day", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    }
-                    else
-                    {
-                        bl.PickUp(drone.Id);
-                        drone.CopyFromBODrone(bl.GetDrone(drone.Id));
-                        this.sender.Filtering();
-                        MessageBox.Show("The package was successfully collected by the drone", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+        //            }
+        //            else
+        //            {
+        //                bl.PickUp(drone.Id);
+        //                drone.CopyFromBODrone(bl.GetDrone(drone.Id));
+        //                this.sender.Filtering();
+        //                MessageBox.Show("The package was successfully collected by the drone", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    }
-                    break;
-            }
-        }
+        //            }
+        //            break;
+        //    }
+        //}
     }
 }

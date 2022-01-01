@@ -44,11 +44,11 @@
             </Button.ContentTemplate>
         </Button>
 
-        <Button x:Name="ShowDrones1"  Margin="20,5" Grid.Column="1" Grid.Row="1" FontFamily="Aharoni" Click="ShowDrones_Click" Padding="30" Opacity="0.8" >
+        <Button x:Name="ShowCustomers"  Margin="20,5" Grid.Column="1" Grid.Row="1" FontFamily="Aharoni" Click="ShowDrones_Click" Padding="30" Opacity="0.8" >
             <Button.ContentTemplate>
                 <DataTemplate>
                     <Viewbox>
-                        <TextBlock TextAlignment="Center">Show <LineBreak/> Drones</TextBlock>
+                        <TextBlock TextAlignment="Center">Show <LineBreak/> Customers </TextBlock>
                     </Viewbox>
                 </DataTemplate>
             </Button.ContentTemplate>
@@ -64,11 +64,11 @@
             </Button.ContentTemplate>
         </Button>
 
-        <Button x:Name="t" Margin="20,5" Grid.Column="3" Grid.Row="1" FontFamily="Aharoni" Padding="30" Opacity="0.8"   >
+        <Button x:Name="ShowPackages" Margin="20,5" Grid.Column="3" Grid.Row="1" FontFamily="Aharoni" Padding="30" Opacity="0.8"   >
             <Button.ContentTemplate>
                 <DataTemplate>
                     <Viewbox>
-                        <TextBlock TextAlignment="Center">Show <LineBreak/> Drones</TextBlock>
+                        <TextBlock TextAlignment="Center">Show <LineBreak/> Packages</TextBlock>
                     </Viewbox>
                 </DataTemplate>
             </Button.ContentTemplate>

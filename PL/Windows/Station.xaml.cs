@@ -17,20 +17,21 @@ using System.Windows.Shapes;
 namespace PL.Windows
 {
     /// <summary>
-    /// Interaction logic for Station.xaml
+    /// Interaction logic for Station.xaml 
     /// </summary>
     public partial class Station : Window
     {
         IBL bl;
         StationView sender;
         PO.Station station;
+        private StationView stationView;
 
         /// <summary>
         /// Consructor for drone display window.
         /// </summary>
         /// <param name="bl">The variable of access to the logic layer</param>
         /// <param name="sender">The element that activates the function</param>
-        public Station(IBL bl, StationView sender)
+        public Station(IBL bl, StationView sender, PO.Station POStation)
         {
             InitializeComponent();
             this.bl = bl;
@@ -73,6 +74,12 @@ namespace PL.Windows
             this.Width = 550;
             this.DataContext = drone;
 
+        }
+
+        public Station(IBL bl, StationView stationView)
+        {
+            this.bl = bl;
+            this.stationView = stationView;
         }
 
         /// <summary>

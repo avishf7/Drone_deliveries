@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlApi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,45 +12,47 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BlApi;
-using BO;
-
 
 namespace PL.Windows
 {
     /// <summary>
-    /// Interaction logic for CustomerView.xaml
+    /// Interaction logic for CustomersView.xaml
     /// </summary>
-    public partial class CustomerView : Window
+    public partial class CustomersView : Window
     {
         IBL bl;
         MainWindow sender;
 
         bool isCloseClick = true;
-        /// <summary>
-        /// 
-        /// </summary>
-        public StationView(IBL bl, MainWindow sender)
+
+
+        public CustomersView()
         {
             InitializeComponent();
+
             this.bl = bl;
             this.sender = sender;
 
-            this.NormalView.DataContext = this.sender.Stations;
-            this.GroupingView.DataContext = from station in this.sender.Stations
-                                            group station by station.SeveralAvailableChargingStations;
+            //StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
+            //MaxWeigth.ItemsSource = Enum.GetValues(typeof(Weight));
+            //this.NormalView.DataContext = this.sender.Drones;
+            //this.GroupingView.DataContext = from drone in this.sender.Drones
+            //                                group drone by drone.DroneStatus;
 
-            this.sender.Drones.CollectionChanged += Drones_CollectionChanged;
+
+            this.sender.Customers.CollectionChanged += Customers_CollectionChanged;
             this.sender.Closing += Sender_Closing;
             this.sender.Activated += Sender_Activated;
             this.sender.Deactivated += Sender_Deactivated;
+
         }
 
-        private void Drones_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void Customers_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            this.GroupingView.DataContext = from drone in this.sender.Drones
-                                            group drone by drone.DroneStatus;
+            //this.GroupingView.DataContext = from drone in this.sender.Drones
+            //                                group drone by drone.DroneStatus;
         }
+
 
         private void Sender_Deactivated(object sender, EventArgs e)
         {
@@ -63,12 +66,8 @@ namespace PL.Windows
 
         private void Sender_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            Exit_Click(sender, null);
+            //  Exit_Click(sender, null);
         }
-
-
-
-
 
 
         /// <summary>
@@ -88,7 +87,15 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void Reset_Click(object sender, RoutedEventArgs e)
         {
+            //MaxWeigth.Text = "";
+            //MaxWeigth.SelectedIndex = -1;
+            //MaxWeigth.SelectedItem = null;
 
+            //StatusSelector.Text = "";
+            //StatusSelector.SelectedIndex = -1;
+            //StatusSelector.SelectedItem = null;
+
+            //Filtering();
         }
 
         /// <summary>
@@ -96,32 +103,25 @@ namespace PL.Windows
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
-        private void AddStation_Click(object sender, RoutedEventArgs e)
+        private void AddCustomer_Click(object sender, RoutedEventArgs e)
         {
-            new Station(bl, this).ShowDialog();
+            new Customer(bl, this).ShowDialog();
         }
 
-        /// <summary>
-        /// Sets that by double-clicking a skimmer from the list it will see the data on the skimmer.
-        /// </summary>
-        /// <param name="sender">The element that activates the function</param>
-        /// <param name="e"></param>
-        private void StationsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void CustomersListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (StationsListView.SelectedItem != null)
+            if (CustomersListView.SelectedItem != null)
             {
-                BO.Station BOStation = bl.GetStation((StationsListView.SelectedItem as BO.StationToList).Id);
-                PO.Station POStation = this.sender.POStations.Find(dr => dr.Id == BOStation.Id);
-                if (POStation == null)
-                    this.sender.POStations.Add(POStation = new PO.Station().CopyFromBOStation(BOStation));
+                BO.Customer BOCustomer = bl.GetCustomer((CustomersListView.SelectedItem as BO.CustomerToList).CustomerId);
+                PO.Customer POCustomer = this.sender.POCustomers.Find(dr => dr.Id == BOCustomer.Id);
+                if (POCustomer == null)
+                    this.sender.POCustomers.Add(POCustomer = new PO.Customer().CopyFromBOCustomer(BOCustomer));
 
-                new Station(bl, this, POStation).Show();
+                new Customer(bl, this, POCustomer).Show();
 
             }
+
         }
-
-
-
         /// <summary>
         /// Window Close Button.
         /// </summary>
@@ -133,6 +133,7 @@ namespace PL.Windows
             this.Close();
         }
 
+
         /// <summary>
         /// Prevent the window from closing by a non-cancel button.
         /// </summary>
@@ -142,6 +143,5 @@ namespace PL.Windows
         {
             e.Cancel = isCloseClick;
         }
-
     }
 }
