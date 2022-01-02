@@ -61,7 +61,7 @@ namespace PL.Windows
             StationIdInfo.Visibility = Visibility.Visible;
             UpdateNameGrid.Visibility = Visibility.Visible;
             StationLocationInfo.Visibility = Visibility.Visible;
-            FreeChargeSlotsInfo.Visibility = Visibility.Visible;           
+            UpdateNumOfChargeGrid.Visibility = Visibility.Visible;           
             ChargingDronesInfo.Visibility = Visibility.Visible;
 
             this.Height = 700;
@@ -152,11 +152,11 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void OK_Click(object sender, RoutedEventArgs e)
         {
-            if (UpdateName.Text != "")
+            if (UpdateName.Text != ""  )
             {
-                bl.UpdateDrone(station.Id, UpdateName.Text);
+                bl.UpdateStation(station.Id, UpdateName.Text, station.FreeChargeSlots);
               //  this.sender.Filtering();
-                MessageBox.Show("Updating the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Updating the element was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 Update.Content = "Update";
                 UpdateName.IsReadOnly = true;

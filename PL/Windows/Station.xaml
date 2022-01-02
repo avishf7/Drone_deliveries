@@ -92,7 +92,6 @@
                      Grid.Row="1" 
                      Grid.Column="1"
                      Background="{StaticResource Static.Background}" 
-                     PreviewTextInput="IntTextBox_PreviewTextInput" 
                      Margin="20"
                      Visibility="Hidden">
             </TextBox>
@@ -143,7 +142,6 @@
                      Grid.Row="2" 
                      Grid.Column="1"
                      Background="{StaticResource Static.Background}" 
-                     PreviewTextInput="IntTextBox_PreviewTextInput" 
                      Margin="20"
                      Visibility="Hidden">
             </TextBox>
@@ -187,19 +185,34 @@
 
 
 
-            <TextBlock x:Name="FreeChargeSlotsInfo" 
-                       Grid.Row="3"
-                       Grid.Column="1"
-                       FontSize="20"
-                       Text="{Binding Path=FreeChargeSlots}"
-                       Background="{StaticResource Static.Background}"                  
-                       Margin="20,27"
-                       TextAlignment="Center"
-                       Visibility="Hidden">
-            </TextBlock>
+            <Grid x:Name="UpdateNumOfChargeGrid" Grid.Row="1" Grid.Column="1" Visibility="Hidden">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70*"/>
+                    <ColumnDefinition Width="30*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="UpdateNumOfCharge" 
+                         Text="{Binding Path=Name}"
+                         FontSize="20"
+                         VerticalAlignment="Stretch"
+                         HorizontalAlignment="Stretch"
+                         Background="{StaticResource Static.Background}"
+                         Margin="20,27"
+                         TextAlignment="Center"
+                         IsReadOnly="True"/>
+
+                <Button x:Name="UpdateCharge"
+                        Content="Update" 
+                        Grid.Column="1"
+                        Margin="10,27"
+                        FontFamily="Arial Black" 
+                        Click="Update_Click"
+                        />
+            </Grid>
 
 
-        
+
+
         </Grid>
 
         <Grid x:Name="AddDownGrid" Grid.Row="1" Visibility="Hidden">

@@ -97,7 +97,6 @@
                      Background="{StaticResource Static.Background}"  
                      Margin="20"
                      Visibility="Hidden">
-
             </TextBox>
 
             <Grid x:Name="UpdateModelGrid" Grid.Row="1" Grid.Column="1" Visibility="Hidden">

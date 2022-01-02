@@ -47,11 +47,10 @@ namespace PL.Windows
         }
 
         /// <summary>
-        /// constructor to window add drone.
+        /// constructor to window add customer.
         /// </summary>
         /// <param name="bl">The variable of access to the logic layer</param>
         /// <param name="sender">The element that activates the function</param>
-        /// <param name="droneId">The ID of the drone intended for display</param>
         public Customer(CustomersView sender, PO.Customer customer)
         {
             InitializeComponent();
@@ -157,11 +156,11 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void OK_Click(object sender, RoutedEventArgs e)
         {
-            if (UpdateName.Text != "" || UpdatePhone.Text != "")
+            if (UpdateName.Text != "" )
             {
-                bl.UpdateDrone(customer.Id, UpdateName.Text);
+                bl.UpdateCustomer(customer.Id, UpdateName.Text, customer.Phone);
                 //  this.sender.Filtering();
-                MessageBox.Show("Updating the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Updating the element was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 Update.Content = "Update";
                 UpdateName.IsReadOnly = true;

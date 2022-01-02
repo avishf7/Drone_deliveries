@@ -92,7 +92,6 @@
                      Grid.Row="1" 
                      Grid.Column="1"
                      Background="{StaticResource Static.Background}" 
-                     PreviewTextInput="IntTextBox_PreviewTextInput" 
                      Margin="20"
                      Visibility="Hidden">
             </TextBox>
@@ -165,7 +164,7 @@
                          TextAlignment="Center"
                          IsReadOnly="True"/>
 
-                <Button x:Name="Update"
+                <Button x:Name="Updatep"
                         Content="Update" 
                         Grid.Column="1"
                         Margin="10,27"
@@ -194,7 +193,6 @@
                      Grid.Row="3" 
                      Grid.Column="1"
                      Background="{StaticResource Static.Background}" 
-                     PreviewTextInput="IntTextBox_PreviewTextInput" 
                      Margin="20"
                      Visibility="Hidden">
             </TextBox>
@@ -274,7 +272,7 @@
                        Grid.Row="0"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=packageAtCustomerFromCustomer}"
+                       Text="{Binding Path=PackageAtCustomerFromCustomer}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="20,27"
                        TextAlignment="Center">
