@@ -44,9 +44,9 @@ namespace PL.Windows
 
             //StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             //MaxWeigth.ItemsSource = Enum.GetValues(typeof(Weight));
-            //this.NormalView.DataContext = this.sender.Drones;
-            //this.GroupingView.DataContext = from drone in this.sender.Drones
-            //                                group drone by drone.DroneStatus;
+           this.NormalView.DataContext = this.sender.Packages;
+            this.GroupingView.DataContext = from drone in this.sender.Packages
+                                            group drone by drone.DroneStatus;
 
 
             this.sender.Packages.CollectionChanged += Packages_CollectionChanged;
@@ -75,18 +75,8 @@ namespace PL.Windows
 
         private void Sender_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //  Exit_Click(sender, null);
-        }
-
-        /// <summary>
-        /// Filter the display by weight in the combobox.
-        /// </summary>
-        /// <param name="sender">The element that activates the function</param>
-        /// <param name="e"></param>
-        private void MaxWeigth_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // Filtering();
-        }
+             Exit_Click(sender, null);
+        }       
 
         /// <summary>
         /// Closing the window
@@ -95,7 +85,7 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void Window_Closed(object sender, EventArgs e)
         {
-            ((Button)this.sender.FindName("ShowDrones")).IsEnabled = true;
+            ((Button)this.sender.FindName("ShowPackages")).IsEnabled = true;
         }
 
         /// <summary>
@@ -121,7 +111,7 @@ namespace PL.Windows
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
-        private void AddDrone_Click(object sender, RoutedEventArgs e)
+        private void AddPackage_Click(object sender, RoutedEventArgs e)
         {
             new Package(bl, this).ShowDialog();
         }
@@ -131,7 +121,7 @@ namespace PL.Windows
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
-        private void PackagesListview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void PackagesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (PackagesListView.SelectedItem != null)
             {
@@ -143,30 +133,31 @@ namespace PL.Windows
                 new Package(bl, this, POPackage).Show();
 
             }
+        }
 
 
-            ///// <summary>
-            ///// Window Close Button.
-            ///// </summary>
-            ///// <param name="sender">The element that activates the function</param>
-            ///// <param name="e"></param>
-            //private void Exit_Click(object sender, RoutedEventArgs e)
-            //{
-            //    isCloseClick = false;
-            //    this.Close();
-            //}
+            /// <summary>
+            /// Window Close Button.
+            /// </summary>
+            /// <param name="sender">The element that activates the function</param>
+            /// <param name="e"></param>
+            private void Exit_Click(object sender, RoutedEventArgs e)
+            {
+                isCloseClick = false;
+                this.Close();
+            }
 
-            ///// <summary>
-            ///// Prevent the window from closing by a non-cancel button.
-            ///// </summary>
-            ///// <param name="sender">The element that activates the function</param>
-            ///// <param name="e"></param>
-            //private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-            //{
-            //    e.Cancel = isCloseClick;
-            //}
+            /// <summary>
+            /// Prevent the window from closing by a non-cancel button.
+            /// </summary>
+            /// <param name="sender">The element that activates the function</param>
+            /// <param name="e"></param>
+            private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+            {
+                e.Cancel = isCloseClick;
+            }
 
 
         }
     }
-}
+

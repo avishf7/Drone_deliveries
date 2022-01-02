@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BlApi;
 using BO;
+using PL.Windows;
 
 namespace PL
 {
@@ -34,10 +35,6 @@ namespace PL
         public List<PO.Customer> POCustomers { get; set; } = new();
         public ObservableCollection<PackageToList> Packages { get; set; }
         public List<PO.Package> POPackages { get; set; } = new();
-
-
-        //const int WM_SYSCOMMAND = 0x0112;
-        //const int SC_MOVE = 0xF010;
 
         public MainWindow()
         {
@@ -61,30 +58,7 @@ namespace PL
 
         }
 
-        //private void Window_SourceInitialized(object sender, EventArgs e)
-        //{
-        //    WindowInteropHelper helper = new WindowInteropHelper(this);
-        //    HwndSource source = HwndSource.FromHwnd(helper.Handle);
-        //    source.AddHook(WndProc);
-        //}
 
-        //private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
-        //{
-
-        //    switch (msg)
-        //    {
-        //        case WM_SYSCOMMAND:
-        //            int command = wParam.ToInt32() & 0xfff0;
-        //            if (command == SC_MOVE)
-        //            {
-        //                handled = true;
-        //            }
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //    return IntPtr.Zero;
-        //}
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -96,12 +70,25 @@ namespace PL
             this.Close();
         }
 
-        //private void ShowStations_Click(object sender, RoutedEventArgs e)
-        //{
-        //    this.ShowStations.IsEnabled = false; ;
-        //    WindowStyle = WindowStyle.None;
-        //    new StationsView(bl, this).Show();
+        private void ShowCustomers_Click(object sender, RoutedEventArgs e)
+        {
+            this.ShowCustomers.IsEnabled = false;
 
-        //}
+            new CustomersView(bl, this).Show();
+        }
+
+        private void ShowStations_Click(object sender, RoutedEventArgs e)
+        {
+            this.ShowStations.IsEnabled = false;
+
+            new StationsView(bl, this).Show();
+        }
+
+        private void ShowPackages_Click(object sender, RoutedEventArgs e)
+        {
+            this.ShowPackages.IsEnabled = false;
+
+            new PackagesView(bl, this).Show();
+        }
     }
 }

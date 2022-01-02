@@ -64,7 +64,7 @@
                 <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="AddPackage" Grid.Column="1" Margin="12" Padding="5" FontFamily="Arial Black" Click="AddStation_Click" >
+            <Button x:Name="AddPackage" Grid.Column="1" Margin="12" Padding="5" FontFamily="Arial Black" Click="AddPackage_Click" >
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <Viewbox>

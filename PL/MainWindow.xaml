@@ -34,45 +34,16 @@
         </Grid.ColumnDefinitions>
 
 
-        <Button x:Name="ShowDrones" Margin="20,5" Grid.Column="0" Grid.Row="1" FontFamily="Aharoni" Click="ShowDrones_Click" Padding="30" Opacity="0.8" >
-            <Button.ContentTemplate>
-                <DataTemplate>
-                    <Viewbox>
-                        <TextBlock TextAlignment="Center">Show <LineBreak/> Drones</TextBlock>
-                    </Viewbox>
-                </DataTemplate>
-            </Button.ContentTemplate>
-        </Button>
+        <Button x:Name="ShowDrones" Content="Drones" Margin="20,5" Grid.Column="0" Grid.Row="1" FontFamily="Aharoni" Click="ShowDrones_Click" Padding="30" Opacity="0.8" />
 
-        <Button x:Name="ShowCustomers"  Margin="20,5" Grid.Column="1" Grid.Row="1" FontFamily="Aharoni" Click="ShowDrones_Click" Padding="30" Opacity="0.8" >
-            <Button.ContentTemplate>
-                <DataTemplate>
-                    <Viewbox>
-                        <TextBlock TextAlignment="Center">Show <LineBreak/> Customers </TextBlock>
-                    </Viewbox>
-                </DataTemplate>
-            </Button.ContentTemplate>
-        </Button>
+        <Button x:Name="ShowCustomers" Content="Customers" Margin="20,5" Grid.Column="1" Grid.Row="1" FontFamily="Aharoni" Padding="30" Opacity="0.8" Click="ShowCustomers_Click" />
 
-        <Button x:Name="ShowStations" Margin="20,5" Grid.Column="2" Grid.Row="1" FontFamily="Aharoni" Padding="30" Opacity="0.8" >
-            <Button.ContentTemplate>
-                <DataTemplate>
-                    <Viewbox>
-                        <TextBlock TextAlignment="Center">Show <LineBreak/> Stations</TextBlock>
-                    </Viewbox>
-                </DataTemplate>
-            </Button.ContentTemplate>
-        </Button>
 
-        <Button x:Name="ShowPackages" Margin="20,5" Grid.Column="3" Grid.Row="1" FontFamily="Aharoni" Padding="30" Opacity="0.8"   >
-            <Button.ContentTemplate>
-                <DataTemplate>
-                    <Viewbox>
-                        <TextBlock TextAlignment="Center">Show <LineBreak/> Packages</TextBlock>
-                    </Viewbox>
-                </DataTemplate>
-            </Button.ContentTemplate>
-        </Button>
+
+        <Button x:Name="ShowStations" Content="Stations" Margin="20,5" Grid.Column="2" Grid.Row="1" FontFamily="Aharoni" Padding="30" Opacity="0.8" Click="ShowStations_Click" />
+
+        <Button x:Name="ShowPackages" Content="Packages" Margin="20,5" Grid.Column="3" Grid.Row="1" FontFamily="Aharoni" Padding="30" Opacity="0.8" Click="ShowPackages_Click"   />
+
 
         <Button x:Name="Exit" Margin="20,5" Grid.Column="4" Grid.Row="1" FontFamily="Aharoni" Click="Exit_Click" Padding="30" Opacity="0.8" >
             <Image Source="https://cdn-icons-png.flaticon.com/512/1828/1828479.png" Margin="10"/>

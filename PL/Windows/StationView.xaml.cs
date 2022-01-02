@@ -19,7 +19,7 @@ namespace PL.Windows
     /// <summary>
     /// Interaction logic for StationView.xaml
     /// </summary>
-    public partial class StationView : Window
+    public partial class StationsView : Window
     {
         IBL bl;
         MainWindow sender;
@@ -28,7 +28,7 @@ namespace PL.Windows
         /// <summary>
         /// 
         /// </summary>
-        public StationView(IBL bl, MainWindow sender)
+        public StationsView(IBL bl, MainWindow sender)
         {
             InitializeComponent();
             this.bl = bl;

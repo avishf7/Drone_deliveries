@@ -15,7 +15,8 @@ using BlApi;
 using BO;
 
 
-namespace PL
+
+namespace PL.Windows
 {
     /// <summary>
     /// Interaction logic for Drone.xaml

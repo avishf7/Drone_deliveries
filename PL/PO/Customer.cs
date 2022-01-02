@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PO
 {
-    class Customer : INotifyPropertyChanged
+    public class Customer : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         /// <summary>
@@ -87,11 +87,11 @@ namespace PO
         /// <summary>
         ///  PackageAtCustomerFromCustomer
         /// </summary>
-        private List<PackageAtCustomer> packageAtCustomerFromCustomer;
+        private IEnumerable<PackageAtCustomer> packageAtCustomerFromCustomer;
         /// <summary>
         /// property for packageAtCustomerFromCustomer
         /// </summary>
-        public List<PackageAtCustomer> PackageAtCustomerFromCustomer
+        public IEnumerable<PackageAtCustomer> PackageAtCustomerFromCustomer
         {
             get => packageAtCustomerFromCustomer;
             set
@@ -105,11 +105,11 @@ namespace PO
         /// <summary>
         ///  PackageAtCustomerToCustomer
         /// </summary>
-        private List<PackageAtCustomer> packageAtCustomerToCustomer;
+        private IEnumerable<PackageAtCustomer> packageAtCustomerToCustomer;
         /// <summary>
         /// property for packageAtCustomerToCustomer
         /// </summary>
-        public List<PackageAtCustomer> PackageAtCustomerToCustomer
+        public IEnumerable<PackageAtCustomer> PackageAtCustomerToCustomer
         {
             get => packageAtCustomerToCustomer;
             set

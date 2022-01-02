@@ -18,7 +18,7 @@ using BO;
 
 
 
-namespace PL
+namespace PL.Windows
 {
     /// <summary>
     /// Interaction logic for DronesView.xaml

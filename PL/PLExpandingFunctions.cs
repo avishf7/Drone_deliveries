@@ -42,7 +42,7 @@ namespace PL
             POStation.Name = BOStation.Name;
             POStation.LocationOfStation = BOStation.LocationOfStation;
             POStation.FreeChargeSlots = BOStation.FreeChargeSlots;
-            POStation.ChargingDrones = (List<BO.DroneCharge>)BOStation.ChargingDrones;
+            POStation.ChargingDrones = BOStation.ChargingDrones;
 
 
             return POStation;

@@ -90,11 +90,11 @@ namespace PO
         /// <summary>
         ///  ChargingDrones
         /// </summary>
-        private List<DroneCharge> chargingDrones;
+        private IEnumerable<DroneCharge> chargingDrones;
         /// <summary>
         /// property for chargingDrones
         /// </summary>
-        public List<DroneCharge> ChargingDrones
+        public IEnumerable<DroneCharge> ChargingDrones
         {
             get => chargingDrones;
             set

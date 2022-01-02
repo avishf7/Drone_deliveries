@@ -26,7 +26,7 @@ namespace PL.Windows
         bool isCloseClick = true;
 
 
-        public CustomersView()
+        public CustomersView(IBL bl, MainWindow sender)
         {
             InitializeComponent();
 
@@ -35,9 +35,9 @@ namespace PL.Windows
 
             //StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             //MaxWeigth.ItemsSource = Enum.GetValues(typeof(Weight));
-            //this.NormalView.DataContext = this.sender.Drones;
-            //this.GroupingView.DataContext = from drone in this.sender.Drones
-            //                                group drone by drone.DroneStatus;
+            this.NormalView.DataContext = this.sender.Customers;
+           this.GroupingView.DataContext = from drone in this.sender.Customers
+                                            group drone by drone.DroneStatus;
 
 
             this.sender.Customers.CollectionChanged += Customers_CollectionChanged;
@@ -66,7 +66,7 @@ namespace PL.Windows
 
         private void Sender_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //  Exit_Click(sender, null);
+              Exit_Click(sender, null);
         }
 
 
@@ -77,7 +77,7 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void Window_Closed(object sender, EventArgs e)
         {
-            ((Button)this.sender.FindName("ShowDrones")).IsEnabled = true;
+            ((Button)this.sender.FindName("ShowCustomers")).IsEnabled = true;
         }
 
         /// <summary>

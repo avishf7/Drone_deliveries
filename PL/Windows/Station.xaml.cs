@@ -22,20 +22,24 @@ namespace PL.Windows
     public partial class Station : Window
     {
         IBL bl;
-        StationView sender;
+        StationsView sender;
         PO.Station station;
-        private StationView stationView;
+        private StationsView stationView;
 
         /// <summary>
         /// Consructor for drone display window.
         /// </summary>
         /// <param name="bl">The variable of access to the logic layer</param>
         /// <param name="sender">The element that activates the function</param>
-        public Station(IBL bl, StationView sender, PO.Station POStation)
+        public Station(IBL bl, StationsView sender, PO.Station POStation)
         {
             InitializeComponent();
             this.bl = bl;
             this.sender = sender;
+            this.station = POStation;
+
+            MainGrid.RowDefinitions[0].Height = new(50, GridUnitType.Star);
+            MainGrid.RowDefinitions[1].Height = new(50, GridUnitType.Star);
 
             MainGrid.ShowGridLines = true;
             AddDownGrid.Visibility = Visibility.Visible;
@@ -45,38 +49,13 @@ namespace PL.Windows
             freeChargeSlots.Visibility = Visibility.Visible;
             chargingDrones.Visibility = Visibility.Visible;
 
-        }
-
-        /// <summary>
-        /// constructor to window add drone.
-        /// </summary>
-        /// <param name="bl">The variable of access to the logic layer</param>
-        /// <param name="sender">The element that activates the function</param>
-        /// <param name="droneId">The ID of the drone intended for display</param>
-        public Station(IBL bl, StationView sender, PO.Drone drone)
-        {
-            InitializeComponent();
-            this.bl = bl;
-            this.sender = sender;
-            this.station = station;
-
-            MainGrid.RowDefinitions[0].Height = new(50, GridUnitType.Star);
-            MainGrid.RowDefinitions[1].Height = new(50, GridUnitType.Star);
-
-
-            //DroneInfoDownGrid.Visibility = Visibility.Visible;
-            //DroneIdInfo.Visibility = Visibility.Visible;
-            //UpdateModelGrid.Visibility = Visibility.Visible;
-            //MaxWeightInfo.Visibility = Visibility.Visible;
-            //DroneLocationInfo.Visibility = Visibility.Visible;
-
             this.Height = 700;
             this.Width = 550;
-            this.DataContext = drone;
+            this.DataContext = station;
 
-        }
+        }       
 
-        public Station(IBL bl, StationView stationView)
+        public Station(IBL bl, StationsView stationView)
         {
             this.bl = bl;
             this.stationView = stationView;
