@@ -21,9 +21,10 @@ namespace PL.Windows
     /// </summary>
     public partial class Customer : Window
     {
-        IBL bl;
+        IBL bl = BlFactory.GetBl();
         CustomersView sender;
-        PO.Customer customer;
+        PO.Customer customer { get; set; }
+        Model Model { get; } = PL.Model.Instance;
 
         /// <summary>
         /// Consructor for drone display window.

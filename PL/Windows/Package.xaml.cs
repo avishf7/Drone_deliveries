@@ -23,7 +23,8 @@ namespace PL.Windows
     {
         IBL bl;
         PackagesView sender;
-        PO.Package package;
+        PO.Package POPackage { get; set; }
+        Model Model { get; } = PL.Model.Instance;
 
         /// <summary>
         /// Consructor for drone display window.
@@ -61,7 +62,7 @@ namespace PL.Windows
             InitializeComponent();
             this.bl = bl;
             this.sender = sender;
-            this.package = package;
+            this.POPackage = package;
 
             MainGrid.RowDefinitions[0].Height = new(50, GridUnitType.Star);
             MainGrid.RowDefinitions[1].Height = new(50, GridUnitType.Star);
@@ -75,7 +76,6 @@ namespace PL.Windows
 
             this.Height = 700;
             this.Width = 550;
-            this.DataContext = package;
 
         }
 
@@ -116,13 +116,13 @@ namespace PL.Windows
                     bl.AddPackage(new()
                     {
                         Id = int.Parse(packageId.Text),
-                      //  SenderCustomerInPackage = senderCustomerInPackage.Text,
+                        //  SenderCustomerInPackage = senderCustomerInPackage.Text,
                         //TargetCustomerInPackage = targetCustomerInPackage.Text,
                         Weight = (Weight)Weight.SelectedItem,
                         Priority = (Priorities)priority.SelectedItem,
                     });
 
-                  //  this.sender.Filtering();
+                    //  this.sender.Filtering();
 
                     MessageBox.Show("Adding the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
@@ -136,7 +136,7 @@ namespace PL.Windows
 
         }
 
-    
+
 
         ///// <summary>
         ///// Button for sending drone for charging and release from charging according to the status of the drone.
