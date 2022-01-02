@@ -30,31 +30,29 @@
 
         <Grid x:Name="UpGrid" Grid.Row="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="16.66*"/>
-                <RowDefinition Height="16.66*"/>
-                <RowDefinition Height="16.66*"/>
-                <RowDefinition Height="16.66*"/>
-                <RowDefinition Height="16.66*"/>
-                <RowDefinition Height="16.66*"/>
+                <RowDefinition Height="25*"/>
+                <RowDefinition Height="25*"/>
+                <RowDefinition Height="25*"/>
+                <RowDefinition Height="25*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="40*"/>
-                <ColumnDefinition Width="40*"/>
-                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
             </Grid.ColumnDefinitions>
 
-            <Label x:Name="labalPackageId" 
+           
+            <Label x:Name="labalSenderCustomerInPackage" 
                    FontSize="20"
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
-                   Content="Package ID:" 
+                   Content="Name of the sender:" 
                    Grid.Row="0" 
                    Grid.Column="0"                   
                    Foreground="#FFDDD81E" 
                    FontFamily="Arial Black"
-                   Margin="8"/>
+                   Margin="20"/>
 
-            <TextBox x:Name="packageId" 
+            <TextBox x:Name="senderCustomerInPackage" 
                      FontSize="20"
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"                   
@@ -66,48 +64,14 @@
                      Visibility="Hidden">
             </TextBox>
 
-            <TextBlock x:Name="PackageIdInfo" 
+
+            <TextBlock x:Name="SenderCustomerInPackageInfo" 
                        Grid.Row="0"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=Id}"
+                       Text="{Binding Path=SenderId}"
                        Background="{StaticResource Static.Background}"                  
-                       Margin="20,27"
-                       TextAlignment="Center"
-                       Visibility="Hidden">
-            </TextBlock>
-
-            <Label x:Name="labalSenderCustomerInPackage" 
-                   FontSize="20"
-                   VerticalContentAlignment="Center"
-                   HorizontalContentAlignment="Center"
-                   Content="Name of the sender:" 
-                   Grid.Row="1" 
-                   Grid.Column="0"                   
-                   Foreground="#FFDDD81E" 
-                   FontFamily="Arial Black"
-                   Margin="8"/>
-
-            <TextBox x:Name="senderCustomerInPackage" 
-                     FontSize="20"
-                     VerticalContentAlignment="Center"
-                     HorizontalContentAlignment="Center"                   
-                     Grid.Row="1" 
-                     Grid.Column="1"
-                     Background="{StaticResource Static.Background}" 
-                     PreviewTextInput="IntTextBox_PreviewTextInput" 
-                     Margin="20"
-                     Visibility="Hidden">
-            </TextBox>
-
-
-            <TextBlock x:Name="SenderCustomerInPackageInfo" 
-                       Grid.Row="1"
-                       Grid.Column="1"
-                       FontSize="20"
-                       Text="{Binding Path=Name}"
-                       Background="{StaticResource Static.Background}"                  
-                       Margin="20,27"
+                       Margin="20"
                        TextAlignment="Center"
                        Visibility="Hidden">
             </TextBlock>
@@ -118,18 +82,18 @@
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
                    Content="Name of the target:" 
-                   Grid.Row="2" 
+                   Grid.Row="1" 
                    Grid.Column="0"                   
                    Foreground="#FFDDD81E" 
                    FontFamily="Arial Black"
-                   Margin="10"/>
+                   Margin="20"/>
 
 
             <TextBox x:Name="targetCustomerInPackage" 
                      FontSize="20"
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"                   
-                     Grid.Row="2" 
+                     Grid.Row="1" 
                      Grid.Column="1"
                      Background="{StaticResource Static.Background}" 
                      PreviewTextInput="IntTextBox_PreviewTextInput" 
@@ -139,12 +103,12 @@
 
 
             <TextBlock x:Name="TargetCustomerInPackageInfo" 
-                       Grid.Row="2"
+                       Grid.Row="1"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=TargetCustomerInPackage}"
+                       Text="{Binding Path=TargetId}"
                        Background="{StaticResource Static.Background}"                  
-                       Margin="20,27"
+                       Margin="20"
                        TextAlignment="Center"
                        Visibility="Hidden">
             </TextBlock>
@@ -155,15 +119,15 @@
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
                    Content="Weight:" 
-                   Grid.Row="3" 
+                   Grid.Row="2" 
                    Grid.Column="0"                   
                    Foreground="#FFDDD81E" 
                    FontFamily="Arial Black"
-                   Margin="8"/>
+                   Margin="20"/>
 
 
             <ComboBox x:Name="Weight"  
-                      Grid.Row="3" Grid.Column="1" 
+                      Grid.Row="2" Grid.Column="1" 
                       FontSize="20" 
                       HorizontalContentAlignment="Center" 
                       VerticalContentAlignment="Center" 
@@ -172,12 +136,12 @@
             
 
             <TextBlock x:Name="WeightInfo" 
-                       Grid.Row="3"
+                       Grid.Row="2"
                        Grid.Column="1"
                        FontSize="20"
                        Text="{Binding Path=Weight}"
                        Background="{StaticResource Static.Background}"                  
-                       Margin="20,27"
+                       Margin="20"
                        TextAlignment="Center"
                        Visibility="Hidden">
             </TextBlock>
@@ -188,15 +152,15 @@
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
                    Content="Priority:" 
-                   Grid.Row="4" 
+                   Grid.Row="3" 
                    Grid.Column="0"                   
                    Foreground="#FFDDD81E" 
                    FontFamily="Arial Black"
-                   Margin="10"/>
+                   Margin="20"/>
 
 
             <ComboBox x:Name="priority"  
-                      Grid.Row="4" Grid.Column="1" 
+                      Grid.Row="3" Grid.Column="1" 
                       FontSize="20" 
                       HorizontalContentAlignment="Center" 
                       VerticalContentAlignment="Center" 
@@ -205,166 +169,18 @@
 
 
             <TextBlock x:Name="PriorityInfo" 
-                       Grid.Row="4"
+                       Grid.Row="3"
                        Grid.Column="1"
                        FontSize="20"
                        Text="{Binding Path=Priority}"
                        Background="{StaticResource Static.Background}"                  
-                       Margin="20,27"
+                       Margin="20"
                        TextAlignment="Center"
                        Visibility="Hidden">
             </TextBlock>
 
 
-            <Label x:Name="labalDroneInPackage" 
-                   FontSize="20"
-                   VerticalContentAlignment="Center"
-                   HorizontalContentAlignment="Center"
-                   Content="The drone in package:" 
-                   Grid.Row="5" 
-                   Grid.Column="0"                   
-                   Foreground="#FFDDD81E" 
-                   FontFamily="Arial Black"
-                   Margin="10"/>
-
-
-            <TextBox x:Name="droneInPackage" 
-                     FontSize="20"
-                     VerticalContentAlignment="Center"
-                     HorizontalContentAlignment="Center"                   
-                     Grid.Row="5" 
-                     Grid.Column="1"
-                     Background="{StaticResource Static.Background}" 
-                     PreviewTextInput="IntTextBox_PreviewTextInput" 
-                     Margin="20"
-                     Visibility="Hidden">
-            </TextBox>
-
-
-
-            <TextBlock x:Name="DroneInPackageInfo" 
-                       Grid.Row="5"
-                       Grid.Column="1"
-                       FontSize="20"
-                       Text="{Binding Path=DroneInPackage}"
-                       Background="{StaticResource Static.Background}"                  
-                       Margin="20,27"
-                       TextAlignment="Center"
-                       Visibility="Hidden">
-            </TextBlock>
-
-            <Label x:Name="labalRequested" 
-                   FontSize="20"
-                   VerticalContentAlignment="Center"
-                   HorizontalContentAlignment="Center"
-                   Content="Requested:" 
-                   Grid.Row="0" 
-                   Grid.Column="2"                   
-                   Foreground="#FFDDD81E" 
-                   FontFamily="Arial Black"
-                   Margin="10"/>
-
-
-            <TextBox x:Name="requested" 
-                     FontSize="20"
-                     VerticalContentAlignment="Center"
-                     HorizontalContentAlignment="Center"                   
-                     Grid.Row="1" 
-                     Grid.Column="2"
-                     Background="{StaticResource Static.Background}" 
-                     PreviewTextInput="IntTextBox_PreviewTextInput" 
-                     Margin="20"
-                     Visibility="Hidden">
-            </TextBox>
-
-
-
-            <TextBlock x:Name="RequestedInfo" 
-                       Grid.Row="1"
-                       Grid.Column="2"
-                       FontSize="20"
-                       Text="{Binding Path=Requested}"
-                       Background="{StaticResource Static.Background}"                  
-                       Margin="20,27"
-                       TextAlignment="Center"
-                       Visibility="Hidden">
-            </TextBlock>
-
-            <Label x:Name="labalScheduled" 
-                   FontSize="20"
-                   VerticalContentAlignment="Center"
-                   HorizontalContentAlignment="Center"
-                   Content="Scheduled:" 
-                   Grid.Row="2" 
-                   Grid.Column="2"                   
-                   Foreground="#FFDDD81E" 
-                   FontFamily="Arial Black"
-                   Margin="10"/>
-
-
-            <TextBox x:Name="scheduled" 
-                     FontSize="20"
-                     VerticalContentAlignment="Center"
-                     HorizontalContentAlignment="Center"                   
-                     Grid.Row="3" 
-                     Grid.Column="2"
-                     Background="{StaticResource Static.Background}" 
-                     PreviewTextInput="IntTextBox_PreviewTextInput" 
-                     Margin="20"
-                     Visibility="Hidden">
-            </TextBox>
-
-
-
-            <TextBlock x:Name="ScheduledInfo" 
-                       Grid.Row="3"
-                       Grid.Column="2"
-                       FontSize="20"
-                       Text="{Binding Path=Scheduled}"
-                       Background="{StaticResource Static.Background}"                  
-                       Margin="20,27"
-                       TextAlignment="Center"
-                       Visibility="Hidden">
-            </TextBlock>
-
-
-
-            <Label x:Name="labalPickedUp" 
-                   FontSize="20"
-                   VerticalContentAlignment="Center"
-                   HorizontalContentAlignment="Center"
-                   Content="PickedUp:" 
-                   Grid.Row="4" 
-                   Grid.Column="2"                   
-                   Foreground="#FFDDD81E" 
-                   FontFamily="Arial Black"
-                   Margin="10"/>
-
-
-            <TextBox x:Name="pickedUp" 
-                     FontSize="20"
-                     VerticalContentAlignment="Center"
-                     HorizontalContentAlignment="Center"                   
-                     Grid.Row="5" 
-                     Grid.Column="2"
-                     Background="{StaticResource Static.Background}" 
-                     PreviewTextInput="IntTextBox_PreviewTextInput" 
-                     Margin="20"
-                     Visibility="Hidden">
-            </TextBox>
-
-
-
-            <TextBlock x:Name="PickedUpInfo" 
-                       Grid.Row="5"
-                       Grid.Column="2"
-                       FontSize="20"
-                       Text="{Binding Path=PickedUp}"
-                       Background="{StaticResource Static.Background}"                  
-                       Margin="20,27"
-                       TextAlignment="Center"
-                       Visibility="Hidden">
-            </TextBlock>
+           
 
         </Grid>
 
@@ -397,78 +213,181 @@
                     Click="cancel_Click"/>
         </Grid>
 
-        <!--<Grid x:Name="StationInfoDownGrid" Grid.Row="1" Visibility="Hidden">
+        <Grid x:Name="PackageInfoDownGrid" Grid.Row="1" Visibility="Hidden">
             <Grid.RowDefinitions>
-                <RowDefinition Height="21*"/>
-                <RowDefinition Height="21*"/>
-                <RowDefinition Height="21*"/>
-                <RowDefinition Height="37*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="30*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50*"/>
                 <ColumnDefinition Width="50*"/>
             </Grid.ColumnDefinitions>
+            
+                      
 
-            <Label x:Name="labalBattaryStatus" 
+            <Label x:Name="labalDroneInPackage" 
                    FontSize="20"
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
-                   Content="Battary Status:" 
+                   Content="The drone in package:" 
                    Grid.Row="0" 
                    Grid.Column="0"                   
                    Foreground="#FFDDD81E" 
                    FontFamily="Arial Black"
-                   Margin="20"/>
+                   Margin="8"/>
 
            
-            <Label x:Name="labalDroneStatus" 
+            <TextBlock x:Name="DroneInPackageInfo" 
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       FontSize="20"
+                       Text="{Binding Path=DroneInPackage}"
+                       Background="{StaticResource Static.Background}"                  
+                       Margin="15"
+                       TextAlignment="Center"
+                       >
+            </TextBlock>
+            
+            
+
+            <Label x:Name="labalRequested" 
                    FontSize="20"
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
-                   Content="Drone Status:" 
+                   Content="Requested:" 
                    Grid.Row="1" 
                    Grid.Column="0"                   
                    Foreground="#FFDDD81E" 
                    FontFamily="Arial Black"
-                   Margin="20"/>
+                   Margin="10"/>
 
-            <TextBlock x:Name="DroneStatus" 
+
+          
+            <TextBlock x:Name="RequestedInfo" 
                        Grid.Row="1"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=DroneStatus}"
+                       Text="{Binding Path=Requested}"
                        Background="{StaticResource Static.Background}"                  
-                       Margin="20"
-                       TextAlignment="Center">
+                       Margin="15"
+                       TextAlignment="Center"
+                       >
             </TextBlock>
 
-            <TextBlock Text="Package In Progress:" 
-                       Grid.Row="2" Grid.Column="0" 
-                       FontSize="20" 
-                       FontFamily="Arial Black" 
-                       Margin="20" 
-                       VerticalAlignment="Center" 
-                       HorizontalAlignment="Center"  
-                       Foreground="#FFDDD81E"/>
+            
+            <Label x:Name="labalScheduled" 
+                   FontSize="20"
+                   VerticalContentAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   Content="Scheduled:" 
+                   Grid.Row="2" 
+                   Grid.Column="0"                   
+                   Foreground="#FFDDD81E" 
+                   FontFamily="Arial Black"
+                   Margin="10"/>
 
-            <TextBox x:Name="PackageInProgress"
-                      DataContext="{Binding Path=PackageInProgress}"
-                      Grid.Row="2" Grid.Column="1" 
-                      FontSize="20" 
-                      Template="{StaticResource PackageInTransferTemplate}"
-                      Background="{StaticResource Static.Background}"
-                      Margin="20,0"/>
+
+           
+            <TextBlock x:Name="ScheduledInfo" 
+                       Grid.Row="2"
+                       Grid.Column="1"
+                       FontSize="20"
+                       Text="{Binding Path=Scheduled}"
+                       Background="{StaticResource Static.Background}"                  
+                       Margin="15"
+                       TextAlignment="Center"
+                       >
+            </TextBlock>
+
+
+
+            <Label x:Name="labalPickedUp" 
+                   FontSize="20"
+                   VerticalContentAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   Content="PickedUp:" 
+                   Grid.Row="3" 
+                   Grid.Column="0"                   
+                   Foreground="#FFDDD81E" 
+                   FontFamily="Arial Black"
+                   Margin="10"/>
+            
+
+          <TextBlock x:Name="PickedUpInfo" 
+                       Grid.Row="3"
+                       Grid.Column="1"
+                       FontSize="20"
+                       Text="{Binding Path=PickedUp}"
+                       Background="{StaticResource Static.Background}"                  
+                       Margin="15"
+                       TextAlignment="Center"
+                       >
+            </TextBlock>
+
+
+            <Label x:Name="labalDelivered" 
+                   FontSize="20"
+                   VerticalContentAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   Content="Delivered:" 
+                   Grid.Row="4" 
+                   Grid.Column="0"                   
+                   Foreground="#FFDDD81E" 
+                   FontFamily="Arial Black"
+                   Margin="10"/>
+
+
+            <TextBlock x:Name="DeliveredInfo" 
+                       Grid.Row="4"
+                       Grid.Column="1"
+                       FontSize="20"
+                       Text="{Binding Path=Delivered}"
+                       Background="{StaticResource Static.Background}"                  
+                       Margin="15"
+                       TextAlignment="Center"
+                       >
+            </TextBlock>
+
+            <Label x:Name="labalPackageId" 
+                   FontSize="20"
+                   VerticalContentAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   Content="Package ID:" 
+                   Grid.Row="5" 
+                   Grid.Column="0"                   
+                   Foreground="#FFDDD81E" 
+                   FontFamily="Arial Black"
+                   Margin="10"/>
+
+ 
+            <TextBlock x:Name="PackageIdInfo" 
+                       Grid.Row="5"
+                       Grid.Column="1"
+                       FontSize="20"
+                       Text="{Binding Path=Id}"
+                       Background="{StaticResource Static.Background}"                  
+                       Margin="15"
+                       TextAlignment="Center"
+                       >
+            </TextBlock>
+
+
 
             <Button x:Name="Exit"                         
                         Grid.Column="0"
-                        Grid.Row="3"
+                        Grid.Row="6"
                         Margin="30,22" 
                         FontFamily="Arial Black"
                         Click="cancel_Click">
                 <Image Source="https://cdn-icons-png.flaticon.com/512/1828/1828479.png" Margin="10"/>
-            </Button>-->
+            </Button>
 
-        <!--<Grid x:Name="DroneInfoDownInDownGrid" Grid.Row="3" Grid.Column="1">
+        <Grid x:Name="DroneInfoDownInDownGrid" Grid.Row="3" Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="25*"/>
                     <ColumnDefinition Width="50*"/>
@@ -479,7 +398,7 @@
                     <RowDefinition Height="50*"/>
                 </Grid.RowDefinitions>
 
-                <Button x:Name="Charge" 
+                <!--<Button x:Name="Charge" 
                         Grid.Column="1"
                         Grid.Row="0"
                         Margin="15,5" 
@@ -502,9 +421,9 @@
                             </MultiBinding>
                         </Image.Source>
                     </Image>
-                </Button>
-            </Grid>-->
-        <!--</Grid>-->
+                </Button>-->
+            </Grid>
+        </Grid>
     </Grid>
 
     <Window.Background>

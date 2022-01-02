@@ -24,5 +24,7 @@ namespace BO
             return "Details of customer in delivery:" + "\nCustomer id: " + CustomerId +
                 "\nCustomer name: " + CustomerName + "\n";
         }
+
+       
     }
 }

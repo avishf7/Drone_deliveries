@@ -31,6 +31,22 @@ namespace PL.Windows
         /// </summary>
         /// <param name="bl">The variable of access to the logic layer</param>
         /// <param name="sender">The element that activates the function</param>
+        public Station(IBL bl, StationsView stationView)
+        {
+            InitializeComponent();
+            this.bl = bl;
+            this.stationView = stationView;
+
+            MainGrid.ShowGridLines = true;
+            AddDownGrid.Visibility = Visibility.Visible;
+            stationId.Visibility = Visibility.Visible;
+            name.Visibility = Visibility.Visible;
+            stationLocation.Visibility = Visibility.Visible;
+            freeChargeSlots.Visibility = Visibility.Visible;
+
+        }
+
+
         public Station(IBL bl, StationsView sender, PO.Station POStation)
         {
             InitializeComponent();
@@ -41,13 +57,12 @@ namespace PL.Windows
             MainGrid.RowDefinitions[0].Height = new(50, GridUnitType.Star);
             MainGrid.RowDefinitions[1].Height = new(50, GridUnitType.Star);
 
-            MainGrid.ShowGridLines = true;
-            AddDownGrid.Visibility = Visibility.Visible;
-            stationId.Visibility = Visibility.Visible;
-            name.Visibility = Visibility.Visible;
-            stationLocation.Visibility = Visibility.Visible;
-            freeChargeSlots.Visibility = Visibility.Visible;
-            chargingDrones.Visibility = Visibility.Visible;
+            StationInfoDownGrid.Visibility = Visibility.Visible;
+            StationIdInfo.Visibility = Visibility.Visible;
+            NameInfo.Visibility = Visibility.Visible;
+            StationLocationInfo.Visibility = Visibility.Visible;
+            FreeChargeSlotsInfo.Visibility = Visibility.Visible;           
+            ChargingDronesInfo.Visibility = Visibility.Visible;
 
             this.Height = 700;
             this.Width = 550;
@@ -55,11 +70,7 @@ namespace PL.Windows
 
         }       
 
-        public Station(IBL bl, StationsView stationView)
-        {
-            this.bl = bl;
-            this.stationView = stationView;
-        }
+
 
         /// <summary>
         /// A button that alerts if the user has entered characters rather than numbers.

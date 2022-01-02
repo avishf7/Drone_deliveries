@@ -36,18 +36,19 @@ namespace PL.Windows
             this.bl = bl;
             this.sender = sender;
 
+            Weight.ItemsSource = Enum.GetValues(typeof(Weight));
+            priority.ItemsSource = Enum.GetValues(typeof(Priorities));
+
 
             MainGrid.ShowGridLines = true;
             AddDownGrid.Visibility = Visibility.Visible;
-            packageId.Visibility = Visibility.Visible;
             senderCustomerInPackage.Visibility = Visibility.Visible;
             targetCustomerInPackage.Visibility = Visibility.Visible;
-            Weight.ItemsSource = Enum.GetValues(typeof(Weight));
-            priority.ItemsSource = Enum.GetValues(typeof(Priorities));
-            droneInPackage.Visibility = Visibility.Visible;
-            requested.Visibility = Visibility.Visible;
-            scheduled.Visibility = Visibility.Visible;
-            pickedUp.Visibility = Visibility.Visible;
+            Weight.Visibility = Visibility.Visible;
+            priority.Visibility = Visibility.Visible;
+
+          
+
         }
 
         /// <summary>
@@ -63,17 +64,20 @@ namespace PL.Windows
             this.sender = sender;
             this.package = package;
 
-            MainGrid.RowDefinitions[0].Height = new(50, GridUnitType.Star);
-            MainGrid.RowDefinitions[1].Height = new(50, GridUnitType.Star);
+            MainGrid.RowDefinitions[0].Height = new(35, GridUnitType.Star);
+            MainGrid.RowDefinitions[1].Height = new(65, GridUnitType.Star);
 
 
-            //DroneInfoDownGrid.Visibility = Visibility.Visible;
-            //DroneIdInfo.Visibility = Visibility.Visible;
-            //UpdateModelGrid.Visibility = Visibility.Visible;
-            //MaxWeightInfo.Visibility = Visibility.Visible;
-            //DroneLocationInfo.Visibility = Visibility.Visible;
+            PackageInfoDownGrid.Visibility = Visibility.Visible;           
+            SenderCustomerInPackageInfo.Visibility = Visibility.Visible;
+            TargetCustomerInPackageInfo.Visibility = Visibility.Visible;
+            WeightInfo.Visibility = Visibility.Visible;
+            PriorityInfo.Visibility = Visibility.Visible;
 
-            this.Height = 700;
+
+
+
+            this.Height = 920;
             this.Width = 550;
             this.DataContext = package;
 
@@ -111,13 +115,13 @@ namespace PL.Windows
         {
             try
             {
-                if (packageId.Text != "" && senderCustomerInPackage.Text != "" && targetCustomerInPackage.Text != "" && Weight.SelectedItem != null && priority.SelectedItem != null)
+                if (senderCustomerInPackage.Text != "" && targetCustomerInPackage.Text != "" && Weight.SelectedItem != null && priority.SelectedItem != null)
                 {
                     bl.AddPackage(new()
                     {
-                        Id = int.Parse(packageId.Text),
-                      //  SenderCustomerInPackage = senderCustomerInPackage.Text,
-                        //TargetCustomerInPackage = targetCustomerInPackage.Text,
+                       
+                      SenderCustomerInPackage = new() {CustomerId = int.Parse (senderCustomerInPackage.Text)},
+                        TargetCustomerInPackage = new() {CustomerId = int.Parse (targetCustomerInPackage.Text)},
                         Weight = (Weight)Weight.SelectedItem,
                         Priority = (Priorities)priority.SelectedItem,
                     });
