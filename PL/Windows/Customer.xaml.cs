@@ -31,7 +31,7 @@ namespace PL.Windows
         /// </summary>
         /// <param name="bl">The variable of access to the logic layer</param>
         /// <param name="sender">The element that activates the function</param>
-        public Customer(IBL bl, CustomersView sender)
+        public Customer(CustomersView sender)
         {
             InitializeComponent();
             this.bl = bl;
@@ -54,7 +54,7 @@ namespace PL.Windows
         /// <param name="bl">The variable of access to the logic layer</param>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="droneId">The ID of the drone intended for display</param>
-        public Customer(IBL bl, CustomersView sender, PO.Customer customer)
+        public Customer(CustomersView sender, PO.Customer customer)
         {
             InitializeComponent();
             this.bl = bl;

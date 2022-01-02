@@ -11,7 +11,8 @@
         Closed="Window_Closed" 
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Closing="Window_Closing"        >
+        Closing="Window_Closing"   
+        DataContext="{Binding RelativeSource={RelativeSource self}}">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -27,8 +28,8 @@
             <RowDefinition Height="450*"/>
             <RowDefinition Height="80*"/>
         </Grid.RowDefinitions>
-        <TabControl Background="{x:Null}" Grid.Row="0" >
-            <TabItem x:Name="NormalView" Header="Normal" Background="{StaticResource Static.Background}" >
+        <TabControl Background="{x:Null}" Grid.Row="0"   >
+            <TabItem x:Name="NormalView" Header="Normal" Background="{StaticResource Static.Background}"  >
                 <Grid x:Name="TabNormalGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50*"/>
@@ -64,7 +65,7 @@
                     </Grid>
 
                     <ListView x:Name="DronesListView"
-                          ItemsSource="{Binding}" 
+                          ItemsSource="{Binding Model.Drones}" 
                           Grid.Row="1" Opacity="0.5" 
                           MouseDoubleClick="DronesListView_MouseDoubleClick" />
                 </Grid>
@@ -76,7 +77,7 @@
                             <Border BorderBrush="Gray" BorderThickness="1" Padding="5" Margin="5">
                                 <Expander IsExpanded="True">
                                     <Expander.Header>
-                                        <StackPanel Orientation="Horizontal">
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">
                                             <TextBlock Text="{Binding Key}" FontWeight="Bold" />
                                         </StackPanel>
                                     </Expander.Header>
