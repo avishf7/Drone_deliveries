@@ -88,9 +88,9 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void CustomersListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (CustomersListView.SelectedItem != null)
+            if (((ListView)sender).SelectedItem != null)
             {
-                BO.Customer BOCustomer = bl.GetCustomer((CustomersListView.SelectedItem as BO.CustomerToList).CustomerId);
+                BO.Customer BOCustomer = bl.GetCustomer((((ListView)sender).SelectedItem as BO.CustomerToList).CustomerId);
                 PO.Customer POCustomer = this.sender.POCustomers.Find(dr => dr.Id == BOCustomer.Id);
                 if (POCustomer == null)
                     this.sender.POCustomers.Add(POCustomer = new PO.Customer().CopyFromBOCustomer(BOCustomer));
