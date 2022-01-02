@@ -27,35 +27,13 @@ namespace PL
     {
         IBL bl = BlFactory.GetBl();
 
-        public ObservableCollection<DroneToList> Drones { get; set; }
-        public List<PO.Drone> PODrones { get; set; } = new();
-        public ObservableCollection<StationToList> Stations { get; set; }
-        public List<PO.Station> POStations { get; set; } = new();
-        public ObservableCollection<CustomerToList> Customers { get; set; }
-        public List<PO.Customer> POCustomers { get; set; } = new();
-        public ObservableCollection<PackageToList> Packages { get; set; }
-        public List<PO.Package> POPackages { get; set; } = new();
 
         public MainWindow()
         {
             InitializeComponent();
-
-            Drones = new ObservableCollection<DroneToList>(bl.GetDrones());
-
-            Stations = new ObservableCollection<StationToList>(bl.GetStations());
-
-            Customers = new ObservableCollection<CustomerToList>(bl.GetCustomers());
-
-            Packages = new ObservableCollection<PackageToList>(bl.GetPackages());
         }
 
-        private void ShowDrones_Click(object sender, RoutedEventArgs e)
-        {
-            //  this.Visibility = Visibility.Hidden;
-            this.ShowDrones.IsEnabled = false;
-            new DronesView(bl, this).Show();
-
-        }
+        
 
 
 
@@ -73,21 +51,27 @@ namespace PL
         {
             this.ShowCustomers.IsEnabled = false;
 
-            new CustomersView(bl, this).Show();
+            new CustomersView( this).Show();
+        }
+
+        private void ShowDrones_Click(object sender, RoutedEventArgs e)
+        {
+            this.ShowDrones.IsEnabled = false;
+            new DronesView(this).Show();
         }
 
         private void ShowStations_Click(object sender, RoutedEventArgs e)
         {
             this.ShowStations.IsEnabled = false;
 
-            new StationsView(bl, this).Show();
+            new StationsView( this).Show();
         }
 
         private void ShowPackages_Click(object sender, RoutedEventArgs e)
         {
             this.ShowPackages.IsEnabled = false;
 
-            new PackagesView(bl, this).Show();
+            new PackagesView( this).Show();
         }
     }
 }

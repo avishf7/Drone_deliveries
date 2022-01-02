@@ -20,20 +20,17 @@ namespace PL.Windows
     /// </summary>
     public partial class CustomersView : Window
     {
-        IBL bl;
-        MainWindow sender;
-
+        IBL bl = BlFactory.GetBl();
+        MainWindow sender;       
         bool isCloseClick = true;
+
+        Model Model { get; } = PL.Model.Instance;
 
 
         public CustomersView(IBL bl, MainWindow sender)
         {
             InitializeComponent();
-
-            this.bl = bl;
             this.sender = sender;
-
-            this.CustomersListView.DataContext = this.sender.Customers;
 
             this.sender.Closing += Sender_Closing;
             this.sender.Activated += Sender_Activated;
@@ -78,7 +75,7 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void AddCustomer_Click(object sender, RoutedEventArgs e)
         {
-            new Customer(bl, this).ShowDialog();
+            new Customer(this).ShowDialog();
         }
 
         /// <summary>
@@ -91,12 +88,11 @@ namespace PL.Windows
             if (((ListView)sender).SelectedItem != null)
             {
                 BO.Customer BOCustomer = bl.GetCustomer((((ListView)sender).SelectedItem as BO.CustomerToList).CustomerId);
-                PO.Customer POCustomer = this.sender.POCustomers.Find(dr => dr.Id == BOCustomer.Id);
+                PO.Customer POCustomer = Model.POCustomers.Find(dr => dr.Id == BOCustomer.Id);
                 if (POCustomer == null)
-                    this.sender.POCustomers.Add(POCustomer = new PO.Customer().CopyFromBOCustomer(BOCustomer));
+                    Model.POCustomers.Add(POCustomer = new PO.Customer().CopyFromBOCustomer(BOCustomer));
 
-                new Customer(bl, this, POCustomer).Show();
-
+                new Customer(this, POCustomer).Show();
             }
 
         }
