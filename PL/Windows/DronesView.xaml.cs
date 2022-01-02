@@ -143,9 +143,9 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (DronesListView.SelectedItem != null)
+            if (((ListView)sender).SelectedItem != null)
             {
-                BO.Drone BODrone = bl.GetDrone((DronesListView.SelectedItem as BO.DroneToList).Id);
+                BO.Drone BODrone = bl.GetDrone((((ListView)sender).SelectedItem as BO.DroneToList).Id);
                 PO.Drone PODrone = this.sender.PODrones.Find(dr => dr.Id == BODrone.Id);
                 if (PODrone == null)
                     this.sender.PODrones.Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));

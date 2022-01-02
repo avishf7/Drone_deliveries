@@ -99,9 +99,9 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void StationsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (StationsListView.SelectedItem != null)
+            if (((ListView)sender).SelectedItem != null)
             {
-                BO.Station BOStation = bl.GetStation((StationsListView.SelectedItem as BO.StationToList).Id);
+                BO.Station BOStation = bl.GetStation((((ListView)sender).SelectedItem as BO.StationToList).Id);
               PO.Station POStation = this.sender.POStations.Find(dr => dr.Id == BOStation.Id);
                 if (POStation == null)
                     this.sender.POStations.Add(POStation = new PO.Station().CopyFromBOStation(BOStation));

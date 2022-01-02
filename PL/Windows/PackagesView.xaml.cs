@@ -123,9 +123,9 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void PackagesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (PackagesListView.SelectedItem != null)
+            if (((ListView)sender).SelectedItem != null)
             {
-                BO.Package BOPackage = bl.GetPackage((PackagesListView.SelectedItem as BO.PackageToList).Id);
+                BO.Package BOPackage = bl.GetPackage((((ListView)sender).SelectedItem as BO.PackageToList).Id);
                 PO.Package POPackage = this.sender.POPackages.Find(dr => dr.Id == BOPackage.Id);
                 if (POPackage == null)
                     this.sender.POPackages.Add(POPackage = new PO.Package().CopyFromBOPackage(BOPackage));
