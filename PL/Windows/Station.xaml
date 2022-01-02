@@ -98,16 +98,30 @@
             </TextBox>
 
 
-            <TextBlock x:Name="NameInfo" 
-                       Grid.Row="1"
-                       Grid.Column="1"
-                       FontSize="20"
-                       Text="{Binding Path=Name}"
-                       Background="{StaticResource Static.Background}"                  
-                       Margin="20,27"
-                       TextAlignment="Center"
-                       Visibility="Hidden">
-            </TextBlock>
+            <Grid x:Name="UpdateNameGrid" Grid.Row="1" Grid.Column="1" Visibility="Hidden">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70*"/>
+                    <ColumnDefinition Width="30*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="UpdateName" 
+                         Text="{Binding Path=Name}"
+                         FontSize="20"
+                         VerticalAlignment="Stretch"
+                         HorizontalAlignment="Stretch"
+                         Background="{StaticResource Static.Background}"
+                         Margin="20,27"
+                         TextAlignment="Center"
+                         IsReadOnly="True"/>
+
+                <Button x:Name="Update"
+                        Content="Update" 
+                        Grid.Column="1"
+                        Margin="10,27"
+                        FontFamily="Arial Black" 
+                        Click="Update_Click"
+                        />
+            </Grid>
 
 
             <Label x:Name="labalStationLocation" 
@@ -219,9 +233,7 @@
 
         <Grid x:Name="StationInfoDownGrid" Grid.Row="1" Visibility="Hidden">
             <Grid.RowDefinitions>
-                <RowDefinition Height="21*"/>
-                <RowDefinition Height="21*"/>
-                <RowDefinition Height="21*"/>
+                <RowDefinition Height="63*"/>
                 <RowDefinition Height="37*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -234,7 +246,7 @@
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
                    Content="Charging drones:" 
-                   Grid.Row="4" 
+                   Grid.Row="0" 
                    Grid.Column="0"                   
                    Foreground="#FFDDD81E" 
                    FontFamily="Arial Black"
@@ -242,14 +254,13 @@
 
 
             <TextBlock x:Name="ChargingDronesInfo" 
-                       Grid.Row="4"
+                       Grid.Row="0"
                        Grid.Column="1"
                        FontSize="20"
                        Text="{Binding Path=ChargingDrones}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="20,27"
-                       TextAlignment="Center"
-                       Visibility="Hidden">
+                       TextAlignment="Center">
             </TextBlock>
 
 

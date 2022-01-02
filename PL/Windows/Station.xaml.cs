@@ -59,7 +59,7 @@ namespace PL.Windows
 
             StationInfoDownGrid.Visibility = Visibility.Visible;
             StationIdInfo.Visibility = Visibility.Visible;
-            NameInfo.Visibility = Visibility.Visible;
+            UpdateNameGrid.Visibility = Visibility.Visible;
             StationLocationInfo.Visibility = Visibility.Visible;
             FreeChargeSlotsInfo.Visibility = Visibility.Visible;           
             ChargingDronesInfo.Visibility = Visibility.Visible;
@@ -130,7 +130,47 @@ namespace PL.Windows
         }
 
 
-       
+        /// <summary>
+        /// A button pressed opens the option to update the drone model and changes the button to OK at the touch of a button.
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
+        private void Update_Click(object sender, RoutedEventArgs e)
+        {
+            Update.Content = "OK";
+            UpdateName.IsReadOnly = false;
+            UpdateName.Text = "";
+
+            Update.Click -= Update_Click;
+            Update.Click += OK_Click;
+        }
+
+        /// <summary>
+        /// Confirmation button for updating the model.
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
+        private void OK_Click(object sender, RoutedEventArgs e)
+        {
+            if (UpdateName.Text != "")
+            {
+                bl.UpdateDrone(station.Id, UpdateName.Text);
+              //  this.sender.Filtering();
+                MessageBox.Show("Updating the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                Update.Content = "Update";
+                UpdateName.IsReadOnly = true;
+
+                Update.Click -= OK_Click;
+                Update.Click += Update_Click;
+            }
+            else
+                MessageBox.Show("empty field", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
+        }
+
+
+
 
         ///// <summary>
         ///// Button for sending drone for charging and release from charging according to the status of the drone.
