@@ -25,12 +25,11 @@ namespace PL.Windows
     /// </summary>
     public partial class DronesView : Window
     {
-        IBL bl;
+        IBL bl = BlFactory.GetBl();
         MainWindow sender;
-
         bool isCloseClick = true;
 
-
+        public Model Model { get; } = PL.Model.Instance;
 
 
         /// <summary>
@@ -38,19 +37,18 @@ namespace PL.Windows
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="sender">The element that activates the function</param>
-        public DronesView(IBL bl, MainWindow sender)
+        public DronesView(MainWindow sender)
         {
             InitializeComponent();
-            this.bl = bl;
             this.sender = sender;
 
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             MaxWeigth.ItemsSource = Enum.GetValues(typeof(Weight));
-            this.NormalView.DataContext = this.sender.Drones;
-            this.GroupingView.DataContext = from drone in this.sender.Drones
+
+            this.GroupingView.DataContext = from drone in bl.GetDrones()
                                             group drone by drone.DroneStatus;
 
-            this.sender.Drones.CollectionChanged += Drones_CollectionChanged;
+            Model.Drones.CollectionChanged += Drones_CollectionChanged;
             this.sender.Closing += Sender_Closing;
             this.sender.Activated += Sender_Activated;
             this.sender.Deactivated += Sender_Deactivated;
@@ -58,7 +56,7 @@ namespace PL.Windows
 
         private void Drones_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            this.GroupingView.DataContext = from drone in this.sender.Drones
+            this.GroupingView.DataContext = from drone in bl.GetDrones()
                                             group drone by drone.DroneStatus;
         }
 
@@ -146,9 +144,9 @@ namespace PL.Windows
             if (((ListView)sender).SelectedItem != null)
             {
                 BO.Drone BODrone = bl.GetDrone((((ListView)sender).SelectedItem as BO.DroneToList).Id);
-                PO.Drone PODrone = this.sender.PODrones.Find(dr => dr.Id == BODrone.Id);
+                PO.Drone PODrone = Model.PODrones.Find(dr => dr.Id == BODrone.Id);
                 if (PODrone == null)
-                    this.sender.PODrones.Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));
+                    Model.PODrones.Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));
 
                 new Drone(bl, this, PODrone).Show();
 
@@ -163,10 +161,10 @@ namespace PL.Windows
             var weight = MaxWeigth.SelectedItem;
             var status = StatusSelector.SelectedItem;
 
-            this.sender.Drones.Clear();
-            foreach (var drone in bl.GetDrones(dr => (status != null ? dr.DroneStatus == (DroneStatuses)status : true) &&
-                                                     (weight != null ? dr.MaxWeight == (Weight)weight : true)))
-                this.sender.Drones.Add(drone);
+
+            Model.Drones = new(bl.GetDrones(dr => (status != null ? dr.DroneStatus == (DroneStatuses)status : true) &&
+                                           (weight != null ? dr.MaxWeight == (Weight)weight : true)));
+
         }
 
         /// <summary>

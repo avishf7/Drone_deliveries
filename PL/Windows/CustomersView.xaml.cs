@@ -24,10 +24,10 @@ namespace PL.Windows
         MainWindow sender;       
         bool isCloseClick = true;
 
-        Model Model { get; } = PL.Model.Instance;
+        public Model Model { get; } = PL.Model.Instance;
 
 
-        public CustomersView(IBL bl, MainWindow sender)
+        public CustomersView(MainWindow sender)
         {
             InitializeComponent();
             this.sender = sender;

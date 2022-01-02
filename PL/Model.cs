@@ -3,26 +3,74 @@ using BO;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace PL
 {
-    sealed class Model
+    public sealed class Model : INotifyPropertyChanged
     {
         internal static Model Instance { get; set; } = new();
 
         IBL bl = BlFactory.GetBl();
 
-        internal ObservableCollection<DroneToList> Drones { get; set; }
-        internal List<PO.Drone> PODrones { get; set; } = new();
-        internal ObservableCollection<StationToList> Stations { get; set; }
-        internal List<PO.Station> POStations { get; set; } = new();
-        internal ObservableCollection<CustomerToList> Customers { get; set; }
-        internal List<PO.Customer> POCustomers { get; set; } = new();
-        internal ObservableCollection<PackageToList> Packages { get; set; }
-        internal List<PO.Package> POPackages { get; set; } = new();
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        ObservableCollection<DroneToList> drones;
+        public ObservableCollection<DroneToList> Drones 
+        {
+            get => drones;
+            set
+            {
+                drones = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Drones"));
+            } 
+        }
+
+        ObservableCollection<StationToList> stations;
+        public ObservableCollection<StationToList> Stations
+        {
+            get => stations;
+            set
+            {
+                stations = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Stations"));
+            }
+        }
+
+        ObservableCollection<CustomerToList> customers;
+        public ObservableCollection<CustomerToList> Customers
+        {
+            get => customers;
+            set
+            {
+                customers = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Customers"));
+            }
+        }
+
+        ObservableCollection<PackageToList> packages;
+        public ObservableCollection<PackageToList> Packages
+        {
+            get => packages;
+            set
+            {
+                packages = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Packages"));
+            }
+        }
+
+
+        public List<PO.Drone> PODrones { get; set; } = new();        
+        public List<PO.Station> POStations { get; set; } = new();        
+        public List<PO.Customer> POCustomers { get; set; } = new();       
+        public List<PO.Package> POPackages { get; set; } = new();
 
         private Model()
         {

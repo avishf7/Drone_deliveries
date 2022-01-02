@@ -11,7 +11,8 @@
         Closed="Window_Closed" 
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Closing="Window_Closing" >
+        Closing="Window_Closing" 
+        DataContext="{Binding RelativeSource={RelativeSource self}}">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -28,7 +29,7 @@
             <RowDefinition Height="80*"/>
         </Grid.RowDefinitions>
         <TabControl Background="{x:Null}" Grid.Row="0" >
-            <TabItem x:Name="NormalView" Header="Normal" Background="{StaticResource Static.Background}" >
+            <TabItem x:Name="NormalView" Header="Normal" Background="{StaticResource Static.Background}" DataContext="{Binding Model.Packages}">
                 <Grid x:Name="TabNormalGrid">
 
                     <ListView x:Name="PackagesListView"

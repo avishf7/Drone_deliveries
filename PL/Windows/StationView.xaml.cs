@@ -21,24 +21,24 @@ namespace PL.Windows
     /// </summary>
     public partial class StationsView : Window
     {
-        IBL bl;
+        IBL bl = BlFactory.GetBl();
         MainWindow sender;
 
         bool isCloseClick = true;
+        public Model Model { get; } = PL.Model.Instance;
+
         /// <summary>
         /// 
         /// </summary>
-        public StationsView(IBL bl, MainWindow sender)
+        public StationsView( MainWindow sender)
         {
             InitializeComponent();
-            this.bl = bl;
             this.sender = sender;
 
-            this.NormalView.DataContext = this.sender.Stations;
-            this.GroupingView.DataContext = from station in this.sender.Stations
+            this.GroupingView.DataContext = from station in bl.GetStations()
                                             group station by station.SeveralAvailableChargingStations;
 
-            this.sender.Stations.CollectionChanged += Stations_CollectionChanged;
+            Model.Stations.CollectionChanged += Stations_CollectionChanged;
             this.sender.Closing += Sender_Closing;
             this.sender.Activated += Sender_Activated;
             this.sender.Deactivated += Sender_Deactivated;
@@ -46,7 +46,7 @@ namespace PL.Windows
 
         private void Stations_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            this.GroupingView.DataContext = from station in this.sender.Stations
+            this.GroupingView.DataContext = from station in bl.GetStations()
                                             group station by station.SeveralAvailableChargingStations;
         }
 
@@ -99,16 +99,16 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void StationsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (((ListView)sender).SelectedItem != null)
-            {
-                BO.Station BOStation = bl.GetStation((((ListView)sender).SelectedItem as BO.StationToList).Id);
-              PO.Station POStation = this.sender.POStations.Find(dr => dr.Id == BOStation.Id);
-                if (POStation == null)
-                    this.sender.POStations.Add(POStation = new PO.Station().CopyFromBOStation(BOStation));
+            //if (((ListView)sender).SelectedItem != null)
+            //{
+            //    BO.Station BOStation = bl.GetStation((((ListView)sender).SelectedItem as BO.StationToList).Id);
+            //  PO.Station POStation = this.sender.POStations.Find(dr => dr.Id == BOStation.Id);
+            //    if (POStation == null)
+            //        this.sender.POStations.Add(POStation = new PO.Station().CopyFromBOStation(BOStation));
 
-               new Station(bl, this, POStation).Show();
+            //   new Station(bl, this, POStation).Show();
 
-            }
+            //}
         }
 
      

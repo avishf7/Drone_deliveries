@@ -22,11 +22,11 @@ namespace PL.Windows
     /// </summary>
     public partial class PackagesView : Window
     {
-        IBL bl;
+        IBL bl = BlFactory.GetBl();
         MainWindow sender;
 
         bool isCloseClick = true;
-
+        public Model Model { get; } = PL.Model.Instance;
 
 
 
@@ -35,19 +35,18 @@ namespace PL.Windows
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="sender">The element that activates the function</param>
-        public PackagesView(IBL bl, MainWindow sender)
+        public PackagesView( MainWindow sender)
         {
             InitializeComponent();
 
-            this.bl = bl;
             this.sender = sender;
 
-            this.NormalView.DataContext = this.sender.Packages;
-            this.GroupingView.DataContext = from package in this.sender.Packages
+
+            this.GroupingView.DataContext = from package in bl.GetPackages()
                                             group package by package.SenderName;
 
 
-            this.sender.Packages.CollectionChanged += Packages_CollectionChanged;
+            Model.Packages.CollectionChanged += Packages_CollectionChanged;
             this.sender.Closing += Sender_Closing;
             this.sender.Activated += Sender_Activated;
             this.sender.Deactivated += Sender_Deactivated;
@@ -56,7 +55,7 @@ namespace PL.Windows
 
         private void Packages_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            this.GroupingView.DataContext = from package in this.sender.Packages
+            this.GroupingView.DataContext = from package in bl.GetPackages()
                                             group package by package.SenderName;
         }
 
@@ -121,16 +120,16 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void PackagesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (((ListView)sender).SelectedItem != null)
-            {
-                BO.Package BOPackage = bl.GetPackage((((ListView)sender).SelectedItem as BO.PackageToList).Id);
-                PO.Package POPackage = this.sender.POPackages.Find(dr => dr.Id == BOPackage.Id);
-                if (POPackage == null)
-                    this.sender.POPackages.Add(POPackage = new PO.Package().CopyFromBOPackage(BOPackage));
+            //if (((ListView)sender).SelectedItem != null)
+            //{
+            //    BO.Package BOPackage = bl.GetPackage((((ListView)sender).SelectedItem as BO.PackageToList).Id);
+            //    PO.Package POPackage = this.sender.POPackages.Find(dr => dr.Id == BOPackage.Id);
+            //    if (POPackage == null)
+            //        this.sender.POPackages.Add(POPackage = new PO.Package().CopyFromBOPackage(BOPackage));
 
-                new Package(bl, this, POPackage).Show();
+            //    new Package(bl, this, POPackage).Show();
 
-            }
+            //}
         }
 
 
