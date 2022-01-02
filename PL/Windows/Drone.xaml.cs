@@ -39,6 +39,7 @@ namespace PL.Windows
             this.bl = bl;
             this.sender = sender;
 
+
             MainGrid.ShowGridLines = true;
             AddDownGrid.Visibility = Visibility.Visible;
             droneId.Visibility = Visibility.Visible;

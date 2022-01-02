@@ -5,7 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Windows"
         mc:Ignorable="d"
-        Title="PackagesView" Height="450" Width="800">
+        Title="PackagesView"
+        Height="450"
+        Width="800"
+        Closed="Window_Closed" 
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Closing="Window_Closing" >
 
     <Window.Resources>
         <ResourceDictionary>

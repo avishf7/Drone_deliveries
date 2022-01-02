@@ -53,7 +53,6 @@ namespace PL
         {
             //  this.Visibility = Visibility.Hidden;
             this.ShowDrones.IsEnabled = false;
-
             new DronesView(bl, this).Show();
 
         }
