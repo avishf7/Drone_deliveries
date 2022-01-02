@@ -21,39 +21,15 @@
             <RowDefinition Height="450*"/>
             <RowDefinition Height="80*"/>
         </Grid.RowDefinitions>
-        <TabControl Background="{x:Null}" Grid.Row="0" >
-            <TabItem x:Name="NormalView" Header="Normal" Background="{StaticResource Static.Background}" >
-                <Grid x:Name="TabNormalGrid">
 
-                    <ListView x:Name="CustomersListView"
+
+        <ListView x:Name="CustomersListView"
+                             Grid.Row="0"
                              ItemsSource="{Binding}" 
                              Opacity="0.5" 
                              MouseDoubleClick="CustomersListView_MouseDoubleClick" />
-                </Grid>
-            </TabItem>
-            <TabItem x:Name="GroupingView" Header="Grouping" Background="{StaticResource Static.Background}"  >
-                <ListBox Background="{StaticResource Static.Background}" ItemsSource="{Binding}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Border BorderBrush="Gray" BorderThickness="1" Padding="5" Margin="5">
-                                <Expander IsExpanded="True">
-                                    <Expander.Header>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Key}" FontWeight="Bold" />
-                                        </StackPanel>
-                                    </Expander.Header>
 
-                                    <ListView ItemsSource="{Binding}" 
-                                                 Background="{x:Null}"
-                                                  MouseDoubleClick="CustomersListView_MouseDoubleClick"/>
-                                </Expander>
-                            </Border>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
 
-            </TabItem>
-        </TabControl>
 
         <Grid x:Name="DownGrid" Grid.Row="1">
             <Grid.ColumnDefinitions >

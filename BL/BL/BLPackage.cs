@@ -39,7 +39,7 @@ namespace BL
             try
             {
                 var DoPackage = dal.GetPackage(packageId);
-                var dr = droneLists.Find(x => x.PackageNumber == packageId);                
+                var dr = droneLists.Find(x => x.PackageNumber == packageId);
 
                 Package BoPackage = new()
                 {
@@ -50,15 +50,16 @@ namespace BL
                     Requested = DoPackage.Requested,
                     PickedUp = DoPackage.PickedUp,
                     Delivered = DoPackage.Delivered,
-                    DroneInPackage = new()
+                    DroneInPackage = dr != null ? new()
                     {
                         Id = dr.Id,
                         BatteryStatus = dr.BatteryStatus,
                         LocationOfDrone = dr.LocationOfDrone
-                    },
+                    }
+                    : null,
                     SenderCustomerInPackage = dal.GetCustomer(DoPackage.SenderId).GetCusomerInPackage(),
                     TargetCustomerInPackage = dal.GetCustomer(DoPackage.TargetId).GetCusomerInPackage()
-                };              
+                };
 
                 return BoPackage;
             }
@@ -82,7 +83,7 @@ namespace BL
                                 pck.Scheduled != null ? PackageStatus.Associated :
                                 PackageStatus.Defined
             }).Where(pck => predicate != null ? predicate(pck) : true);
-            
+
         }
 
         public void DeletePackage(int id)
@@ -96,7 +97,7 @@ namespace BL
 
                 throw new NotImplementedException();
             }
-            
+
         }
     }
 }

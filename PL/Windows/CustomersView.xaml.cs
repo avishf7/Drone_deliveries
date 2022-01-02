@@ -33,25 +33,14 @@ namespace PL.Windows
             this.bl = bl;
             this.sender = sender;
 
-            //StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
-            //MaxWeigth.ItemsSource = Enum.GetValues(typeof(Weight));
-            this.NormalView.DataContext = this.sender.Customers;
-           this.GroupingView.DataContext = from drone in this.sender.Customers
-                                            group drone by drone.DroneStatus;
+            this.CustomersListView.DataContext = this.sender.Customers;
 
-
-            this.sender.Customers.CollectionChanged += Customers_CollectionChanged;
             this.sender.Closing += Sender_Closing;
             this.sender.Activated += Sender_Activated;
             this.sender.Deactivated += Sender_Deactivated;
 
         }
 
-        private void Customers_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            //this.GroupingView.DataContext = from drone in this.sender.Drones
-            //                                group drone by drone.DroneStatus;
-        }
 
 
         private void Sender_Deactivated(object sender, EventArgs e)
@@ -66,7 +55,7 @@ namespace PL.Windows
 
         private void Sender_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-              Exit_Click(sender, null);
+            Exit_Click(sender, null);
         }
 
 
@@ -80,26 +69,10 @@ namespace PL.Windows
             ((Button)this.sender.FindName("ShowCustomers")).IsEnabled = true;
         }
 
-        /// <summary>
-        /// A button that resets the filters.
-        /// </summary>
-        /// <param name="sender">The element that activates the function</param>
-        /// <param name="e"></param>
-        private void Reset_Click(object sender, RoutedEventArgs e)
-        {
-            //MaxWeigth.Text = "";
-            //MaxWeigth.SelectedIndex = -1;
-            //MaxWeigth.SelectedItem = null;
 
-            //StatusSelector.Text = "";
-            //StatusSelector.SelectedIndex = -1;
-            //StatusSelector.SelectedItem = null;
-
-            //Filtering();
-        }
 
         /// <summary>
-        /// A button that opens a window for adding a new drone.
+        /// A button that opens a window for adding a new customer.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
@@ -108,6 +81,11 @@ namespace PL.Windows
             new Customer(bl, this).ShowDialog();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CustomersListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (CustomersListView.SelectedItem != null)
