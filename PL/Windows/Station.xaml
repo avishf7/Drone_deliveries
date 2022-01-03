@@ -119,8 +119,8 @@
                         Content="Update" 
                         Grid.Column="1"
                         Margin="10,27"
-                        FontFamily="Arial Black" 
-                        Click="Update_Click"
+                        FontFamily="Arial Black"
+                        Click="Update_Click"                         
                         />
             </Grid>
 
