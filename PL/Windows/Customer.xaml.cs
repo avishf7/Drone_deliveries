@@ -42,13 +42,11 @@ namespace PL.Windows
             name.Visibility = Visibility.Visible;
             phone.Visibility = Visibility.Visible;
             customerLocation.Visibility = Visibility.Visible;
-            packageAtCustomerFromCustomer.Visibility = Visibility.Visible;
-            packageAtCustomerToCustomer.Visibility = Visibility.Visible;
-
+           
         }
 
         /// <summary>
-        /// constructor to window add drone.
+        /// constructor to window add customer.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         public Customer(CustomersView sender, PO.Customer customer)
@@ -62,11 +60,12 @@ namespace PL.Windows
             MainGrid.RowDefinitions[1].Height = new(50, GridUnitType.Star);
 
 
-            //DroneInfoDownGrid.Visibility = Visibility.Visible;
-            //DroneIdInfo.Visibility = Visibility.Visible;
-            //UpdateModelGrid.Visibility = Visibility.Visible;
-            //MaxWeightInfo.Visibility = Visibility.Visible;
-            //DroneLocationInfo.Visibility = Visibility.Visible;
+            CustomerInfoDownGrid.Visibility = Visibility.Visible;
+            CustomerIdInfo.Visibility = Visibility.Visible;
+            UpdateNameGrid.Visibility = Visibility.Visible;
+            UpdatePhoneGrid.Visibility = Visibility.Visible;
+            CustomerLocationInfo.Visibility = Visibility.Visible;
+
 
             this.Height = 700;
             this.Width = 550;
@@ -130,7 +129,49 @@ namespace PL.Windows
 
         }
 
-   
+
+        /// <summary>
+        /// A button pressed opens the option to update the drone model and changes the button to OK at the touch of a button.
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
+        private void Update_Click(object sender, RoutedEventArgs e)
+        {
+            Update.Content = "OK";
+            UpdateName.IsReadOnly = false;
+            UpdateName.Text = "";
+
+            Update.Click -= Update_Click;
+            Update.Click += OK_Click;
+        }
+
+        /// <summary>
+        /// Confirmation button for updating the model.
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
+        private void OK_Click(object sender, RoutedEventArgs e)
+        {
+            if (UpdateName.Text != "" )
+            {
+                bl.UpdateCustomer(customer.Id, UpdateName.Text, customer.Phone);
+                //  this.sender.Filtering();
+                MessageBox.Show("Updating the element was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                Update.Content = "Update";
+                UpdateName.IsReadOnly = true;
+
+                Update.Click -= OK_Click;
+                Update.Click += Update_Click;
+            }
+            else
+                MessageBox.Show("empty field", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
+        }
+
+
+
+
         ///// <summary>
         ///// Button for sending drone for charging and release from charging according to the status of the drone.
         ///// </summary>
