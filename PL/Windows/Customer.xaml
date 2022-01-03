@@ -313,7 +313,7 @@
                 <Image Source="https://cdn-icons-png.flaticon.com/512/1828/1828479.png" Margin="10"/>
             </Button>
 
-        <Grid x:Name="DroneInfoDownInDownGrid" Grid.Row="3" Grid.Column="1">
+        <Grid x:Name="CutomerInfoDownInDownGrid" Grid.Row="3" Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="25*"/>
                     <ColumnDefinition Width="50*"/>
