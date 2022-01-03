@@ -58,8 +58,6 @@ namespace PL.Windows
 
             InitializeComponent();
            
-            MainGrid.RowDefinitions[0].Height = new(35, GridUnitType.Star);
-            MainGrid.RowDefinitions[1].Height = new(65, GridUnitType.Star);
 
 
             PackageInfoDownGrid.Visibility = Visibility.Visible;           
@@ -67,9 +65,10 @@ namespace PL.Windows
             TargetCustomerInPackageInfo.Visibility = Visibility.Visible;
             WeightInfo.Visibility = Visibility.Visible;
             PriorityInfo.Visibility = Visibility.Visible;
+            Exit.Visibility = Visibility.Visible;
 
-            this.Height = 920;
-            this.Width = 550;
+            this.Height = 450;
+            this.Width = 1300;
 
         }
 

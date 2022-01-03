@@ -67,6 +67,7 @@ namespace PL.Windows
             StationLocationInfo.Visibility = Visibility.Visible;
             UpdateNumOfChargeGrid.Visibility = Visibility.Visible;           
             ChargingDronesInfo.Visibility = Visibility.Visible;
+            freeChargeSlotsInfo.Visibility = Visibility.Visible;
 
             this.Height = 700;
             this.Width = 550;
@@ -98,7 +99,7 @@ namespace PL.Windows
         }
 
         /// <summary>
-        /// Add drone button
+        /// Add station button
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
@@ -133,38 +134,38 @@ namespace PL.Windows
 
 
         /// <summary>
-        /// A button pressed opens the option to update the drone model and changes the button to OK at the touch of a button.
+        /// A button pressed opens the option to update the station and changes the button to OK at the touch of a button.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
         private void Update_Click(object sender, RoutedEventArgs e)
         {
-            Update.Content = "OK";
+            ((Button)sender).Content = "OK";
             UpdateName.IsReadOnly = false;
             UpdateName.Text = "";
 
-            Update.Click -= Update_Click;
-            Update.Click += OK_Click;
+            ((Button)sender).Click -= Update_Click;
+            ((Button)sender).Click += OK_Click;
         }
 
         /// <summary>
-        /// Confirmation button for updating the model.
+        /// Confirmation button for updating the station.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
         private void OK_Click(object sender, RoutedEventArgs e)
         {
-            if (UpdateName.Text != ""  )
+            if (UpdateName.Text != "")
             {
                 bl.UpdateStation(POStation.Id, UpdateName.Text, POStation.FreeChargeSlots);
               //  this.sender.Filtering();
                 MessageBox.Show("Updating the element was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                Update.Content = "Update";
+                ((Button)sender).Content = "Update";
                 UpdateName.IsReadOnly = true;
 
-                Update.Click -= OK_Click;
-                Update.Click += Update_Click;
+                ((Button)sender).Click -= OK_Click;
+                ((Button)sender).Click += Update_Click;
             }
             else
                 MessageBox.Show("empty field", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
