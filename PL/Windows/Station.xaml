@@ -186,27 +186,17 @@
                      Visibility="Hidden">
             </TextBox>
 
-            <TextBlock x:Name="freeChargeSlotsInfo" 
-                       Grid.Row="3"
-                       Grid.Column="1"
-                       FontSize="20"
-                       Text="{Binding Path=FreeChargeSlots}"
-                       Background="{StaticResource Static.Background}"                  
-                       Margin="20,27"
-                       TextAlignment="Center"
-                       Visibility="Hidden">
-            </TextBlock>
 
 
 
-            <Grid x:Name="UpdateNumOfChargeGrid" Grid.Row="1" Grid.Column="1" Visibility="Hidden">
+            <Grid x:Name="UpdateNumOfChargeGrid" Grid.Row="3" Grid.Column="1" Visibility="Hidden">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="70*"/>
                     <ColumnDefinition Width="30*"/>
                 </Grid.ColumnDefinitions>
 
                 <TextBox x:Name="UpdateNumOfCharge" 
-                         Text="{Binding Path=Name}"
+                         Text="{Binding Path=FreeChargeSlots}"
                          FontSize="20"
                          VerticalAlignment="Stretch"
                          HorizontalAlignment="Stretch"

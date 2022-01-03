@@ -64,10 +64,11 @@ namespace PL.Windows
             StationInfoDownGrid.Visibility = Visibility.Visible;
             StationIdInfo.Visibility = Visibility.Visible;
             UpdateNameGrid.Visibility = Visibility.Visible;
+ 
             StationLocationInfo.Visibility = Visibility.Visible;
             UpdateNumOfChargeGrid.Visibility = Visibility.Visible;           
             ChargingDronesInfo.Visibility = Visibility.Visible;
-            freeChargeSlotsInfo.Visibility = Visibility.Visible;
+           // freeChargeSlotsInfo.Visibility = Visibility.Visible;
 
             this.Height = 700;
             this.Width = 550;
@@ -140,9 +141,11 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void Update_Click(object sender, RoutedEventArgs e)
         {
+
+
             ((Button)sender).Content = "OK";
-            UpdateName.IsReadOnly = false;
-            UpdateName.Text = "";
+            ((TextBox) VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender),0)).IsReadOnly=false;
+            ((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0)).Text = "";
 
             ((Button)sender).Click -= Update_Click;
             ((Button)sender).Click += OK_Click;
@@ -155,14 +158,15 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void OK_Click(object sender, RoutedEventArgs e)
         {
-            if (UpdateName.Text != "")
+
+            if (((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0)).Text != "")
             {
                 bl.UpdateStation(POStation.Id, UpdateName.Text, POStation.FreeChargeSlots);
                 //  this.sender.Filtering();
                 MessageBox.Show("Updating the element was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 ((Button)sender).Content = "Update";
-                UpdateName.IsReadOnly = true;
+                ((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0)).IsReadOnly = true;
 
                 ((Button)sender).Click -= OK_Click;
                 ((Button)sender).Click += Update_Click;
