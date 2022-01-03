@@ -10,7 +10,9 @@
         Width="500" 
         WindowStartupLocation="CenterScreen"
         WindowStyle="SingleBorderWindow" 
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        DataContext="{Binding  RelativeSource={RelativeSource self}}">
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -70,7 +72,7 @@
                        Grid.Row="0"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=Id}"
+                       Text="{Binding Path=PODrone.Id}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="20,27"
                        TextAlignment="Center"
@@ -107,7 +109,7 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBox x:Name="UpdateModel" 
-                         Text="{Binding Path=Model}"
+                         Text="{Binding Path=PODrone.Model}"
                          FontSize="20"
                          VerticalAlignment="Stretch"
                          HorizontalAlignment="Stretch"
@@ -141,6 +143,7 @@
                       HorizontalContentAlignment="Center" 
                       VerticalContentAlignment="Center" 
                       Margin="20"
+                      ItemsSource="{Binding Model.Weight}"
                       Visibility="Hidden"/>
 
 
@@ -148,7 +151,7 @@
                        Grid.Row="2"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=MaxWeight}"
+                       Text="{Binding Path=PODrone.MaxWeight}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="20,27"
                        TextAlignment="Center"
@@ -164,21 +167,27 @@
                        HorizontalAlignment="Center"  
                        Foreground="#FFDDD81E"/>
 
-            <ComboBox x:Name="stations" 
-                      ItemTemplate="{StaticResource stationTemplate}"
+            <ComboBox x:Name="stations"                       
                       Grid.Row="3" 
                       Grid.Column="1"
                       FontSize="20" 
                       HorizontalContentAlignment="Center" 
                       VerticalContentAlignment="Center" 
                       Margin="20" 
-                         Visibility="Hidden"/>
+                      ItemsSource="{Binding Model.Stations}"
+                      Visibility="Hidden">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=Name}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ComboBox>
 
             <TextBox x:Name="DroneLocationInfo" 
                  Grid.Row="3"
                  Grid.Column="1"
                  FontSize="20"
-                 DataContext="{Binding Path=LocationOfDrone}"
+                 DataContext="{Binding Path=PODrone.LocationOfDrone}"
                  Template="{StaticResource LocationTemplate}"         
                  Margin="20,10"
                  TextAlignment="Center"
@@ -239,19 +248,9 @@
                    FontFamily="Arial Black"
                    Margin="20"/>
 
-            <!--<TextBlock x:Name="BattaryStatus" 
-                   FontSize="20"
-                   Text="{Binding Path=BatteryStatus, Mode=OneWay, StringFormat={}{0:F1}%}"
-                   Grid.Row="0" 
-                   Grid.Column="1"
-                   Background="{StaticResource Static.Background}" 
-                   Margin="20" 
-                   TextAlignment="Center">
-            </TextBlock>-->
-
             <ProgressBar x:Name="BattaryStatus" 
                    FontSize="20"
-                   Value="{Binding Path=BatteryStatus, Mode=OneWay}"
+                   Value="{Binding Path=PODrone.BatteryStatus, Mode=OneWay}"
                    Grid.Row="0" 
                    Grid.Column="1"
                    Background="{StaticResource Static.Background}" 
@@ -274,7 +273,7 @@
                        Grid.Row="1"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=DroneStatus}"
+                       Text="{Binding Path=PODrone.DroneStatus}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="20"
                        TextAlignment="Center">
@@ -290,7 +289,7 @@
                        Foreground="#FFDDD81E"/>
 
             <TextBox x:Name="PackageInProgress"
-                      DataContext="{Binding Path=PackageInProgress}"
+                      DataContext="{Binding Path=PODrone.PackageInProgress}"
                       Grid.Row="2" Grid.Column="1" 
                       FontSize="20" 
                       Template="{StaticResource PackageInTransferTemplate}"
@@ -322,8 +321,8 @@
                         Grid.Row="0"
                         Margin="15,5" 
                         FontFamily="Arial Black"
-                        IsEnabled="{Binding Path=DroneStatus, Mode=OneWay, Converter={StaticResource StatusToEnabledCharge}}" Click="Charge_Click">
-                    <Image Source="{Binding Path=DroneStatus, Mode=OneWay, Converter={StaticResource StatusToPictureCharge}}"/>
+                        IsEnabled="{Binding Path=PODrone.DroneStatus, Mode=OneWay, Converter={StaticResource StatusToEnabledCharge}}" Click="Charge_Click">
+                    <Image Source="{Binding Path=PODrone.DroneStatus, Mode=OneWay, Converter={StaticResource StatusToPictureCharge}}"/>
                 </Button>
 
                 <Button x:Name="Delivery"                         

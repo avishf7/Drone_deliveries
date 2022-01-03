@@ -8,7 +8,8 @@
         Title="Package" Height="450" Width="800" WindowStartupLocation="CenterScreen"
         WindowStyle="SingleBorderWindow" 
         ResizeMode="NoResize"
-        DataContext="{Binding POPackage ,RelativeSource={RelativeSource self}}">
+        DataContext="{Binding RelativeSource={RelativeSource self}}">
+    
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -66,16 +67,19 @@
             </TextBox>
 
 
-            <TextBlock x:Name="SenderCustomerInPackageInfo" 
+            <TextBox x:Name="SenderCustomerInPackageInfo" 
                        Grid.Row="0"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=SenderId}"
+                       DataContext="{Binding Path=POPackage.SenderCustomerInPackage}"
+                       Template="{StaticResource CustomerInPackageTemplate}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="20"
                        TextAlignment="Center"
-                       Visibility="Hidden">
-            </TextBlock>
+                       Visibility="Hidden"
+                       >
+                
+            </TextBox>
 
 
             <Label x:Name="labalTargetCustomerInPackage" 
@@ -103,16 +107,17 @@
             </TextBox>
 
 
-            <TextBlock x:Name="TargetCustomerInPackageInfo" 
+            <TextBox x:Name="TargetCustomerInPackageInfo" 
                        Grid.Row="1"
                        Grid.Column="1"
-                       FontSize="20"
-                       Text="{Binding Path=TargetId}"
+                       FontSize="20" 
+                       DataContext="{Binding Path=POPackage.SenderCustomerInPackage}"
+                       Template="{StaticResource CustomerInPackageTemplate}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="20"
                        TextAlignment="Center"
                        Visibility="Hidden">
-            </TextBlock>
+            </TextBox>
 
 
             <Label x:Name="labalWeight" 
@@ -140,7 +145,7 @@
                        Grid.Row="2"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=Weight}"
+                       Text="{Binding Path=POPackage.Weight}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="20"
                        TextAlignment="Center"
@@ -173,7 +178,7 @@
                        Grid.Row="3"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=Priority}"
+                       Text="{Binding Path=POPackage.Priority}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="20"
                        TextAlignment="Center"
@@ -247,7 +252,7 @@
                        Grid.Row="0"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=DroneInPackage}"
+                       Text="{Binding Path=POPackage.DroneInPackage}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="15"
                        TextAlignment="Center"
@@ -273,7 +278,7 @@
                        Grid.Row="1"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=Requested}"
+                       Text="{Binding Path=POPackage.Requested , FallbackValue='None'}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="15"
                        TextAlignment="Center"
@@ -298,7 +303,7 @@
                        Grid.Row="2"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=Scheduled}"
+                       Text="{Binding Path=POPackage.Scheduled ,FallbackValue='None'}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="15"
                        TextAlignment="Center"
@@ -323,7 +328,7 @@
                        Grid.Row="3"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=PickedUp}"
+                       Text="{Binding Path=POPackage.PickedUp , FallbackValue='None'}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="15"
                        TextAlignment="Center"
@@ -347,7 +352,7 @@
                        Grid.Row="4"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=Delivered}"
+                       Text="{Binding Path=POPackage.Delivered , FallbackValue='None'}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="15"
                        TextAlignment="Center"
@@ -370,7 +375,7 @@
                        Grid.Row="5"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=Id}"
+                       Text="{Binding Path=POPackage.Id}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="15"
                        TextAlignment="Center"

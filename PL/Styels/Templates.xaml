@@ -5,11 +5,6 @@
         <ResourceDictionary Source="\Styels\Colors.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
-    <!--Station-type object reception template-->
-    <DataTemplate x:Key="stationTemplate" DataType="local:StationToList">
-        <TextBlock Text="{Binding Path=Name}"/>
-    </DataTemplate>
-
     <!--Representation template of package in transfer-->
     <ControlTemplate x:Key="PackageInTransferTemplate">
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
@@ -38,7 +33,8 @@
 
     <!--Representation template of location-->
     <ControlTemplate x:Key="LocationTemplate">
-        <Grid Background="{StaticResource Static.Background}">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <Grid Background="{StaticResource Static.Background}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50*" />
                     <RowDefinition Height="50*" />
@@ -51,7 +47,28 @@
                 <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=Longitude ,Mode=OneWay ,StringFormat={}{0:F3}}" HorizontalAlignment="Center" />
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Lattitude: "  HorizontalAlignment="Left"/>
                 <TextBlock Grid.Row="1" Grid.Column="1"  Text="{Binding Path=Lattitude ,Mode=OneWay, StringFormat={}{0:F3}}" HorizontalAlignment="Center" />
-        </Grid>
+            </Grid>
+        </ScrollViewer>
+    </ControlTemplate>
+
+    <!--Representation Customer in package-->
+    <ControlTemplate x:Key="CustomerInPackageTemplate">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <Grid Background="{StaticResource Static.Background}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50*" />
+                    <RowDefinition Height="50*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*" />
+                    <ColumnDefinition Width="50*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0"  Text="Name: " HorizontalAlignment="Left" />
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=CustomerName ,Mode=OneWay ,StringFormat={}{0:F3}}" HorizontalAlignment="Center" />
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Id: "  HorizontalAlignment="Left"/>
+                <TextBlock Grid.Row="1" Grid.Column="1"  Text="{Binding Path=CustomerId ,Mode=OneWay, StringFormat={}{0:F3}}" HorizontalAlignment="Center" />
+            </Grid>
+        </ScrollViewer>
     </ControlTemplate>
 
 </ResourceDictionary>

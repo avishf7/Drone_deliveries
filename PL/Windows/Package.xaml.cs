@@ -21,25 +21,20 @@ namespace PL.Windows
     /// </summary>
     public partial class Package : Window
     {
-        IBL bl;
+        IBL bl = BlFactory.GetBl();
         PackagesView sender;
-        PO.Package POPackage { get; set; }
-        Model Model { get; } = PL.Model.Instance;
+
+        public PO.Package POPackage { get; set; }
+        public Model Model { get; } = PL.Model.Instance;
 
         /// <summary>
         /// Consructor for drone display window.
         /// </summary>
-        /// <param name="bl">The variable of access to the logic layer</param>
         /// <param name="sender">The element that activates the function</param>
-        public Package(IBL bl, PackagesView sender)
+        public Package(PackagesView sender)
         {
             InitializeComponent();
-            this.bl = bl;
-            this.sender = sender;
-
-            Weight.ItemsSource = Enum.GetValues(typeof(Weight));
-            priority.ItemsSource = Enum.GetValues(typeof(Priorities));
-
+            this.sender = sender;            
 
             MainGrid.ShowGridLines = true;
             AddDownGrid.Visibility = Visibility.Visible;
@@ -55,16 +50,14 @@ namespace PL.Windows
         /// <summary>
         /// constructor to window add drone.
         /// </summary>
-        /// <param name="bl">The variable of access to the logic layer</param>
         /// <param name="sender">The element that activates the function</param>
-        /// <param name="droneId">The ID of the drone intended for display</param>
-        public Package(IBL bl, PackagesView sender, PO.Package package)
+        public Package(PackagesView sender, PO.Package package)
         {
-            InitializeComponent();
-            this.bl = bl;
             this.sender = sender;
             this.POPackage = package;
 
+            InitializeComponent();
+           
             MainGrid.RowDefinitions[0].Height = new(35, GridUnitType.Star);
             MainGrid.RowDefinitions[1].Height = new(65, GridUnitType.Star);
 
@@ -74,9 +67,6 @@ namespace PL.Windows
             TargetCustomerInPackageInfo.Visibility = Visibility.Visible;
             WeightInfo.Visibility = Visibility.Visible;
             PriorityInfo.Visibility = Visibility.Visible;
-
-
-
 
             this.Height = 920;
             this.Width = 550;

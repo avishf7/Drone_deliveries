@@ -23,18 +23,17 @@ namespace PL.Windows
     {
         IBL bl = BlFactory.GetBl();
         CustomersView sender;
-        PO.Customer customer { get; set; }
-        Model Model { get; } = PL.Model.Instance;
+
+        public PO.Customer POCustomer { get; set; }
+        public Model Model { get; } = PL.Model.Instance;
 
         /// <summary>
         /// Consructor for drone display window.
         /// </summary>
-        /// <param name="bl">The variable of access to the logic layer</param>
         /// <param name="sender">The element that activates the function</param>
         public Customer(CustomersView sender)
         {
             InitializeComponent();
-            this.bl = bl;
             this.sender = sender;
 
             MainGrid.ShowGridLines = true;
@@ -51,16 +50,14 @@ namespace PL.Windows
         /// <summary>
         /// constructor to window add drone.
         /// </summary>
-        /// <param name="bl">The variable of access to the logic layer</param>
         /// <param name="sender">The element that activates the function</param>
-        /// <param name="droneId">The ID of the drone intended for display</param>
         public Customer(CustomersView sender, PO.Customer customer)
         {
-            InitializeComponent();
-            this.bl = bl;
             this.sender = sender;
-            this.customer = customer;
+            this.POCustomer = customer;
 
+            InitializeComponent();
+           
             MainGrid.RowDefinitions[0].Height = new(50, GridUnitType.Star);
             MainGrid.RowDefinitions[1].Height = new(50, GridUnitType.Star);
 
@@ -73,8 +70,6 @@ namespace PL.Windows
 
             this.Height = 700;
             this.Width = 550;
-            this.DataContext = customer;
-
         }
 
         /// <summary>

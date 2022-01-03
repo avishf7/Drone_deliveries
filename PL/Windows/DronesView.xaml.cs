@@ -35,15 +35,11 @@ namespace PL.Windows
         /// <summary>
         /// constructor to create window of drones view.
         /// </summary>
-        /// <param name="bl"></param>
         /// <param name="sender">The element that activates the function</param>
         public DronesView(MainWindow sender)
         {
             InitializeComponent();
             this.sender = sender;
-
-            StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
-            MaxWeigth.ItemsSource = Enum.GetValues(typeof(Weight));
 
             this.GroupingView.DataContext = from drone in bl.GetDrones()
                                             group drone by drone.DroneStatus;
@@ -131,7 +127,7 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void AddDrone_Click(object sender, RoutedEventArgs e)
         {
-            new Drone(bl, this).ShowDialog();
+            new Drone(this).ShowDialog();
         }
 
         /// <summary>
@@ -148,7 +144,7 @@ namespace PL.Windows
                 if (PODrone == null)
                     Model.PODrones.Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));
 
-                new Drone(bl, this, PODrone).Show();
+                new Drone( this, PODrone).Show();
 
             }
         }

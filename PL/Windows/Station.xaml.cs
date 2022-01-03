@@ -21,21 +21,20 @@ namespace PL.Windows
     /// </summary>
     public partial class Station : Window
     {
-        IBL bl;
-        StationsView sender;
-        PO.Station station;
-        private StationsView stationView;
+        IBL bl = BlFactory.GetBl();
+        StationsView sender;        
+
+        public PO.Station POStation { get; set; }
+        public Model Model { get; } = PL.Model.Instance;
 
         /// <summary>
         /// Consructor for drone display window.
         /// </summary>
-        /// <param name="bl">The variable of access to the logic layer</param>
         /// <param name="sender">The element that activates the function</param>
-        public Station(IBL bl, StationsView stationView)
+        public Station(StationsView sender)
         {
             InitializeComponent();
-            this.bl = bl;
-            this.stationView = stationView;
+            this.sender = sender;
 
             MainGrid.ShowGridLines = true;
             AddDownGrid.Visibility = Visibility.Visible;
@@ -46,13 +45,18 @@ namespace PL.Windows
 
         }
 
-
-        public Station(IBL bl, StationsView sender, PO.Station POStation)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="POStation"></param>
+        public Station(StationsView sender, PO.Station POStation)
         {
-            InitializeComponent();
-            this.bl = bl;
+
             this.sender = sender;
-            this.station = POStation;
+            this.POStation = POStation;
+         
+            InitializeComponent();
 
             MainGrid.RowDefinitions[0].Height = new(50, GridUnitType.Star);
             MainGrid.RowDefinitions[1].Height = new(50, GridUnitType.Star);
@@ -61,13 +65,11 @@ namespace PL.Windows
             StationIdInfo.Visibility = Visibility.Visible;
             NameInfo.Visibility = Visibility.Visible;
             StationLocationInfo.Visibility = Visibility.Visible;
-            FreeChargeSlotsInfo.Visibility = Visibility.Visible;           
+            FreeChargeSlotsInfo.Visibility = Visibility.Visible;
             ChargingDronesInfo.Visibility = Visibility.Visible;
 
             this.Height = 700;
             this.Width = 550;
-            this.DataContext = station;
-
         }       
 
 

@@ -89,7 +89,7 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void AddStation_Click(object sender, RoutedEventArgs e)
         {
-           new Station(bl, this).ShowDialog();
+           new Station( this).ShowDialog();
         }
 
         /// <summary>
@@ -99,19 +99,19 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void StationsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //if (((ListView)sender).SelectedItem != null)
-            //{
-            //    BO.Station BOStation = bl.GetStation((((ListView)sender).SelectedItem as BO.StationToList).Id);
-            //  PO.Station POStation = this.sender.POStations.Find(dr => dr.Id == BOStation.Id);
-            //    if (POStation == null)
-            //        this.sender.POStations.Add(POStation = new PO.Station().CopyFromBOStation(BOStation));
+            if (((ListView)sender).SelectedItem != null)
+            {
+                BO.Station BOStation = bl.GetStation((((ListView)sender).SelectedItem as BO.StationToList).Id);
+                PO.Station POStation = Model.POStations.Find(dr => dr.Id == BOStation.Id);
+                if (POStation == null)
+                    Model.POStations.Add(POStation = new PO.Station().CopyFromBOStation(BOStation));
 
-            //   new Station(bl, this, POStation).Show();
+                new Station( this, POStation).Show();
 
-            //}
+            }
         }
 
-     
+
 
         /// <summary>
         /// Window Close Button.

@@ -72,6 +72,12 @@ namespace PL
         public List<PO.Customer> POCustomers { get; set; } = new();       
         public List<PO.Package> POPackages { get; set; } = new();
 
+        public Array Weight { get; set; } = Enum.GetValues(typeof(Weight));
+        public Array DroneStatuses { get; set; } = Enum.GetValues(typeof(DroneStatuses));
+        public Array Priorities { get; set; } = Enum.GetValues(typeof(Priorities));
+        public Array PackageStatus { get; set; } = Enum.GetValues(typeof(PackageStatus));
+
+
         private Model()
         {
             Drones = new ObservableCollection<DroneToList>(bl.GetDrones());

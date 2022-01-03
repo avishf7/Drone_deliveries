@@ -40,8 +40,6 @@ namespace PL.Windows
             InitializeComponent();
 
             this.sender = sender;
-
-
             this.GroupingView.DataContext = from package in bl.GetPackages()
                                             group package by package.SenderName;
 
@@ -110,7 +108,7 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void AddPackage_Click(object sender, RoutedEventArgs e)
         {
-            new Package(bl, this).ShowDialog();
+            new Package( this).ShowDialog();
         }
 
         /// <summary>
@@ -120,16 +118,16 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void PackagesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //if (((ListView)sender).SelectedItem != null)
-            //{
-            //    BO.Package BOPackage = bl.GetPackage((((ListView)sender).SelectedItem as BO.PackageToList).Id);
-            //    PO.Package POPackage = this.sender.POPackages.Find(dr => dr.Id == BOPackage.Id);
-            //    if (POPackage == null)
-            //        this.sender.POPackages.Add(POPackage = new PO.Package().CopyFromBOPackage(BOPackage));
+            if (((ListView)sender).SelectedItem != null)
+            {
+                BO.Package BOPackage = bl.GetPackage((((ListView)sender).SelectedItem as BO.PackageToList).Id);
+                PO.Package POPackage = Model.POPackages.Find(dr => dr.Id == BOPackage.Id);
+                if (POPackage == null)
+                    Model.POPackages.Add(POPackage = new PO.Package().CopyFromBOPackage(BOPackage));
 
-            //    new Package(bl, this, POPackage).Show();
+                new Package(this, POPackage).Show();
 
-            //}
+            }
         }
 
 

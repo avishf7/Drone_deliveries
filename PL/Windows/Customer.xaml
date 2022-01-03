@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Title="Customer" Height="450" Width="800" WindowStartupLocation="CenterScreen"
         WindowStyle="SingleBorderWindow" 
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        DataContext="{Binding POCustomer, RelativeSource={RelativeSource self}}">
+    
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

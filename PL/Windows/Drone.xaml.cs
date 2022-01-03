@@ -23,20 +23,20 @@ namespace PL.Windows
     /// </summary>
     public partial class Drone : Window
     {
-
-        IBL bl;
+        IBL bl = BlFactory.GetBl();
         DronesView sender;
-        PO.Drone drone;
+
+        public PO.Drone PODrone { get; set; }
+        public Model Model { get; } = PL.Model.Instance;
 
         /// <summary>
         /// Consructor for drone display window.
         /// </summary>
-        /// <param name="bl">The variable of access to the logic layer</param>
         /// <param name="sender">The element that activates the function</param>
-        public Drone(IBL bl, DronesView sender)
+        public Drone( DronesView sender)
         {
             InitializeComponent();
-            this.bl = bl;
+
             this.sender = sender;
 
 
@@ -46,9 +46,6 @@ namespace PL.Windows
             model.Visibility = Visibility.Visible;
             maxWeight.Visibility = Visibility.Visible;
             stations.Visibility = Visibility.Visible;
-            maxWeight.ItemsSource = Enum.GetValues(typeof(Weight));
-            stations.ItemsSource = bl.GetStations();
-
         }
 
         /// <summary>
@@ -57,12 +54,12 @@ namespace PL.Windows
         /// <param name="bl">The variable of access to the logic layer</param>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="droneId">The ID of the drone intended for display</param>
-        public Drone(IBL bl, DronesView sender, PO.Drone drone)
+        public Drone( DronesView sender, PO.Drone drone)
         {
-            InitializeComponent();
-            this.bl = bl;
             this.sender = sender;
-            this.drone = drone;
+            this.PODrone = drone;
+
+            InitializeComponent();         
 
             MainGrid.RowDefinitions[0].Height = new(50, GridUnitType.Star);
             MainGrid.RowDefinitions[1].Height = new(50, GridUnitType.Star);
@@ -76,8 +73,6 @@ namespace PL.Windows
 
             this.Height = 700;
             this.Width = 550;
-            this.DataContext = drone;
-
         }
 
         /// <summary>
@@ -159,7 +154,7 @@ namespace PL.Windows
         {
             if (UpdateModel.Text != "")
             {
-                bl.UpdateDrone(drone.Id, UpdateModel.Text);
+                bl.UpdateDrone(PODrone.Id, UpdateModel.Text);
                 this.sender.Filtering();
                 MessageBox.Show("Updating the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -181,13 +176,13 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void Charge_Click(object sender, RoutedEventArgs e)
         {
-            switch (drone.DroneStatus)
+            switch (PODrone.DroneStatus)
             {
                 case DroneStatuses.Available:
                     try
                     {
-                        bl.SendDroneForCharge(drone.Id);
-                        drone.CopyFromBODrone(bl.GetDrone(drone.Id));
+                        bl.SendDroneForCharge(PODrone.Id);
+                        PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
                         this.sender.Filtering();
                         MessageBox.Show("Sent for charging", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -199,8 +194,8 @@ namespace PL.Windows
 
                     break;
                 case DroneStatuses.Maintenance:
-                    bl.RealeseDroneFromCharge(drone.Id);
-                    drone.CopyFromBODrone(bl.GetDrone(drone.Id));
+                    bl.RealeseDroneFromCharge(PODrone.Id);
+                    PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
                     this.sender.Filtering();
                     MessageBox.Show("Released from charging", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -215,13 +210,13 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void Delivery_Click(object sender, RoutedEventArgs e)
         {
-            switch (drone.DroneStatus)
+            switch (PODrone.DroneStatus)
             {
                 case DroneStatuses.Available:
                     try
                     {
-                        bl.packageAssigning(drone.Id);
-                        drone.CopyFromBODrone(bl.GetDrone(drone.Id));
+                        bl.packageAssigning(PODrone.Id);
+                        PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
                         this.sender.Filtering();
                         MessageBox.Show("The package was successfully associated", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -230,18 +225,18 @@ namespace PL.Windows
                     catch (NoSuitablePackageForScheduledException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
                     break;
                 case DroneStatuses.Sendering:
-                    if (drone.PackageInProgress.IsCollected)
+                    if (PODrone.PackageInProgress.IsCollected)
                     {
-                        bl.Deliver(drone.Id);
-                        drone.CopyFromBODrone(bl.GetDrone(drone.Id));
+                        bl.Deliver(PODrone.Id);
+                        PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
                         this.sender.Filtering();
                         MessageBox.Show("The package was delivered to its destination, good day", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     }
                     else
                     {
-                        bl.PickUp(drone.Id);
-                        drone.CopyFromBODrone(bl.GetDrone(drone.Id));
+                        bl.PickUp(PODrone.Id);
+                        PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
                         this.sender.Filtering();
                         MessageBox.Show("The package was successfully collected by the drone", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 

@@ -62,8 +62,8 @@ namespace PL
             POCustomer.Name = BOCustomer.Name;
             POCustomer.Phone = BOCustomer.Phone;
             POCustomer.CustomerLocation = BOCustomer.CustomerLocation;
-            POCustomer.PackageAtCustomerFromCustomer = (List<BO.PackageAtCustomer>)BOCustomer.PackageAtCustomerFromCustomer;
-            POCustomer.PackageAtCustomerToCustomer = (List<BO.PackageAtCustomer>)BOCustomer.PackageAtCustomerToCustomer;
+            POCustomer.PackageAtCustomerFromCustomer = BOCustomer.PackageAtCustomerFromCustomer;
+            POCustomer.PackageAtCustomerToCustomer = BOCustomer.PackageAtCustomerToCustomer;
 
 
             return POCustomer;

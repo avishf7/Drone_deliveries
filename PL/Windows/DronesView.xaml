@@ -12,7 +12,7 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Closing="Window_Closing"   
-        DataContext="{Binding RelativeSource={RelativeSource self}}">
+        DataContext="{Binding  RelativeSource={RelativeSource self}}">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -49,9 +49,9 @@
                         </Grid.ColumnDefinitions >
 
                         <TextBlock Text="Status selector:" Grid.Column="0" FontSize="18" FontFamily="Arial Black" Margin="12,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FFDDD81E" Grid.ColumnSpan="2"/>
-                        <ComboBox x:Name="StatusSelector" Grid.Column="2" FontSize="18" Margin="10,5,0,5" Width="130" HorizontalAlignment="Left" SelectionChanged="StatusSelector_SelectionChanged"  />
+                        <ComboBox x:Name="StatusSelector" Grid.Column="2" FontSize="18" Margin="10,5,0,5" Width="130" HorizontalAlignment="Left" SelectionChanged="StatusSelector_SelectionChanged" ItemsSource="{Binding Model.DroneStatuses}"  />
                         <TextBlock Text="Max weigth:" Grid.Column="3" FontSize="18" FontFamily="Arial Black" Margin="14,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"  Foreground="#FFDDD81E"/>
-                        <ComboBox x:Name="MaxWeigth" Grid.Column="4" FontSize="18" Margin="10,5,0,5" Width="100" HorizontalAlignment="Left" SelectionChanged="MaxWeigth_SelectionChanged"/>
+                        <ComboBox x:Name="MaxWeigth" Grid.Column="4" FontSize="18" Margin="10,5,0,5" Width="100" HorizontalAlignment="Left" SelectionChanged="MaxWeigth_SelectionChanged" ItemsSource="{Binding Model.Weight}"/>
                         <Button x:Name="Reset" Grid.Column="5" Margin="10,5,10,5" FontFamily="Arial Black" Padding="5" Click="Reset_Click">
                             <Button.ContentTemplate>
                                 <DataTemplate>

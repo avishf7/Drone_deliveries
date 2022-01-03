@@ -12,7 +12,7 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Closing="Window_Closing" 
-        DataContext="{Binding Model.Customers, RelativeSource={RelativeSource self}}">
+        DataContext="{Binding RelativeSource={RelativeSource self}}">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -32,7 +32,7 @@
 
         <ListView x:Name="CustomersListView"
                              Grid.Row="0"
-                             ItemsSource="{Binding}" 
+                             ItemsSource="{Binding Model.Customers}" 
                              Opacity="0.5" 
                              MouseDoubleClick="CustomersListView_MouseDoubleClick" />
 
