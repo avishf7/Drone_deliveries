@@ -154,7 +154,7 @@ namespace PL.Windows
         {
             if (UpdateName.Text != "" )
             {
-                bl.UpdateCustomer(customer.Id, UpdateName.Text, customer.Phone);
+                bl.UpdateCustomer(POCustomer.Id, UpdateName.Text, POCustomer.Phone);
                 //  this.sender.Filtering();
                 MessageBox.Show("Updating the element was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
