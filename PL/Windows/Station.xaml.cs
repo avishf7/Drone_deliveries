@@ -158,6 +158,10 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void OK_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+
+          
 
             if (((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0)).Text != "")
             {
@@ -173,6 +177,12 @@ namespace PL.Windows
             }
             else
                 MessageBox.Show("empty field", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (TooSmallAmount ex)
+            {
+
+                MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
 

@@ -31,10 +31,38 @@
         <TabControl Background="{x:Null}" Grid.Row="0" >
             <TabItem x:Name="NormalView" Header="Normal" Background="{StaticResource Static.Background}" >
                 <Grid x:Name="TabNormalGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50*"/>
+                        <RowDefinition Height="400*"/>
+                    </Grid.RowDefinitions>
+                    <Grid x:Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
+              VerticalAlignment="Stretch" Width="auto">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="161*"/>
+                            <ColumnDefinition Width="18*"/>
+                            <ColumnDefinition Width="153*"/>
+                            <ColumnDefinition Width="144*"/>
+                            <ColumnDefinition Width="117*"/>
+                            <ColumnDefinition Width="207*"/>
+                        </Grid.ColumnDefinitions >
+
+                        <TextBlock Text="Status selector:" Grid.Column="0" FontSize="18" FontFamily="Arial Black" Margin="12,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FFDDD81E" Grid.ColumnSpan="2"/>
+                        <ComboBox x:Name="StatusSelector" Grid.Column="2" FontSize="18" Margin="10,5,0,5" Width="130" HorizontalAlignment="Left" SelectionChanged="StatusSelector_SelectionChanged" ItemsSource="{Binding Model.PackageStatus}"  />
+                        <Button x:Name="Reset" Grid.Column="5" Margin="10,5,10,5" FontFamily="Arial Black" Padding="5" Click="Reset_Click">
+                            <Button.ContentTemplate>
+                                <DataTemplate>
+                                    <Viewbox>
+                                        <TextBlock>Reset view</TextBlock>
+                                    </Viewbox>
+                                </DataTemplate>
+                            </Button.ContentTemplate>
+                        </Button>
+
+                    </Grid>
 
                     <ListView x:Name="PackagesListView"
                              ItemsSource="{Binding Model.Packages}" 
-                             Opacity="0.5" 
+                              Grid.Row="1"  Opacity="0.5" 
                              MouseDoubleClick="PackagesListView_MouseDoubleClick" />
                 </Grid>
             </TabItem>

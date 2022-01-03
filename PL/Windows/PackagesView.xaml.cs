@@ -84,23 +84,45 @@ namespace PL.Windows
         }
 
         /// <summary>
+        /// Filter the display by status in the combobox
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
+        private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Filtering();
+        }
+
+
+        /// <summary>
         /// A button that resets the filters.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
         private void Reset_Click(object sender, RoutedEventArgs e)
         {
-            //MaxWeigth.Text = "";
-            //MaxWeigth.SelectedIndex = -1;
-            //MaxWeigth.SelectedItem = null;
+            StatusSelector.Text = "";
+            StatusSelector.SelectedIndex = -1;
+            StatusSelector.SelectedItem = null;
 
-            //StatusSelector.Text = "";
-            //StatusSelector.SelectedIndex = -1;
-            //StatusSelector.SelectedItem = null;
+            StatusSelector.Text = "";
+            StatusSelector.SelectedIndex = -1;
+            StatusSelector.SelectedItem = null;
 
-            //Filtering();
+            Filtering();
         }
 
+        /// <summary>
+        /// Filter the display according to the combo boxs selection.
+        /// </summary>
+        public void Filtering()
+        {
+            var status = StatusSelector.SelectedItem;
+
+
+            Model.Packages = new(bl.GetPackages(pck => (status != null ? pck.PackageStatus == (PackageStatus)status : true)));
+
+        }
         /// <summary>
         /// A button that opens a window for adding a new drone.
         /// </summary>
