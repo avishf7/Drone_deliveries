@@ -158,7 +158,7 @@ namespace PL.Windows
             if (UpdateName.Text != "")
             {
                 bl.UpdateStation(POStation.Id, UpdateName.Text, POStation.FreeChargeSlots);
-              //  this.sender.Filtering();
+
                 MessageBox.Show("Updating the element was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 ((Button)sender).Content = "Update";

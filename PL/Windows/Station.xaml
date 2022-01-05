@@ -106,6 +106,7 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBox x:Name="UpdateName" 
+                         Grid.Column="0"
                          Text="{Binding Path=Name}"
                          FontSize="20"
                          VerticalAlignment="Stretch"
@@ -122,6 +123,7 @@
                         FontFamily="Arial Black"
                         Click="Update_Click"                         
                         />
+                
             </Grid>
 
 

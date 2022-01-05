@@ -57,7 +57,7 @@ namespace BL
                         DO.Customer randomCustomer = dal.GetCustomer(deliveredPackages.ToList()[rd.Next(deliveredPackages.Count())].TargetId);
 
                         droneLocation = new() { Lattitude = randomCustomer.Lattitude, Longitude = randomCustomer.Longitude };
-                        minBattery = BatteryUsage(Distance(droneLocation, FindClosestStationLocation(droneLocation)));
+                        minBattery = BatteryUsage(droneLocation.Distance(FindClosestStationLocation(droneLocation)));
 
                         break;
                     case DroneStatuses.Maintenance:
@@ -83,15 +83,15 @@ namespace BL
                         if (Pck.PickedUp == null)
                         {
                             droneLocation = FindClosestStationLocation(senderLocation);
-                            minBattery = BatteryUsage(Distance(droneLocation, senderLocation))
-                                       + BatteryUsage(Distance(senderLocation, targetLocation), (int)Pck.Weight)
-                                       + BatteryUsage(Distance(targetLocation, FindClosestStationLocation(targetLocation)));
+                            minBattery = BatteryUsage(droneLocation.Distance(senderLocation))
+                                       + BatteryUsage(senderLocation.Distance(targetLocation), (int)Pck.Weight)
+                                       + BatteryUsage(targetLocation.Distance(FindClosestStationLocation(targetLocation)));
                         }
                         else
                         {
                             droneLocation = senderLocation;
-                            minBattery = BatteryUsage(Distance(senderLocation, targetLocation), (int)Pck.Weight)
-                                       + BatteryUsage(Distance(targetLocation, FindClosestStationLocation(targetLocation)));
+                            minBattery = BatteryUsage(senderLocation.Distance(targetLocation), (int)Pck.Weight)
+                                       + BatteryUsage(targetLocation.Distance(FindClosestStationLocation(targetLocation)));
                         }
 
                         break;
@@ -112,51 +112,21 @@ namespace BL
         }
 
         /// <summary>
-        /// Calculate the distance (KM) between two received locations 
-        /// according to their coordinates,
-        /// Using a distance calculation formula.
-        /// </summary>
-        /// <param name="sLocation">Start location</param>
-        /// <param name="eLocation">End location </param>
-        /// <returns>distance (KM) between two received locations</returns>
-        static double Distance(Location sLocation, Location eLocation)
-        {
-            //Converts decimal degrees to radians:
-            var rlat1 = Math.PI * sLocation.Lattitude / 180;
-            var rlat2 = Math.PI * eLocation.Lattitude / 180;
-            var rLon1 = Math.PI * sLocation.Longitude / 180;
-            var rLon2 = Math.PI * eLocation.Longitude / 180;
-            var theta = sLocation.Longitude - eLocation.Longitude;
-            var rtheta = Math.PI * theta / 180;
-
-            //Formula for calculating the distance 
-            //between two coordinates represented by radians:
-            var dist = (Math.Sin(rlat1) * Math.Sin(rlat2)) + Math.Cos(rlat1) *
-                      Math.Cos(rlat2) * Math.Cos(rtheta);
-            dist = Math.Acos(dist);
-
-            dist = dist * 180 / Math.PI;  //Converts radians to decimal degrees
-            dist = dist * 60 * 1.1515;
-
-            return dist * 1.61081082288953;      //Converts to KM
-        }
-
-        /// <summary>
         /// Find the station closest to the shipped location
         /// </summary>
         /// <param name="location">Drone's location</param>
         /// <returns> the station closest</returns>
         /// <exception cref="BlApi.NoNumberFoundException"></exception>
-        Location FindClosestStationLocation(Location location, Predicate<DO.Station> predicate = null)
+        public Location FindClosestStationLocation(Location location, Predicate<DO.Station> predicate = null)
         {
             var stations = dal.GetStations(predicate);
 
             if (!stations.Any())
                 throw new BlApi.NoNumberFoundException("No station that provided the predicate");
 
-            double minDistance = stations.Min(x => Distance(location, new Location() { Lattitude = x.Lattitude, Longitude = x.Longitude }));
+            double minDistance = stations.Min(x => location.Distance( new Location() { Lattitude = x.Lattitude, Longitude = x.Longitude }));
 
-            DO.Station station = stations.SingleOrDefault(x => Distance(location, new Location() { Lattitude = x.Lattitude, Longitude = x.Longitude }) == minDistance);
+            DO.Station station = stations.SingleOrDefault(x => location.Distance(new Location() { Lattitude = x.Lattitude, Longitude = x.Longitude }) == minDistance);
 
             return new Location() { Lattitude = station.Lattitude, Longitude = station.Longitude };
         }
