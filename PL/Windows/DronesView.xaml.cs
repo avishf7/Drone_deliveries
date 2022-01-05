@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,13 +24,30 @@ namespace PL.Windows
     /// <summary>
     /// Interaction logic for DronesView.xaml
     /// </summary>
-    public partial class DronesView : Window
+    public partial class DronesView : Window, INotifyPropertyChanged
     {
+        
+
         IBL bl = BlFactory.GetBl();
         MainWindow sender;
         bool isCloseClick = true;
 
-        public Model Model { get; } = PL.Model.Instance;
+        public event PropertyChangedEventHandler PropertyChanged;
+        public IEnumerable<IGrouping<DroneStatuses, BO.DroneToList>> groupingDrones;
+
+
+        public IEnumerable<IGrouping<DroneStatuses, BO.DroneToList>> GroupingDrones
+        {
+            get => groupingDrones;
+            set
+            {
+                groupingDrones = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("GroupingDrones"));
+            }
+        }
+
+    public Model Model { get; } = PL.Model.Instance;
 
 
         /// <summary>
@@ -40,8 +58,7 @@ namespace PL.Windows
         {
             InitializeComponent();
             this.sender = sender;
-
-            this.GroupingView.DataContext = from drone in bl.GetDrones()
+            GroupingDrones = from drone in bl.GetDrones()
                                             group drone by drone.DroneStatus;
 
             Model.Drones.CollectionChanged += Drones_CollectionChanged;
@@ -52,7 +69,7 @@ namespace PL.Windows
 
         private void Drones_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            this.GroupingView.DataContext = from drone in bl.GetDrones()
+            GroupingDrones = from drone in bl.GetDrones()
                                             group drone by drone.DroneStatus;
         }
 

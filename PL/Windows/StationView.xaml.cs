@@ -1,6 +1,7 @@
 ﻿using BlApi;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,24 +20,37 @@ namespace PL.Windows
     /// <summary>
     /// Interaction logic for StationView.xaml
     /// </summary>
-    public partial class StationsView : Window
+    public partial class StationsView : Window, INotifyPropertyChanged
     {
         IBL bl = BlFactory.GetBl();
         MainWindow sender;
-
         bool isCloseClick = true;
-        public Model Model { get; } = PL.Model.Instance;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        IEnumerable<IGrouping<int, BO.StationToList>> groupingStations;
+        public IEnumerable<IGrouping<int, BO.StationToList>> GroupingStations
+        {
+            get => groupingStations;
+            set
+            {
+                groupingStations = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("GroupingStations"));
+            }
+        }
+    public Model Model { get; } = PL.Model.Instance;
 
         /// <summary>
         /// 
         /// </summary>
-        public StationsView( MainWindow sender)
+        public StationsView(MainWindow sender)
         {
             InitializeComponent();
             this.sender = sender;
 
-            this.GroupingView.DataContext = from station in bl.GetStations()
-                                            group station by station.SeveralAvailableChargingStations;
+            GroupingStations = from station in bl.GetStations()
+                               group station by station.SeveralAvailableChargingStations;
 
             Model.Stations.CollectionChanged += Stations_CollectionChanged;
             this.sender.Closing += Sender_Closing;
@@ -46,8 +60,8 @@ namespace PL.Windows
 
         private void Stations_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            this.GroupingView.DataContext = from station in bl.GetStations()
-                                            group station by station.SeveralAvailableChargingStations;
+            GroupingStations = from station in bl.GetStations()
+                               group station by station.SeveralAvailableChargingStations;
         }
 
         private void Sender_Deactivated(object sender, EventArgs e)
@@ -66,9 +80,9 @@ namespace PL.Windows
         }
 
 
-      
 
-      
+
+
 
         /// <summary>
         /// Closing the window
@@ -89,7 +103,7 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void AddStation_Click(object sender, RoutedEventArgs e)
         {
-           new Station( this).ShowDialog();
+            new Station(this).ShowDialog();
         }
 
         /// <summary>

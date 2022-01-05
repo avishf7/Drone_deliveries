@@ -329,7 +329,7 @@
                         Grid.Row="1"
                         Margin="15,5" 
                         FontFamily="Arial Black"
-                        IsEnabled="{Binding Path=DroneStatus, Mode=OneWay,Converter={StaticResource StatusToEnableDelivery}}" Click="Delivery_Click">
+                        IsEnabled="{Binding Path=PODrone.DroneStatus, Mode=OneWay,Converter={StaticResource StatusToEnableDelivery}}" Click="Delivery_Click">
                     <Image>
                         <Image.Source>
                             <MultiBinding Converter="{StaticResource StatusToPictureDelivery}" Mode="OneWay">

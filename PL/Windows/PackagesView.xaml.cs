@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,12 +21,25 @@ namespace PL.Windows
     /// <summary>
     /// Interaction logic for PackageView.xaml
     /// </summary>
-    public partial class PackagesView : Window
+    public partial class PackagesView : Window, INotifyPropertyChanged
     {
         IBL bl = BlFactory.GetBl();
         MainWindow sender;
-
         bool isCloseClick = true;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public IEnumerable<IGrouping<string, BO.PackageToList>> groupingPackages { get; set; }
+        public IEnumerable<IGrouping<string, BO.PackageToList>> GroupingPackages
+        {
+            get => groupingPackages;
+            set
+            {
+                groupingPackages = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("GroupingPackages"));
+            }
+        }
         public Model Model { get; } = PL.Model.Instance;
 
 
@@ -35,13 +49,13 @@ namespace PL.Windows
         /// </summary>
         /// <param name="bl"></param>
         /// <param name="sender">The element that activates the function</param>
-        public PackagesView( MainWindow sender)
+        public PackagesView(MainWindow sender)
         {
             InitializeComponent();
 
             this.sender = sender;
-            this.GroupingView.DataContext = from package in bl.GetPackages()
-                                            group package by package.SenderName;
+            GroupingPackages = from package in bl.GetPackages()
+                               group package by package.SenderName;
 
 
             Model.Packages.CollectionChanged += Packages_CollectionChanged;
@@ -53,8 +67,8 @@ namespace PL.Windows
 
         private void Packages_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            this.GroupingView.DataContext = from package in bl.GetPackages()
-                                            group package by package.SenderName;
+            GroupingPackages = from package in bl.GetPackages()
+                               group package by package.SenderName;
         }
 
 
@@ -130,7 +144,7 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void AddPackage_Click(object sender, RoutedEventArgs e)
         {
-            new Package( this).ShowDialog();
+            new Package(this).ShowDialog();
         }
 
         /// <summary>

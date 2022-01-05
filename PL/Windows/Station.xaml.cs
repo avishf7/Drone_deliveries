@@ -121,7 +121,7 @@ namespace PL.Windows
                         ChargingDrones = new List<DroneCharge>()
                     });
 
-                   // this.sender.Filtering();
+                    Model.Stations.Add(bl.GetStations().Where(dr => dr.Id == int.Parse(stationId.Text)).Single());
 
                     MessageBox.Show("Adding the station was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
