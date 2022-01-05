@@ -23,7 +23,7 @@ namespace BL
                 var orderPackages = dal.GetPackages().Where(pck => (int)pck.Weight <= (int)dr.MaxWeight)
                                 .OrderByDescending(pck => pck.Priority)
                                 .ThenByDescending(pck => pck.Weight)
-                                .ThenBy(pck => Distance(dr.LocationOfDrone, new()
+                                .ThenBy(pck => dr.LocationOfDrone.Distance( new()
                                 {
                                     Lattitude = dal.GetCustomer(pck.SenderId).Lattitude,
                                     Longitude = dal.GetCustomer(pck.SenderId).Longitude
@@ -45,9 +45,9 @@ namespace BL
                         Location senderLocation = new() { Lattitude = sender.Lattitude, Longitude = sender.Longitude },
                                  targetLocation = new() { Lattitude = target.Lattitude, Longitude = target.Longitude };
 
-                        double minBattery = BatteryUsage(Distance(dr.LocationOfDrone, senderLocation))
-                                          + BatteryUsage(Distance(senderLocation, targetLocation), (int)pck.Weight)
-                                          + BatteryUsage(Distance(targetLocation, FindClosestStationLocation(targetLocation)));
+                        double minBattery = BatteryUsage(dr.LocationOfDrone.Distance(senderLocation))
+                                          + BatteryUsage(senderLocation.Distance(targetLocation), (int)pck.Weight)
+                                          + BatteryUsage(targetLocation.Distance(FindClosestStationLocation(targetLocation)));
 
 
                         if (isEnoughBattary = dr.BatteryStatus >= minBattery)
@@ -88,7 +88,7 @@ namespace BL
 
             if (dr.PackageNumber == doPackage.Id)
             {
-                dr.BatteryStatus = dr.BatteryStatus - BatteryUsage(Distance(dr.LocationOfDrone, sender.CustomerLocation));
+                dr.BatteryStatus = dr.BatteryStatus - BatteryUsage(dr.LocationOfDrone.Distance(sender.CustomerLocation));
                 dr.LocationOfDrone = sender.CustomerLocation;               
                 dal.PickUp(doPackage.Id);
             }
@@ -112,7 +112,7 @@ namespace BL
 
             if (dr.PackageNumber == doPackage.Id)
             {
-                dr.BatteryStatus = dr.BatteryStatus - BatteryUsage(Distance(dr.LocationOfDrone, target.CustomerLocation),
+                dr.BatteryStatus = dr.BatteryStatus - BatteryUsage(dr.LocationOfDrone.Distance(target.CustomerLocation),
                     (int)doPackage.Weight);
                 dr.LocationOfDrone = target.CustomerLocation;
                 dr.DroneStatus = DroneStatuses.Available;

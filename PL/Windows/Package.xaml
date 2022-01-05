@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Windows"
         mc:Ignorable="d"
-        Title="Package" Height="450" Width="800" WindowStartupLocation="CenterScreen"
+        Title="Package" Height="450" Width="600" WindowStartupLocation="CenterScreen"
         WindowStyle="SingleBorderWindow" 
         ResizeMode="NoResize"
         DataContext="{Binding RelativeSource={RelativeSource self}}">
@@ -27,8 +27,8 @@
             <RowDefinition Height="20*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="800" />
-            <ColumnDefinition Width="800" />
+            <ColumnDefinition Width="600" />
+            <ColumnDefinition Width="650" />
         </Grid.ColumnDefinitions>
 
         <Grid x:Name="UpGrid" Grid.Row="0" Grid.Column="0">
@@ -112,7 +112,7 @@
                        Grid.Row="1"
                        Grid.Column="1"
                        FontSize="20" 
-                       DataContext="{Binding Path=POPackage.SenderCustomerInPackage}"
+                       DataContext="{Binding Path=POPackage.TargetCustomerInPackage}"
                        Template="{StaticResource CustomerInPackageTemplate}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="20"
@@ -138,6 +138,7 @@
                       FontSize="20" 
                       HorizontalContentAlignment="Center" 
                       VerticalContentAlignment="Center" 
+                      ItemsSource="{Binding Model.Weight}"
                       Margin="20"
                       Visibility="Hidden"/>
             
@@ -171,6 +172,7 @@
                       FontSize="20" 
                       HorizontalContentAlignment="Center" 
                       VerticalContentAlignment="Center" 
+                      ItemsSource="{Binding Model.Priorities}"
                       Margin="20"
                       Visibility="Hidden"/>            
 
@@ -184,10 +186,7 @@
                        Margin="20"
                        TextAlignment="Center"
                        Visibility="Hidden">
-            </TextBlock>
-
-
-           
+            </TextBlock>           
 
         </Grid>
 
@@ -222,12 +221,12 @@
 
         <Grid x:Name="PackageInfoDownGrid" Grid.Row="0" Grid.Column="1" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="15*"/>
-                <RowDefinition Height="15*"/>
-                <RowDefinition Height="15*"/>
-                <RowDefinition Height="15*"/>
-                <RowDefinition Height="15*"/>
-                <RowDefinition Height="15*"/>
+                <RowDefinition Height="25*"/>
+                <RowDefinition Height="13*"/>
+                <RowDefinition Height="13*"/>
+                <RowDefinition Height="13*"/>
+                <RowDefinition Height="13*"/>
+                <RowDefinition Height="13*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50*"/>
@@ -240,7 +239,7 @@
                    FontSize="20"
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
-                   Content="The drone in package:" 
+                   Content="Drone in package:" 
                    Grid.Row="0" 
                    Grid.Column="0"                   
                    Foreground="#FFDDD81E" 
@@ -248,16 +247,17 @@
                    Margin="8"/>
 
            
-            <TextBlock x:Name="DroneInPackageInfo" 
+            <TextBox x:Name="DroneInPackageInfo" 
                        Grid.Row="0"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=POPackage.DroneInPackage}"
+                       DataContext="{Binding Path=POPackage.DroneInPackage, Mode=OneWay, TargetNullValue='None'}"
+                       Template="{StaticResource DroneInPackageTemplate}"
                        Background="{StaticResource Static.Background}"                  
-                       Margin="15"
+                       Margin="2"
                        TextAlignment="Center"
                        >
-            </TextBlock>
+            </TextBox>
             
             
 
@@ -278,7 +278,7 @@
                        Grid.Row="1"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=POPackage.Requested , FallbackValue='None'}"
+                       Text="{Binding Path=POPackage.Requested , TargetNullValue='None'}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="15"
                        TextAlignment="Center"
@@ -303,7 +303,7 @@
                        Grid.Row="2"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=POPackage.Scheduled ,FallbackValue='None'}"
+                       Text="{Binding Path=POPackage.Scheduled ,TargetNullValue='None'}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="15"
                        TextAlignment="Center"
@@ -328,7 +328,7 @@
                        Grid.Row="3"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=POPackage.PickedUp , FallbackValue='None'}"
+                       Text="{Binding Path=POPackage.PickedUp , TargetNullValue='None'}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="15"
                        TextAlignment="Center"
@@ -352,7 +352,7 @@
                        Grid.Row="4"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=POPackage.Delivered , FallbackValue='None'}"
+                       Text="{Binding Path=POPackage.Delivered, TargetNullValue='None'}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="15"
                        TextAlignment="Center"

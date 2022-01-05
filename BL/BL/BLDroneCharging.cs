@@ -34,7 +34,7 @@ namespace BL
                 throw new BlApi.NoNumberFoundException("There is no station with available charging stations", ex);
             }
 
-            double KM = Distance(stLocation, dr.LocationOfDrone);
+            double KM = stLocation.Distance(dr.LocationOfDrone);
 
 
             if (KM <= dr.BatteryStatus * DroneAvailable)

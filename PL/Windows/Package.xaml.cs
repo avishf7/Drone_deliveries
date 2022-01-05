@@ -42,9 +42,7 @@ namespace PL.Windows
             targetCustomerInPackage.Visibility = Visibility.Visible;
             Weight.Visibility = Visibility.Visible;
             priority.Visibility = Visibility.Visible;
-
-          
-
+        
         }
 
         /// <summary>
@@ -67,7 +65,7 @@ namespace PL.Windows
             PriorityInfo.Visibility = Visibility.Visible;
             Exit.Visibility = Visibility.Visible;
 
-            this.Height = 450;
+            this.Height = 550;
             this.Width = 1300;
 
         }
@@ -107,15 +105,14 @@ namespace PL.Windows
                 if (senderCustomerInPackage.Text != "" && targetCustomerInPackage.Text != "" && Weight.SelectedItem != null && priority.SelectedItem != null)
                 {
                     bl.AddPackage(new()
-                    {
-                       
+                    {                       
                       SenderCustomerInPackage = new() {CustomerId = int.Parse (senderCustomerInPackage.Text)},
                         TargetCustomerInPackage = new() {CustomerId = int.Parse (targetCustomerInPackage.Text)},
                         Weight = (Weight)Weight.SelectedItem,
                         Priority = (Priorities)priority.SelectedItem,
                     });
 
-                    //  this.sender.Filtering();
+                      this.sender.Filtering();
 
                     MessageBox.Show("Adding the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
