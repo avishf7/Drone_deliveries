@@ -134,6 +134,8 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void DroneInPackageInfo_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+           
+                      
             if (((TextBox)sender).DataContext != null)
             {
                 BO.Drone BODrone = bl.GetDrone((((TextBox)sender).DataContext as BO.DroneInPackage).Id);
@@ -142,8 +144,8 @@ namespace PL.Windows
                     Model.PODrones.Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));
 
                 new Drone(this, PODrone).Show();
-
             }
+            
         }
 
 

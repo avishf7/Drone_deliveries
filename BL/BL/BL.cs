@@ -61,7 +61,7 @@ namespace BL
 
                         break;
                     case DroneStatuses.Maintenance:
-                        DO.Station randomStation = stations.ToList()[rd.Next(1,stations.Count())];
+                        DO.Station randomStation = stations.ToList()[rd.Next(stations.Count())];
 
                         droneLocation = new() { Lattitude = randomStation.Lattitude, Longitude = randomStation.Longitude };
                         maxBattery = 20.0;

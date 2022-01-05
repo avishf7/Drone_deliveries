@@ -38,9 +38,11 @@ namespace PL.Windows
 
             MainGrid.ShowGridLines = true;
             AddDownGrid.Visibility = Visibility.Visible;
+            AddStationGrid.Visibility = Visibility.Visible;
             stationId.Visibility = Visibility.Visible;
             name.Visibility = Visibility.Visible;
-            stationLocation.Visibility = Visibility.Visible;
+            stationLocationLongitude.Visibility = Visibility.Visible;
+            stationLocationLattitude.Visibility = Visibility.Visible;
             freeChargeSlots.Visibility = Visibility.Visible;
 
         }
@@ -108,7 +110,7 @@ namespace PL.Windows
         {
             try
             {
-                if (stationId.Text != "" && name.Text != "" && stationLocation.Text != "" && freeChargeSlots.Text != null)
+                if (stationId.Text != "" && name.Text != "" && stationLocationLongitude.Text != "" && stationLocationLattitude.Text != "" && freeChargeSlots.Text != null)
                 {
                     bl.AddStation(new()
                     {
@@ -141,8 +143,6 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void Update_Click(object sender, RoutedEventArgs e)
         {
-
-
             ((Button)sender).Content = "OK";
             ((TextBox) VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender),0)).IsReadOnly=false;
             ((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0)).Text = "";
@@ -159,9 +159,7 @@ namespace PL.Windows
         private void OK_Click(object sender, RoutedEventArgs e)
         {
             try
-            {
-
-          
+            {         
 
             if (((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0)).Text != "")
             {
