@@ -18,8 +18,10 @@ namespace PL
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        ObservableCollection<DroneToList> drones;
-        public ObservableCollection<DroneToList> Drones 
+        #region List View collections
+
+        IEnumerable<DroneToList> drones;
+        public IEnumerable<DroneToList> Drones
         {
             get => drones;
             set
@@ -27,11 +29,11 @@ namespace PL
                 drones = value;
                 if (PropertyChanged != null)
                     PropertyChanged(this, new PropertyChangedEventArgs("Drones"));
-            } 
+            }
         }
 
-        ObservableCollection<StationToList> stations;
-        public ObservableCollection<StationToList> Stations
+        IEnumerable<StationToList> stations;
+        public IEnumerable<StationToList> Stations
         {
             get => stations;
             set
@@ -42,8 +44,8 @@ namespace PL
             }
         }
 
-        ObservableCollection<CustomerToList> customers;
-        public ObservableCollection<CustomerToList> Customers
+        IEnumerable<CustomerToList> customers;
+        public IEnumerable<CustomerToList> Customers
         {
             get => customers;
             set
@@ -54,8 +56,8 @@ namespace PL
             }
         }
 
-        ObservableCollection<PackageToList> packages;
-        public ObservableCollection<PackageToList> Packages
+        IEnumerable<PackageToList> packages;
+        public IEnumerable<PackageToList> Packages
         {
             get => packages;
             set
@@ -65,25 +67,129 @@ namespace PL
                     PropertyChanged(this, new PropertyChangedEventArgs("Packages"));
             }
         }
+        #endregion
 
+        #region Grouping collections
 
-        public List<PO.Drone> PODrones { get; set; } = new();        
-        public List<PO.Station> POStations { get; set; } = new();        
-        public List<PO.Customer> POCustomers { get; set; } = new();       
+        public IEnumerable<IGrouping<DroneStatuses, BO.DroneToList>> groupingDrones;
+
+        public IEnumerable<IGrouping<DroneStatuses, BO.DroneToList>> GroupingDrones
+        {
+            get => groupingDrones;
+            set
+            {
+                groupingDrones = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("GroupingDrones"));
+            }
+        }
+
+        public IEnumerable<IGrouping<string, BO.PackageToList>> groupingPackages { get; set; }
+        public IEnumerable<IGrouping<string, BO.PackageToList>> GroupingPackages
+        {
+            get => groupingPackages;
+            set
+            {
+                groupingPackages = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("GroupingPackages"));
+            }
+        }
+
+        IEnumerable<IGrouping<int, BO.StationToList>> groupingStations;
+        public IEnumerable<IGrouping<int, BO.StationToList>> GroupingStations
+        {
+            get => groupingStations;
+            set
+            {
+                groupingStations = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("GroupingStations"));
+            }
+        }
+        #endregion
+
+        #region PO collections
+
+        public List<PO.Drone> PODrones { get; set; } = new();
+        public List<PO.Station> POStations { get; set; } = new();
+        public List<PO.Customer> POCustomers { get; set; } = new();
         public List<PO.Package> POPackages { get; set; } = new();
+        #endregion
 
-        public Array Weight { get; set; } = Enum.GetValues(typeof(Weight));
-        public Array DroneStatuses { get; set; } = Enum.GetValues(typeof(DroneStatuses));
-        public Array Priorities { get; set; } = Enum.GetValues(typeof(Priorities));
-        public Array PackageStatus { get; set; } = Enum.GetValues(typeof(PackageStatus));
+        #region Enumerations
 
+        public Array Weight { get; } = Enum.GetValues(typeof(Weight));
+        public Array DroneStatuses { get; } = Enum.GetValues(typeof(DroneStatuses));
+        public Array Priorities { get; } = Enum.GetValues(typeof(Priorities));
+        public Array PackageStatus { get; } = Enum.GetValues(typeof(PackageStatus));
+        #endregion
+
+        #region Filters
+
+        public BO.Weight? maxWeightFilter = null;
+        public BO.DroneStatuses? DroneStatusesFilter = null;
+        public BO.PackageStatus? PackageStatusFilter = null;
+        #endregion
 
         private Model()
         {
-            Drones = new ObservableCollection<DroneToList>(bl.GetDrones());
-            Stations = new ObservableCollection<StationToList>(bl.GetStations());
-            Customers = new ObservableCollection<CustomerToList>(bl.GetCustomers());
-            Packages = new ObservableCollection<PackageToList>(bl.GetPackages());
+            Drones =bl.GetDrones();
+            Stations = bl.GetStations();
+            Customers = bl.GetCustomers();
+            Packages = bl.GetPackages();
+
+            GroupingDrones = from drone in bl.GetDrones()
+                             group drone by drone.DroneStatus;
+            GroupingPackages = from package in bl.GetPackages()
+                               group package by package.SenderName;
+            GroupingStations = from station in bl.GetStations()
+                               group station by station.SeveralAvailableChargingStations;
+
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void UpdateDrones()
+        {
+            Drones = bl.GetDrones(dr => (DroneStatusesFilter != null ? dr.DroneStatus == DroneStatusesFilter : true) &&
+                               (maxWeightFilter != null ? dr.MaxWeight == maxWeightFilter : true));
+
+            GroupingDrones = from drone in bl.GetDrones()
+                             group drone by drone.DroneStatus;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void UpdateStations()
+        {
+            Stations = bl.GetStations();
+
+            GroupingStations = from station in bl.GetStations()
+                               group station by station.SeveralAvailableChargingStations;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void UpdatePackages()
+        {
+            Packages = bl.GetPackages(pck => (PackageStatusFilter != null ? pck.PackageStatus == PackageStatusFilter : true));
+
+            GroupingPackages = from package in bl.GetPackages()
+                               group package by package.SenderName;
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void UpdateCustomers()
+        {
+            Customers = bl.GetCustomers();
         }
     }
 }

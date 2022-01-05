@@ -20,25 +20,15 @@ namespace PL.Windows
     /// <summary>
     /// Interaction logic for StationView.xaml
     /// </summary>
-    public partial class StationsView : Window, INotifyPropertyChanged
+    public partial class StationsView : Window
     {
         IBL bl = BlFactory.GetBl();
         MainWindow sender;
         bool isCloseClick = true;
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        IEnumerable<IGrouping<int, BO.StationToList>> groupingStations;
-        public IEnumerable<IGrouping<int, BO.StationToList>> GroupingStations
-        {
-            get => groupingStations;
-            set
-            {
-                groupingStations = value;
-                if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("GroupingStations"));
-            }
-        }
+
+       
     public Model Model { get; } = PL.Model.Instance;
 
         /// <summary>
@@ -49,20 +39,11 @@ namespace PL.Windows
             InitializeComponent();
             this.sender = sender;
 
-            GroupingStations = from station in bl.GetStations()
-                               group station by station.SeveralAvailableChargingStations;
 
-            Model.Stations.CollectionChanged += Stations_CollectionChanged;
             this.sender.Closing += Sender_Closing;
             this.sender.Activated += Sender_Activated;
             this.sender.Deactivated += Sender_Deactivated;
-        }
-
-        private void Stations_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            GroupingStations = from station in bl.GetStations()
-                               group station by station.SeveralAvailableChargingStations;
-        }
+        }       
 
         private void Sender_Deactivated(object sender, EventArgs e)
         {

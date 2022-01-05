@@ -21,25 +21,13 @@ namespace PL.Windows
     /// <summary>
     /// Interaction logic for PackageView.xaml
     /// </summary>
-    public partial class PackagesView : Window, INotifyPropertyChanged
+    public partial class PackagesView : Window
     {
         IBL bl = BlFactory.GetBl();
         MainWindow sender;
         bool isCloseClick = true;
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        public IEnumerable<IGrouping<string, BO.PackageToList>> groupingPackages { get; set; }
-        public IEnumerable<IGrouping<string, BO.PackageToList>> GroupingPackages
-        {
-            get => groupingPackages;
-            set
-            {
-                groupingPackages = value;
-                if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("GroupingPackages"));
-            }
-        }
         public Model Model { get; } = PL.Model.Instance;
 
 
@@ -54,21 +42,11 @@ namespace PL.Windows
             InitializeComponent();
 
             this.sender = sender;
-            GroupingPackages = from package in bl.GetPackages()
-                               group package by package.SenderName;
 
-
-            Model.Packages.CollectionChanged += Packages_CollectionChanged;
             this.sender.Closing += Sender_Closing;
             this.sender.Activated += Sender_Activated;
             this.sender.Deactivated += Sender_Deactivated;
 
-        }
-
-        private void Packages_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            GroupingPackages = from package in bl.GetPackages()
-                               group package by package.SenderName;
         }
 
 
@@ -104,7 +82,8 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Filtering();
+            Model.PackageStatusFilter = (PackageStatus?)StatusSelector.SelectedItem;
+            Model.UpdatePackages();
         }
 
 
@@ -115,28 +94,16 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void Reset_Click(object sender, RoutedEventArgs e)
         {
-            StatusSelector.Text = "";
             StatusSelector.SelectedIndex = -1;
             StatusSelector.SelectedItem = null;
-
             StatusSelector.Text = "";
+
             StatusSelector.SelectedIndex = -1;
             StatusSelector.SelectedItem = null;
-
-            Filtering();
+            StatusSelector.Text = "";           
         }
 
-        /// <summary>
-        /// Filter the display according to the combo boxs selection.
-        /// </summary>
-        public void Filtering()
-        {
-            var status = StatusSelector.SelectedItem;
-
-
-            Model.Packages = new(bl.GetPackages(pck => (status != null ? pck.PackageStatus == (PackageStatus)status : true)));
-
-        }
+       
         /// <summary>
         /// A button that opens a window for adding a new drone.
         /// </summary>

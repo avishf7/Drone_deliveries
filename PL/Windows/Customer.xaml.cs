@@ -115,7 +115,7 @@ namespace PL.Windows
                         PackageAtCustomerToCustomer = new List<PackageAtCustomer>()
                     });
 
-                   // this.sender.Filtering();
+                    Model.UpdateCustomers();
 
                     MessageBox.Show("Adding the customer was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
@@ -155,7 +155,7 @@ namespace PL.Windows
             if (UpdateName.Text != "" )
             {
                 bl.UpdateCustomer(POCustomer.Id, UpdateName.Text, POCustomer.Phone);
-                //  this.sender.Filtering();
+                Model.UpdateCustomers();
                 MessageBox.Show("Updating the element was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 Update.Content = "Update";

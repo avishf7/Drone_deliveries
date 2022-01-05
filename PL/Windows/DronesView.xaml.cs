@@ -24,7 +24,7 @@ namespace PL.Windows
     /// <summary>
     /// Interaction logic for DronesView.xaml
     /// </summary>
-    public partial class DronesView : Window, INotifyPropertyChanged
+    public partial class DronesView : Window
     {
         
 
@@ -32,20 +32,9 @@ namespace PL.Windows
         MainWindow sender;
         bool isCloseClick = true;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public IEnumerable<IGrouping<DroneStatuses, BO.DroneToList>> groupingDrones;
 
 
-        public IEnumerable<IGrouping<DroneStatuses, BO.DroneToList>> GroupingDrones
-        {
-            get => groupingDrones;
-            set
-            {
-                groupingDrones = value;
-                if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("GroupingDrones"));
-            }
-        }
+       
 
     public Model Model { get; } = PL.Model.Instance;
 
@@ -58,10 +47,9 @@ namespace PL.Windows
         {
             InitializeComponent();
             this.sender = sender;
-            GroupingDrones = from drone in bl.GetDrones()
+            Model.GroupingDrones = from drone in bl.GetDrones()
                                             group drone by drone.DroneStatus;
 
-            Model.Drones.CollectionChanged += Drones_CollectionChanged;
             this.sender.Closing += Sender_Closing;
             this.sender.Activated += Sender_Activated;
             this.sender.Deactivated += Sender_Deactivated;
@@ -69,7 +57,7 @@ namespace PL.Windows
 
         private void Drones_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            GroupingDrones = from drone in bl.GetDrones()
+            Model.GroupingDrones = from drone in bl.GetDrones()
                                             group drone by drone.DroneStatus;
         }
 
@@ -96,7 +84,8 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void MaxWeigth_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Filtering();
+            Model.maxWeightFilter = (Weight?)((ComboBox)sender).SelectedItem;
+            Model.UpdateDrones();
         }
 
         /// <summary>
@@ -106,7 +95,8 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Filtering();
+            Model.DroneStatusesFilter = (DroneStatuses?)((ComboBox)sender).SelectedItem;
+            Model.UpdateDrones();
         }
 
         /// <summary>
@@ -126,15 +116,13 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void Reset_Click(object sender, RoutedEventArgs e)
         {
-            MaxWeigth.Text = "";
             MaxWeigth.SelectedIndex = -1;
             MaxWeigth.SelectedItem = null;
+            MaxWeigth.Text = "";
 
-            StatusSelector.Text = "";
             StatusSelector.SelectedIndex = -1;
             StatusSelector.SelectedItem = null;
-
-            Filtering();
+            StatusSelector.Text = "";          
         }
 
         /// <summary>
@@ -164,21 +152,7 @@ namespace PL.Windows
                 new Drone( this, PODrone).Show();
 
             }
-        }
-
-        /// <summary>
-        /// Filter the display according to the combo boxs selection.
-        /// </summary>
-        public void Filtering()
-        {
-            var weight = MaxWeigth.SelectedItem;
-            var status = StatusSelector.SelectedItem;
-
-
-            Model.Drones = new(bl.GetDrones(dr => (status != null ? dr.DroneStatus == (DroneStatuses)status : true) &&
-                                           (weight != null ? dr.MaxWeight == (Weight)weight : true)));
-
-        }
+        }        
 
         /// <summary>
         /// Window Close Button.

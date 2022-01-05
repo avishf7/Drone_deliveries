@@ -112,7 +112,7 @@ namespace PL.Windows
                         Priority = (Priorities)priority.SelectedItem,
                     });
 
-                      this.sender.Filtering();
+                    Model.UpdatePackages();
 
                     MessageBox.Show("Adding the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();

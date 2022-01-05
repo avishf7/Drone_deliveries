@@ -26,7 +26,6 @@ namespace PL.Windows
         IBL bl = BlFactory.GetBl();
         Window sender;
 
-
         public PO.Drone PODrone { get; set; }
         public Model Model { get; } = PL.Model.Instance;
 
@@ -117,7 +116,8 @@ namespace PL.Windows
                         MaxWeight = (Weight)maxWeight.SelectedItem,
                     }, ((StationToList)stations.SelectedItem).Id);
 
-                    Model.Drones.Add(bl.GetDrones().Where(dr => dr.Id == int.Parse(droneId.Text)).Single());
+
+                    Model.UpdateDrones();
 
                     MessageBox.Show("Adding the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
@@ -157,7 +157,7 @@ namespace PL.Windows
             {
                 bl.UpdateDrone(PODrone.Id, UpdateModel.Text);
 
-                UpdateModelDrones();
+                Model.UpdateDrones();
 
                 MessageBox.Show("Updating the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -188,7 +188,7 @@ namespace PL.Windows
                     {
                         bl.SendDroneForCharge(PODrone.Id);
                         PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
-                        UpdateModelDrones();
+                        Model.UpdateDrones();
                         MessageBox.Show("Sent for charging", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     }
@@ -201,7 +201,7 @@ namespace PL.Windows
                 case DroneStatuses.Maintenance:
                     bl.RealeseDroneFromCharge(PODrone.Id);
                     PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
-                    UpdateModelDrones();
+                    Model.UpdateDrones();
                     MessageBox.Show("Released from charging", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
 
@@ -222,7 +222,7 @@ namespace PL.Windows
                     {
                         bl.packageAssigning(PODrone.Id);
                         PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
-                        UpdateModelDrones();
+                        Model.UpdateDrones();
                         MessageBox.Show("The package was successfully associated", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
 
@@ -234,7 +234,7 @@ namespace PL.Windows
                     {
                         bl.Deliver(PODrone.Id);
                         PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
-                        UpdateModelDrones();
+                        Model.UpdateDrones();
                         MessageBox.Show("The package was delivered to its destination, good day", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     }
@@ -242,20 +242,12 @@ namespace PL.Windows
                     {
                         bl.PickUp(PODrone.Id);
                         PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
-                        UpdateModelDrones();
+                        Model.UpdateDrones();
                         MessageBox.Show("The package was successfully collected by the drone", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     }
                     break;
             }
-        }
-        /// <summary>
-        /// Auxiliary function to update the list in Model
-        /// </summary>
-        private void UpdateModelDrones()
-        {
-            if (Model.Drones.Remove(Model.Drones.Where(dr => dr.Id == PODrone.Id).SingleOrDefault()))
-                Model.Drones.Add(bl.GetDrones().Where(dr => dr.Id == PODrone.Id).Single());
         }
     }
 }

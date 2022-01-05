@@ -67,7 +67,7 @@
                 </Grid>
             </TabItem>
             <TabItem x:Name="GroupingView" Header="Grouping" Background="{StaticResource Static.Background}"  >
-                <ListBox Background="{StaticResource Static.Background}" ItemsSource="{Binding GroupingPackages}">
+                <ListBox Background="{StaticResource Static.Background}" ItemsSource="{Binding Model.GroupingPackages}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Border BorderBrush="Gray" BorderThickness="1" Padding="5" Margin="5">
