@@ -22,7 +22,7 @@ namespace PL.Windows
     public partial class Customer : Window
     {
         IBL bl = BlFactory.GetBl();
-        CustomersView sender;
+        Window sender;
 
         public PO.Customer POCustomer { get; set; }
         public Model Model { get; } = PL.Model.Instance;
@@ -31,7 +31,7 @@ namespace PL.Windows
         /// Consructor for drone display window.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
-        public Customer(CustomersView sender)
+        public Customer(Window sender)
         {
             InitializeComponent();
             this.sender = sender;
@@ -49,7 +49,7 @@ namespace PL.Windows
         /// constructor to window add customer.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
-        public Customer(CustomersView sender, PO.Customer customer)
+        public Customer(Window sender, PO.Customer customer)
         {
             this.sender = sender;
             this.POCustomer = customer;
@@ -171,6 +171,19 @@ namespace PL.Windows
             else
                 MessageBox.Show("empty field", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
+        }
+
+        private void PackageAtCustomerListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (((TextBox)sender).DataContext != null)
+            {
+                BO.Package BOPackage = bl.GetPackage((((TextBox)sender).DataContext as BO.PackageAtCustomer).PackageId);
+                PO.Package POPackage = Model.POPackages.Find(pck => pck.Id == BOPackage.Id);
+                if (POCustomer == null)
+                    Model.POPackages.Add(POPackage = new PO.Package().CopyFromBOPackage(BOPackage));
+
+                new Package(this, POPackage).Show();
+            }
         }
 
 

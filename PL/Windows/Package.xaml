@@ -78,6 +78,7 @@
                        Margin="20"
                        TextAlignment="Center"
                        Visibility="Hidden"
+                       MouseDoubleClick="CustomerInPackageInfo_MouseDoubleClick"
                        >
 
             </TextBox>
@@ -117,7 +118,8 @@
                        Background="{StaticResource Static.Background}"                  
                        Margin="20"
                        TextAlignment="Center"
-                       Visibility="Hidden">
+                       Visibility="Hidden"
+                       MouseDoubleClick="CustomerInPackageInfo_MouseDoubleClick">
             </TextBox>
 
 

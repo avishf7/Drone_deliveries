@@ -22,7 +22,7 @@ namespace PL.Windows
     public partial class Station : Window
     {
         IBL bl = BlFactory.GetBl();
-        StationsView sender;        
+        StationsView sender;
 
         public PO.Station POStation { get; set; }
         public Model Model { get; } = PL.Model.Instance;
@@ -57,7 +57,7 @@ namespace PL.Windows
 
             this.sender = sender;
             this.POStation = POStation;
-         
+
             InitializeComponent();
 
             MainGrid.RowDefinitions[0].Height = new(50, GridUnitType.Star);
@@ -66,15 +66,15 @@ namespace PL.Windows
             StationInfoDownGrid.Visibility = Visibility.Visible;
             StationIdInfo.Visibility = Visibility.Visible;
             UpdateNameGrid.Visibility = Visibility.Visible;
- 
+
             StationLocationInfo.Visibility = Visibility.Visible;
-            UpdateNumOfChargeGrid.Visibility = Visibility.Visible;           
-            ChargingDronesInfo.Visibility = Visibility.Visible;
-           // freeChargeSlotsInfo.Visibility = Visibility.Visible;
+            UpdateNumOfChargeGrid.Visibility = Visibility.Visible;
+        //    ChargingDronesInfo.Visibility = Visibility.Visible;
+            // freeChargeSlotsInfo.Visibility = Visibility.Visible;
 
             this.Height = 700;
             this.Width = 550;
-        }       
+        }
 
 
 
@@ -116,7 +116,7 @@ namespace PL.Windows
                     {
                         Id = int.Parse(stationId.Text),
                         Name = name.Text,
-                        LocationOfStation = new ()
+                        LocationOfStation = new()
                         {
                             Lattitude = int.Parse(stationLocationLattitude.Text),
                             Longitude = int.Parse(stationLocationLongitude.Text)
@@ -148,7 +148,7 @@ namespace PL.Windows
         private void Update_Click(object sender, RoutedEventArgs e)
         {
             ((Button)sender).Content = "OK";
-            ((TextBox) VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender),0)).IsReadOnly=false;
+            ((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0)).IsReadOnly = false;
             ((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0)).Text = "";
 
             ((Button)sender).Click -= Update_Click;
@@ -163,22 +163,22 @@ namespace PL.Windows
         private void OK_Click(object sender, RoutedEventArgs e)
         {
             try
-            {         
-
-            if (((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0)).Text != "")
             {
-                bl.UpdateStation(POStation.Id, UpdateName.Text, POStation.FreeChargeSlots);
 
-                MessageBox.Show("Updating the element was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+                if (((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0)).Text != "")
+                {
+                    bl.UpdateStation(POStation.Id, UpdateName.Text, POStation.FreeChargeSlots);
 
-                ((Button)sender).Content = "Update";
-                ((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0)).IsReadOnly = true;
+                    MessageBox.Show("Updating the element was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                ((Button)sender).Click -= OK_Click;
-                ((Button)sender).Click += Update_Click;
-            }
-            else
-                MessageBox.Show("empty field", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    ((Button)sender).Content = "Update";
+                    ((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0)).IsReadOnly = true;
+
+                    ((Button)sender).Click -= OK_Click;
+                    ((Button)sender).Click += Update_Click;
+                }
+                else
+                    MessageBox.Show("empty field", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (TooSmallAmount ex)
             {
@@ -188,6 +188,22 @@ namespace PL.Windows
 
         }
 
+        private void ChargingDronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (((TextBox)sender).DataContext != null)
+            {
+                if ((((TextBox)sender).DataContext as BO.DroneCharge) != null)
+                {
+                    BO.Drone BODrone = bl.GetDrone((((TextBox)sender).DataContext as BO.DroneCharge).DroneId);
+                    PO.Drone PODrone = Model.PODrones.Find(dr => dr.Id == BODrone.Id);
+                    if (PODrone == null)
+                        Model.PODrones.Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));
+
+                    new Drone(this, PODrone).Show();
+                }
+            }
+
+        }
 
 
 

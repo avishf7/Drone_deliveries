@@ -321,9 +321,14 @@
                    FontFamily="Arial Black"
                    Margin="20"/>
 
+            <ListView x:Name="PackageFromCustomerListView"
+                          ItemsSource="{Binding Model.PackageAtCustomerFromCustomer}" 
+                          Grid.Row="0" Grid.Column="1" Opacity="0.5" 
+                          Margin="20,27"
+                          MouseDoubleClick="PackageAtCustomerListView_MouseDoubleClick" />
 
 
-            <TextBlock x:Name="PackageAtCustomerFromCustomerInfo" 
+            <!--<TextBlock x:Name="PackageAtCustomerFromCustomerInfo" 
                        Grid.Row="0"
                        Grid.Column="1"
                        FontSize="20"
@@ -331,7 +336,7 @@
                        Background="{StaticResource Static.Background}"                  
                        Margin="20,27"
                        TextAlignment="Center">
-            </TextBlock>
+            </TextBlock>-->
 
 
             <Label x:Name="labalPackageAtCustomerToCustomer" 
@@ -345,9 +350,14 @@
                    FontFamily="Arial Black"
                    Margin="20"/>
 
+            <ListView x:Name="PackageToCustomerListView"
+                          ItemsSource="{Binding Model.PackageAtCustomerToCustomer}" 
+                          Grid.Row="1" Grid.Column="1" Opacity="0.5" 
+                          Margin="20,27"
+                          MouseDoubleClick="PackageAtCustomerListView_MouseDoubleClick" />
 
 
-            <TextBlock x:Name="PackageAtCustomerToCustomerInfo" 
+            <!--<TextBlock x:Name="PackageAtCustomerToCustomerInfo" 
                        Grid.Row="1"
                        Grid.Column="1"
                        FontSize="20"
@@ -355,7 +365,7 @@
                        Background="{StaticResource Static.Background}"                  
                        Margin="20,27"
                        TextAlignment="Center">
-            </TextBlock>
+            </TextBlock>-->
 
             <Button x:Name="Exit"                         
                         Grid.Column="0"

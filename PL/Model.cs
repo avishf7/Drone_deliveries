@@ -67,6 +67,18 @@ namespace PL
                     PropertyChanged(this, new PropertyChangedEventArgs("Packages"));
             }
         }
+
+        //IEnumerable<DroneCharge> droneCharges;
+        //public IEnumerable<DroneCharge> DroneCharges
+        //{
+        //    get => droneCharges;
+        //    set
+        //    {
+        //        droneCharges = value;
+        //        if (PropertyChanged != null)
+        //            PropertyChanged(this, new PropertyChangedEventArgs("DroneCharges"));
+        //    }
+        //}
         #endregion
 
         #region Grouping collections

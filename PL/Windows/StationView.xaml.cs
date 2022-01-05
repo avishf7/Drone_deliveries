@@ -97,7 +97,7 @@ namespace PL.Windows
             if (((ListView)sender).SelectedItem != null)
             {
                 BO.Station BOStation = bl.GetStation((((ListView)sender).SelectedItem as BO.StationToList).Id);
-                PO.Station POStation = Model.POStations.Find(dr => dr.Id == BOStation.Id);
+                PO.Station POStation = Model.POStations.Find(st => st.Id == BOStation.Id);
                 if (POStation == null)
                     Model.POStations.Add(POStation = new PO.Station().CopyFromBOStation(BOStation));
 

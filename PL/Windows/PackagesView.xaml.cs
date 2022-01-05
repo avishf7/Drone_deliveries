@@ -27,7 +27,6 @@ namespace PL.Windows
         MainWindow sender;
         bool isCloseClick = true;
 
-
         public Model Model { get; } = PL.Model.Instance;
 
 

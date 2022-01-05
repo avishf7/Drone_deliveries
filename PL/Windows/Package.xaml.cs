@@ -22,7 +22,7 @@ namespace PL.Windows
     public partial class Package : Window
     {
         IBL bl = BlFactory.GetBl();
-        PackagesView sender;
+        Window sender;
 
         public PO.Package POPackage { get; set; }
         public Model Model { get; } = PL.Model.Instance;
@@ -31,7 +31,7 @@ namespace PL.Windows
         /// Consructor for drone display window.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
-        public Package(PackagesView sender)
+        public Package(Window sender)
         {
             InitializeComponent();
             this.sender = sender;            
@@ -49,7 +49,7 @@ namespace PL.Windows
         /// constructor to window add drone.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
-        public Package(PackagesView sender, PO.Package package)
+        public Package(Window sender, PO.Package package)
         {
             this.sender = sender;
             this.POPackage = package;
@@ -134,18 +134,38 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void DroneInPackageInfo_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-           
-                      
+
+
+
             if (((TextBox)sender).DataContext != null)
             {
-                BO.Drone BODrone = bl.GetDrone((((TextBox)sender).DataContext as BO.DroneInPackage).Id);
-                PO.Drone PODrone = Model.PODrones.Find(dr => dr.Id == BODrone.Id);
-                if (PODrone == null)
-                    Model.PODrones.Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));
+                if ((((TextBox)sender).DataContext as BO.DroneInPackage) != null)
+                {
+                    BO.Drone BODrone = bl.GetDrone((((TextBox)sender).DataContext as BO.DroneInPackage).Id);
+                    PO.Drone PODrone = Model.PODrones.Find(dr => dr.Id == BODrone.Id);
+                    if (PODrone == null)
+                        Model.PODrones.Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));
 
-                new Drone(this, PODrone).Show();
+                    new Drone(this, PODrone).Show();
+                }
+                else
+                    MessageBox.Show("There are unfilled fields", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             
+        }
+
+        private void CustomerInPackageInfo_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+            if (((TextBox)sender).DataContext != null)
+            {
+                BO.Customer BOCustomer = bl.GetCustomer((((TextBox)sender).DataContext as BO.CustomerInPackage).CustomerId);
+                PO.Customer POCustomer = Model.POCustomers.Find(cus => cus.Id == BOCustomer.Id);
+                if (POCustomer == null)
+                    Model.POCustomers.Add(POCustomer = new PO.Customer().CopyFromBOCustomer(BOCustomer));
+
+                new Customer(this, POCustomer).Show();
+            }
         }
 
 

@@ -292,8 +292,6 @@
             </Grid>
 
 
-
-
         </Grid>
 
         <Grid x:Name="AddDownGrid" Grid.Row="1" Visibility="Hidden">
@@ -347,7 +345,7 @@
                    Margin="20"/>
 
 
-            <TextBlock x:Name="ChargingDronesInfo" 
+            <!--<TextBlock x:Name="ChargingDronesInfo" 
                        Grid.Row="0"
                        Grid.Column="1"
                        FontSize="20"
@@ -355,7 +353,14 @@
                        Background="{StaticResource Static.Background}"                  
                        Margin="20,27"
                        TextAlignment="Center">
-            </TextBlock>
+            </TextBlock>-->
+
+            <ListView x:Name="ChargingDronesListView"
+                          ItemsSource="{Binding Model.ChargingDrones}" 
+                          Grid.Row="0" Grid.Column="1" Opacity="0.5" 
+                                             Margin="20,27"
+                                             FontSize="20"
+                          MouseDoubleClick="ChargingDronesListView_MouseDoubleClick" />
 
 
             <Button x:Name="Exit"                         
