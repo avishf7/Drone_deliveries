@@ -24,7 +24,7 @@ namespace PL.Windows
     public partial class Drone : Window
     {
         IBL bl = BlFactory.GetBl();
-        DronesView sender;
+        Window sender;
 
 
         public PO.Drone PODrone { get; set; }
@@ -34,7 +34,7 @@ namespace PL.Windows
         /// Consructor for drone display window.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
-        public Drone(DronesView sender)
+        public Drone(Window sender)
         {
             InitializeComponent();
 
@@ -55,7 +55,7 @@ namespace PL.Windows
         /// <param name="bl">The variable of access to the logic layer</param>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="droneId">The ID of the drone intended for display</param>
-        public Drone(DronesView sender, PO.Drone drone)
+        public Drone(Window sender, PO.Drone drone)
         {
             this.sender = sender;
             this.PODrone = drone;

@@ -247,7 +247,7 @@
                    Margin="8"/>
 
            
-            <TextBox x:Name="DroneInPackageInfo" 
+            <Button x:Name="DroneInPackageInfo" 
                        Grid.Row="0"
                        Grid.Column="1"
                        FontSize="20"
@@ -255,9 +255,9 @@
                        Template="{StaticResource DroneInPackageTemplate}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="2"
-                       TextAlignment="Center"
+                       MouseDoubleClick="DroneInPackageInfo_MouseDoubleClick"
                        >
-            </TextBox>
+            </Button>
             
             
 
@@ -380,9 +380,10 @@
                        Margin="15"
                        TextAlignment="Center"
                        >
-            </TextBlock>          
+            </TextBlock>
 
-       
+
+
         </Grid>
         <Button x:Name="Exit"                         
                         Grid.Column="1"

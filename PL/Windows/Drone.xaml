@@ -333,8 +333,8 @@
                     <Image>
                         <Image.Source>
                             <MultiBinding Converter="{StaticResource StatusToPictureDelivery}" Mode="OneWay">
-                                <Binding Path="DroneStatus"/>
-                                <Binding Path="PackageInProgress"/>
+                                <Binding Path="PODrone.DroneStatus"/>
+                                <Binding Path="PODrone.PackageInProgress"/>
                             </MultiBinding>
                         </Image.Source>
                     </Image>
