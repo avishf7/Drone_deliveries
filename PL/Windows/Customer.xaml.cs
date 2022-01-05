@@ -38,12 +38,10 @@ namespace PL.Windows
 
             MainGrid.ShowGridLines = true;
             AddDownGrid.Visibility = Visibility.Visible;
-            AddCustomerGrid.Visibility = Visibility.Visible;
+            AddCustomerLocationGrid.Visibility = Visibility.Visible;
             customerId.Visibility = Visibility.Visible;
             name.Visibility = Visibility.Visible;
             phone.Visibility = Visibility.Visible;
-            customerLocationLattitude.Visibility = Visibility.Visible;
-            cutomerLocationLongitude.Visibility = Visibility.Visible;
 
         }
 
@@ -105,14 +103,18 @@ namespace PL.Windows
         {
             try
             {
-                if (customerId.Text != "" && name.Text != "" && phone.Text != "" && cutomerLocationLongitude.Text != "" && customerLocationLattitude.Text != "")
+                if (customerId.Text != "" && name.Text != "" && phone.Text != "" && customerLocationLongitude.Text != "" && customerLocationLattitude.Text != "")
                 {
                     bl.AddCustomer(new()
                     {
                         Id = int.Parse(customerId.Text),
                         Name = name.Text,
                         Phone = phone.Text,
-
+                        CustomerLocation = new()
+                        {
+                            Lattitude = int.Parse(customerLocationLattitude.Text),
+                            Longitude = int.Parse(customerLocationLongitude.Text)
+                        },
                         PackageAtCustomerFromCustomer = new List<PackageAtCustomer>(),
                         PackageAtCustomerToCustomer = new List<PackageAtCustomer>()
                     });

@@ -116,7 +116,11 @@ namespace PL.Windows
                     {
                         Id = int.Parse(stationId.Text),
                         Name = name.Text,
-                        LocationOfStation = new Location(),
+                        LocationOfStation = new ()
+                        {
+                            Lattitude = int.Parse(stationLocationLattitude.Text),
+                            Longitude = int.Parse(stationLocationLongitude.Text)
+                        },
                         FreeChargeSlots = int.Parse(freeChargeSlots.Text),
                         ChargingDrones = new List<DroneCharge>()
                     });

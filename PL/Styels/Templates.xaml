@@ -73,6 +73,15 @@
                 <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,5" Text="Battery status: " />
                 <ProgressBar Grid.Row="2" Grid.Column="1" Margin="0,5" Value="{Binding Path=BatteryStatus ,Mode=OneWay}"/>
             </Grid>
+            <ScrollViewer.Style>
+                <Style TargetType="ScrollViewer">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Red" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ScrollViewer.Style>
         </ScrollViewer>
     </ControlTemplate>
     

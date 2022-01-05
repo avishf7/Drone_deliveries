@@ -9,7 +9,7 @@
         WindowStyle="SingleBorderWindow" 
         ResizeMode="NoResize"
         DataContext="{Binding POCustomer, RelativeSource={RelativeSource self}}">
-    
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -136,7 +136,7 @@
                    FontFamily="Arial Black"
                    Margin="20"/>
 
-            <Grid x:Name="AddCustomerGrid" Grid.Row="2" Grid.Column="1"  Visibility="Hidden">
+            <Grid x:Name="AddCustomerLocationGrid" Grid.Row="2" Grid.Column="1"  Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50*"/>
                     <RowDefinition Height="50*"/>
@@ -156,15 +156,14 @@
                    FontFamily="Arial Black"
                    Margin="2" />
 
-                <TextBox x:Name="cutomerLocationLongitude" 
+                <TextBox x:Name="customerLocationLongitude" 
                      FontSize="20"
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"                   
                      Grid.Row="0" 
                      Grid.Column="1"
                      Background="{StaticResource Static.Background}" 
-                     Margin="20,5"
-                     Visibility="Hidden">
+                     Margin="20,5"  >
                 </TextBox>
 
                 <Label x:Name="labalLocationLattitude" 
@@ -184,8 +183,7 @@
                      Grid.Row="1" 
                      Grid.Column="1"
                      Background="{StaticResource Static.Background}" 
-                     Margin="20,5"
-                     Visibility="Hidden">
+                     Margin="20,5">
                 </TextBox>
             </Grid>
 
@@ -253,7 +251,7 @@
             </Grid>
 
 
-          
+
 
             <!--<TextBox x:Name="customerLocation" 
                      FontSize="20"
@@ -265,12 +263,12 @@
                      Margin="20"
                      Visibility="Hidden">
             </TextBox>-->
-         
-          
+
+
 
         </Grid>
-        
-        
+
+
 
         <Grid x:Name="AddDownGrid" Grid.Row="1" Visibility="Hidden">
             <Grid.ColumnDefinitions>
@@ -279,7 +277,7 @@
                 <ColumnDefinition Width="40*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="45*"/> 
+                <RowDefinition Height="45*"/>
                 <RowDefinition Height="45*"/>
 
             </Grid.RowDefinitions>
@@ -368,7 +366,7 @@
                 <Image Source="https://cdn-icons-png.flaticon.com/512/1828/1828479.png" Margin="10"/>
             </Button>
 
-        <Grid x:Name="CutomerInfoDownInDownGrid" Grid.Row="3" Grid.Column="1">
+            <Grid x:Name="CutomerInfoDownInDownGrid" Grid.Row="3" Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="25*"/>
                     <ColumnDefinition Width="50*"/>
@@ -408,4 +406,5 @@
     </Grid>
     <Window.Background>
         <ImageBrush ImageSource="https://img.wisebuy.co.il/data/images/Guide/ThinkstockPhotos-668766928131508931264610000.jpg" />
-    </Window.Background></Window>
+    </Window.Background>
+</Window>
