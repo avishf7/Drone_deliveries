@@ -26,6 +26,7 @@ namespace PL.Windows
         IBL bl = BlFactory.GetBl();
         DronesView sender;
 
+
         public PO.Drone PODrone { get; set; }
         public Model Model { get; } = PL.Model.Instance;
 
@@ -116,7 +117,7 @@ namespace PL.Windows
                         MaxWeight = (Weight)maxWeight.SelectedItem,
                     }, ((StationToList)stations.SelectedItem).Id);
 
-                    this.sender.Filtering();
+                    Model.Drones.Add(bl.GetDrones().Where(dr => dr.Id == int.Parse(droneId.Text)).Single());
 
                     MessageBox.Show("Adding the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
@@ -155,7 +156,9 @@ namespace PL.Windows
             if (UpdateModel.Text != "")
             {
                 bl.UpdateDrone(PODrone.Id, UpdateModel.Text);
-                this.sender.Filtering();
+
+                UpdateModelDrones();
+
                 MessageBox.Show("Updating the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 Update.Content = "Update";
@@ -168,6 +171,8 @@ namespace PL.Windows
                 MessageBox.Show("empty field", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
         }
+
+
 
         /// <summary>
         /// Button for sending drone for charging and release from charging according to the status of the drone.
@@ -183,7 +188,7 @@ namespace PL.Windows
                     {
                         bl.SendDroneForCharge(PODrone.Id);
                         PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
-                        this.sender.Filtering();
+                        UpdateModelDrones();
                         MessageBox.Show("Sent for charging", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     }
@@ -196,7 +201,7 @@ namespace PL.Windows
                 case DroneStatuses.Maintenance:
                     bl.RealeseDroneFromCharge(PODrone.Id);
                     PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
-                    this.sender.Filtering();
+                    UpdateModelDrones();
                     MessageBox.Show("Released from charging", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
 
@@ -217,7 +222,7 @@ namespace PL.Windows
                     {
                         bl.packageAssigning(PODrone.Id);
                         PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
-                        this.sender.Filtering();
+                        UpdateModelDrones();
                         MessageBox.Show("The package was successfully associated", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
 
@@ -229,7 +234,7 @@ namespace PL.Windows
                     {
                         bl.Deliver(PODrone.Id);
                         PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
-                        this.sender.Filtering();
+                        UpdateModelDrones();
                         MessageBox.Show("The package was delivered to its destination, good day", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     }
@@ -237,12 +242,20 @@ namespace PL.Windows
                     {
                         bl.PickUp(PODrone.Id);
                         PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
-                        this.sender.Filtering();
+                        UpdateModelDrones();
                         MessageBox.Show("The package was successfully collected by the drone", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     }
                     break;
             }
+        }
+        /// <summary>
+        /// Auxiliary function to update the list in Model
+        /// </summary>
+        private void UpdateModelDrones()
+        {
+            if (Model.Drones.Remove(Model.Drones.Where(dr => dr.Id == PODrone.Id).SingleOrDefault()))
+                Model.Drones.Add(bl.GetDrones().Where(dr => dr.Id == PODrone.Id).Single());
         }
     }
 }
