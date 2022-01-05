@@ -54,6 +54,12 @@ namespace BL
                 {
                     throw new TooSmallAmount("There is more drones in charge then new charge slots");
                 }
+
+                if (numOfChargeStation == 0)
+                {
+                    throw new TooSmallAmount("There must be at least one charging station," +
+                        " to delete the station check the options");
+                }
                 dalSt.FreeChargeSlots = numOfChargeStation - blSt.ChargingDrones.Count();
             }
 

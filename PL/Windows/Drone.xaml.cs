@@ -33,7 +33,7 @@ namespace PL.Windows
         /// Consructor for drone display window.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
-        public Drone( DronesView sender)
+        public Drone(DronesView sender)
         {
             InitializeComponent();
 
@@ -54,12 +54,12 @@ namespace PL.Windows
         /// <param name="bl">The variable of access to the logic layer</param>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="droneId">The ID of the drone intended for display</param>
-        public Drone( DronesView sender, PO.Drone drone)
+        public Drone(DronesView sender, PO.Drone drone)
         {
             this.sender = sender;
             this.PODrone = drone;
 
-            InitializeComponent();         
+            InitializeComponent();
 
             MainGrid.RowDefinitions[0].Height = new(50, GridUnitType.Star);
             MainGrid.RowDefinitions[1].Height = new(50, GridUnitType.Star);
@@ -83,8 +83,8 @@ namespace PL.Windows
         private void IntTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             //Checks that entered numbers only
-            if (e.Handled = !(int.TryParse(e.Text, out int d)) && e.Text != "")
-                MessageBox.Show("Please enter only numbers.");
+            if (e.Handled = !(int.TryParse(e.Text, out int d)) && e.Text != "" || d <= 0)
+                MessageBox.Show("Please enter only positive numbers.");
 
         }
 

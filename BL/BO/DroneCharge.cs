@@ -20,6 +20,8 @@ namespace BO
 
 
 
+
+
         public override string ToString()
         {
             return "Details of DroneCharge: " + "\nDrone ID: " + DroneId + "\nDrone's battery status: "
