@@ -125,12 +125,88 @@
             </Grid>
 
 
+            <Label x:Name="labalCustomerLocation" 
+                   FontSize="20"
+                   VerticalContentAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   Content="Customer location:" 
+                   Grid.Row="2" 
+                   Grid.Column="0"                   
+                   Foreground="#FFDDD81E" 
+                   FontFamily="Arial Black"
+                   Margin="20"/>
+
+            <Grid x:Name="AddCustomerGrid" Grid.Row="2" Grid.Column="1"  Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="50*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="70*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="labalLongitude" 
+                   FontSize="14"
+                   VerticalContentAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   Content="Longitude:" 
+                   Grid.Row="0" 
+                   Grid.Column="0"                              
+                   FontFamily="Arial Black"
+                   Margin="2" />
+
+                <TextBox x:Name="cutomerLocationLongitude" 
+                     FontSize="20"
+                     VerticalContentAlignment="Center"
+                     HorizontalContentAlignment="Center"                   
+                     Grid.Row="0" 
+                     Grid.Column="1"
+                     Background="{StaticResource Static.Background}" 
+                     Margin="20,5"
+                     Visibility="Hidden">
+                </TextBox>
+
+                <Label x:Name="labalLocationLattitude" 
+                   FontSize="14"
+                   VerticalContentAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   Content="Lattitude:" 
+                   Grid.Row="1" 
+                   Grid.Column="0"    
+                   FontFamily="Arial Black"
+                   Margin="2"/>
+
+                <TextBox x:Name="customerLocationLattitude" 
+                     FontSize="20"
+                     VerticalContentAlignment="Center"
+                     HorizontalContentAlignment="Center"                   
+                     Grid.Row="1" 
+                     Grid.Column="1"
+                     Background="{StaticResource Static.Background}" 
+                     Margin="20,5"
+                     Visibility="Hidden">
+                </TextBox>
+            </Grid>
+
+            <TextBlock x:Name="CustomerLocationInfo" 
+                       Grid.Row="2"
+                       Grid.Column="1"
+                       FontSize="20"
+                       Text="{Binding Path=CustomerLocation}"
+                       Background="{StaticResource Static.Background}"                  
+                       Margin="20,27"
+                       TextAlignment="Center"
+                       Visibility="Hidden">
+            </TextBlock>
+
+
             <Label x:Name="labalPhone" 
                    FontSize="20"
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
                    Content="Phone:" 
-                   Grid.Row="2" 
+                   Grid.Row="3" 
                    Grid.Column="0"                   
                    Foreground="#FFDDD81E" 
                    FontFamily="Arial Black"
@@ -141,7 +217,7 @@
                      FontSize="20"
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"                   
-                     Grid.Row="2" 
+                     Grid.Row="3" 
                      Grid.Column="1"
                      Background="{StaticResource Static.Background}" 
                      PreviewTextInput="IntTextBox_PreviewTextInput" 
@@ -150,7 +226,7 @@
             </TextBox>
 
 
-            <Grid x:Name="UpdatePhoneGrid" Grid.Row="1" Grid.Column="1" Visibility="Hidden">
+            <Grid x:Name="UpdatePhoneGrid" Grid.Row="3" Grid.Column="1" Visibility="Hidden">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="70*"/>
                     <ColumnDefinition Width="30*"/>
@@ -168,6 +244,7 @@
 
                 <Button x:Name="Updatep"
                         Content="Update" 
+                        Grid.Row="3"
                         Grid.Column="1"
                         Margin="10,27"
                         FontFamily="Arial Black" 
@@ -176,19 +253,9 @@
             </Grid>
 
 
-            <Label x:Name="labalCustomerLocation" 
-                   FontSize="20"
-                   VerticalContentAlignment="Center"
-                   HorizontalContentAlignment="Center"
-                   Content="Customer location:" 
-                   Grid.Row="3" 
-                   Grid.Column="0"                   
-                   Foreground="#FFDDD81E" 
-                   FontFamily="Arial Black"
-                   Margin="20"/>
+          
 
-
-            <TextBox x:Name="customerLocation" 
+            <!--<TextBox x:Name="customerLocation" 
                      FontSize="20"
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"                   
@@ -197,20 +264,8 @@
                      Background="{StaticResource Static.Background}" 
                      Margin="20"
                      Visibility="Hidden">
-            </TextBox>
-
-
-
-            <TextBlock x:Name="CustomerLocationInfo" 
-                       Grid.Row="3"
-                       Grid.Column="1"
-                       FontSize="20"
-                       Text="{Binding Path=CustomerLocation}"
-                       Background="{StaticResource Static.Background}"                  
-                       Margin="20,27"
-                       TextAlignment="Center"
-                       Visibility="Hidden">
-            </TextBlock>
+            </TextBox>-->
+         
           
 
         </Grid>

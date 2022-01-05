@@ -9,7 +9,7 @@
         WindowStyle="SingleBorderWindow" 
         ResizeMode="NoResize"
         DataContext="{Binding RelativeSource={RelativeSource self}}">
-    
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -43,7 +43,7 @@
                 <ColumnDefinition Width="50*"/>
             </Grid.ColumnDefinitions>
 
-           
+
             <Label x:Name="labalSenderCustomerInPackage" 
                    FontSize="20"
                    VerticalContentAlignment="Center"
@@ -79,7 +79,7 @@
                        TextAlignment="Center"
                        Visibility="Hidden"
                        >
-                
+
             </TextBox>
 
 
@@ -141,7 +141,7 @@
                       ItemsSource="{Binding Model.Weight}"
                       Margin="20"
                       Visibility="Hidden"/>
-            
+
 
             <TextBlock x:Name="WeightInfo" 
                        Grid.Row="2"
@@ -174,7 +174,7 @@
                       VerticalContentAlignment="Center" 
                       ItemsSource="{Binding Model.Priorities}"
                       Margin="20"
-                      Visibility="Hidden"/>            
+                      Visibility="Hidden"/>
 
 
             <TextBlock x:Name="PriorityInfo" 
@@ -186,7 +186,7 @@
                        Margin="20"
                        TextAlignment="Center"
                        Visibility="Hidden">
-            </TextBlock>           
+            </TextBlock>
 
         </Grid>
 
@@ -232,8 +232,8 @@
                 <ColumnDefinition Width="50*"/>
                 <ColumnDefinition Width="50*"/>
             </Grid.ColumnDefinitions>
-            
-                      
+
+
 
             <Label x:Name="labalDroneInPackage" 
                    FontSize="20"
@@ -246,8 +246,8 @@
                    FontFamily="Arial Black"
                    Margin="8"/>
 
-           
-            <Button x:Name="DroneInPackageInfo" 
+
+            <TextBox x:Name="DroneInPackageInfo" 
                        Grid.Row="0"
                        Grid.Column="1"
                        FontSize="20"
@@ -255,11 +255,33 @@
                        Template="{StaticResource DroneInPackageTemplate}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="2"
+                       TextAlignment="Center"
                        MouseDoubleClick="DroneInPackageInfo_MouseDoubleClick"
                        >
-            </Button>
-            
-            
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Red" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+
+            <Rectangle Name="rctback" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"  Margin="2"  Stroke="Black" VerticalAlignment="Top"   >
+                <Rectangle.Style>
+                    <Style TargetType="Rectangle">
+                        <Setter Property="Fill" Value="Green"></Setter>
+                      
+                    </Style>
+                </Rectangle.Style>
+            </Rectangle>
+
+
+
+
 
             <Label x:Name="labalRequested" 
                    FontSize="20"
@@ -273,7 +295,7 @@
                    Margin="10"/>
 
 
-          
+
             <TextBlock x:Name="RequestedInfo" 
                        Grid.Row="1"
                        Grid.Column="1"
@@ -285,7 +307,7 @@
                        >
             </TextBlock>
 
-            
+
             <Label x:Name="labalScheduled" 
                    FontSize="20"
                    VerticalContentAlignment="Center"
@@ -298,7 +320,7 @@
                    Margin="10"/>
 
 
-           
+
             <TextBlock x:Name="ScheduledInfo" 
                        Grid.Row="2"
                        Grid.Column="1"
@@ -322,9 +344,9 @@
                    Foreground="#FFDDD81E" 
                    FontFamily="Arial Black"
                    Margin="10"/>
-            
 
-          <TextBlock x:Name="PickedUpInfo" 
+
+            <TextBlock x:Name="PickedUpInfo" 
                        Grid.Row="3"
                        Grid.Column="1"
                        FontSize="20"
@@ -370,7 +392,7 @@
                    FontFamily="Arial Black"
                    Margin="10"/>
 
- 
+
             <TextBlock x:Name="PackageIdInfo" 
                        Grid.Row="5"
                        Grid.Column="1"

@@ -139,19 +139,60 @@
                    Margin="20"/>
 
 
-            <TextBox x:Name="stationLocation" 
+            <Grid x:Name="AddStationGrid" Grid.Row="2" Grid.Column="1"  Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="50*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="70*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="labalLongitude" 
+                   FontSize="14"
+                   VerticalContentAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   Content="Longitude:" 
+                   Grid.Row="0" 
+                   Grid.Column="0" 
+                   FontFamily="Arial Black"
+                   Margin="2"/>
+
+                <TextBox x:Name="stationLocationLongitude" 
                      FontSize="20"
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"                   
-                     Grid.Row="2" 
+                     Grid.Row="0" 
                      Grid.Column="1"
                      Background="{StaticResource Static.Background}" 
-                     Margin="20"
+                     Margin="20,5"
                      Visibility="Hidden">
             </TextBox>
 
+                <Label x:Name="labalLocationLattitude" 
+                   FontSize="14"
+                   VerticalContentAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   Content="Lattitude:" 
+                   Grid.Row="1" 
+                   Grid.Column="0"                      
+                   FontFamily="Arial Black"
+                   Margin="2"/>
 
-            <TextBox x:Name="StationLocationInfo" 
+                <TextBox x:Name="stationLocationLattitude" 
+                     FontSize="20"
+                     VerticalContentAlignment="Center"
+                     HorizontalContentAlignment="Center"                   
+                     Grid.Row="1" 
+                     Grid.Column="1"
+                     Background="{StaticResource Static.Background}" 
+                     Margin="20,5"
+                     Visibility="Hidden">
+                </TextBox>
+            </Grid>
+
+                <TextBox x:Name="StationLocationInfo" 
                        Grid.Row="2"
                        Grid.Column="1"
                        FontSize="20"
@@ -163,7 +204,40 @@
                        Visibility="Hidden">
             </TextBox>
 
+            <!--<Grid x:Name="AddStationGrid" Grid.Row="2" Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="50*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Label x:Name="labalAddStationLocation" 
+                   FontSize="20"
+                   VerticalContentAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   Content="Station location - longitude:" 
+                   Grid.Row="0" 
+                   Grid.Column="0"                   
+                   Foreground="#FFDDD81E" 
+                   FontFamily="Arial Black"
+                   Margin="10"/>
 
+                <TextBox x:Name="addStationLocation" 
+                     FontSize="20"
+                     VerticalContentAlignment="Center"
+                     HorizontalContentAlignment="Center"                   
+                     Grid.Row="2" 
+                     Grid.Column="1"
+                     Background="{StaticResource Static.Background}" 
+                     Margin="10"
+                     Visibility="Hidden">
+                </TextBox>
+
+
+            </Grid>-->
             <Label x:Name="labalFreeChargeSlots" 
                    FontSize="20"
                    VerticalContentAlignment="Center"

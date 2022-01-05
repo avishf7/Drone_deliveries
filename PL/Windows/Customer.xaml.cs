@@ -38,11 +38,13 @@ namespace PL.Windows
 
             MainGrid.ShowGridLines = true;
             AddDownGrid.Visibility = Visibility.Visible;
+            AddCustomerGrid.Visibility = Visibility.Visible;
             customerId.Visibility = Visibility.Visible;
             name.Visibility = Visibility.Visible;
             phone.Visibility = Visibility.Visible;
-            customerLocation.Visibility = Visibility.Visible;
-           
+            customerLocationLattitude.Visibility = Visibility.Visible;
+            cutomerLocationLongitude.Visibility = Visibility.Visible;
+
         }
 
         /// <summary>
@@ -103,7 +105,7 @@ namespace PL.Windows
         {
             try
             {
-                if (customerId.Text != "" && name.Text != "" && phone.Text != "" && customerLocation.Text != "")
+                if (customerId.Text != "" && name.Text != "" && phone.Text != "" && cutomerLocationLongitude.Text != "" && customerLocationLattitude.Text != "")
                 {
                     bl.AddCustomer(new()
                     {
@@ -137,12 +139,12 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void Update_Click(object sender, RoutedEventArgs e)
         {
-            Update.Content = "OK";
-            UpdateName.IsReadOnly = false;
-            UpdateName.Text = "";
+            ((Button)sender).Content = "OK";
+            ((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0)).IsReadOnly = false;
+            ((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0)).Text = "";
 
-            Update.Click -= Update_Click;
-            Update.Click += OK_Click;
+            ((Button)sender).Click -= Update_Click;
+            ((Button)sender).Click += OK_Click;
         }
 
         /// <summary>
@@ -152,17 +154,17 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void OK_Click(object sender, RoutedEventArgs e)
         {
-            if (UpdateName.Text != "" )
+            if (((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0)).Text != "")
             {
                 bl.UpdateCustomer(POCustomer.Id, UpdateName.Text, POCustomer.Phone);
                 //  this.sender.Filtering();
                 MessageBox.Show("Updating the element was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                Update.Content = "Update";
-                UpdateName.IsReadOnly = true;
+                ((Button)sender).Content = "Update";
+                ((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0)).IsReadOnly = true;
 
-                Update.Click -= OK_Click;
-                Update.Click += Update_Click;
+                ((Button)sender).Click -= OK_Click;
+                ((Button)sender).Click += Update_Click;
             }
             else
                 MessageBox.Show("empty field", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
