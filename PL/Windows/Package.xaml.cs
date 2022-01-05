@@ -127,6 +127,25 @@ namespace PL.Windows
         }
 
 
+        /// <summary>
+        /// Sets that by double-clicking a skimmer from the list it will see the data on the skimmer.
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
+        private void DroneInPackageInfo_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (((TextBox)sender).DataContext != null)
+            {
+                BO.Drone BODrone = bl.GetDrone((((TextBox)sender).DataContext as BO.DroneInPackage).Id);
+                PO.Drone PODrone = Model.PODrones.Find(dr => dr.Id == BODrone.Id);
+                if (PODrone == null)
+                    Model.PODrones.Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));
+
+                new Drone(this, PODrone).Show();
+
+            }
+        }
+
 
         ///// <summary>
         ///// Button for sending drone for charging and release from charging according to the status of the drone.

@@ -24,7 +24,7 @@ namespace PL.Windows
     public partial class Drone : Window
     {
         IBL bl = BlFactory.GetBl();
-        DronesView sender;
+        Window sender;
 
         public PO.Drone PODrone { get; set; }
         public Model Model { get; } = PL.Model.Instance;
@@ -33,7 +33,7 @@ namespace PL.Windows
         /// Consructor for drone display window.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
-        public Drone(DronesView sender)
+        public Drone(Window sender)
         {
             InitializeComponent();
 
@@ -54,7 +54,7 @@ namespace PL.Windows
         /// <param name="bl">The variable of access to the logic layer</param>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="droneId">The ID of the drone intended for display</param>
-        public Drone(DronesView sender, PO.Drone drone)
+        public Drone(Window sender, PO.Drone drone)
         {
             this.sender = sender;
             this.PODrone = drone;
@@ -116,7 +116,6 @@ namespace PL.Windows
                         MaxWeight = (Weight)maxWeight.SelectedItem,
                     }, ((StationToList)stations.SelectedItem).Id);
 
-                    this.sender.Filtering();
 
                     MessageBox.Show("Adding the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
@@ -155,7 +154,6 @@ namespace PL.Windows
             if (UpdateModel.Text != "")
             {
                 bl.UpdateDrone(PODrone.Id, UpdateModel.Text);
-                this.sender.Filtering();
                 MessageBox.Show("Updating the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 Update.Content = "Update";
@@ -183,7 +181,6 @@ namespace PL.Windows
                     {
                         bl.SendDroneForCharge(PODrone.Id);
                         PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
-                        this.sender.Filtering();
                         MessageBox.Show("Sent for charging", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     }
@@ -196,7 +193,6 @@ namespace PL.Windows
                 case DroneStatuses.Maintenance:
                     bl.RealeseDroneFromCharge(PODrone.Id);
                     PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
-                    this.sender.Filtering();
                     MessageBox.Show("Released from charging", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
 
@@ -217,7 +213,6 @@ namespace PL.Windows
                     {
                         bl.packageAssigning(PODrone.Id);
                         PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
-                        this.sender.Filtering();
                         MessageBox.Show("The package was successfully associated", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
 
@@ -229,7 +224,6 @@ namespace PL.Windows
                     {
                         bl.Deliver(PODrone.Id);
                         PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
-                        this.sender.Filtering();
                         MessageBox.Show("The package was delivered to its destination, good day", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     }
@@ -237,7 +231,6 @@ namespace PL.Windows
                     {
                         bl.PickUp(PODrone.Id);
                         PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
-                        this.sender.Filtering();
                         MessageBox.Show("The package was successfully collected by the drone", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     }
