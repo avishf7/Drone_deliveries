@@ -80,6 +80,7 @@
                        FontSize="20"
                        DataContext="{Binding Path=POPackage.SenderCustomerInPackage}"
                        Template="{StaticResource CustomerInPackageTemplate}"
+                       IsEnabled="{Binding Converter={StaticResource ObjectToEnable}}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="20"
                        TextAlignment="Center"
@@ -126,6 +127,7 @@
                        FontSize="20" 
                        DataContext="{Binding Path=POPackage.TargetCustomerInPackage}"
                        Template="{StaticResource CustomerInPackageTemplate}"
+                       IsEnabled="{Binding Converter={StaticResource ObjectToEnable}}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="20"
                        TextAlignment="Center"
@@ -250,7 +252,7 @@
                 </Button.ContentTemplate>
             </Button>
 
-            
+
         </Grid>
 
 
@@ -288,6 +290,7 @@
                        FontSize="20"
                        DataContext="{Binding Path=POPackage.DroneInPackage, Mode=OneWay, TargetNullValue='None'}"
                        Template="{StaticResource DroneInPackageTemplate}"
+                       IsEnabled="{Binding Converter={StaticResource ObjectToEnable}}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="2"
                        TextAlignment="Center"
@@ -414,7 +417,7 @@
                        Margin="15"
                        TextAlignment="Center"
                        >
-            </TextBlock>         
+            </TextBlock>
 
 
         </Grid>

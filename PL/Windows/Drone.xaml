@@ -293,6 +293,7 @@
                       Grid.Row="2" Grid.Column="1" 
                       FontSize="20" 
                       Template="{StaticResource PackageInTransferTemplate}"
+                      IsEnabled="{Binding Converter={StaticResource ObjectToEnable}}"
                       Background="{StaticResource Static.Background}"
                      MouseDoubleClick="PackageInProgress_MouseDoubleClick"
                       Margin="20,0"/>

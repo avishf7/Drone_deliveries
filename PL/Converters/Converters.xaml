@@ -7,4 +7,5 @@
     <local:StatusToEnabledCharge x:Key="StatusToEnabledCharge"/>
     <local:StatusToPictureDelivery x:Key="StatusToPictureDelivery"/>
     <local:StatusToEnableDelivery x:Key="StatusToEnableDelivery"/>
+    <local:ObjectToEnable x:Key="ObjectToEnable"/>
 </ResourceDictionary>

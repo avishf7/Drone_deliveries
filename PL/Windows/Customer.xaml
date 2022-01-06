@@ -361,6 +361,7 @@
 
             <ListView x:Name="PackageToCustomerListView"
                           ItemsSource="{Binding PackageAtCustomerToCustomer}" 
+                          IsEnabled="{Binding Converter={StaticResource ObjectToEnable}}"
                           Background="{StaticResource Static.Background}"
                           Grid.Row="1" Grid.Column="1"
                           Margin="20,0"
