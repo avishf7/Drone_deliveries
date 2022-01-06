@@ -8,7 +8,8 @@
         Title="Package" Height="450" Width="600" WindowStartupLocation="CenterScreen"
         WindowStyle="SingleBorderWindow" 
         ResizeMode="NoResize"
-        DataContext="{Binding RelativeSource={RelativeSource self}}">
+        DataContext="{Binding RelativeSource={RelativeSource self}}"
+         Topmost="{Binding Sender.Topmost, RelativeSource={RelativeSource self}}">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -48,24 +49,29 @@
                    FontSize="20"
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
-                   Content="The ID of the sender:" 
+                   Content="Sender customer:" 
                    Grid.Row="0" 
                    Grid.Column="0"                   
                    Foreground="#FFDDD81E" 
                    FontFamily="Arial Black"
                    Margin="20"/>
 
-            <TextBox x:Name="senderCustomerInPackage" 
+            <ComboBox x:Name="senderCustomerInPackage"
+                      ItemsSource="{Binding Model.Customers}"
                      FontSize="20"
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"                   
                      Grid.Row="0" 
                      Grid.Column="1"
-                     Background="{StaticResource Static.Background}" 
-                     PreviewTextInput="IntTextBox_PreviewTextInput" 
+                     Background="{StaticResource Static.Background}"  
                      Margin="20"
                      Visibility="Hidden">
-            </TextBox>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding CustomerId}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ComboBox>
 
 
             <TextBox x:Name="SenderCustomerInPackageInfo" 
@@ -88,7 +94,7 @@
                    FontSize="20"
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
-                   Content="The ID of the target:" 
+                   Content="Target customer:" 
                    Grid.Row="1" 
                    Grid.Column="0"                   
                    Foreground="#FFDDD81E" 
@@ -96,17 +102,22 @@
                    Margin="20"/>
 
 
-            <TextBox x:Name="targetCustomerInPackage" 
+            <ComboBox x:Name="targetCustomerInPackage"
+                      ItemsSource="{Binding Model.Customers}"
                      FontSize="20"
                      VerticalContentAlignment="Center"
                      HorizontalContentAlignment="Center"                   
                      Grid.Row="1" 
                      Grid.Column="1"
                      Background="{StaticResource Static.Background}" 
-                     PreviewTextInput="IntTextBox_PreviewTextInput" 
                      Margin="20"
                      Visibility="Hidden">
-            </TextBox>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding CustomerId}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ComboBox>
 
 
             <TextBox x:Name="TargetCustomerInPackageInfo" 
@@ -283,19 +294,6 @@
                        MouseDoubleClick="DroneInPackageInfo_MouseDoubleClick"
                        >
             </TextBox>
-
-            <Rectangle Name="rctback" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"  Margin="2"  Stroke="Black" VerticalAlignment="Top"   >
-                <Rectangle.Style>
-                    <Style TargetType="Rectangle">
-                        <Setter Property="Fill" Value="Green"></Setter>
-                      
-                    </Style>
-                </Rectangle.Style>
-            </Rectangle>
-
-
-
-
 
             <Label x:Name="labalRequested" 
                    FontSize="20"

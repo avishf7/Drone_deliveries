@@ -13,12 +13,19 @@ namespace BL
     {
         public void AddPackage(Package package)
         {
+
+            int senderId = package.SenderCustomerInPackage.CustomerId;
+            int targetId = package.TargetCustomerInPackage.CustomerId;
+
+            if (senderId == targetId)
+                throw new NotValidTargetException("The destination is the same as the sender");
+
             try
             {
-                dal.AddPackage(new DO.Package
+                    dal.AddPackage(new DO.Package
                 {
-                    SenderId = package.SenderCustomerInPackage.CustomerId,
-                    TargetId = package.TargetCustomerInPackage.CustomerId,
+                    SenderId = senderId,
+                    TargetId = targetId,
                     Weight = (DO.Weight)package.Weight,
                     Priority = (DO.Priorities)package.Priority,
                     DroneId = 0,
@@ -35,7 +42,7 @@ namespace BL
         }
 
         public Package GetPackage(int packageId)
-        {
+        {            
             try
             {
                 var DoPackage = dal.GetPackage(packageId);

@@ -98,7 +98,7 @@ namespace PO
             {
                 packageAtCustomerFromCustomer = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("PackageAtCustomerFromCustomer "));
+                    PropertyChanged(this, new PropertyChangedEventArgs("PackageAtCustomerFromCustomer"));
             }
         }
 
@@ -116,7 +116,7 @@ namespace PO
             {
                 packageAtCustomerToCustomer = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("packageAtCustomerToCustomer "));
+                    PropertyChanged(this, new PropertyChangedEventArgs("PackageAtCustomerToCustomer"));
             }
         }
 

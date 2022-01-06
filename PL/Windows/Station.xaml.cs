@@ -22,8 +22,8 @@ namespace PL.Windows
     public partial class Station : Window
     {
         IBL bl = BlFactory.GetBl();
-        StationsView sender;
 
+        public StationsView Sender { get; set; }
         public PO.Station POStation { get; set; }
         public Model Model { get; } = PL.Model.Instance;
 
@@ -33,8 +33,9 @@ namespace PL.Windows
         /// <param name="sender">The element that activates the function</param>
         public Station(StationsView sender)
         {
+            this.Sender = sender;
             InitializeComponent();
-            this.sender = sender;
+            
 
             MainGrid.ShowGridLines = true;
             AddDownGrid.Visibility = Visibility.Visible;
@@ -55,7 +56,7 @@ namespace PL.Windows
         public Station(StationsView sender, PO.Station POStation)
         {
 
-            this.sender = sender;
+            this.Sender = sender;
             this.POStation = POStation;
 
             InitializeComponent();
@@ -69,11 +70,16 @@ namespace PL.Windows
 
             StationLocationInfo.Visibility = Visibility.Visible;
             UpdateNumOfChargeGrid.Visibility = Visibility.Visible;
-        //    ChargingDronesInfo.Visibility = Visibility.Visible;
-            // freeChargeSlotsInfo.Visibility = Visibility.Visible;
 
             this.Height = 700;
             this.Width = 550;
+
+            this.Sender.Closed += Sender_Closed;
+        }
+
+        private void Sender_Closed(object sender, EventArgs e)
+        {
+            cancel_Click(sender, null);
         }
 
 
@@ -189,12 +195,13 @@ namespace PL.Windows
 
         private void ChargingDronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-                      
-           
-           
-            if (((ListView)sender).DataContext == null && (((ListView)sender).DataContext as BO.DroneCharge) == null)
+
+            ListView listView = (ListView)sender;
+            DroneCharge droneCharge = listView.SelectedItem as BO.DroneCharge;
+
+            if (droneCharge != null && droneCharge != null)
             {              
-                    BO.Drone BODrone = bl.GetDrone((((ListView)sender).DataContext as BO.DroneCharge).DroneId);
+                    BO.Drone BODrone = bl.GetDrone((listView.SelectedItem as DroneCharge).DroneId);
                     PO.Drone PODrone = Model.PODrones.Find(dr => dr.Id == BODrone.Id);
                     if (PODrone == null)
                         Model.PODrones.Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));

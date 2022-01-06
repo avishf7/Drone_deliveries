@@ -22,8 +22,8 @@ namespace PL.Windows
     public partial class Customer : Window
     {
         IBL bl = BlFactory.GetBl();
-        Window sender;
 
+        public Window Sender { get; set; }
         public PO.Customer POCustomer { get; set; }
         public Model Model { get; } = PL.Model.Instance;
 
@@ -33,8 +33,9 @@ namespace PL.Windows
         /// <param name="sender">The element that activates the function</param>
         public Customer(Window sender)
         {
+            this.Sender = sender;
             InitializeComponent();
-            this.sender = sender;
+            
 
             MainGrid.ShowGridLines = true;
             AddDownGrid.Visibility = Visibility.Visible;
@@ -51,7 +52,7 @@ namespace PL.Windows
         /// <param name="sender">The element that activates the function</param>
         public Customer(Window sender, PO.Customer customer)
         {
-            this.sender = sender;
+            this.Sender = sender;
             this.POCustomer = customer;
 
             InitializeComponent();
@@ -69,6 +70,13 @@ namespace PL.Windows
 
             this.Height = 700;
             this.Width = 550;
+
+            this.Sender.Closed += Sender_Closed;
+        }
+
+        private void Sender_Closed(object sender, EventArgs e)
+        {
+            cancel_Click(sender, null);
         }
 
         /// <summary>
@@ -141,9 +149,11 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void Update_Click(object sender, RoutedEventArgs e)
         {
+            var updateElement = ((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0));
+
             ((Button)sender).Content = "OK";
-            ((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0)).IsReadOnly = false;
-            ((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0)).Text = "";
+            updateElement.IsReadOnly = false;
+            updateElement.Text = "";
 
             ((Button)sender).Click -= Update_Click;
             ((Button)sender).Click += OK_Click;
@@ -156,14 +166,24 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void OK_Click(object sender, RoutedEventArgs e)
         {
-            if (((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0)).Text != "")
+           var updateElement = ((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0));
+ 
+            if (updateElement.Text != "")
             {
-                bl.UpdateCustomer(POCustomer.Id, UpdateName.Text, POCustomer.Phone);
+                bl.UpdateCustomer(POCustomer.Id, UpdateName.Text, UpdatePhone.Text);
+
                 Model.UpdateCustomers();
+                foreach (var pck in POCustomer.PackageAtCustomerFromCustomer)
+                    Model.UpdatePOPackage(pck.PackageId);
+                foreach (var pck in POCustomer.PackageAtCustomerToCustomer)
+                    Model.UpdatePOPackage(pck.PackageId);
+
+                Model.UpdatePackages();
+
                 MessageBox.Show("Updating the element was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 ((Button)sender).Content = "Update";
-                ((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0)).IsReadOnly = true;
+                updateElement.IsReadOnly = true;
 
                 ((Button)sender).Click -= OK_Click;
                 ((Button)sender).Click += Update_Click;
@@ -175,11 +195,12 @@ namespace PL.Windows
 
         private void PackageAtCustomerListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (((ListView)sender).DataContext != null)
+            ListView listView = (ListView)sender;
+            if (listView.SelectedItem != null)
             {
-                BO.Package BOPackage = bl.GetPackage((((ListView)sender).DataContext as BO.PackageAtCustomer).PackageId);
+                BO.Package BOPackage = bl.GetPackage((listView.SelectedItem as PackageAtCustomer).PackageId);
                 PO.Package POPackage = Model.POPackages.Find(pck => pck.Id == BOPackage.Id);
-                if (POCustomer == null)
+                if (POPackage == null)
                     Model.POPackages.Add(POPackage = new PO.Package().CopyFromBOPackage(BOPackage));
 
                 new Package(this, POPackage).Show();

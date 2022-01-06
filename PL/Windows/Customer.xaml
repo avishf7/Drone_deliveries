@@ -8,7 +8,8 @@
         Title="Customer" Height="450" Width="800" WindowStartupLocation="CenterScreen"
         WindowStyle="SingleBorderWindow" 
         ResizeMode="NoResize"
-        DataContext="{Binding POCustomer, RelativeSource={RelativeSource self}}">
+        DataContext="{Binding POCustomer, RelativeSource={RelativeSource self}}"
+         Topmost="{Binding Sender.Topmost, RelativeSource={RelativeSource self}}">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -322,8 +323,9 @@
                    Margin="20"/>
 
             <ListView x:Name="PackageFromCustomerListView"
-                          ItemsSource="{Binding PackageAtCustomer}" 
-                          Grid.Row="0" Grid.Column="1" Opacity="0.5" 
+                          ItemsSource="{Binding PackageAtCustomerFromCustomer}" 
+                          Grid.Row="0" Grid.Column="1" 
+                          Background="{StaticResource Static.Background}"
                           Margin="20,27"
                           MouseDoubleClick="PackageAtCustomerListView_MouseDoubleClick" />
 
@@ -351,8 +353,9 @@
                    Margin="20"/>
 
             <ListView x:Name="PackageToCustomerListView"
-                          ItemsSource="{Binding PackageAtCustomer}" 
-                          Grid.Row="1" Grid.Column="1" Opacity="0.5" 
+                          ItemsSource="{Binding PackageAtCustomerToCustomer}" 
+                          Background="{StaticResource Static.Background}"
+                          Grid.Row="1" Grid.Column="1"
                           Margin="20,27"
                           MouseDoubleClick="PackageAtCustomerListView_MouseDoubleClick" />
 
@@ -386,31 +389,6 @@
                     <RowDefinition Height="50*"/>
                     <RowDefinition Height="50*"/>
                 </Grid.RowDefinitions>
-
-                <!--<Button x:Name="Charge" 
-                        Grid.Column="1"
-                        Grid.Row="0"
-                        Margin="15,5" 
-                        FontFamily="Arial Black"
-                        IsEnabled="{Binding Path=DroneStatus, Mode=OneWay, Converter={StaticResource StatusToEnabledCharge}}" Click="Charge_Click">
-                    <Image Source="{Binding Path=DroneStatus, Mode=OneWay, Converter={StaticResource StatusToPictureCharge}}"/>
-                </Button>
-
-                <Button x:Name="Delivery"                         
-                        Grid.Column="1"
-                        Grid.Row="1"
-                        Margin="15,5" 
-                        FontFamily="Arial Black"
-                        IsEnabled="{Binding Path=DroneStatus, Mode=OneWay,Converter={StaticResource StatusToEnableDelivery}}" Click="Delivery_Click">
-                    <Image>
-                        <Image.Source>
-                            <MultiBinding Converter="{StaticResource StatusToPictureDelivery}" Mode="OneWay">
-                                <Binding Path="DroneStatus"/>
-                                <Binding Path="PackageInProgress"/>
-                            </MultiBinding>
-                        </Image.Source>
-                    </Image>
-                </Button>-->
             </Grid>
         </Grid>
     </Grid>

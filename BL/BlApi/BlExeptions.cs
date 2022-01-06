@@ -148,6 +148,18 @@ namespace BlApi
         { return "The package registered with the drone has not yet been collected: " + "\n" + Message; }
     }
 
+    [Serializable]
+    public class NotValidTargetException : Exception
+    {
+        public NotValidTargetException() { }
+        public NotValidTargetException(string message) : base(message) { }
+        public NotValidTargetException(string message, Exception innerException) : base(message, innerException) { }
+        protected NotValidTargetException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+
+        override public string ToString()
+        { return "The target is not valid: " + "\n" + Message; }
+    }
+
 }
 
 

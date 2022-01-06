@@ -192,7 +192,7 @@ namespace PL
             Packages = bl.GetPackages(pck => (PackageStatusFilter != null ? pck.PackageStatus == PackageStatusFilter : true));
 
             GroupingPackages = from package in bl.GetPackages()
-                               group package by package.SenderName;
+                               group package by package.SenderName;          
 
         }
 
@@ -202,6 +202,28 @@ namespace PL
         public void UpdateCustomers()
         {
             Customers = bl.GetCustomers();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        public void UpdatePOPackage(int id)
+        {
+            var poPackage = POPackages.Where(pck => pck.Id == id).SingleOrDefault();
+            poPackage?.CopyFromBOPackage(bl.GetPackage(id));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        public void UpdatePOStation(Location location)
+        {
+            var poStation = POStations.Where(st => st.LocationOfStation == location).SingleOrDefault();
+            poStation?.CopyFromBOStation(bl.GetStation(poStation.Id));
+
+         
         }
     }
 }

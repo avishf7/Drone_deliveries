@@ -24,8 +24,8 @@ namespace PL.Windows
     public partial class Drone : Window
     {
         IBL bl = BlFactory.GetBl();
-        Window sender;
 
+        public Window Sender { get; set; }
         public PO.Drone PODrone { get; set; }
         public Model Model { get; } = PL.Model.Instance;
 
@@ -35,9 +35,10 @@ namespace PL.Windows
         /// <param name="sender">The element that activates the function</param>
         public Drone(Window sender)
         {
+            this.Sender = sender;
             InitializeComponent();
 
-            this.sender = sender;
+            
 
 
             MainGrid.ShowGridLines = true;
@@ -56,7 +57,7 @@ namespace PL.Windows
         /// <param name="droneId">The ID of the drone intended for display</param>
         public Drone(Window sender, PO.Drone drone)
         {
-            this.sender = sender;
+            this.Sender = sender;
             this.PODrone = drone;
 
             InitializeComponent();
@@ -73,6 +74,13 @@ namespace PL.Windows
 
             this.Height = 700;
             this.Width = 550;
+
+            this.Sender.Closed += Sender_Closed;
+        }
+
+        private void Sender_Closed(object sender, EventArgs e)
+        {
+            cancel_Click(sender, null);
         }
 
         /// <summary>
@@ -189,6 +197,8 @@ namespace PL.Windows
                         bl.SendDroneForCharge(PODrone.Id);
                         PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
                         Model.UpdateDrones();
+                        Model.UpdateStations();
+                        Model.UpdatePOStation(PODrone.LocationOfDrone);
                         MessageBox.Show("Sent for charging", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     }
@@ -202,12 +212,18 @@ namespace PL.Windows
                     bl.RealeseDroneFromCharge(PODrone.Id);
                     PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
                     Model.UpdateDrones();
+                    Model.UpdateStations();
+                    Model.UpdatePOStation(PODrone.LocationOfDrone);
+                   
                     MessageBox.Show("Released from charging", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
 
                     break;
             }
         }
+
+        
+
         /// <summary>
         /// A button that handles the delivery of the package according to the status of the drone.
         /// </summary>
@@ -223,6 +239,9 @@ namespace PL.Windows
                         bl.packageAssigning(PODrone.Id);
                         PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
                         Model.UpdateDrones();
+                        Model.UpdatePackages();
+                        Model.UpdatePOPackage(PODrone.PackageInProgress.Id);
+                        Model.UpdateCustomers();
                         MessageBox.Show("The package was successfully associated", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
 
@@ -232,9 +251,13 @@ namespace PL.Windows
                 case DroneStatuses.Sendering:
                     if (PODrone.PackageInProgress.IsCollected)
                     {
+                        int providedPckageId = PODrone.PackageInProgress.Id;
                         bl.Deliver(PODrone.Id);
                         PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
                         Model.UpdateDrones();
+                        Model.UpdatePackages();
+                        Model.UpdatePOPackage(providedPckageId);
+                        Model.UpdateCustomers();
                         MessageBox.Show("The package was delivered to its destination, good day", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     }
@@ -243,6 +266,9 @@ namespace PL.Windows
                         bl.PickUp(PODrone.Id);
                         PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
                         Model.UpdateDrones();
+                        Model.UpdatePackages();
+                        Model.UpdatePOPackage(PODrone.PackageInProgress.Id);
+                        Model.UpdateCustomers();
                         MessageBox.Show("The package was successfully collected by the drone", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     }
@@ -250,13 +276,17 @@ namespace PL.Windows
             }
         }
 
+        
+
         private void PackageInProgress_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (((TextBox)sender).DataContext != null)
+            TextBox textBox = (TextBox)sender;
+
+            if (textBox.DataContext != null)
             {
-                if ((((TextBox)sender).DataContext as BO.Package) != null)
+                if ((textBox.DataContext as BO.Package) != null)
                 {
-                    BO.Package BOPackage = bl.GetPackage((((TextBox)sender).DataContext as BO.Package).Id);
+                    BO.Package BOPackage = bl.GetPackage((textBox.DataContext as BO.Package).Id);
                     PO.Package POPackage = Model.POPackages.Find(pck => pck.Id == BOPackage.Id);
                     if (PODrone == null)
                         Model.POPackages.Add(POPackage = new PO.Package().CopyFromBOPackage(BOPackage));
