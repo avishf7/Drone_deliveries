@@ -9,7 +9,7 @@ namespace BO
     public class PackageAtCustomer
     {
         /// <summary>
-        /// Gets customer id
+        /// Gets package id
         /// </summary>
         public int PackageId { get; set; }
 

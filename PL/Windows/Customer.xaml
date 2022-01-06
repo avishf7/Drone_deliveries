@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Windows"
+        xmlns:BO="clr-namespace:BO;assembly=BL"        
         mc:Ignorable="d"
         Title="Customer" Height="450" Width="800" WindowStartupLocation="CenterScreen"
         WindowStyle="SingleBorderWindow" 
@@ -188,16 +189,17 @@
                 </TextBox>
             </Grid>
 
-            <TextBlock x:Name="CustomerLocationInfo" 
+            <TextBox x:Name="CustomerLocationInfo" 
                        Grid.Row="2"
                        Grid.Column="1"
                        FontSize="20"
-                       Text="{Binding Path=CustomerLocation}"
+                       DataContext="{Binding Path=CustomerLocation}"
+                       Template="{StaticResource LocationTemplate}"
                        Background="{StaticResource Static.Background}"                  
-                       Margin="20,27"
+                       Margin="20,10"
                        TextAlignment="Center"
                        Visibility="Hidden">
-            </TextBlock>
+            </TextBox>
 
 
             <Label x:Name="labalPhone" 
@@ -251,22 +253,6 @@
                         />
             </Grid>
 
-
-
-
-            <!--<TextBox x:Name="customerLocation" 
-                     FontSize="20"
-                     VerticalContentAlignment="Center"
-                     HorizontalContentAlignment="Center"                   
-                     Grid.Row="3" 
-                     Grid.Column="1"
-                     Background="{StaticResource Static.Background}" 
-                     Margin="20"
-                     Visibility="Hidden">
-            </TextBox>-->
-
-
-
         </Grid>
 
 
@@ -315,7 +301,7 @@
                    FontSize="20"
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
-                   Content="Packages sent from customer:" 
+                   Content="Sent from customer:" 
                    Grid.Row="0" 
                    Grid.Column="0"                   
                    Foreground="#FFDDD81E" 
@@ -324,28 +310,49 @@
 
             <ListView x:Name="PackageFromCustomerListView"
                           ItemsSource="{Binding PackageAtCustomerFromCustomer}" 
-                          Grid.Row="0" Grid.Column="1" 
+                          Grid.Row="0" Grid.Column="1"                           
                           Background="{StaticResource Static.Background}"
-                          Margin="20,27"
-                          MouseDoubleClick="PackageAtCustomerListView_MouseDoubleClick" />
+                          Margin="20,10"
+                          MouseDoubleClick="PackageAtCustomerListView_MouseDoubleClick">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="BO:PackageAtCustomer ">
+                        <ScrollBar  x:Name="fff">
+                            <Grid Background="{StaticResource Static.Background}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20*" />
+                                    <RowDefinition Height="20*" />
+                                    <RowDefinition Height="20*" />
+                                    <RowDefinition Height="20*" />
+                                    <RowDefinition Height="20*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50*" />
+                                    <ColumnDefinition Width="50*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Package ID: " />
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=PackageId, Mode=OneWay, FallbackValue='None'}" HorizontalAlignment="Center" />
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Weight: " />
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=Weight, Mode=OneWay, FallbackValue='None'}" HorizontalAlignment="Center" />
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Priority: " />
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=Priority, Mode=OneWay, FallbackValue='None'}" HorizontalAlignment="Center" />
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="Status: " />
+                                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=Status ,Mode=OneWay, FallbackValue='None'}"  HorizontalAlignment="Center"/>
+                                <TextBlock Grid.Row="4" Grid.Column="0" Text="Target customer: " HorizontalAlignment="Stretch" />
+                                <TextBox Grid.Row="4" Grid.Column="1" Template="{DynamicResource CustomerInPackageTemplate}" DataContext="{Binding Path=OtherSideCustomer ,Mode=OneWay}" HorizontalAlignment="Center" />
 
-
-            <!--<TextBlock x:Name="PackageAtCustomerFromCustomerInfo" 
-                       Grid.Row="0"
-                       Grid.Column="1"
-                       FontSize="20"
-                       Text="{Binding Path=PackageAtCustomerFromCustomer}"
-                       Background="{StaticResource Static.Background}"                  
-                       Margin="20,27"
-                       TextAlignment="Center">
-            </TextBlock>-->
+                            </Grid>
+                        </ScrollBar>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ListView>
+            
 
 
             <Label x:Name="labalPackageAtCustomerToCustomer" 
                    FontSize="20"
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
-                   Content="Packages sent to customer:" 
+                   Content="Sent to customer:" 
                    Grid.Row="1" 
                    Grid.Column="0"                   
                    Foreground="#FFDDD81E" 
@@ -356,20 +363,40 @@
                           ItemsSource="{Binding PackageAtCustomerToCustomer}" 
                           Background="{StaticResource Static.Background}"
                           Grid.Row="1" Grid.Column="1"
-                          Margin="20,27"
-                          MouseDoubleClick="PackageAtCustomerListView_MouseDoubleClick" />
+                          Margin="20,10"
+                          MouseDoubleClick="PackageAtCustomerListView_MouseDoubleClick" >
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="BO:PackageAtCustomer ">
+                        <Grid Background="{StaticResource Static.Background}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20*" />
+                                <RowDefinition Height="20*" />
+                                <RowDefinition Height="20*" />
+                                <RowDefinition Height="20*" />
+                                <RowDefinition Height="20*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50*" />
+                                <ColumnDefinition Width="50*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Package ID: " />
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=PackageId, Mode=OneWay, FallbackValue='None'}" HorizontalAlignment="Center" />
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Weight: " />
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=Weight, Mode=OneWay, FallbackValue='None'}" HorizontalAlignment="Center" />
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Priority: " />
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=Priority, Mode=OneWay, FallbackValue='None'}" HorizontalAlignment="Center" />
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Status: " />
+                            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=Status ,Mode=OneWay, FallbackValue='None'}"  HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Sender customer: " HorizontalAlignment="Stretch" />
+                            <TextBox Grid.Row="4" Grid.Column="1" Template="{DynamicResource CustomerInPackageTemplate}" DataContext="{Binding Path=OtherSideCustomer ,Mode=OneWay}" HorizontalAlignment="Center" />
+
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ListView>
 
 
-            <!--<TextBlock x:Name="PackageAtCustomerToCustomerInfo" 
-                       Grid.Row="1"
-                       Grid.Column="1"
-                       FontSize="20"
-                       Text="{Binding Path=PackageAtCustomerToCustomer}"
-                       Background="{StaticResource Static.Background}"                  
-                       Margin="20,27"
-                       TextAlignment="Center">
-            </TextBlock>-->
-
+         
             <Button x:Name="Exit"                         
                         Grid.Column="0"
                         Grid.Row="2"
