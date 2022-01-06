@@ -189,18 +189,26 @@ namespace PL.Windows
 
         private void ChargingDronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (((TextBox)sender).DataContext != null)
-            {
-                if ((((TextBox)sender).DataContext as BO.DroneCharge) != null)
-                {
-                    BO.Drone BODrone = bl.GetDrone((((TextBox)sender).DataContext as BO.DroneCharge).DroneId);
+                      
+           
+           
+            if (((ListView)sender).DataContext == null && (((ListView)sender).DataContext as BO.DroneCharge) == null)
+            {              
+                    BO.Drone BODrone = bl.GetDrone((((ListView)sender).DataContext as BO.DroneCharge).DroneId);
                     PO.Drone PODrone = Model.PODrones.Find(dr => dr.Id == BODrone.Id);
                     if (PODrone == null)
                         Model.PODrones.Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));
 
-                    new Drone(this, PODrone).Show();
-                }
+                    new Drone(this, PODrone).Show();                                
             }
+            else
+            {
+                MessageBox.Show("No element to see ", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+
+
+        }
 
         }
 
@@ -282,4 +290,4 @@ namespace PL.Windows
         //    }
         //}
     }
-}
+

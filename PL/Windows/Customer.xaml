@@ -322,7 +322,7 @@
                    Margin="20"/>
 
             <ListView x:Name="PackageFromCustomerListView"
-                          ItemsSource="{Binding Model.PackageAtCustomerFromCustomer}" 
+                          ItemsSource="{Binding PackageAtCustomerFromCustomer}" 
                           Grid.Row="0" Grid.Column="1" Opacity="0.5" 
                           Margin="20,27"
                           MouseDoubleClick="PackageAtCustomerListView_MouseDoubleClick" />
@@ -351,7 +351,7 @@
                    Margin="20"/>
 
             <ListView x:Name="PackageToCustomerListView"
-                          ItemsSource="{Binding Model.PackageAtCustomerToCustomer}" 
+                          ItemsSource="{Binding PackageAtCustomerToCustomer}" 
                           Grid.Row="1" Grid.Column="1" Opacity="0.5" 
                           Margin="20,27"
                           MouseDoubleClick="PackageAtCustomerListView_MouseDoubleClick" />

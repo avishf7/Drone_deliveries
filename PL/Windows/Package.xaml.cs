@@ -149,7 +149,7 @@ namespace PL.Windows
                     new Drone(this, PODrone).Show();
                 }
                 else
-                    MessageBox.Show("There are unfilled fields", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("No element exists", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             
         }
@@ -166,6 +166,8 @@ namespace PL.Windows
 
                 new Customer(this, POCustomer).Show();
             }
+            else
+                MessageBox.Show("No element exists", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void AddPackage_Click(object sender, RoutedEventArgs e)

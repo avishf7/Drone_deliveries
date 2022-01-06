@@ -175,9 +175,9 @@ namespace PL.Windows
 
         private void PackageAtCustomerListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (((TextBox)sender).DataContext != null)
+            if (((ListView)sender).DataContext != null)
             {
-                BO.Package BOPackage = bl.GetPackage((((TextBox)sender).DataContext as BO.PackageAtCustomer).PackageId);
+                BO.Package BOPackage = bl.GetPackage((((ListView)sender).DataContext as BO.PackageAtCustomer).PackageId);
                 PO.Package POPackage = Model.POPackages.Find(pck => pck.Id == BOPackage.Id);
                 if (POCustomer == null)
                     Model.POPackages.Add(POPackage = new PO.Package().CopyFromBOPackage(BOPackage));
