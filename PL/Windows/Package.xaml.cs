@@ -63,7 +63,7 @@ namespace PL.Windows
             TargetCustomerInPackageInfo.Visibility = Visibility.Visible;
             WeightInfo.Visibility = Visibility.Visible;
             PriorityInfo.Visibility = Visibility.Visible;
-            Exit.Visibility = Visibility.Visible;
+            DeleteGrid.Visibility = Visibility.Visible;
 
             this.Height = 550;
             this.Width = 1300;
@@ -134,7 +134,7 @@ namespace PL.Windows
 
                     Model.UpdateCustomers();
 
-                    MessageBox.Show("Adding the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Adding the package was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
                 }
                 else
@@ -189,11 +189,31 @@ namespace PL.Windows
                 MessageBox.Show("No element exists", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
-        private void AddPackage_Click(object sender, RoutedEventArgs e)
+        private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            new Package(this).ShowDialog();
+            try
+            {
+
+                bl.DeletePackage(POPackage.Id);
+
+
+                int senderId = POPackage.SenderCustomerInPackage.CustomerId;
+                int targetId = POPackage.TargetCustomerInPackage.CustomerId;
+                Model.UpdatePackages();
+
+
+
+                Model.POCustomers.Find(cus => cus.Id == senderId)?.CopyFromBOCustomer(bl.GetCustomer(senderId));
+                Model.POCustomers.Find(cus => cus.Id == targetId)?.CopyFromBOCustomer(bl.GetCustomer(targetId));
+
+                Model.UpdateCustomers();
+
+            }
+            catch (NoNumberFoundException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
+            catch (PakcageConnectToDroneException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
 
+   
 
         ///// <summary>
         ///// Button for sending drone for charging and release from charging according to the status of the drone.

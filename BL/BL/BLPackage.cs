@@ -95,16 +95,17 @@ namespace BL
 
         public void DeletePackage(int id)
         {
-            try
-            {
-                dal.DeletePackage(id);
-            }
-            catch (Exception)
-            {
+            DO.Package DoPackage = dal.GetPackage(id);
 
-                throw new NotImplementedException();
-            }
+                try { DoPackage = dal.GetPackage(id); } catch (DalApi.NoNumberFoundException) { throw new BlApi.NoNumberFoundException(); }
+            if (DoPackage.Scheduled != null)
+                throw new PakcageConnectToDroneException();
+                
 
+                    dal.DeletePackage(id);
+                
+                
+            }
         }
     }
-}
+

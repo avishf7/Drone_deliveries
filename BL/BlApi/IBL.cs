@@ -158,7 +158,9 @@ namespace BlApi
         /// Delete a package from the list
         /// </summary>
         /// <param name="id">The id of the package</param>
-      public void DeletePackage(int id);
+        ///  <exception cref="NoNumberFoundException"></exception>
+        ///   <exception cref="PakcageConnectToDroneException"></exception>
+        public void DeletePackage(int id);
 
 
 

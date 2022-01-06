@@ -242,14 +242,13 @@
             </Grid.ColumnDefinitions>
 
 
-            <Button x:Name="AddPackage" Grid.Row="1" Grid.Column="1" Margin="10,20" Padding="5" FontFamily="Arial Black" Click="AddPackage_Click" >
-                <Button.ContentTemplate>
-                    <DataTemplate>
-                        <Viewbox>
-                            <TextBlock>Add Package</TextBlock>
-                        </Viewbox>
-                    </DataTemplate>
-                </Button.ContentTemplate>
+            <Button x:Name="ExitInfo"                         
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Margin="5,10" 
+                        FontFamily="Arial Black"
+                        Click="cancel_Click">
+                <Image Source="https://cdn-icons-png.flaticon.com/512/1828/1828479.png" Margin="10"/>            
             </Button>
 
 
@@ -422,7 +421,7 @@
 
         </Grid>
 
-        <Grid x:Name="AddDownInfoGrid2" Grid.Row="1" Grid.Column="1" Visibility="Hidden">
+        <Grid x:Name="DeleteGrid" Grid.Row="1" Grid.Column="1" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40*"/>
                 <ColumnDefinition Width="20*"/>
@@ -430,14 +429,15 @@
             </Grid.ColumnDefinitions>
 
 
-            <Button x:Name="cancelAddInfo" 
-                    Content="Cancel"
-                    FontSize="18"
-                    Grid.Column="1"
-                    Grid.Row="1"
-                    Margin="10,20" 
-                    FontFamily="Arial Black"
-                    Click="cancel_Click"/>
+            <Button x:Name="Delete"                         
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Content="Delete"
+                        Margin="5,10" 
+                        FontFamily="Arial Black"
+                        Click="Delete_Click">               
+            </Button>
+
 
         </Grid>
 
