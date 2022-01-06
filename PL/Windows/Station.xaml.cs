@@ -122,7 +122,6 @@ namespace PL.Windows
                             Longitude = int.Parse(stationLocationLongitude.Text)
                         },
                         FreeChargeSlots = int.Parse(freeChargeSlots.Text),
-                        ChargingDrones = new List<DroneCharge>()
                     });
 
                     Model.UpdateStations();

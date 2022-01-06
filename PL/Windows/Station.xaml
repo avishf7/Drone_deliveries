@@ -312,15 +312,12 @@
                    Margin="20"/>
 
 
-            <ListBox ItemsSource="{Binding Path=ChargingDrones}" x:Name="listbox" Grid.Row="0" Grid.Column="1"  FontSize="15" Width="780" Margin="15,103,15,224" >
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Path=Model.ChagingDrone}" Foreground="Yellow">
-                            </TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
+            <ListBox ItemsSource="{Binding Path=ChargingDrones}"
+                     x:Name="listbox" 
+                     Grid.Row="0" Grid.Column="1" 
+                     FontSize="15" Width="780" 
+                     Margin="15,103,15,224" >               
+                 
             </ListBox>
 
 
@@ -336,7 +333,7 @@
             </TextBlock>-->
 
             <ListView x:Name="ChargingDronesListView"
-                          ItemsSource="{Binding Model.ChargingDrones}" 
+                          ItemsSource="{Binding  ChargingDrones}" 
                           Grid.Row="0" Grid.Column="1" Opacity="0.5" 
                                              Margin="20,27"
                                              FontSize="20"

@@ -249,5 +249,10 @@ namespace PL.Windows
                     break;
             }
         }
+
+        private void PackageInProgress_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

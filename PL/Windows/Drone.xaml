@@ -293,6 +293,7 @@
                       FontSize="20" 
                       Template="{StaticResource PackageInTransferTemplate}"
                       Background="{StaticResource Static.Background}"
+                     MouseDoubleClick="PackageInProgress_MouseDoubleClick"
                       Margin="20,0"/>
 
             <Button x:Name="Exit"                         

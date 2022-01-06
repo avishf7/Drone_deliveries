@@ -50,6 +50,15 @@
                 <TextBlock Grid.Row="3" Grid.Column="0"  Text="Priority: " />
                 <TextBlock Grid.Row="3" Grid.Column="1"  Text="{Binding Path=Priority ,Mode=OneWay, FallbackValue='None'}" HorizontalAlignment="Center" />
             </Grid>
+            <ScrollViewer.Style>
+                <Style TargetType="ScrollViewer">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Red" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ScrollViewer.Style>
         </ScrollViewer>
     </ControlTemplate>
 
@@ -104,6 +113,15 @@
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Id: "  HorizontalAlignment="Left"/>
                 <TextBlock Grid.Row="1" Grid.Column="1"  Text="{Binding Path=CustomerId ,Mode=OneWay}" HorizontalAlignment="Center" />
             </Grid>
+            <ScrollViewer.Style>
+                <Style TargetType="ScrollViewer">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Red" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ScrollViewer.Style>
         </ScrollViewer>
     </ControlTemplate>
 
