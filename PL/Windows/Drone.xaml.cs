@@ -72,8 +72,8 @@ namespace PL.Windows
             MaxWeightInfo.Visibility = Visibility.Visible;
             DroneLocationInfo.Visibility = Visibility.Visible;
 
-            this.Height = 700;
-            this.Width = 550;
+            this.Height = 800;
+            this.Width = 600;
 
             this.Sender.Closed += Sender_Closed;
         }

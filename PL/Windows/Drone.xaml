@@ -227,9 +227,9 @@
 
         <Grid x:Name="DroneInfoDownGrid" Grid.Row="1" Visibility="Hidden">
             <Grid.RowDefinitions>
-                <RowDefinition Height="21*"/>
-                <RowDefinition Height="21*"/>
-                <RowDefinition Height="21*"/>
+                <RowDefinition Height="17*"/>
+                <RowDefinition Height="17*"/>
+                <RowDefinition Height="29*"/>
                 <RowDefinition Height="37*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -296,7 +296,7 @@
                       IsEnabled="{Binding Converter={StaticResource ObjectToEnable}}"
                       Background="{StaticResource Static.Background}"
                      MouseDoubleClick="PackageInProgress_MouseDoubleClick"
-                      Margin="20,0"/>
+                      Margin="15,0"/>
 
             <Button x:Name="Exit"                         
                         Grid.Column="0"

@@ -257,12 +257,12 @@
 
         <Grid x:Name="PackageInfoDownGrid" Grid.Row="0" Grid.Column="1" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="25*"/>
-                <RowDefinition Height="13*"/>
-                <RowDefinition Height="13*"/>
-                <RowDefinition Height="13*"/>
-                <RowDefinition Height="13*"/>
-                <RowDefinition Height="13*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="12*"/>
+                <RowDefinition Height="12*"/>
+                <RowDefinition Height="12*"/>
+                <RowDefinition Height="12*"/>
+                <RowDefinition Height="12*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50*"/>
@@ -291,7 +291,7 @@
                        Template="{StaticResource DroneInPackageTemplate}"
                        IsEnabled="{Binding Converter={StaticResource ObjectToEnable}}"
                        Background="{StaticResource Static.Background}"                  
-                       Margin="2"
+                       Margin="0"
                        TextAlignment="Center"
                        MouseDoubleClick="DroneInPackageInfo_MouseDoubleClick"
                        >
