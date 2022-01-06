@@ -37,6 +37,20 @@ namespace BlApi
     }
 
     [Serializable]
+    public class PakcageConnectToDroneException : Exception
+    {
+
+        public PakcageConnectToDroneException() : base() { }
+        public PakcageConnectToDroneException(string message) : base(message) { }
+        public PakcageConnectToDroneException(string message, Exception inner) : base(message, inner) { }
+        protected PakcageConnectToDroneException(SerializationInfo info, StreamingContext context)
+     : base(info, context) { }
+
+        override public string ToString()
+        { return "Can not be deleted: " + "\n" + Message; }
+    }
+
+    [Serializable]
     public class DroneNotAvailableException : Exception
     {
         public DroneNotAvailableException() : base() { }
