@@ -175,7 +175,7 @@ namespace BlApi
         /// <exception cref="NoSuitablePackageForScheduledException"></exception>
         /// <exception cref="NoNumberFoundException"></exception>
         /// <exception cref="DroneNotAvailableException"></exception>
-        public void packageAssigning(int droneId);
+        public void PackageAssigning(int droneId);
 
         /// <summary>
         /// A function that implements the state of a collected package by a drone

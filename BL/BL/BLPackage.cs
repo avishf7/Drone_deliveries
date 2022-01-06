@@ -22,7 +22,7 @@ namespace BL
 
             try
             {
-                    dal.AddPackage(new DO.Package
+                dal.AddPackage(new DO.Package
                 {
                     SenderId = senderId,
                     TargetId = targetId,
@@ -42,7 +42,7 @@ namespace BL
         }
 
         public Package GetPackage(int packageId)
-        {            
+        {
             try
             {
                 var DoPackage = dal.GetPackage(packageId);
@@ -95,17 +95,14 @@ namespace BL
 
         public void DeletePackage(int id)
         {
-            DO.Package DoPackage = dal.GetPackage(id);
+            DO.Package DoPackage;
 
-                try { DoPackage = dal.GetPackage(id); } catch (DalApi.NoNumberFoundException) { throw new BlApi.NoNumberFoundException(); }
+            try { DoPackage = dal.GetPackage(id); } catch (DalApi.NoNumberFoundException) { throw new BlApi.NoNumberFoundException(); }
             if (DoPackage.Scheduled != null)
-                throw new PakcageConnectToDroneException();
-                
+                throw new PakcageConnectToDroneException("Package in transfar");
 
-                    dal.DeletePackage(id);
-                
-                
-            }
+            dal.DeletePackage(id);
+
         }
     }
-
+}

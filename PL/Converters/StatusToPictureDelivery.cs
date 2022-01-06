@@ -16,8 +16,8 @@ namespace PL.Converters
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
 
-            if (values[0] is DroneStatuses)
-                switch ((DroneStatuses)values[0])
+            if (values[0] is DroneStatuses statuses)
+                switch (statuses)
                 {
 
                     case DroneStatuses.Available:

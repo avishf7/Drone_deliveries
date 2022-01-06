@@ -211,6 +211,8 @@ namespace PL.Windows
             }
             catch (NoNumberFoundException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
             catch (PakcageConnectToDroneException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
+
+            this.Close();
         }
 
    

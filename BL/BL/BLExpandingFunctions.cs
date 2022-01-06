@@ -39,9 +39,7 @@ namespace BL
         {
             //Converts decimal degrees to radians:
             var rlat1 = Math.PI * sLocation.Lattitude / 180;
-            var rlat2 = Math.PI * eLocation.Lattitude / 180;
-            var rLon1 = Math.PI * sLocation.Longitude / 180;
-            var rLon2 = Math.PI * eLocation.Longitude / 180;
+            var rlat2 = Math.PI * eLocation.Lattitude / 180;           
             var theta = sLocation.Longitude - eLocation.Longitude;
             var rtheta = Math.PI * theta / 180;
 

@@ -16,17 +16,13 @@ namespace PL.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            switch ((DroneStatuses)value)
+            return (DroneStatuses)value switch
             {
-                case DroneStatuses.Available:
-                    return "https://www.pngrepo.com/png/161328/512/battery.png";
-                case DroneStatuses.Maintenance:
-                    return "https://cdn0.iconfinder.com/data/icons/ios-edge-line-1/25/Battery-Dead-512.png";
-                case DroneStatuses.Sendering:
-                    return "https://deqn8kzyud5pf.cloudfront.net/assets/hamburgerX-blue-21400e6344ec76c3618c6ad6ae3d1f765d30715e49db6178b40fc1da45fded71.png";
-            }
-
-            throw new NotImplementedException();
+                DroneStatuses.Available => "https://www.pngrepo.com/png/161328/512/battery.png",
+                DroneStatuses.Maintenance => "https://cdn0.iconfinder.com/data/icons/ios-edge-line-1/25/Battery-Dead-512.png",
+                DroneStatuses.Sendering => "https://deqn8kzyud5pf.cloudfront.net/assets/hamburgerX-blue-21400e6344ec76c3618c6ad6ae3d1f765d30715e49db6178b40fc1da45fded71.png",
+                _ => throw new NotImplementedException(),
+            };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

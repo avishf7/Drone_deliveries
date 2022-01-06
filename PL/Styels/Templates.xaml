@@ -118,7 +118,6 @@
 
             <Button x:Name="ShowCustomer" Content="Show customer" Visibility="Hidden" FontFamily="Arial Black" />
             <ScrollViewer x:Name="CustomerInfo" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-
                 <Grid x:Name="CustomerInfoGrid" Background="{StaticResource Static.Background}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50*" />

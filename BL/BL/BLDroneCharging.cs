@@ -39,7 +39,7 @@ namespace BL
 
             if (KM <= dr.BatteryStatus * DroneAvailable)
             {
-                dr.BatteryStatus = dr.BatteryStatus - KM / DroneAvailable;
+                dr.BatteryStatus -= KM / DroneAvailable;
                 dr.LocationOfDrone = stLocation;
                 dr.DroneStatus = DroneStatuses.Maintenance;
 
@@ -73,7 +73,7 @@ namespace BL
             }
 
 
-            dr.BatteryStatus = dr.BatteryStatus + time.TotalHours * ChargingRate;
+            dr.BatteryStatus += time.TotalHours * ChargingRate;
             if (dr.BatteryStatus > 100)
             {
                 dr.BatteryStatus = 100;

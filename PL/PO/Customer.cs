@@ -79,7 +79,7 @@ namespace PO
             {
                 customerLocation = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("CustomerLocation"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(CustomerLocation)));
             }
 
         }
@@ -98,7 +98,7 @@ namespace PO
             {
                 packageAtCustomerFromCustomer = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("PackageAtCustomerFromCustomer"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(PackageAtCustomerFromCustomer)));
             }
         }
 
@@ -116,7 +116,7 @@ namespace PO
             {
                 packageAtCustomerToCustomer = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("PackageAtCustomerToCustomer"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(PackageAtCustomerToCustomer)));
             }
         }
 

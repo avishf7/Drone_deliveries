@@ -14,17 +14,13 @@ namespace PL.Converters
     {        
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            switch ((DroneStatuses)value)
+            return (DroneStatuses)value switch
             {
-                case DroneStatuses.Available:
-                    return true;
-                case DroneStatuses.Maintenance:
-                    return false;
-                case DroneStatuses.Sendering:
-                    return true;
-            }
-
-            throw new NotImplementedException();
+                DroneStatuses.Available => true,
+                DroneStatuses.Maintenance => false,
+                DroneStatuses.Sendering => true,
+                _ => throw new NotImplementedException(),
+            };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

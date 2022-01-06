@@ -35,7 +35,7 @@ namespace BO
         /// <summary>
         /// Gets the id of the drone
         /// </summary>
-        public DroneInPackage DroneInPackage { get; set; }
+        public DroneInPackage DroneInPackage { get; set; } = null;
 
         /// <summary>
         /// Gets the requested

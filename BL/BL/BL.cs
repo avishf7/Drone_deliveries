@@ -137,19 +137,15 @@ namespace BL
         /// <param name="distance">The number of miles the drone has made</param>
         /// <param name="status">What weight the drone carries</param>
         /// <returns>Battery consumption</returns>
-        double BatteryUsage(double distance, int status = 3)
+        static double BatteryUsage(double distance, int status = 3)
         {
-            switch ((Weight)status)
+            return (Weight)status switch
             {
-                case Weight.Light:
-                    return distance * LightWeight;
-                case Weight.Medium:
-                    return distance * MediumWeight;
-                case Weight.Heavy:
-                    return distance * HeavyWeight;
-                default:
-                    return distance * DroneAvailable;
-            }
+                Weight.Light => distance * LightWeight,
+                Weight.Medium => distance * MediumWeight,
+                Weight.Heavy => distance * HeavyWeight,
+                _ => distance * DroneAvailable,
+            };
         }
     }
 }

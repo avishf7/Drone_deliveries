@@ -13,7 +13,7 @@ namespace BL
 {
     public partial class BL : IBL
     {
-        public void packageAssigning(int droneId)
+        public void PackageAssigning(int droneId)
         {
             var dr = droneLists.SingleOrDefault(d => d.Id == droneId);
 

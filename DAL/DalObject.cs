@@ -357,8 +357,8 @@ namespace Dal
         /// <param name="id">The id of the package</param>
         public void DeletePackage(int id)
         {
-            int Id = DataSource.packages.FindIndex(pck => pck.Id == id);
-            DataSource.packages.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundException(" "));
+            int index = DataSource.packages.FindIndex(pck => pck.Id == id);
+            DataSource.packages.RemoveAt(index != -1 ? index : throw new NoNumberFoundException(" "));
         }
 
         #endregion

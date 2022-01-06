@@ -236,7 +236,7 @@ namespace PL.Windows
                 case DroneStatuses.Available:
                     try
                     {
-                        bl.packageAssigning(PODrone.Id);
+                        bl.PackageAssigning(PODrone.Id);
                         PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
                         Model.UpdateDrones();
                         Model.UpdatePackages();

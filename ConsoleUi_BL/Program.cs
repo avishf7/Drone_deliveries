@@ -267,7 +267,7 @@ namespace ConsoleUiBL
 
                                     try
                                     {
-                                        bl.packageAssigning(assoDroneId);
+                                        bl.PackageAssigning(assoDroneId);
 
                                         //Output that displays the success of a request:
                                         Console.WriteLine(bl.GetDrone(assoDroneId));

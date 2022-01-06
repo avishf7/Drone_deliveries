@@ -28,7 +28,7 @@ namespace PL
             {
                 drones = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Drones"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Drones)));
             }
         }
 
@@ -40,7 +40,7 @@ namespace PL
             {
                 stations = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Stations"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Stations)));
             }
         }
 
@@ -52,7 +52,7 @@ namespace PL
             {
                 customers = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Customers"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Customers)));
             }
         }
 
@@ -64,7 +64,7 @@ namespace PL
             {
                 packages = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Packages"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Packages)));
             }
         }
 
