@@ -136,6 +136,7 @@ namespace BlApi
         /// </summary>
         /// <param name="package">Package to add</param>
         /// <exception cref="ExistsNumberException"></exception>
+        /// <exception cref="NotValidTargetException"></exception>
         public void AddPackage(Package package);
 
         /// <summary>

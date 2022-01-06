@@ -55,12 +55,6 @@ namespace PL.Windows
             this.sender.Deactivated += Sender_Deactivated;
         }
 
-        private void Drones_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            Model.GroupingDrones = from drone in bl.GetDrones()
-                                            group drone by drone.DroneStatus;
-        }
-
         private void Sender_Deactivated(object sender, EventArgs e)
         {
             this.Topmost = false;

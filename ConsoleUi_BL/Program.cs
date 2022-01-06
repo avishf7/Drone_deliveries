@@ -173,10 +173,9 @@ namespace ConsoleUiBL
                                         //Output that displays the success of a request:
                                         bl.GetPackages().ToList().ForEach(pck => Console.WriteLine(pck));
                                     }
-                                    catch (ExistsNumberException ex)
-                                    {
-                                        Console.WriteLine(ex);
-                                    }
+                                    catch (ExistsNumberException ex) { Console.WriteLine(ex); }
+                                    catch (NotValidTargetException ex) { Console.WriteLine(ex); }
+
 
                                     break;
 

@@ -22,8 +22,8 @@ namespace PL.Windows
     public partial class Package : Window
     {
         IBL bl = BlFactory.GetBl();
-        Window sender;
 
+        public Window Sender { get; set; }
         public PO.Package POPackage { get; set; }
         public Model Model { get; } = PL.Model.Instance;
 
@@ -33,8 +33,9 @@ namespace PL.Windows
         /// <param name="sender">The element that activates the function</param>
         public Package(Window sender)
         {
+            this.Sender = sender;
             InitializeComponent();
-            this.sender = sender;            
+
 
             MainGrid.ShowGridLines = true;
             AddDownGrid.Visibility = Visibility.Visible;
@@ -42,7 +43,7 @@ namespace PL.Windows
             targetCustomerInPackage.Visibility = Visibility.Visible;
             Weight.Visibility = Visibility.Visible;
             priority.Visibility = Visibility.Visible;
-        
+
         }
 
         /// <summary>
@@ -51,13 +52,13 @@ namespace PL.Windows
         /// <param name="sender">The element that activates the function</param>
         public Package(Window sender, PO.Package package)
         {
-            this.sender = sender;
+            this.Sender = sender;
             this.POPackage = package;
 
             InitializeComponent();
 
             AddDownInfoGrid.Visibility = Visibility.Visible;
-            PackageInfoDownGrid.Visibility = Visibility.Visible;           
+            PackageInfoDownGrid.Visibility = Visibility.Visible;
             SenderCustomerInPackageInfo.Visibility = Visibility.Visible;
             TargetCustomerInPackageInfo.Visibility = Visibility.Visible;
             WeightInfo.Visibility = Visibility.Visible;
@@ -67,6 +68,13 @@ namespace PL.Windows
             this.Height = 550;
             this.Width = 1300;
 
+            this.Sender.Closed += Sender_Closed;
+
+        }
+
+        private void Sender_Closed(object sender, EventArgs e)
+        {
+            cancel_Click(sender, null);
         }
 
         /// <summary>
@@ -101,17 +109,30 @@ namespace PL.Windows
         {
             try
             {
-                if (senderCustomerInPackage.Text != "" && targetCustomerInPackage.Text != "" && Weight.SelectedItem != null && priority.SelectedItem != null)
+                if (senderCustomerInPackage.SelectedItem != null && targetCustomerInPackage.SelectedItem != null && Weight.SelectedItem != null && priority.SelectedItem != null)
                 {
-                    bl.AddPackage(new()
-                    {                       
-                      SenderCustomerInPackage = new() {CustomerId = int.Parse (senderCustomerInPackage.Text)},
-                        TargetCustomerInPackage = new() {CustomerId = int.Parse (targetCustomerInPackage.Text)},
-                        Weight = (Weight)Weight.SelectedItem,
-                        Priority = (Priorities)priority.SelectedItem,
-                    });
+                    int senderId = ((CustomerToList)senderCustomerInPackage.SelectedItem).CustomerId;
+                    int targetId = ((CustomerToList)targetCustomerInPackage.SelectedItem).CustomerId;
+
+                    try
+                    {
+                        bl.AddPackage(new()
+                        {
+                            SenderCustomerInPackage = new() { CustomerId = senderId },
+                            TargetCustomerInPackage = new() { CustomerId = targetId },
+                            Weight = (Weight)Weight.SelectedItem,
+                            Priority = (Priorities)priority.SelectedItem,
+                        });
+                    }
+                    catch (NotValidTargetException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
+
 
                     Model.UpdatePackages();
+
+                    Model.POCustomers.Find(cus => cus.Id == senderId)?.CopyFromBOCustomer(bl.GetCustomer(senderId));
+                    Model.POCustomers.Find(cus => cus.Id == targetId)?.CopyFromBOCustomer(bl.GetCustomer(targetId));
+
+                    Model.UpdateCustomers();
 
                     MessageBox.Show("Adding the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
@@ -133,24 +154,23 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void DroneInPackageInfo_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            TextBox textBox = (TextBox)sender;
 
-
-
-            if (((TextBox)sender).DataContext != null)
+            if (textBox.DataContext != null)
             {
-                if ((((TextBox)sender).DataContext as BO.DroneInPackage) != null)
+                if ((textBox.DataContext as BO.DroneInPackage) != null)
                 {
-                    BO.Drone BODrone = bl.GetDrone((((TextBox)sender).DataContext as BO.DroneInPackage).Id);
+                    BO.Drone BODrone = bl.GetDrone((textBox.DataContext as DroneInPackage).Id);
                     PO.Drone PODrone = Model.PODrones.Find(dr => dr.Id == BODrone.Id);
                     if (PODrone == null)
-                        Model.PODrones..Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));
+                        Model.PODrones.Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));
 
                     new Drone(this, PODrone).Show();
                 }
                 else
                     MessageBox.Show("No element exists", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
+
         }
 
         private void CustomerInPackageInfo_MouseDoubleClick(object sender, MouseButtonEventArgs e)

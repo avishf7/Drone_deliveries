@@ -6,6 +6,7 @@
     </ResourceDictionary.MergedDictionaries>
 
 
+
     <!--Representation template of location-->
     <ControlTemplate x:Key="LocationTemplate">
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
@@ -93,36 +94,38 @@
             </ScrollViewer.Style>
         </ScrollViewer>
     </ControlTemplate>
-    
 
-   
+
+
     <!--Representation Customer in package-->
     <ControlTemplate x:Key="CustomerInPackageTemplate">
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-            <Grid Background="{StaticResource Static.Background}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50*" />
-                    <RowDefinition Height="50*" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50*" />
-                    <ColumnDefinition Width="50*" />
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0"  Text="Name: " HorizontalAlignment="Left" />
-                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=CustomerName ,Mode=OneWay}" HorizontalAlignment="Center" />
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Id: "  HorizontalAlignment="Left"/>
-                <TextBlock Grid.Row="1" Grid.Column="1"  Text="{Binding Path=CustomerId ,Mode=OneWay}" HorizontalAlignment="Center" />
+            <Grid>
+                <Button x:Name="ShowCustomer" Content="Show customer" Visibility="Hidden" />
+                <Grid x:Name="InfoGrid" Background="{StaticResource Static.Background}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50*" />
+                        <RowDefinition Height="50*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*" />
+                        <ColumnDefinition Width="50*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0"  Text="Name: " HorizontalAlignment="Left" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=CustomerName ,Mode=OneWay}" HorizontalAlignment="Center" />
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Id: "  HorizontalAlignment="Left"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1"  Text="{Binding Path=CustomerId ,Mode=OneWay}" HorizontalAlignment="Center" />
+
+                </Grid>
             </Grid>
-            <ScrollViewer.Style>
-                <Style TargetType="ScrollViewer">
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="Red" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </ScrollViewer.Style>
         </ScrollViewer>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Visibility" TargetName="ShowCustomer" Value="Visible"/>
+                <Setter Property="Visibility" TargetName="InfoGrid" Value="Hidden"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+
     </ControlTemplate>
 
 </ResourceDictionary>
