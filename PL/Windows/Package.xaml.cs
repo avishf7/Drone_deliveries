@@ -55,9 +55,9 @@ namespace PL.Windows
             this.POPackage = package;
 
             InitializeComponent();
-           
 
-
+            AddDownInfoGrid.Visibility = Visibility.Visible;
+            AddDownInfoGrid2.Visibility = Visibility.Visible;
             PackageInfoDownGrid.Visibility = Visibility.Visible;           
             SenderCustomerInPackageInfo.Visibility = Visibility.Visible;
             TargetCustomerInPackageInfo.Visibility = Visibility.Visible;
@@ -166,6 +166,11 @@ namespace PL.Windows
 
                 new Customer(this, POCustomer).Show();
             }
+        }
+
+        private void AddPackage_Click(object sender, RoutedEventArgs e)
+        {
+            new Package(this).ShowDialog();
         }
 
 

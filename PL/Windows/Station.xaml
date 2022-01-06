@@ -204,40 +204,7 @@
                        Visibility="Hidden">
             </TextBox>
 
-            <!--<Grid x:Name="AddStationGrid" Grid.Row="2" Visibility="Hidden">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50*"/>
-                    <RowDefinition Height="50*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50*"/>
-                    <ColumnDefinition Width="50*"/>
-                </Grid.ColumnDefinitions>
-                
-                <Label x:Name="labalAddStationLocation" 
-                   FontSize="20"
-                   VerticalContentAlignment="Center"
-                   HorizontalContentAlignment="Center"
-                   Content="Station location - longitude:" 
-                   Grid.Row="0" 
-                   Grid.Column="0"                   
-                   Foreground="#FFDDD81E" 
-                   FontFamily="Arial Black"
-                   Margin="10"/>
 
-                <TextBox x:Name="addStationLocation" 
-                     FontSize="20"
-                     VerticalContentAlignment="Center"
-                     HorizontalContentAlignment="Center"                   
-                     Grid.Row="2" 
-                     Grid.Column="1"
-                     Background="{StaticResource Static.Background}" 
-                     Margin="10"
-                     Visibility="Hidden">
-                </TextBox>
-
-
-            </Grid>-->
             <Label x:Name="labalFreeChargeSlots" 
                    FontSize="20"
                    VerticalContentAlignment="Center"
@@ -343,6 +310,19 @@
                    Foreground="#FFDDD81E" 
                    FontFamily="Arial Black"
                    Margin="20"/>
+
+
+            <ListBox ItemsSource="{Binding Path=ChargingDrones}" x:Name="listbox" Grid.Row="0" Grid.Column="1"  FontSize="15" Width="780" Margin="15,103,15,224" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Path=Model.ChagingDrone}" Foreground="Yellow">
+                            </TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
 
 
             <!--<TextBlock x:Name="ChargingDronesInfo" 
