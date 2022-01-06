@@ -33,10 +33,12 @@ namespace PL.Windows
         /// <param name="sender">The element that activates the function</param>
         public Station(StationsView sender)
         {
+
             this.Sender = sender;
             InitializeComponent();
 
 
+            WindowStyle = WindowStyle.None;
             MainGrid.ShowGridLines = true;
             AddDownGrid.Visibility = Visibility.Visible;
             AddStationGrid.Visibility = Visibility.Visible;
@@ -55,6 +57,7 @@ namespace PL.Windows
         /// <param name="POStation"></param>
         public Station(StationsView sender, PO.Station POStation)
         {
+
 
             this.Sender = sender;
             this.POStation = POStation;

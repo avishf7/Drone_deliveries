@@ -35,8 +35,8 @@ namespace PL.Windows
         {
             this.Sender = sender;
             InitializeComponent();
-            
 
+            WindowStyle = WindowStyle.None;
             MainGrid.ShowGridLines = true;
             AddDownGrid.Visibility = Visibility.Visible;
             AddCustomerLocationGrid.Visibility = Visibility.Visible;
