@@ -284,18 +284,15 @@ namespace PL.Windows
 
             if (textBox.DataContext != null)
             {
-                if ((textBox.DataContext as BO.Package) != null)
-                {
-                    BO.Package BOPackage = bl.GetPackage((textBox.DataContext as BO.Package).Id);
+                    var BOPackage = bl.GetPackage((textBox.DataContext as BO.PackageInTransfer).Id);
                     PO.Package POPackage = Model.POPackages.Find(pck => pck.Id == BOPackage.Id);
-                    if (PODrone == null)
+                    if (POPackage == null)
                         Model.POPackages.Add(POPackage = new PO.Package().CopyFromBOPackage(BOPackage));
 
-                    new Package(this, POPackage).Show();
-                }
-                else
-                    MessageBox.Show("No element exists", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    new Package(this, POPackage).Show();                
             }
+            else
+                MessageBox.Show("No element exists", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }
