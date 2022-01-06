@@ -271,7 +271,20 @@ namespace PL.Windows
 
         private void PackageInProgress_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            if (((TextBox)sender).DataContext != null)
+            {
+                if ((((TextBox)sender).DataContext as BO.Package) != null)
+                {
+                    BO.Package BOPackage = bl.GetPackage((((TextBox)sender).DataContext as BO.Package).Id);
+                    PO.Package POPackage = Model.POPackages.Find(pck => pck.Id == BOPackage.Id);
+                    if (PODrone == null)
+                        Model.POPackages.Add(POPackage = new PO.Package().CopyFromBOPackage(BOPackage));
 
+                    new Package(this, POPackage).Show();
+                }
+                else
+                    MessageBox.Show("No element exists", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

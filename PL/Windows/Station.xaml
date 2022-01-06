@@ -312,13 +312,13 @@
                    Margin="20"/>
 
 
-            <ListBox ItemsSource="{Binding Path=ChargingDrones}"
+            <!--<ListBox ItemsSource="{Binding Path=ChargingDrones}"
                      x:Name="listbox" 
                      Grid.Row="0" Grid.Column="1" 
                      FontSize="15" Width="780" 
                      Margin="15,103,15,224" >               
                  
-            </ListBox>
+            </ListBox>-->
 
 
 
