@@ -27,7 +27,7 @@ namespace PO
             {
                 id = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Id"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Id)));
             }
         }
 
@@ -45,7 +45,7 @@ namespace PO
             {
                 name = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Name"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Name)));
             }
         }
 
@@ -63,7 +63,7 @@ namespace PO
             {
                 locationOfStation = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("LocationOfStation"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(LocationOfStation)));
             }
 
         }
@@ -82,7 +82,7 @@ namespace PO
             {
                 freeChargeSlots = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("FreeChargeSlots"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(FreeChargeSlots)));
             }
         }
 
@@ -101,7 +101,7 @@ namespace PO
             {
                 chargingDrones = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("ChargingDrones"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(ChargingDrones)));
             }
         }
 

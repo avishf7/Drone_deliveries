@@ -27,7 +27,7 @@ namespace PO
             {
                 id = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Id"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Id)));
             }
         }
 
@@ -45,7 +45,7 @@ namespace PO
             {
                 model = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Model"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Model)));
             }
         }
 
@@ -63,7 +63,7 @@ namespace PO
             {
                 maxWeight = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("MaxWeight"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(MaxWeight)));
             }
         }
 
@@ -81,7 +81,7 @@ namespace PO
             {
                 batteryStatus = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("BatteryStatus"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(BatteryStatus)));
             }
         }
 
@@ -99,7 +99,7 @@ namespace PO
             {
                 droneStatus = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("DroneStatus"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(DroneStatus)));
             }
 
         }
@@ -118,7 +118,7 @@ namespace PO
             {
                 packageInProgress = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("PackageInProgress"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(PackageInProgress)));
             }
 
         }
@@ -137,7 +137,7 @@ namespace PO
             {
                 locationOfDrone = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("LocationOfDrone"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(LocationOfDrone)));
             }
 
         }
