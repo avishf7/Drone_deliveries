@@ -284,19 +284,6 @@
                        >
             </TextBox>
 
-            <Rectangle Name="rctback" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right"  Margin="2"  Stroke="Black" VerticalAlignment="Top"   >
-                <Rectangle.Style>
-                    <Style TargetType="Rectangle">
-                        <Setter Property="Fill" Value="Green"></Setter>
-                      
-                    </Style>
-                </Rectangle.Style>
-            </Rectangle>
-
-
-
-
-
             <Label x:Name="labalRequested" 
                    FontSize="20"
                    VerticalContentAlignment="Center"

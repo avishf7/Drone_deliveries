@@ -57,7 +57,6 @@ namespace PL.Windows
             InitializeComponent();
 
             AddDownInfoGrid.Visibility = Visibility.Visible;
-            AddDownInfoGrid2.Visibility = Visibility.Visible;
             PackageInfoDownGrid.Visibility = Visibility.Visible;           
             SenderCustomerInPackageInfo.Visibility = Visibility.Visible;
             TargetCustomerInPackageInfo.Visibility = Visibility.Visible;
@@ -144,7 +143,7 @@ namespace PL.Windows
                     BO.Drone BODrone = bl.GetDrone((((TextBox)sender).DataContext as BO.DroneInPackage).Id);
                     PO.Drone PODrone = Model.PODrones.Find(dr => dr.Id == BODrone.Id);
                     if (PODrone == null)
-                        Model.PODrones.Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));
+                        Model.PODrones..Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));
 
                     new Drone(this, PODrone).Show();
                 }

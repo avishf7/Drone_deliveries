@@ -189,6 +189,8 @@ namespace PL.Windows
                         bl.SendDroneForCharge(PODrone.Id);
                         PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
                         Model.UpdateDrones();
+                        Model.UpdateStations();
+                        Model.UpdatePOStation(PODrone.LocationOfDrone);
                         MessageBox.Show("Sent for charging", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     }
@@ -202,12 +204,18 @@ namespace PL.Windows
                     bl.RealeseDroneFromCharge(PODrone.Id);
                     PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
                     Model.UpdateDrones();
+                    Model.UpdateStations();
+                    Model.UpdatePOStation(PODrone.LocationOfDrone);
+                   
                     MessageBox.Show("Released from charging", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
 
                     break;
             }
         }
+
+        
+
         /// <summary>
         /// A button that handles the delivery of the package according to the status of the drone.
         /// </summary>
@@ -223,6 +231,9 @@ namespace PL.Windows
                         bl.packageAssigning(PODrone.Id);
                         PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
                         Model.UpdateDrones();
+                        Model.UpdatePackages();
+                        Model.UpdatePOPackage(PODrone.PackageInProgress.Id);
+                        Model.UpdateCustomers();
                         MessageBox.Show("The package was successfully associated", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
 
@@ -235,6 +246,9 @@ namespace PL.Windows
                         bl.Deliver(PODrone.Id);
                         PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
                         Model.UpdateDrones();
+                        Model.UpdatePackages();
+                        Model.UpdatePOPackage(PODrone.PackageInProgress.Id);
+                        Model.UpdateCustomers();
                         MessageBox.Show("The package was delivered to its destination, good day", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     }
@@ -243,12 +257,17 @@ namespace PL.Windows
                         bl.PickUp(PODrone.Id);
                         PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
                         Model.UpdateDrones();
+                        Model.UpdatePackages();
+                        Model.UpdatePOPackage(PODrone.PackageInProgress.Id);
+                        Model.UpdateCustomers();
                         MessageBox.Show("The package was successfully collected by the drone", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     }
                     break;
             }
         }
+
+        
 
         private void PackageInProgress_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {

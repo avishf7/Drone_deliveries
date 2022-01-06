@@ -194,6 +194,8 @@ namespace PL
             GroupingPackages = from package in bl.GetPackages()
                                group package by package.SenderName;
 
+            POCustomers = (List<PO.Customer>)POCustomers.Select(cus => cus.CopyFromBOCustomer(bl.GetCustomer(cus.Id)));
+
         }
 
         /// <summary>
@@ -202,6 +204,28 @@ namespace PL
         public void UpdateCustomers()
         {
             Customers = bl.GetCustomers();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        public void UpdatePOPackage(int id)
+        {
+            var poPackage = POPackages.Where(pck => pck.Id == id).Single();
+            poPackage.CopyFromBOPackage(bl.GetPackage(id));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        public void UpdatePOStation(Location location)
+        {
+            var poStation = POStations.Where(st => st.LocationOfStation == location).Single();
+            poStation.CopyFromBOStation(bl.GetStation(poStation.Id));
+
+         
         }
     }
 }
