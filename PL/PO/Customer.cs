@@ -25,7 +25,7 @@ namespace PO
             {
                 id = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Id"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Id)));
             }
         }
 
@@ -43,7 +43,7 @@ namespace PO
             {
                 name = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Name"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Name)));
             }
         }
 
@@ -61,7 +61,7 @@ namespace PO
             {
                 phone = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Phone"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Phone)));
             }
         }
 

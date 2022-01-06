@@ -27,7 +27,7 @@ namespace PO
             {
                 id = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Id"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Id)));
             }
         }
 
@@ -45,7 +45,7 @@ namespace PO
             {
                 senderCustomerInPackage = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("SenderCustomerInPackage"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(SenderCustomerInPackage)));
             }
 
         }
@@ -64,7 +64,7 @@ namespace PO
             {
                 targetCustomerInPackage = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("TargetCustomerInPackage"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(TargetCustomerInPackage)));
             }
 
         }
@@ -83,7 +83,7 @@ namespace PO
             {
                 weight = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Weight"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Weight)));
             }
 
         }
@@ -103,7 +103,7 @@ namespace PO
             {
                 priority = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Priority"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Priority)));
             }
         }
 
@@ -121,7 +121,7 @@ namespace PO
             {
                 droneInPackage = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("DroneInPackage"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(DroneInPackage)));
             }
 
         }
@@ -140,7 +140,7 @@ namespace PO
             {
                 requested = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Requested"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Requested)));
             }
         }
 
@@ -159,7 +159,7 @@ namespace PO
             {
                 scheduled = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Scheduled"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Scheduled)));
             }
         }
 
@@ -177,7 +177,7 @@ namespace PO
             {
                 pickedUp = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("PickedUp"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(PickedUp)));
             }
         }
 
@@ -195,7 +195,7 @@ namespace PO
             {
                 delivered = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Delivered"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Delivered)));
             }
         }
                                         
