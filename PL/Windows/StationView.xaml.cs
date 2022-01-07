@@ -24,13 +24,15 @@ namespace PL.Windows
     {
         IBL bl = BlFactory.GetBl();
         /// <summary>
-        /// The window that opens the activated window.
+        /// The window that opens this window.
         /// </summary>
         MainWindow sender;
+
+        //That they will not be able to close the window with the X button
         bool isCloseClick = true;
 
         /// <summary>
-        /// Contains all collections.
+        ///Contains all the data needed for the display.
         /// </summary>
         public Model Model { get; } = PL.Model.Instance;
 
@@ -42,14 +44,18 @@ namespace PL.Windows
             InitializeComponent();
             this.sender = sender;
 
-
+            //If the window that opened the new window closes, the new window will also close.
             this.sender.Closing += Sender_Closing;
+
+            // Causes the window that opens to be above the main window.
             this.sender.Activated += Sender_Activated;
+           
+            // When the main window does not open another window it will be TOP MOST.
             this.sender.Deactivated += Sender_Deactivated;
         }
 
         /// <summary>
-        /// When the main window does not open another window it will be TOP MOST.
+        /// Makes the sender nut be up.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
@@ -59,7 +65,7 @@ namespace PL.Windows
         }
 
         /// <summary>
-        /// Causes the window that opens to be above the main window.
+        ///Makes the sender be up.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>

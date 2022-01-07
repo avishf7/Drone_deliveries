@@ -21,10 +21,19 @@ namespace PL.Windows
     public partial class CustomersView : Window
     {
         IBL bl = BlFactory.GetBl();
-        MainWindow sender;       
+        /// <summary>
+        /// The window that opens this window.
+        /// </summary>
+        MainWindow sender;
+
+        //That they will not be able to close the window with the X button
         bool isCloseClick = true;
 
+        /// <summary>
+        ///Contains all the data needed for the display.
+        /// </summary>
         public Model Model { get; } = PL.Model.Instance;
+
 
         /// <summary>
         ///  constructor to create window of customers view.
@@ -35,15 +44,20 @@ namespace PL.Windows
             InitializeComponent();
             this.sender = sender;
 
-            this.sender.Closing += Sender_Closing;
-            this.sender.Activated += Sender_Activated;
-            this.sender.Deactivated += Sender_Deactivated;
 
+            //If the window that opened the new window closes, the new window will also close.
+            this.sender.Closing += Sender_Closing;
+
+            // Causes the window that opens to be above the main window.
+            this.sender.Activated += Sender_Activated;
+
+            // When the main window does not open another window it will be TOP MOST.
+            this.sender.Deactivated += Sender_Deactivated;
         }
 
 
         /// <summary>
-        /// Disables the button that will not respond to clicks
+        /// Makes the sender nut be up.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
@@ -53,7 +67,7 @@ namespace PL.Windows
         }
 
         /// <summary>
-        /// Activated the button that will respond to clicks
+        ///Makes the sender be up.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
@@ -63,7 +77,7 @@ namespace PL.Windows
         }
 
         /// <summary>
-        /// Closing the window.
+        /// If the window that opened the new window closes, the new window will also close.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>

@@ -26,17 +26,22 @@ namespace PL.Windows
     /// </summary>
     public partial class DronesView : Window
     {
-        
+
 
         IBL bl = BlFactory.GetBl();
+        /// <summary>
+        /// The window that opens this window.
+        /// </summary>
         MainWindow sender;
+
+        //That they will not be able to close the window with the X button
         bool isCloseClick = true;
 
+        /// <summary>
+        ///Contains all the data needed for the display.
+        /// </summary>
+        public Model Model { get; } = PL.Model.Instance;
 
-
-       
-
-    public Model Model { get; } = PL.Model.Instance;
 
 
         /// <summary>
@@ -50,21 +55,42 @@ namespace PL.Windows
             Model.GroupingDrones = from drone in bl.GetDrones()
                                             group drone by drone.DroneStatus;
 
+
+            //If the window that opened the new window closes, the new window will also close.
             this.sender.Closing += Sender_Closing;
+
+            // Causes the window that opens to be above the main window.
             this.sender.Activated += Sender_Activated;
+
+            // When the main window does not open another window it will be TOP MOST.
             this.sender.Deactivated += Sender_Deactivated;
         }
 
+        /// <summary>
+        /// Makes the sender nut be up.
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
         private void Sender_Deactivated(object sender, EventArgs e)
         {
             this.Topmost = false;
         }
 
+        /// <summary>
+        ///Makes the sender be up.
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
         private void Sender_Activated(object sender, EventArgs e)
         {
             this.Topmost = true;
         }
 
+        /// <summary>
+        /// If the window that opened the new window closes, the new window will also close.
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
         private void Sender_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Exit_Click(sender, null);

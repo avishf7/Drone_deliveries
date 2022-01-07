@@ -19,8 +19,11 @@ namespace PL
         public event PropertyChangedEventHandler PropertyChanged;
 
         #region List View collections
-
+       
         IEnumerable<DroneToList> drones;
+        /// <summary>
+        /// A collection that represents a list view of drones
+        /// </summary>
         public IEnumerable<DroneToList> Drones
         {
             get => drones;
@@ -33,6 +36,9 @@ namespace PL
         }
 
         IEnumerable<StationToList> stations;
+        /// <summary>
+        ///  A collection that represents a list view of stations.
+        /// </summary>
         public IEnumerable<StationToList> Stations
         {
             get => stations;
@@ -45,6 +51,9 @@ namespace PL
         }
 
         IEnumerable<CustomerToList> customers;
+        /// <summary>
+        ///  A collection that represents a list view of customers.
+        /// </summary>
         public IEnumerable<CustomerToList> Customers
         {
             get => customers;
@@ -57,6 +66,9 @@ namespace PL
         }
 
         IEnumerable<PackageToList> packages;
+        /// <summary>
+        ///  A collection that represents a list view of packages.
+        /// </summary>
         public IEnumerable<PackageToList> Packages
         {
             get => packages;
@@ -68,17 +80,7 @@ namespace PL
             }
         }
 
-        //IEnumerable<DroneCharge> droneCharges;
-        //public IEnumerable<DroneCharge> DroneCharges
-        //{
-        //    get => droneCharges;
-        //    set
-        //    {
-        //        droneCharges = value;
-        //        if (PropertyChanged != null)
-        //            PropertyChanged(this, new PropertyChangedEventArgs("DroneCharges"));
-        //    }
-        //}
+       
         #endregion
 
         #region Grouping collections
@@ -122,10 +124,21 @@ namespace PL
         #endregion
 
         #region PO collections
-
+        /// <summary>
+        /// A collection representing a view of an entity PODrone.
+        /// </summary>
         public List<PO.Drone> PODrones { get; set; } = new();
+        /// <summary>
+        /// A collection representing a view of an entity POStation.
+        /// </summary>
         public List<PO.Station> POStations { get; set; } = new();
+        /// <summary>
+        /// A collection representing a view of an entity POCustomer.
+        /// </summary>
         public List<PO.Customer> POCustomers { get; set; } = new();
+        /// <summary>
+        /// A collection representing a view of an entity POPackage.
+        /// </summary>
         public List<PO.Package> POPackages { get; set; } = new();
         #endregion
 

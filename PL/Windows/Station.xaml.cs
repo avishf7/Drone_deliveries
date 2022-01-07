@@ -23,8 +23,20 @@ namespace PL.Windows
     {
         IBL bl = BlFactory.GetBl();
 
+
+        /// <summary>
+        /// The window that opens this window.
+        /// </summary>
         public StationsView Sender { get; set; }
+
+        /// <summary>
+        /// The variable from which the display opens
+        /// </summary>
         public PO.Station POStation { get; set; }
+
+        /// <summary>
+        ///Contains all the data needed for the display.
+        /// </summary>
         public Model Model { get; } = PL.Model.Instance;
 
         /// <summary>
@@ -77,11 +89,12 @@ namespace PL.Windows
             this.Height = 700;
             this.Width = 550;
 
+            //If the window that opened the new window closes, the new window will also close.
             this.Sender.Closed += Sender_Closed;
         }
 
         /// <summary>
-        /// Closing the window.
+        ///  If the window that opened the new window closes, the new window will also close.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
