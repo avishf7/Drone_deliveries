@@ -23,18 +23,20 @@ namespace PL.Windows
     /// </summary>
     public partial class PackagesView : Window
     {
+
         IBL bl = BlFactory.GetBl();
         MainWindow sender;
         bool isCloseClick = true;
-
+        /// <summary>
+        /// 
+        /// </summary>
         public Model Model { get; } = PL.Model.Instance;
 
 
 
         /// <summary>
-        /// constructor to create window of drones view.
+        /// constructor to create window of packages view.
         /// </summary>
-        /// <param name="bl"></param>
         /// <param name="sender">The element that activates the function</param>
         public PackagesView(MainWindow sender)
         {
@@ -48,17 +50,31 @@ namespace PL.Windows
 
         }
 
-
+        /// <summary>
+        /// Disables the button that will not respond to clicks
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
         private void Sender_Deactivated(object sender, EventArgs e)
         {
             this.Topmost = false;
         }
 
+        /// <summary>
+        /// Activated the button that will respond to clicks
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
         private void Sender_Activated(object sender, EventArgs e)
         {
             this.Topmost = true;
         }
 
+        /// <summary>
+        /// Closing the window.
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
         private void Sender_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Exit_Click(sender, null);
@@ -104,7 +120,7 @@ namespace PL.Windows
 
        
         /// <summary>
-        /// A button that opens a window for adding a new drone.
+        /// A button that opens a window for adding a new package.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
@@ -114,7 +130,7 @@ namespace PL.Windows
         }
 
         /// <summary>
-        /// Sets that by double-clicking a skimmer from the list it will see the data on the skimmer.
+        /// Sets that by double-clicking a package from the list it will see the data on the package.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>

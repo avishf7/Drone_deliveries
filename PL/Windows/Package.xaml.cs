@@ -28,7 +28,7 @@ namespace PL.Windows
         public Model Model { get; } = PL.Model.Instance;
 
         /// <summary>
-        /// Consructor for drone display window.
+        /// constructor to window add package.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         public Package(Window sender)
@@ -47,9 +47,10 @@ namespace PL.Windows
         }
 
         /// <summary>
-        /// constructor to window add drone.
+        /// Consructor for package display window.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
+        /// <param name="package">The package intended for display</param>
         public Package(Window sender, PO.Package package)
         {
             this.Sender = sender;
@@ -72,6 +73,11 @@ namespace PL.Windows
 
         }
 
+        /// <summary>
+        /// Closing the window.
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
         private void Sender_Closed(object sender, EventArgs e)
         {
             cancel_Click(sender, null);
@@ -87,7 +93,6 @@ namespace PL.Windows
             //Checks that entered numbers only
             if (e.Handled = !(int.TryParse(e.Text, out int d)) && e.Text != "" && d <= 0)
                 MessageBox.Show("Please enter only positive numbers.");
-
         }
 
         /// <summary>
@@ -101,7 +106,7 @@ namespace PL.Windows
         }
 
         /// <summary>
-        /// Add drone button
+        /// Add package button
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
@@ -148,7 +153,7 @@ namespace PL.Windows
 
 
         /// <summary>
-        /// Sets that by double-clicking a skimmer from the list it will see the data on the skimmer.
+        /// Sets that by double-clicking a drone in the package from the list it will see the data on the DroneInPackage.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
@@ -170,9 +175,14 @@ namespace PL.Windows
                 else
                     MessageBox.Show("No element exists", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
 
+
+        /// <summary>
+        /// Sets that by double-clicking a customer in the package from the list it will see the data on the CustomerInPackage.
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
         private void CustomerInPackageInfo_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
@@ -189,6 +199,12 @@ namespace PL.Windows
                 MessageBox.Show("No element exists", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
+
+        /// <summary>
+        /// Delete a package
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -207,6 +223,8 @@ namespace PL.Windows
                 Model.POCustomers.Find(cus => cus.Id == targetId)?.CopyFromBOCustomer(bl.GetCustomer(targetId));
 
                 Model.UpdateCustomers();
+
+                MessageBox.Show("Delete the package was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
             }
             catch (NoNumberFoundException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }

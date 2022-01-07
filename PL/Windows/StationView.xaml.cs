@@ -23,16 +23,19 @@ namespace PL.Windows
     public partial class StationsView : Window
     {
         IBL bl = BlFactory.GetBl();
+        /// <summary>
+        /// The window that opens the activated window.
+        /// </summary>
         MainWindow sender;
         bool isCloseClick = true;
 
-
-
-       
-    public Model Model { get; } = PL.Model.Instance;
+        /// <summary>
+        /// Contains all collections.
+        /// </summary>
+        public Model Model { get; } = PL.Model.Instance;
 
         /// <summary>
-        /// 
+        /// constructor to create window of stations view.
         /// </summary>
         public StationsView(MainWindow sender)
         {
@@ -43,25 +46,37 @@ namespace PL.Windows
             this.sender.Closing += Sender_Closing;
             this.sender.Activated += Sender_Activated;
             this.sender.Deactivated += Sender_Deactivated;
-        }       
+        }
 
+        /// <summary>
+        /// When the main window does not open another window it will be TOP MOST.
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
         private void Sender_Deactivated(object sender, EventArgs e)
         {
             this.Topmost = false;
         }
 
+        /// <summary>
+        /// Causes the window that opens to be above the main window.
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
         private void Sender_Activated(object sender, EventArgs e)
         {
             this.Topmost = true;
         }
 
+        /// <summary>
+        /// If the window that opened the new window closes, the new window will also close.
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
         private void Sender_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Exit_Click(sender, null);
         }
-
-
-
 
 
 
@@ -78,7 +93,7 @@ namespace PL.Windows
 
 
         /// <summary>
-        /// A button that opens a window for adding a new drone.
+        /// A button that opens a window for adding a new station.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
@@ -88,7 +103,7 @@ namespace PL.Windows
         }
 
         /// <summary>
-        /// Sets that by double-clicking a skimmer from the list it will see the data on the skimmer.
+        /// Sets that by double-clicking a station from the list it will see the data on the station.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>

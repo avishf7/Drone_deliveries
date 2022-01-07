@@ -30,7 +30,7 @@ namespace PL.Windows
         public Model Model { get; } = PL.Model.Instance;
 
         /// <summary>
-        /// Consructor for drone display window.
+        /// constructor to window add drone.
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         public Drone(Window sender)
@@ -50,11 +50,10 @@ namespace PL.Windows
         }
 
         /// <summary>
-        /// constructor to window add drone.
+        ///  Consructor for drone display window.
         /// </summary>
-        /// <param name="bl">The variable of access to the logic layer</param>
         /// <param name="sender">The element that activates the function</param>
-        /// <param name="droneId">The ID of the drone intended for display</param>
+        /// <param name="drone">The drone intended for display</param>
         public Drone(Window sender, PO.Drone drone)
         {
             this.Sender = sender;
@@ -78,6 +77,11 @@ namespace PL.Windows
             this.Sender.Closed += Sender_Closed;
         }
 
+        /// <summary>
+        /// Closing the window.
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
         private void Sender_Closed(object sender, EventArgs e)
         {
             cancel_Click(sender, null);
@@ -276,8 +280,12 @@ namespace PL.Windows
             }
         }
 
-        
 
+        /// <summary>
+        /// Sets that by double-clicking a package from the list it will see the data on the PackageInTransfer.
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
         private void PackageInProgress_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             TextBox textBox = (TextBox)sender;

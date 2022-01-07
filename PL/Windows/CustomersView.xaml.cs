@@ -26,7 +26,10 @@ namespace PL.Windows
 
         public Model Model { get; } = PL.Model.Instance;
 
-
+        /// <summary>
+        ///  constructor to create window of customers view.
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
         public CustomersView(MainWindow sender)
         {
             InitializeComponent();
@@ -39,17 +42,31 @@ namespace PL.Windows
         }
 
 
-
+        /// <summary>
+        /// Disables the button that will not respond to clicks
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
         private void Sender_Deactivated(object sender, EventArgs e)
         {
             this.Topmost = false;
         }
 
+        /// <summary>
+        /// Activated the button that will respond to clicks
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
         private void Sender_Activated(object sender, EventArgs e)
         {
             this.Topmost = true;
         }
 
+        /// <summary>
+        /// Closing the window.
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
         private void Sender_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Exit_Click(sender, null);
@@ -79,9 +96,9 @@ namespace PL.Windows
         }
 
         /// <summary>
-        /// 
+        ///  Sets that by double-clicking a customer from the list it will see the data on the customer.
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="sender">>The element that activates the function</param>
         /// <param name="e"></param>
         private void CustomersListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
