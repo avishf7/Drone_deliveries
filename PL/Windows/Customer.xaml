@@ -22,7 +22,7 @@
         </ResourceDictionary>
     </Window.Resources>
 
-
+    <!--The basic grid-->
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="80*" />
@@ -32,6 +32,8 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
+        <!--Grid used to display some of the fields in the entity 
+        and also used for the Add Client window.-->
         <Grid x:Name="UpGrid" Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="25*"/>
@@ -100,7 +102,7 @@
                      Visibility="Hidden">
             </TextBox>
 
-
+            <!--Grid used for customer update-->
             <Grid x:Name="UpdateNameGrid" Grid.Row="1" Grid.Column="1" Visibility="Hidden">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="70*"/>
@@ -138,6 +140,8 @@
                    FontFamily="Arial Black"
                    Margin="20"/>
 
+
+            <!--Grid used to add customer location-->
             <Grid x:Name="AddCustomerLocationGrid" Grid.Row="2" Grid.Column="1"  Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50*"/>
@@ -227,6 +231,8 @@
             </TextBox>
 
 
+
+            <!--Grid used for customer update-->
             <Grid x:Name="UpdatePhoneGrid" Grid.Row="3" Grid.Column="1" Visibility="Hidden">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="70*"/>
@@ -252,11 +258,10 @@
                         Click="Update_Click"
                         />
             </Grid>
-
         </Grid>
 
 
-
+        <!--Grid used for buttons in the Insert window-->
         <Grid x:Name="AddDownGrid" Grid.Row="1" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40*"/>
@@ -286,6 +291,8 @@
                     Click="cancel_Click"/>
         </Grid>
 
+
+        <!--Grid containing data for display only -->
         <Grid x:Name="CustomerInfoDownGrid" Grid.Row="1" Visibility="Hidden">
             <Grid.RowDefinitions>
                 <RowDefinition Height="31.5*"/>
@@ -407,7 +414,7 @@
                 <Image Source="https://cdn-icons-png.flaticon.com/512/1828/1828479.png" Margin="10"/>
             </Button>
 
-            <Grid x:Name="CutomerInfoDownInDownGrid" Grid.Row="3" Grid.Column="1">
+            <!--<Grid x:Name="CutomerInfoDownInDownGrid" Grid.Row="3" Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="25*"/>
                     <ColumnDefinition Width="50*"/>
@@ -417,7 +424,7 @@
                     <RowDefinition Height="50*"/>
                     <RowDefinition Height="50*"/>
                 </Grid.RowDefinitions>
-            </Grid>
+            </Grid>-->
         </Grid>
     </Grid>
     <Window.Background>

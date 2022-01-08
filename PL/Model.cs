@@ -80,13 +80,16 @@ namespace PL
             }
         }
 
-       
+
         #endregion
 
         #region Grouping collections
 
-        public IEnumerable<IGrouping<DroneStatuses, BO.DroneToList>> groupingDrones;
 
+        public IEnumerable<IGrouping<DroneStatuses, BO.DroneToList>> groupingDrones;
+        /// <summary>
+        /// A collection that represents a grouped view of a drone entity
+        /// </summary>
         public IEnumerable<IGrouping<DroneStatuses, BO.DroneToList>> GroupingDrones
         {
             get => groupingDrones;
@@ -99,6 +102,9 @@ namespace PL
         }
 
         public IEnumerable<IGrouping<string, BO.PackageToList>> groupingPackages { get; set; }
+        /// <summary>
+        /// A collection that represents a grouped view of a package entity
+        /// </summary>
         public IEnumerable<IGrouping<string, BO.PackageToList>> GroupingPackages
         {
             get => groupingPackages;
@@ -111,6 +117,9 @@ namespace PL
         }
 
         IEnumerable<IGrouping<int, BO.StationToList>> groupingStations;
+        /// <summary>
+        /// A collection that represents a grouped view of a station entity
+        /// </summary>
         public IEnumerable<IGrouping<int, BO.StationToList>> GroupingStations
         {
             get => groupingStations;
@@ -144,6 +153,8 @@ namespace PL
 
         #region Enumerations
 
+        //A collection that represents a view of enumerations
+
         public Array Weight { get; } = Enum.GetValues(typeof(Weight));
         public Array DroneStatuses { get; } = Enum.GetValues(typeof(DroneStatuses));
         public Array Priorities { get; } = Enum.GetValues(typeof(Priorities));
@@ -152,11 +163,16 @@ namespace PL
 
         #region Filters
 
+        //A collection that represents a view of filters
+
         public BO.Weight? maxWeightFilter = null;
         public BO.DroneStatuses? DroneStatusesFilter = null;
         public BO.PackageStatus? PackageStatusFilter = null;
         #endregion
 
+        /// <summary>
+        /// Initialize the data of the grouped collections.
+        /// </summary>
         private Model()
         {
             Drones =bl.GetDrones();
@@ -175,7 +191,7 @@ namespace PL
         }
 
         /// <summary>
-        /// 
+        /// Updates the display collection of drones.
         /// </summary>
         public void UpdateDrones()
         {
@@ -187,7 +203,7 @@ namespace PL
         }
 
         /// <summary>
-        /// 
+        /// Updates the display collection of stations.
         /// </summary>
         public void UpdateStations()
         {
@@ -198,7 +214,7 @@ namespace PL
         }
 
         /// <summary>
-        /// 
+        /// Updates the display collection of packages.
         /// </summary>
         public void UpdatePackages()
         {
@@ -210,7 +226,7 @@ namespace PL
         }
 
         /// <summary>
-        /// 
+        /// Updates the display collection of customers.
         /// </summary>
         public void UpdateCustomers()
         {
@@ -218,7 +234,7 @@ namespace PL
         }
 
         /// <summary>
-        /// 
+        /// Updates the POPackage entity view collection.
         /// </summary>
         /// <param name="id"></param>
         public void UpdatePOPackage(int id)
@@ -227,10 +243,12 @@ namespace PL
             poPackage?.CopyFromBOPackage(bl.GetPackage(id));
         }
 
+
+
         /// <summary>
-        /// 
+        /// Updates the POStation entity view collection
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="location"></param>
         public void UpdatePOStation(Location location)
         {
             var poStation = POStations.Where(st => st.LocationOfStation == location).SingleOrDefault();
