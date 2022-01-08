@@ -22,6 +22,7 @@
     </Window.Resources>
 
 
+    <!--The basic grid-->
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="80*" />
@@ -32,6 +33,8 @@
             <ColumnDefinition Width="650" />
         </Grid.ColumnDefinitions>
 
+        <!--Grid used to display some of the fields in the entity 
+        and also used for the Add Client window.-->
         <Grid x:Name="UpGrid" Grid.Row="0" Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="25*"/>
@@ -205,6 +208,7 @@
 
         </Grid>
 
+        <!--Grid used for buttons in the Insert window-->
         <Grid x:Name="AddDownGrid" Grid.Row="1" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40*"/>
@@ -234,6 +238,8 @@
                     Click="cancel_Click"/>
         </Grid>
 
+        
+        <!--Grid containing data for display only -->
         <Grid x:Name="AddDownInfoGrid" Grid.Row="1" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40*"/>

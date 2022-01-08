@@ -22,6 +22,7 @@
     </Window.Resources>
 
 
+    <!--The basic grid-->
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="80*" />
@@ -31,6 +32,8 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
+        <!--Grid used to display some of the fields in the entity 
+        and also used for the Add Client window.-->
         <Grid x:Name="UpGrid" Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="25*"/>
@@ -99,7 +102,8 @@
                      Visibility="Hidden">
             </TextBox>
 
-
+            
+            <!--Grid used for customer update-->
             <Grid x:Name="UpdateNameGrid" Grid.Row="1" Grid.Column="1" Visibility="Hidden">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="70*"/>
@@ -140,6 +144,7 @@
                    Margin="20"/>
 
 
+            <!--Grid used to add station location-->
             <Grid x:Name="AddStationGrid" Grid.Row="2" Grid.Column="1"  Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50*"/>
@@ -232,7 +237,7 @@
 
 
 
-
+            <!--Grid used for station update-->
             <Grid x:Name="UpdateNumOfChargeGrid" Grid.Row="3" Grid.Column="1" Visibility="Hidden">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="70*"/>
@@ -258,10 +263,10 @@
                         Click="Update_Click"
                         />
             </Grid>
-
-
         </Grid>
 
+
+        <!--Grid used for buttons in the Insert window-->
         <Grid x:Name="AddDownGrid" Grid.Row="1" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40*"/>
@@ -291,6 +296,8 @@
                     Click="cancel_Click"/>
         </Grid>
 
+
+        <!--Grid containing data for display only -->
         <Grid x:Name="StationInfoDownGrid" Grid.Row="1" Visibility="Hidden">
             <Grid.RowDefinitions>
                 <RowDefinition Height="63*"/>

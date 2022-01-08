@@ -23,6 +23,7 @@
         </ResourceDictionary>
     </Window.Resources>
 
+    <!--Grid Displays a list of all drones with information about them-->
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="450*"/>
@@ -94,6 +95,8 @@
             </TabItem>
         </TabControl>
 
+
+        <!--Grid for buttons in the window-->
         <Grid x:Name="DownGrid" Grid.Row="1">
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="10*"/>
