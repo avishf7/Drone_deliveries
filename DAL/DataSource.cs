@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DalXml;
 using DO;
+
 
 namespace Dal
 {
@@ -203,9 +203,9 @@ namespace Dal
 
 
             XmlTools.SaveListToXMLSerializer(dronesList, @"DroneXml.xml");
-            XMLTools.SaveListToXMLSerializer(stations, @"BaseStationXml.xml");
-            XMLTools.SaveListToXMLSerializer(customers, @"CustomerXml.xml");
-            XMLTools.SaveListToXMLSerializer(packages, @"ParcelXml.xml");
+            XmlTools.SaveListToXMLSerializer(stations, @"StationXml.xml");
+            XmlTools.SaveListToXMLSerializer(customers, @"CustomerXml.xml");
+            XmlTools.SaveListToXMLSerializer(packages, @"PackageXml.xml");
         }
 
     }
