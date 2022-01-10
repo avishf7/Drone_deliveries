@@ -39,6 +39,33 @@ namespace DalApi
         { return "No number found exeptions:" + Message; }
     }
 
+    [Serializable]
+    public class XMLFileLoadCreateException : Exception
+    {
+        public XMLFileLoadCreateException() : base() { }
+        public XMLFileLoadCreateException(string message) : base(message) { }
+        public XMLFileLoadCreateException(string message, Exception inner) : base(message, inner) { }
+        protected XMLFileLoadCreateException(SerializationInfo info, StreamingContext context)
+     : base(info, context) { }
+        // special constructor for our custom exception
+
+        override public string ToString()
+        { return "Exists XML exception:" + Message; }
+    }
+
+    //[Serializable]
+    //public class XMLFileLoadCreateException : Exception
+    //{
+    //    public XMLFileLoadCreateException() : base() { }
+    //    public XMLFileLoadCreateException(string message) : base(message) { }
+    //    public XMLFileLoadCreateException(string message, Exception inner) : base(message, inner) { }
+    //    protected XMLFileLoadCreateException(SerializationInfo info, StreamingContext context)
+    // : base(info, context) { }
+    //    // special constructor for our custom exception
+
+    //    override public string ToString()
+    //    { return "Exists XML exception:" + Message; }
+    //}
 
 
 }
