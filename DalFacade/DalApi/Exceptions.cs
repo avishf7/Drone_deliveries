@@ -42,30 +42,32 @@ namespace DalApi
     [Serializable]
     public class XMLFileLoadCreateException : Exception
     {
-        public XMLFileLoadCreateException() : base() { }
-        public XMLFileLoadCreateException(string message) : base(message) { }
-        public XMLFileLoadCreateException(string message, Exception inner) : base(message, inner) { }
-        protected XMLFileLoadCreateException(SerializationInfo info, StreamingContext context)
-     : base(info, context) { }
-        // special constructor for our custom exception
+        private string filePath;
+        private string v;
+        private Exception ex;
 
-        override public string ToString()
-        { return "Exists XML exception:" + Message; }
+        public XMLFileLoadCreateException()
+        {
+        }
+
+        public XMLFileLoadCreateException(string message) : base(message)
+        {
+        }
+
+        public XMLFileLoadCreateException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        public XMLFileLoadCreateException(string filePath, string v, Exception ex)
+        {
+            this.filePath = filePath;
+            this.v = v;
+            this.ex = ex;
+        }
+
+        protected XMLFileLoadCreateException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
     }
-
-    //[Serializable]
-    //public class XMLFileLoadCreateException : Exception
-    //{
-    //    public XMLFileLoadCreateException() : base() { }
-    //    public XMLFileLoadCreateException(string message) : base(message) { }
-    //    public XMLFileLoadCreateException(string message, Exception inner) : base(message, inner) { }
-    //    protected XMLFileLoadCreateException(SerializationInfo info, StreamingContext context)
-    // : base(info, context) { }
-    //    // special constructor for our custom exception
-
-    //    override public string ToString()
-    //    { return "Exists XML exception:" + Message; }
-    //}
-
 
 }

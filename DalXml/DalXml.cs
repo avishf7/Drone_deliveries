@@ -68,7 +68,6 @@ namespace DalXml
 
         #endregion
 
-
         #region Station
         public void AddStation(Station station)
         {
@@ -143,7 +142,6 @@ namespace DalXml
         }
 
         #endregion
-
 
         #region Customer 
 
@@ -242,6 +240,192 @@ namespace DalXml
 
             return customer.Select(item => item);
         }
+
+        #endregion
+
+        #region Package functions
+
+        /// <summary>
+        /// Function of adding a package.
+        /// </summary>
+        /// <param name="package">Package to add</param>
+        public void AddPackage(Package package)
+        {
+            package.Id = DataSource.Config.PackageIdCounter++;
+            DataSource.packages.Add(package);
+        }
+
+        /// <summary>
+        /// Function of updating a package.
+        /// </summary>
+        /// <param name="Package">Package to update</param>
+        public void UpdatePackage(Package package)
+        {
+            if (!DataSource.packages.Exists(x => x.Id == package.Id))
+            {
+                throw new NoNumberFoundException();
+            }
+
+            int iU = DataSource.packages.FindIndex(pck => pck.Id == package.Id);
+            DataSource.packages.Insert(iU, package);
+        }
+
+        /// <summary>
+        ///Function for displaying package.
+        /// </summary>
+        /// <param name="packageId"> The id of package</param>
+        /// <returns>A copy of the package function</returns>
+        public Package GetPackage(int packageId)
+        {
+            if (!DataSource.packages.Exists(x => x.Id == packageId))
+            {
+                throw new NoNumberFoundException();
+            }
+
+            return DataSource.packages.First(pck => pck.Id == packageId);
+        }
+
+
+        /// <summary>
+        /// Displays a list of package's.
+        /// </summary>
+        /// <param name="predicate">The list will be filtered according to the conditions obtained</param>
+        /// <returns>The list of packages</returns>
+        public IEnumerable<Package> GetPackages(Predicate<Package> predicate = null)
+        {
+            return DataSource.packages.Where(i => predicate == null ? true : predicate(i));
+        }
+
+        /// <summary>
+        /// A function that implements a state of connecting a package to a skimmer
+        /// </summary>
+        /// <param name="id">The id of the package </param>
+        /// <param name="droneId">The id of the drone</param>
+        public void ConnectPackageToDrone(int id, int droneId)
+        {
+            Package package = GetPackage(id);
+            int indexPackage = DataSource.packages.FindIndex(pck => pck.Id == id);
+
+
+            package.DroneId = droneId;
+            package.Scheduled = DateTime.Now;
+
+            DataSource.packages[indexPackage] = package;
+        }
+
+        /// <summary>
+        /// A function that implements the state of a collected package
+        /// </summary>
+        /// <param name="id">The id of the package </param>
+        public void PickUp(int id)
+        {
+            Package package = GetPackage(id);
+            int indexPackage = DataSource.packages.FindIndex(pck => pck.Id == id);
+
+            package.PickedUp = DateTime.Now;
+            DataSource.packages[indexPackage] = package;
+
+        }
+
+        /// <summary>
+        /// A function that implements the state of a delivered package
+        /// </summary>
+        /// <param name="id">The id of the package</param>
+        public void PackageDeliver(int id)
+        {
+            Package package = GetPackage(id);
+            int indexPackage = DataSource.packages.FindIndex(pck => pck.Id == id);
+
+            package.Delivered = DateTime.Now;
+            package.DroneId = -1;
+            DataSource.packages[indexPackage] = package;
+        }
+
+
+        /// <summary>
+        /// Delete a package from the list
+        /// </summary>
+        /// <param name="id">The id of the package</param>
+        public void DeletePackage(int id)
+        {
+            int index = DataSource.packages.FindIndex(pck => pck.Id == id);
+            DataSource.packages.RemoveAt(index != -1 ? index : throw new NoNumberFoundException(" "));
+        }
+
+        #endregion
+
+        #region Drone charge functions
+
+        /// <summary>
+        /// Function of adding a droneCharge.
+        /// </summary>
+        /// <param name="droneCharge">Drone charge to add</param>
+        public void AddDroneCharge(DroneCharge droneCharge)
+        {
+            if (DataSource.droneCharges.Exists(x => x.DroneId == droneCharge.DroneId))
+            {
+                throw new ExistsNumberException();
+            }
+
+            DataSource.droneCharges.Add(droneCharge);
+        }
+
+        /// <summary>
+        /// Function of updating a drone charge.
+        /// </summary>
+        /// <param name="Package">Package to update</param>
+        public void UpdateDroneCharge(DroneCharge droneCharge)
+        {
+            if (!DataSource.droneCharges.Exists(x => x.DroneId == droneCharge.DroneId))
+            {
+                throw new NoNumberFoundException();
+            }
+
+            int iU = DataSource.droneCharges.FindIndex(drCh => drCh.DroneId == droneCharge.DroneId);
+            DataSource.droneCharges.Insert(iU, droneCharge);
+        }
+
+        /// <summary>
+        /// Function for displaying drone charges.
+        /// </summary>
+        /// <param name="droneId">The id of drone</param>
+        /// <returns>A copy of the drone function</returns>
+        public DroneCharge GetDroneCharge(int droneId)
+        {
+            if (!DataSource.droneCharges.Exists(x => x.DroneId == droneId))
+            {
+                throw new NoNumberFoundException();
+            }
+
+            return DataSource.droneCharges.First(dr => dr.DroneId == droneId);
+        }
+
+        /// <summary>
+        /// Displays a list of drone chrarges.
+        /// </summary>
+        /// <param name="predicate">The list will be filtered according to the conditions obtained</param>
+        /// <returns>The list of dronesList</returns>
+        public IEnumerable<DroneCharge> GetDronesCharges(Predicate<DroneCharge> predicate = null)
+        {
+            return DataSource.droneCharges.Where(i => predicate == null ? true : predicate(i));
+        }
+
+        /// <summary>
+        /// Delete a drone charge from the list
+        /// </summary>
+        /// <param name="id">The id of drone</param>
+        public void DeleteDroneCharge(int id)
+        {
+            if (!DataSource.droneCharges.Exists(x => x.DroneId == id))
+            {
+                throw new NoNumberFoundException();
+            }
+
+            int Id = DataSource.droneCharges.FindIndex(drc => drc.DroneId == id);
+            DataSource.droneCharges.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundException(" "));
+        }
+
+
 
         #endregion
     }
