@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
 using System.Runtime.CompilerServices;
+using ServiceStack.Text;
 
 namespace Dal
 {
@@ -243,7 +244,7 @@ namespace Dal
 
         #endregion
 
-        #region Package functions
+        #region Package 
 
         /// <summary>
         /// Function of adding a package.
@@ -509,8 +510,8 @@ namespace Dal
         {
             IEnumerable<double> config = XmlTools.LoadListFromXMLElement(@"config.xml");
 
-            
-            List<double> ChargingRequests = new()
+
+            config ChargingRequests = new()
             {               
             config.DroneAvailable,
                 DataSource.Config.LightWeight,
@@ -518,8 +519,23 @@ namespace Dal
                 DataSource.Config.HeavyWeight,
                 DataSource.Config.ChargingRate
             };
-
+            XmlTools.SaveListToXMLSerializer(config, @"config.xml");
             return ChargingRequests;
+
+
+            XElement element = XmlTools.LoadListFromXMLElement((@"config.xml");
+            IEnumerable<double>Cconfig = from cus in element.Elements()
+                                             select new Config()
+                                             {
+                                                 LightWeight = double.Parse(cus.Element("LightWeight").Value),
+                                                 Name = cus.Element("Name").Value,
+                                                 Phone = cus.Element("PhoneNumber").Value,
+                                                 Longitude = double.Parse(cus.Element("Longitude").Value),
+                                                 Lattitude = double.Parse(cus.Element("Latitude").Value)
+                                             };
+
+
+            return customer.Select(item => item);
         }
 
 

@@ -1,9 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<string>1.0</string>
-	<string>1.5</string>
-	<string>2.0</string>
-	<string>2.5</string>
+<ArrayOfDouble xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<double>1.0</double>
+		<double>1.5</double>
+			<double>2.0</double>
+	<double>2.5</string>
 	<string>10000</string>
 	<string>14</string>
-</ArrayOfString>
+</ArrayOfDouble>
+
+
+DataSource.Config.DroneAvailable,
+DataSource.Config.LightWeight,
+DataSource.Config.MediumWeight,
+DataSource.Config.HeavyWeight,
+DataSource.Config.ChargingRate
