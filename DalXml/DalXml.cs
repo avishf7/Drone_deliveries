@@ -274,13 +274,17 @@ namespace Dal
         /// <param name="Package">Package to update</param>
         public void UpdatePackage(Package package)
         {
-            if (!DataSource.packages.Exists(x => x.Id == package.Id))
+            List<Package> packageList = XmlTools.LoadListFromXMLSerializer<Package>(@"PackageXml.xml");
+
+            if (!packageList.Exists(pck => pck.Id == package.Id))
             {
                 throw new NoNumberFoundException();
             }
 
-            int iU = DataSource.packages.FindIndex(pck => pck.Id == package.Id);
-            DataSource.packages.Insert(iU, package);
+            int iU = packageList.FindIndex(pck => pck.Id == package.Id);
+            packageList.Insert(iU, package);
+
+            XmlTools.SaveListToXMLSerializer(packageList, @"PackageXml.xml");
         }
 
         /// <summary>
@@ -290,12 +294,14 @@ namespace Dal
         /// <returns>A copy of the package function</returns>
         public Package GetPackage(int packageId)
         {
-            if (!DataSource.packages.Exists(x => x.Id == packageId))
+            List<Package> package = XmlTools.LoadListFromXMLSerializer<Package>(@"PackageXml.xml");
+
+            if (!package.Exists(x => x.Id == packageId))
             {
                 throw new NoNumberFoundException();
             }
 
-            return DataSource.packages.First(pck => pck.Id == packageId);
+            return package.First(pck => pck.Id == packageId);
         }
 
 
@@ -306,7 +312,10 @@ namespace Dal
         /// <returns>The list of packages</returns>
         public IEnumerable<Package> GetPackages(Predicate<Package> predicate = null)
         {
-            return DataSource.packages.Where(i => predicate == null ? true : predicate(i));
+            List<Package> package = XmlTools.LoadListFromXMLSerializer<Package>(@"PackageXml.xml");
+
+
+            return package.Where(i => predicate == null ? true : predicate(i));
         }
 
         /// <summary>
@@ -316,14 +325,18 @@ namespace Dal
         /// <param name="droneId">The id of the drone</param>
         public void ConnectPackageToDrone(int id, int droneId)
         {
+            List<Package> packageList = XmlTools.LoadListFromXMLSerializer<Package>(@"PackageXml.xml");
+
             Package package = GetPackage(id);
-            int indexPackage = DataSource.packages.FindIndex(pck => pck.Id == id);
+            int indexPackage = packageList.FindIndex(pck => pck.Id == id);
 
 
             package.DroneId = droneId;
             package.Scheduled = DateTime.Now;
 
-            DataSource.packages[indexPackage] = package;
+            packageList[indexPackage] = package;
+
+            XmlTools.SaveListToXMLSerializer(packageList, @"PackageXml.xml");
         }
 
         /// <summary>
@@ -332,12 +345,15 @@ namespace Dal
         /// <param name="id">The id of the package </param>
         public void PickUp(int id)
         {
+            List<Package> packageList = XmlTools.LoadListFromXMLSerializer<Package>(@"PackageXml.xml");
+
             Package package = GetPackage(id);
-            int indexPackage = DataSource.packages.FindIndex(pck => pck.Id == id);
+            int indexPackage = packageList.FindIndex(pck => pck.Id == id);
 
             package.PickedUp = DateTime.Now;
-            DataSource.packages[indexPackage] = package;
+            packageList[indexPackage] = package;
 
+            XmlTools.SaveListToXMLSerializer(packageList, @"PackageXml.xml");
         }
 
         /// <summary>
@@ -346,12 +362,16 @@ namespace Dal
         /// <param name="id">The id of the package</param>
         public void PackageDeliver(int id)
         {
+            List<Package> packageList = XmlTools.LoadListFromXMLSerializer<Package>(@"PackageXml.xml");
+
             Package package = GetPackage(id);
-            int indexPackage = DataSource.packages.FindIndex(pck => pck.Id == id);
+            int indexPackage = packageList.FindIndex(pck => pck.Id == id);
 
             package.Delivered = DateTime.Now;
             package.DroneId = -1;
-            DataSource.packages[indexPackage] = package;
+            packageList[indexPackage] = package;
+
+            XmlTools.SaveListToXMLSerializer(packageList, @"PackageXml.xml");
         }
 
 
@@ -361,8 +381,12 @@ namespace Dal
         /// <param name="id">The id of the package</param>
         public void DeletePackage(int id)
         {
-            int index = DataSource.packages.FindIndex(pck => pck.Id == id);
-            DataSource.packages.RemoveAt(index != -1 ? index : throw new NoNumberFoundException(" "));
+            List<Package> packageList = XmlTools.LoadListFromXMLSerializer<Package>(@"PackageXml.xml");
+
+            int index = packageList.FindIndex(pck => pck.Id == id);
+            packageList.RemoveAt(index != -1 ? index : throw new NoNumberFoundException(" "));
+
+            XmlTools.SaveListToXMLSerializer(packageList, @"PackageXml.xml");
         }
 
         #endregion
@@ -375,12 +399,16 @@ namespace Dal
         /// <param name="droneCharge">Drone charge to add</param>
         public void AddDroneCharge(DroneCharge droneCharge)
         {
-            if (DataSource.droneCharges.Exists(x => x.DroneId == droneCharge.DroneId))
+            List<DroneCharge> droneChargeList = XmlTools.LoadListFromXMLSerializer<DroneCharge>(@"DroneCharge.xml");
+
+            if (droneChargeList.Exists(x => x.DroneId == droneCharge.DroneId))
             {
                 throw new ExistsNumberException();
             }
 
-            DataSource.droneCharges.Add(droneCharge);
+            droneChargeList.Add(droneCharge);
+
+            XmlTools.SaveListToXMLSerializer(droneChargeList, @"DroneCharge.xml");
         }
 
         /// <summary>
@@ -442,7 +470,7 @@ namespace Dal
 
         public List<double> ChargingRequest()
         {
-            XElement config = XmlTools.LoadFromXMLElement(@"config.xml");
+            XElement config = XmlTools.LoadListFromXMLElement(@"config.xml");
 
 
             List<double> ChargingRequests = new()
@@ -453,23 +481,11 @@ namespace Dal
                 double.Parse(config.Element("HeavyWeight").Value),
                 double.Parse(config.Element("ChargingRate").Value)
             };
-            XmlTools.SaveListToXMLSerializer(config, @"config.xml");
+            XmlTools.SaveListToXMLElement(config, @"config.xml");
             return ChargingRequests;
 
 
-            XElement element = XmlTools.LoadListFromXMLElement((@"config.xml");
-            IEnumerable<double>Cconfig = from cus in element.Elements()
-                                             select new Config()
-                                             {
-                                                 LightWeight = double.Parse(cus.Element("LightWeight").Value),
-                                                 Name = cus.Element("Name").Value,
-                                                 Phone = cus.Element("PhoneNumber").Value,
-                                                 Longitude = double.Parse(cus.Element("Longitude").Value),
-                                                 Lattitude = double.Parse(cus.Element("Latitude").Value)
-                                             };
-
-
-            return customer.Select(item => item);
+           
         }
 
     }
