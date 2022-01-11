@@ -7,16 +7,16 @@ using System.Linq;
 using System.Xml.Linq;
 using System.Runtime.CompilerServices;
 
-namespace DalXml
+namespace Dal
 {
-    public class DalXml : IDal
+    sealed class DalXml : IDal
     {
-        static DalXml()// static ctor to ensure instance init is done just before first usage
-        {
-            //DataSource.Initialize();
+        public static DalXml Instance { get; } = new DalXml();
+
+        private DalXml()//CTOR for Initialize first data
+        {     
+            
         }
-
-
 
         #region Drone
         public void AddDrone(Drone drone)
@@ -251,182 +251,279 @@ namespace DalXml
         /// <param name="package">Package to add</param>
         public void AddPackage(Package package)
         {
-            package.Id = DataSource.Config.PackageIdCounter++;
-            DataSource.packages.Add(package);
+            package.Id =int.Parse(XElement.Load(@"config.xml").Element("config-elements").Element("PackageIdCounter").Value) ;
+            //DataSource.packages.Add(package);
         }
 
-        /// <summary>
-        /// Function of updating a package.
-        /// </summary>
-        /// <param name="Package">Package to update</param>
-        public void UpdatePackage(Package package)
+        public void DeleteDrone(int id)
         {
-            if (!DataSource.packages.Exists(x => x.Id == package.Id))
-            {
-                throw new NoNumberFoundException();
-            }
-
-            int iU = DataSource.packages.FindIndex(pck => pck.Id == package.Id);
-            DataSource.packages.Insert(iU, package);
+            throw new NotImplementedException();
         }
 
-        /// <summary>
-        ///Function for displaying package.
-        /// </summary>
-        /// <param name="packageId"> The id of package</param>
-        /// <returns>A copy of the package function</returns>
+        public void DeleteStation(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteCustomer(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdatePackage(Package Package)
+        {
+            throw new NotImplementedException();
+        }
+
         public Package GetPackage(int packageId)
         {
-            if (!DataSource.packages.Exists(x => x.Id == packageId))
-            {
-                throw new NoNumberFoundException();
-            }
-
-            return DataSource.packages.First(pck => pck.Id == packageId);
+            throw new NotImplementedException();
         }
 
-
-        /// <summary>
-        /// Displays a list of package's.
-        /// </summary>
-        /// <param name="predicate">The list will be filtered according to the conditions obtained</param>
-        /// <returns>The list of packages</returns>
         public IEnumerable<Package> GetPackages(Predicate<Package> predicate = null)
         {
-            return DataSource.packages.Where(i => predicate == null ? true : predicate(i));
+            throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// A function that implements a state of connecting a package to a skimmer
-        /// </summary>
-        /// <param name="id">The id of the package </param>
-        /// <param name="droneId">The id of the drone</param>
-        public void ConnectPackageToDrone(int id, int droneId)
-        {
-            Package package = GetPackage(id);
-            int indexPackage = DataSource.packages.FindIndex(pck => pck.Id == id);
-
-
-            package.DroneId = droneId;
-            package.Scheduled = DateTime.Now;
-
-            DataSource.packages[indexPackage] = package;
-        }
-
-        /// <summary>
-        /// A function that implements the state of a collected package
-        /// </summary>
-        /// <param name="id">The id of the package </param>
         public void PickUp(int id)
         {
-            Package package = GetPackage(id);
-            int indexPackage = DataSource.packages.FindIndex(pck => pck.Id == id);
-
-            package.PickedUp = DateTime.Now;
-            DataSource.packages[indexPackage] = package;
-
+            throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// A function that implements the state of a delivered package
-        /// </summary>
-        /// <param name="id">The id of the package</param>
         public void PackageDeliver(int id)
         {
-            Package package = GetPackage(id);
-            int indexPackage = DataSource.packages.FindIndex(pck => pck.Id == id);
-
-            package.Delivered = DateTime.Now;
-            package.DroneId = -1;
-            DataSource.packages[indexPackage] = package;
+            throw new NotImplementedException();
         }
 
+        public void ConnectPackageToDrone(int id, int droneId)
+        {
+            throw new NotImplementedException();
+        }
 
-        /// <summary>
-        /// Delete a package from the list
-        /// </summary>
-        /// <param name="id">The id of the package</param>
         public void DeletePackage(int id)
         {
-            int index = DataSource.packages.FindIndex(pck => pck.Id == id);
-            DataSource.packages.RemoveAt(index != -1 ? index : throw new NoNumberFoundException(" "));
+            throw new NotImplementedException();
         }
 
-        #endregion
-
-        #region Drone charge functions
-
-        /// <summary>
-        /// Function of adding a droneCharge.
-        /// </summary>
-        /// <param name="droneCharge">Drone charge to add</param>
         public void AddDroneCharge(DroneCharge droneCharge)
         {
-            if (DataSource.droneCharges.Exists(x => x.DroneId == droneCharge.DroneId))
-            {
-                throw new ExistsNumberException();
-            }
-
-            DataSource.droneCharges.Add(droneCharge);
+            throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Function of updating a drone charge.
-        /// </summary>
-        /// <param name="Package">Package to update</param>
         public void UpdateDroneCharge(DroneCharge droneCharge)
         {
-            if (!DataSource.droneCharges.Exists(x => x.DroneId == droneCharge.DroneId))
-            {
-                throw new NoNumberFoundException();
-            }
-
-            int iU = DataSource.droneCharges.FindIndex(drCh => drCh.DroneId == droneCharge.DroneId);
-            DataSource.droneCharges.Insert(iU, droneCharge);
+            throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Function for displaying drone charges.
-        /// </summary>
-        /// <param name="droneId">The id of drone</param>
-        /// <returns>A copy of the drone function</returns>
         public DroneCharge GetDroneCharge(int droneId)
         {
-            if (!DataSource.droneCharges.Exists(x => x.DroneId == droneId))
-            {
-                throw new NoNumberFoundException();
-            }
-
-            return DataSource.droneCharges.First(dr => dr.DroneId == droneId);
+            throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Displays a list of drone chrarges.
-        /// </summary>
-        /// <param name="predicate">The list will be filtered according to the conditions obtained</param>
-        /// <returns>The list of dronesList</returns>
         public IEnumerable<DroneCharge> GetDronesCharges(Predicate<DroneCharge> predicate = null)
         {
-            return DataSource.droneCharges.Where(i => predicate == null ? true : predicate(i));
+            throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Delete a drone charge from the list
-        /// </summary>
-        /// <param name="id">The id of drone</param>
         public void DeleteDroneCharge(int id)
         {
-            if (!DataSource.droneCharges.Exists(x => x.DroneId == id))
-            {
-                throw new NoNumberFoundException();
-            }
-
-            int Id = DataSource.droneCharges.FindIndex(drc => drc.DroneId == id);
-            DataSource.droneCharges.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundException(" "));
+            throw new NotImplementedException();
         }
 
+        ///// <summary>
+        ///// Function of updating a package.
+        ///// </summary>
+        ///// <param name="Package">Package to update</param>
+        //public void UpdatePackage(Package package)
+        //{
+        //    if (!DataSource.packages.Exists(x => x.Id == package.Id))
+        //    {
+        //        throw new NoNumberFoundException();
+        //    }
+
+        //    int iU = DataSource.packages.FindIndex(pck => pck.Id == package.Id);
+        //    DataSource.packages.Insert(iU, package);
+        //}
+
+        ///// <summary>
+        /////Function for displaying package.
+        ///// </summary>
+        ///// <param name="packageId"> The id of package</param>
+        ///// <returns>A copy of the package function</returns>
+        //public Package GetPackage(int packageId)
+        //{
+        //    if (!DataSource.packages.Exists(x => x.Id == packageId))
+        //    {
+        //        throw new NoNumberFoundException();
+        //    }
+
+        //    return DataSource.packages.First(pck => pck.Id == packageId);
+        //}
+
+
+        ///// <summary>
+        ///// Displays a list of package's.
+        ///// </summary>
+        ///// <param name="predicate">The list will be filtered according to the conditions obtained</param>
+        ///// <returns>The list of packages</returns>
+        //public IEnumerable<Package> GetPackages(Predicate<Package> predicate = null)
+        //{
+        //    return DataSource.packages.Where(i => predicate == null ? true : predicate(i));
+        //}
+
+        ///// <summary>
+        ///// A function that implements a state of connecting a package to a skimmer
+        ///// </summary>
+        ///// <param name="id">The id of the package </param>
+        ///// <param name="droneId">The id of the drone</param>
+        //public void ConnectPackageToDrone(int id, int droneId)
+        //{
+        //    Package package = GetPackage(id);
+        //    int indexPackage = DataSource.packages.FindIndex(pck => pck.Id == id);
+
+
+        //    package.DroneId = droneId;
+        //    package.Scheduled = DateTime.Now;
+
+        //    DataSource.packages[indexPackage] = package;
+        //}
+
+        ///// <summary>
+        ///// A function that implements the state of a collected package
+        ///// </summary>
+        ///// <param name="id">The id of the package </param>
+        //public void PickUp(int id)
+        //{
+        //    Package package = GetPackage(id);
+        //    int indexPackage = DataSource.packages.FindIndex(pck => pck.Id == id);
+
+        //    package.PickedUp = DateTime.Now;
+        //    DataSource.packages[indexPackage] = package;
+
+        //}
+
+        ///// <summary>
+        ///// A function that implements the state of a delivered package
+        ///// </summary>
+        ///// <param name="id">The id of the package</param>
+        //public void PackageDeliver(int id)
+        //{
+        //    Package package = GetPackage(id);
+        //    int indexPackage = DataSource.packages.FindIndex(pck => pck.Id == id);
+
+        //    package.Delivered = DateTime.Now;
+        //    package.DroneId = -1;
+        //    DataSource.packages[indexPackage] = package;
+        //}
+
+
+        ///// <summary>
+        ///// Delete a package from the list
+        ///// </summary>
+        ///// <param name="id">The id of the package</param>
+        //public void DeletePackage(int id)
+        //{
+        //    int index = DataSource.packages.FindIndex(pck => pck.Id == id);
+        //    DataSource.packages.RemoveAt(index != -1 ? index : throw new NoNumberFoundException(" "));
+        //}
+
+        //#endregion
+
+        //#region Drone charge functions
+
+        ///// <summary>
+        ///// Function of adding a droneCharge.
+        ///// </summary>
+        ///// <param name="droneCharge">Drone charge to add</param>
+        //public void AddDroneCharge(DroneCharge droneCharge)
+        //{
+        //    if (DataSource.droneCharges.Exists(x => x.DroneId == droneCharge.DroneId))
+        //    {
+        //        throw new ExistsNumberException();
+        //    }
+
+        //    DataSource.droneCharges.Add(droneCharge);
+        //}
+
+        ///// <summary>
+        ///// Function of updating a drone charge.
+        ///// </summary>
+        ///// <param name="Package">Package to update</param>
+        //public void UpdateDroneCharge(DroneCharge droneCharge)
+        //{
+        //    if (!DataSource.droneCharges.Exists(x => x.DroneId == droneCharge.DroneId))
+        //    {
+        //        throw new NoNumberFoundException();
+        //    }
+
+        //    int iU = DataSource.droneCharges.FindIndex(drCh => drCh.DroneId == droneCharge.DroneId);
+        //    DataSource.droneCharges.Insert(iU, droneCharge);
+        //}
+
+        ///// <summary>
+        ///// Function for displaying drone charges.
+        ///// </summary>
+        ///// <param name="droneId">The id of drone</param>
+        ///// <returns>A copy of the drone function</returns>
+        //public DroneCharge GetDroneCharge(int droneId)
+        //{
+        //    if (!DataSource.droneCharges.Exists(x => x.DroneId == droneId))
+        //    {
+        //        throw new NoNumberFoundException();
+        //    }
+
+        //    return DataSource.droneCharges.First(dr => dr.DroneId == droneId);
+        //}
+
+        ///// <summary>
+        ///// Displays a list of drone chrarges.
+        ///// </summary>
+        ///// <param name="predicate">The list will be filtered according to the conditions obtained</param>
+        ///// <returns>The list of dronesList</returns>
+        //public IEnumerable<DroneCharge> GetDronesCharges(Predicate<DroneCharge> predicate = null)
+        //{
+        //    return DataSource.droneCharges.Where(i => predicate == null ? true : predicate(i));
+        //}
+
+        ///// <summary>
+        ///// Delete a drone charge from the list
+        ///// </summary>
+        ///// <param name="id">The id of drone</param>
+        //public void DeleteDroneCharge(int id)
+        //{
+        //    if (!DataSource.droneCharges.Exists(x => x.DroneId == id))
+        //    {
+        //        throw new NoNumberFoundException();
+        //    }
+
+        //    int Id = DataSource.droneCharges.FindIndex(drc => drc.DroneId == id);
+        //    DataSource.droneCharges.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundException(" "));
+        //}
+
+        /// <summary>
+        /// Information on power consumption and charging time
+        /// </summary>
+        /// <returns>A list of the charging requests</returns>
+        /// 
+        public List<double> ChargingRequest()
+        {
+            IEnumerable<double> config = XmlTools.LoadListFromXMLElement(@"config.xml");
+
+            
+            List<double> ChargingRequests = new()
+            {               
+            config.DroneAvailable,
+                DataSource.Config.LightWeight,
+                DataSource.Config.MediumWeight,
+                DataSource.Config.HeavyWeight,
+                DataSource.Config.ChargingRate
+            };
+
+            return ChargingRequests;
+        }
 
 
         #endregion
+
     }
 }

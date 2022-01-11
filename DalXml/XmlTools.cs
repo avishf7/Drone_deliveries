@@ -9,9 +9,9 @@ using System.Xml.Serialization;
 using DalApi;
 using DO;
 
-namespace DalXml
+namespace Dal
 {
-    internal class XmlTools
+    public class XmlTools
     {
         static string dir = @"xml\";
         static XmlTools()

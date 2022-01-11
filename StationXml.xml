@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<ArrayOfStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Station>
+    <Id>5</Id>
+    <Name>VIRTA Charging Station</Name>
+    <FreeChargeSlots>4</FreeChargeSlots>
+    <Longitude>34.554392666232026</Longitude>
+    <Lattitude>32.113611496805035</Lattitude>
+  </Station>
+  <Station>
+    <Id>15</Id>
+    <Name>EV-Edge Charging Station</Name>
+    <FreeChargeSlots>4</FreeChargeSlots>
+    <Longitude>34.54097611412451</Longitude>
+    <Lattitude>32.01601992431843</Lattitude>
+  </Station>
+</ArrayOfStation>

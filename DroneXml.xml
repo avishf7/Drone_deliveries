@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<ArrayOfDrone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Drone>
+    <Id>3</Id>
+    <Model>Mavic Air 2</Model>
+    <MaxWeight>Heavy</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>11</Id>
+    <Model>Mavic Air 2</Model>
+    <MaxWeight>Heavy</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>24</Id>
+    <Model>MAVIC MINI 2</Model>
+    <MaxWeight>Heavy</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>34</Id>
+    <Model>MAVIC MINI 2</Model>
+    <MaxWeight>Heavy</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>45</Id>
+    <Model>MAVIC MINI 2</Model>
+    <MaxWeight>Heavy</MaxWeight>
+  </Drone>
+</ArrayOfDrone>

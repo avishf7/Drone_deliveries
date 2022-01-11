@@ -17,7 +17,7 @@ namespace Dal
         /// <summary>
         /// CTOR
         /// </summary>
-        private DalObject()
+        private DalObject()//CTOR for Initialize first data
         {
             DataSource.Initialize();
         }
