@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<config>
+  <DroneAvailable>1.0</DroneAvailable>
+  <LightWeight>1.5</LightWeight>
+  <MediumWeight>2.0</MediumWeight>
+  <HeavyWeight>2.5</HeavyWeight>
+  <ChargingRate>10000</ChargingRate>
+  <PackageIdCounter>11</PackageIdCounter>
+</config>

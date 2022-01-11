@@ -148,7 +148,7 @@ namespace Dal
 
         public void AddCustomer(Customer customer)
         {
-            XElement element = XmlTools.LoadListFromXMLElement(@"CustomerXml.xml");
+            XElement element = XmlTools.LoadFromXMLElement(@"CustomerXml.xml");
 
             XElement Customer = (from cus in element.Elements()
                                  where cus.Element("Id").Value == customer.Id.ToString()
@@ -167,13 +167,13 @@ namespace Dal
 
             element.Add(XCustomer);
 
-            XmlTools.SaveListToXMLElement(element, @"CustomerXml.xml");
+            XmlTools.SaveToXMLElement(element, @"CustomerXml.xml");
         }
 
 
         public void UpdateCustomer(Customer customer)
         {
-            XElement element = XmlTools.LoadListFromXMLElement(@"CustomerXml.xml");
+            XElement element = XmlTools.LoadFromXMLElement(@"CustomerXml.xml");
 
             XElement Customer = (from cus in element.Elements()
                                  where cus.Element("Id").Value == customer.Id.ToString()
@@ -189,13 +189,13 @@ namespace Dal
             Customer.Element("Longitude").Value = customer.Longitude.ToString();
             Customer.Element("Latitude").Value = customer.Lattitude.ToString();
 
-            XmlTools.SaveListToXMLElement(element, @"CustomerXml.xml");
+            XmlTools.SaveToXMLElement(element, @"CustomerXml.xml");
         }
 
 
         public Customer GetCustomer(int customerId)
         {
-            XElement element = XmlTools.LoadListFromXMLElement(@"CustomerXml.xml");
+            XElement element = XmlTools.LoadFromXMLElement(@"CustomerXml.xml");
 
             Customer Customer = (from cus in element.Elements()
                                  where cus.Element("Id").Value == customerId.ToString()
@@ -226,7 +226,7 @@ namespace Dal
         /// <returns>The list of customers</returns>
         public IEnumerable<Customer> GetCustomers(Predicate<Customer> predicate = null)
         {
-            XElement element = XmlTools.LoadListFromXMLElement(@"CustomerXml.xml");
+            XElement element = XmlTools.LoadFromXMLElement(@"CustomerXml.xml");
             IEnumerable<Customer> customer = from cus in element.Elements()
                                              select new Customer()
                                              {
@@ -251,8 +251,20 @@ namespace Dal
         /// <param name="package">Package to add</param>
         public void AddPackage(Package package)
         {
-            package.Id =int.Parse(XElement.Load(@"config.xml").Element("config-elements").Element("PackageIdCounter").Value) ;
-            //DataSource.packages.Add(package);
+            List<Package> packages = XmlTools.LoadListFromXMLSerializer<Package>(@"PackageXml.xml");
+            XElement config = XmlTools.LoadFromXMLElement(@"config.xml");
+            XElement packageIdCounter = config.Element("PackageIdCounter");
+            int intPackageIdCounter = int.Parse(packageIdCounter.Value);
+
+
+            package.Id = intPackageIdCounter;
+            packages.Add(package);
+
+            packageIdCounter.Value = (intPackageIdCounter + 1).ToString();
+
+            XmlTools.SaveToXMLElement(config, @"config.xml");
+            XmlTools.SaveListToXMLSerializer(packages, @"PackageXml.xml");
+
         }
 
         public void DeleteDrone(int id)
@@ -507,16 +519,16 @@ namespace Dal
         /// 
         public List<double> ChargingRequest()
         {
-            IEnumerable<double> config = XmlTools.LoadListFromXMLElement(@"config.xml");
+            XElement config = XmlTools.LoadFromXMLElement(@"config.xml");
 
             
             List<double> ChargingRequests = new()
             {               
-            config.DroneAvailable,
-                DataSource.Config.LightWeight,
-                DataSource.Config.MediumWeight,
-                DataSource.Config.HeavyWeight,
-                DataSource.Config.ChargingRate
+            double.Parse(config.Element("DroneAvailable").Value),
+                double.Parse(config.Element("LightWeight").Value),
+                double.Parse(config.Element("MediumWeight").Value),
+                double.Parse(config.Element("HeavyWeight").Value),
+                double.Parse(config.Element("ChargingRate").Value)
             };
 
             return ChargingRequests;

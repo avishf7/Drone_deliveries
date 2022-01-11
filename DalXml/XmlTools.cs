@@ -21,11 +21,11 @@ namespace Dal
         }
 
         #region SaveLoadWithXElement
-        public static void SaveListToXMLElement(XElement rootElem, string filePath)
+        public static void SaveToXMLElement(XElement rootElem, string filePath)
         {
             try
             {
-                rootElem.Save(/*dir + */filePath);
+                rootElem.Save(dir + filePath);
             }
             catch (Exception ex)
             {
@@ -33,18 +33,18 @@ namespace Dal
             }
         }
 
-        public static XElement LoadListFromXMLElement(string filePath)
+        public static XElement LoadFromXMLElement(string filePath)
         {
             try
             {
-                if (File.Exists(/*dir +*/ filePath))
+                if (File.Exists(dir + filePath))
                 {
-                    return XElement.Load(/*dir +*/ filePath);
+                    return XElement.Load(dir + filePath);
                 }
                 else
                 {
-                    XElement rootElem = new XElement(/*dir + */filePath);
-                    rootElem.Save(/*dir + */filePath);
+                    XElement rootElem = new XElement(dir +filePath);
+                    rootElem.Save(dir + filePath);
                     return rootElem;
                 }
             }
@@ -60,7 +60,7 @@ namespace Dal
         {
             try
             {
-                FileStream file = new FileStream(/*dir +*/ filePath, FileMode.Create);
+                FileStream file = new FileStream(dir + filePath, FileMode.Create);
                 XmlSerializer x = new XmlSerializer(list.GetType());
                 x.Serialize(file, list);
                 file.Close();
@@ -75,11 +75,11 @@ namespace Dal
         {
             try
             {
-                if (File.Exists(filePath))
+                if (File.Exists(dir + filePath))
                 {
                     List<T> list;
                     XmlSerializer x = new XmlSerializer(typeof(List<T>));
-                    FileStream file = new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite);
+                    FileStream file = new FileStream(dir + filePath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite);
                     list = (List<T>)x.Deserialize(file);
                     file.Close();
                     return list;
@@ -91,7 +91,7 @@ namespace Dal
             }
             catch (Exception ex)
             {
-                throw new XMLFileLoadCreateException(filePath, $"fail to load xml file: {filePath}", ex);
+                throw new XMLFileLoadCreateException(dir + filePath, $"fail to load xml file: {filePath}", ex);
             }
         }
         #endregion
