@@ -200,11 +200,6 @@ namespace Dal
             //####################################################################
 
             Config.PackageIdCounter = 11;
-
-            XmlTools.SaveListToXMLSerializer(dronesList, @"DroneXml.xml");
-            XmlTools.SaveListToXMLSerializer(stations, @"StationXml.xml");
-            XmlTools.SaveListToXMLSerializer(customers, @"CustomerXml.xml");
-            XmlTools.SaveListToXMLSerializer(packages, @"PackageXml.xml");
         }
 
 
