@@ -80,9 +80,9 @@
     <Priority>Normal</Priority>
     <Requested>2022-01-11T10:52:11.0449835+02:00</Requested>
     <Scheduled>2022-01-11T13:52:11.0449855+02:00</Scheduled>
-    <PickedUp xsi:nil="true" />
-    <Delivered xsi:nil="true" />
-    <DroneId>11</DroneId>
+    <PickedUp>2022-01-12T11:40:49.5113806+02:00</PickedUp>
+    <Delivered>2022-01-12T11:40:53.054494+02:00</Delivered>
+    <DroneId>-1</DroneId>
   </Package>
   <Package>
     <Id>8</Id>
