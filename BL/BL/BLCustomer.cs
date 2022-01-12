@@ -122,16 +122,16 @@ namespace BL
 
         }
 
-        public void DeleteCustomer(int id)
-        {
-            try
-            {
-                dal.DeleteCustomer(id);
-            }
-            catch (Exception)
-            {
-                throw new NotImplementedException();
-            }
-        }
+        //public void DeleteCustomer(int id)
+        //{
+        //    try
+        //    {
+        //        dal.DeleteCustomer(id);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
     }
 }

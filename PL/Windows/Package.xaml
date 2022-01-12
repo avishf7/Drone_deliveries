@@ -71,7 +71,7 @@
                      Visibility="Hidden">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding CustomerId}"/>
+                        <TextBlock Text="{Binding CustomerId}" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ComboBox>
@@ -167,7 +167,7 @@
                        FontSize="20"
                        Text="{Binding Path=POPackage.Weight}"
                        Background="{StaticResource Static.Background}"                  
-                       Margin="20"
+                       Margin="20,36"
                        TextAlignment="Center"
                        Visibility="Hidden">
             </TextBlock>
@@ -201,7 +201,7 @@
                        FontSize="20"
                        Text="{Binding Path=POPackage.Priority}"
                        Background="{StaticResource Static.Background}"                  
-                       Margin="20"
+                       Margin="20,36"
                        TextAlignment="Center"
                        Visibility="Hidden">
             </TextBlock>
@@ -297,7 +297,7 @@
                        Template="{StaticResource DroneInPackageTemplate}"
                        IsEnabled="{Binding Converter={StaticResource ObjectToEnable}}"
                        Background="{StaticResource Static.Background}"                  
-                       Margin="0"
+                       Margin="-2,1"
                        TextAlignment="Center"
                        MouseDoubleClick="DroneInPackageInfo_MouseDoubleClick"
                        >

@@ -37,12 +37,6 @@ namespace DalApi
         /// <returns>The list of dronesList</returns>
         IEnumerable<Drone> GetDrones(Predicate<Drone> predicate = null);
 
-        /// <summary>
-        /// Delete a drone from the list
-        /// </summary>
-        /// <param name="id">The id of the drone</param>
-        void DeleteDrone(int id);
-
         #endregion
 
         #region Station functions
@@ -85,13 +79,7 @@ namespace DalApi
         /// <param name="stationId">The id of the station</param>
         void RealeseChargingStation(int stationId);
 
-        /// <summary>
-        /// Delete a station from the list
-        /// </summary>
-        /// <param name="id">The id of the station</param>
-        public void DeleteStation(int id);
-
-        #endregion
+         #endregion
 
         #region Customer functions
 
@@ -120,12 +108,6 @@ namespace DalApi
         /// <param name="predicate">The list will be filtered according to the conditions obtained</param>
         /// <returns>The list of customers</returns>
         IEnumerable<Customer> GetCustomers(Predicate<Customer> predicate = null);
-
-        /// <summary>
-        /// Delete a customer from the list
-        /// </summary>
-        /// <param name="id">The id of the customer</param>
-        public void DeleteCustomer(int id);
 
         #endregion
 

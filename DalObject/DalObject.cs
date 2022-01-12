@@ -78,15 +78,15 @@ namespace Dal
 
         }
 
-        /// <summary>
-        /// Delete a drone from the list
-        /// </summary>
-        /// <param name="id">The id of the drone</param>
-        public void DeleteDrone(int id)
-        {
-            int Id = DataSource.dronesList.FindIndex(dr => dr.Id == id);
-            DataSource.dronesList.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundException(" "));
-        }
+        ///// <summary>
+        ///// Delete a drone from the list
+        ///// </summary>
+        ///// <param name="id">The id of the drone</param>
+        //public void DeleteDrone(int id)
+        //{
+        //    int Id = DataSource.dronesList.FindIndex(dr => dr.Id == id);
+        //    DataSource.dronesList.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundException(" "));
+        //}
 
         #endregion
 
@@ -173,15 +173,16 @@ namespace Dal
             station.FreeChargeSlots++;
             DataSource.stations[indexStation] = station;
         }
-        /// <summary>
-        /// Delete a station from the list
-        /// </summary>
-        /// <param name="id">The id of the station</param>
-        public void DeleteStation(int id)
-        {
-            int Id = DataSource.stations.FindIndex(st => st.Id == id);
-            DataSource.stations.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundException(" "));
-        }
+
+        ///// <summary>
+        ///// Delete a station from the list
+        ///// </summary>
+        ///// <param name="id">The id of the station</param>
+        //public void DeleteStation(int id)
+        //{
+        //    int Id = DataSource.stations.FindIndex(st => st.Id == id);
+        //    DataSource.stations.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundException(" "));
+        //}
         #endregion
 
         #region Customer functions
@@ -240,15 +241,15 @@ namespace Dal
             return DataSource.customers.Where(i => predicate == null ? true : predicate(i));
         }
 
-        /// <summary>
-        /// Delete a customer from the list
-        /// </summary>
-        /// <param name="id">The id of the customer</param>
-        public void DeleteCustomer(int id)
-        {
-            int Id = DataSource.customers.FindIndex(cus => cus.Id == id);
-            DataSource.customers.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundException(" "));
-        }
+        ///// <summary>
+        ///// Delete a customer from the list
+        ///// </summary>
+        ///// <param name="id">The id of the customer</param>
+        //public void DeleteCustomer(int id)
+        //{
+        //    int Id = DataSource.customers.FindIndex(cus => cus.Id == id);
+        //    DataSource.customers.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundException(" "));
+        //}
 
         #endregion
 

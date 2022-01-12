@@ -6,7 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
 using System.Runtime.CompilerServices;
-using ServiceStack.Text;
+
 
 namespace Dal
 {
@@ -208,14 +208,15 @@ namespace Dal
                 throw new NoNumberFoundException();
             }
 
-            return new Customer()
+            Customer customer = new Customer()
             {
                 Id = int.Parse(Customer.Element("Id").Value),
                 Name = Customer.Element("Name").Value,
-                Phone = Customer.Element("PhoneNumber").Value,
+                Phone = Customer.Element("Phone").Value,
                 Longitude = double.Parse(Customer.Element("Longitude").Value),
-                Lattitude = double.Parse(Customer.Element("Latitude").Value)
+                Lattitude = double.Parse(Customer.Element("Lattitude").Value)
             };
+            return customer;
   
         }
 
@@ -233,9 +234,9 @@ namespace Dal
                                              {
                                                  Id = int.Parse(cus.Element("Id").Value),
                                                  Name = cus.Element("Name").Value,
-                                                 Phone = cus.Element("PhoneNumber").Value,
+                                                 Phone = cus.Element("Phone").Value,
                                                  Longitude = double.Parse(cus.Element("Longitude").Value),
-                                                 Lattitude = double.Parse(cus.Element("Latitude").Value)
+                                                 Lattitude = double.Parse(cus.Element("Lattitude").Value)
                                              };
 
 
@@ -417,13 +418,17 @@ namespace Dal
         /// <param name="Package">Package to update</param>
         public void UpdateDroneCharge(DroneCharge droneCharge)
         {
-            if (!DataSource.droneCharges.Exists(x => x.DroneId == droneCharge.DroneId))
+            List<DroneCharge> droneChargeList = XmlTools.LoadListFromXMLSerializer<DroneCharge>(@"DroneCharge.xml");
+
+            if (!droneChargeList.Exists(x => x.DroneId == droneCharge.DroneId))
             {
                 throw new NoNumberFoundException();
             }
 
-            int iU = DataSource.droneCharges.FindIndex(drCh => drCh.DroneId == droneCharge.DroneId);
-            DataSource.droneCharges.Insert(iU, droneCharge);
+            int iU = droneChargeList.FindIndex(drCh => drCh.DroneId == droneCharge.DroneId);
+            droneChargeList.Insert(iU, droneCharge);
+
+            XmlTools.SaveListToXMLSerializer(droneChargeList, @"DroneCharge.xml");
         }
 
         /// <summary>
@@ -433,12 +438,14 @@ namespace Dal
         /// <returns>A copy of the drone function</returns>
         public DroneCharge GetDroneCharge(int droneId)
         {
-            if (!DataSource.droneCharges.Exists(x => x.DroneId == droneId))
+            List<DroneCharge> droneCharge = XmlTools.LoadListFromXMLSerializer<DroneCharge>(@"DroneCharge.xml");
+
+            if (!droneCharge.Exists(x => x.DroneId == droneId))
             {
                 throw new NoNumberFoundException();
             }
 
-            return DataSource.droneCharges.First(dr => dr.DroneId == droneId);
+            return droneCharge.First(dr => dr.DroneId == droneId);
         }
 
         /// <summary>
@@ -448,7 +455,9 @@ namespace Dal
         /// <returns>The list of dronesList</returns>
         public IEnumerable<DroneCharge> GetDronesCharges(Predicate<DroneCharge> predicate = null)
         {
-            return DataSource.droneCharges.Where(i => predicate == null ? true : predicate(i));
+            List<DroneCharge> droneCharge = XmlTools.LoadListFromXMLSerializer<DroneCharge>(@"DroneCharge.xml");
+
+            return droneCharge.Where(i => predicate == null ? true : predicate(i));
         }
 
         /// <summary>
@@ -457,20 +466,24 @@ namespace Dal
         /// <param name="id">The id of drone</param>
         public void DeleteDroneCharge(int id)
         {
-            if (!DataSource.droneCharges.Exists(x => x.DroneId == id))
+            List<DroneCharge> droneCharge = XmlTools.LoadListFromXMLSerializer<DroneCharge>(@"DroneCharge.xml");
+
+            if (!droneCharge.Exists(x => x.DroneId == id))
             {
                 throw new NoNumberFoundException();
             }
 
-            int Id = DataSource.droneCharges.FindIndex(drc => drc.DroneId == id);
-            DataSource.droneCharges.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundException(" "));
+            int Id = droneCharge.FindIndex(drc => drc.DroneId == id);
+            droneCharge.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundException(" "));
+
+            XmlTools.SaveListToXMLSerializer(droneCharge, @"DroneCharge.xml");
         }
 
         #endregion
 
         public List<double> ChargingRequest()
         {
-            XElement config = XmlTools.LoadListFromXMLElement(@"config.xml");
+            XElement config = XmlTools.LoadFromXMLElement(@"config.xml");
 
 
             List<double> ChargingRequests = new()
@@ -481,7 +494,7 @@ namespace Dal
                 double.Parse(config.Element("HeavyWeight").Value),
                 double.Parse(config.Element("ChargingRate").Value)
             };
-            XmlTools.SaveListToXMLElement(config, @"config.xml");
+            XmlTools.SaveToXMLElement(config, @"config.xml");
             return ChargingRequests;
 
 

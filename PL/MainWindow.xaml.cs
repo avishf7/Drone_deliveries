@@ -44,6 +44,7 @@ namespace PL
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
+
             this.Close();
         }
 
@@ -72,6 +73,15 @@ namespace PL
             this.ShowPackages.IsEnabled = false;
 
             new PackagesView( this).Show();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            var dr = bl.GetDrones(d => d.DroneStatus == DroneStatuses.Maintenance);
+            foreach (var item in dr)
+            {
+                bl.RealeseDroneFromCharge(item.Id);
+            }
         }
     }
 }

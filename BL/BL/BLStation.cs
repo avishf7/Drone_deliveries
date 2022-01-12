@@ -104,17 +104,17 @@ namespace BL
             }).Where(st => predicate != null ? predicate(st) : true);
         }
 
-        public void DeleteStation(int id)
-        {
-            try
-            {
-                dal.DeleteStation(id);
-            }
-            catch (Exception)
-            {
-                throw new NotImplementedException();
-            }
+        //public void DeleteStation(int id)
+        //{
+        //    try
+        //    {
+        //        dal.DeleteStation(id);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw new NotImplementedException();
+        //    }
 
-        }
+        //}
     }
 }

@@ -345,7 +345,7 @@
                                 <TextBlock Grid.Row="3" Grid.Column="0" Text="Status: " />
                                 <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=Status ,Mode=OneWay, FallbackValue='None'}"/>
                                 <TextBlock Grid.Row="4" Grid.Column="0" Text="Target customer: " HorizontalAlignment="Stretch" />
-                                <TextBox Grid.Row="4" Grid.Column="1" Template="{DynamicResource CustomerInPackageTemplate}" DataContext="{Binding Path=OtherSideCustomer ,Mode=OneWay}"/>
+                            <TextBox Grid.Row="4" Grid.Column="1" Template="{DynamicResource CustomerInPackageTemplate}" DataContext="{Binding Path=OtherSideCustomer ,Mode=OneWay}" MouseDoubleClick="CustomerInPackageInfo_MouseDoubleClick"/>
 
                             </Grid>
                        
@@ -396,7 +396,7 @@
                             <TextBlock Grid.Row="3" Grid.Column="0" Text="Status: " />
                             <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=Status ,Mode=OneWay, FallbackValue='None'}"/>
                             <TextBlock Grid.Row="4" Grid.Column="0" Text="Sender customer: " />
-                            <TextBox Grid.Row="4" Grid.Column="1" Template="{DynamicResource CustomerInPackageTemplate}" DataContext="{Binding Path=OtherSideCustomer ,Mode=OneWay}"/>
+                            <TextBox Grid.Row="4" Grid.Column="1" Template="{DynamicResource CustomerInPackageTemplate}" DataContext="{Binding Path=OtherSideCustomer ,Mode=OneWay}" MouseDoubleClick="CustomerInPackageInfo_MouseDoubleClick"/>
 
                         </Grid>
                     </DataTemplate>

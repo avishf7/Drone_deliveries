@@ -233,6 +233,21 @@ namespace PL.Windows
 
                 new Package(this, POPackage).Show();
             }
-        }               
+        }
+
+        private void CustomerInPackageInfo_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (((TextBox)sender).DataContext != null)
+            {
+                BO.Customer BOCustomer = bl.GetCustomer((((TextBox)sender).DataContext as BO.CustomerInPackage).CustomerId);
+                PO.Customer POCustomer = Model.POCustomers.Find(cus => cus.Id == BOCustomer.Id);
+                if (POCustomer == null)
+                    Model.POCustomers.Add(POCustomer = new PO.Customer().CopyFromBOCustomer(BOCustomer));
+
+                new Customer(this, POCustomer).Show();
+            }
+            else
+                MessageBox.Show("No element exists", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 }

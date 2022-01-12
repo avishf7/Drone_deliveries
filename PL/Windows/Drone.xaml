@@ -118,7 +118,7 @@
                          VerticalAlignment="Stretch"
                          HorizontalAlignment="Stretch"
                          Background="{StaticResource Static.Background}"
-                         Margin="20,27"
+                         Margin="20,32"
                          TextAlignment="Center"
                          IsReadOnly="True"/>
 
@@ -157,7 +157,7 @@
                        FontSize="20"
                        Text="{Binding Path=PODrone.MaxWeight}"
                        Background="{StaticResource Static.Background}"                  
-                       Margin="20,27"
+                       Margin="20,32"
                        TextAlignment="Center"
                        Visibility="Hidden">
             </TextBlock>
@@ -253,7 +253,7 @@
                    Grid.Column="0"                   
                    Foreground="#FFDDD81E" 
                    FontFamily="Arial Black"
-                   Margin="20"/>
+                   Margin="10"/>
 
             <ProgressBar x:Name="BattaryStatus" 
                    FontSize="20"
@@ -274,7 +274,7 @@
                    Grid.Column="0"                   
                    Foreground="#FFDDD81E" 
                    FontFamily="Arial Black"
-                   Margin="20"/>
+                   Margin="10"/>
 
             <TextBlock x:Name="DroneStatus" 
                        Grid.Row="1"
@@ -282,7 +282,7 @@
                        FontSize="20"
                        Text="{Binding Path=PODrone.DroneStatus}"
                        Background="{StaticResource Static.Background}"                  
-                       Margin="20"
+                       Margin="17"
                        TextAlignment="Center">
             </TextBlock>
 
