@@ -245,7 +245,7 @@ namespace Dal
 
         #endregion
 
-        #region Package 
+        #region Package functions
 
         /// <summary>
         /// Function of adding a package.

@@ -43,8 +43,7 @@ namespace BL
                 dr.LocationOfDrone = stLocation;
                 dr.DroneStatus = DroneStatuses.Maintenance;
 
-                IEnumerable<DO.Station> stationsT = dal.GetStations(x => x.FreeChargeSlots > 0);
-                DO.Station station = stationsT.SingleOrDefault(x => x.Lattitude == stLocation.Lattitude && x.Longitude == stLocation.Longitude);
+                DO.Station station = dal.GetStations(x => x.Lattitude == stLocation.Lattitude && x.Longitude == stLocation.Longitude).SingleOrDefault();
 
                 dal.UsingChargingStation(station.Id);
                 dal.AddDroneCharge(new() { DroneId = DroneId, StationId = station.Id, ChargeStart = DateTime.Now });

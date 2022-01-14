@@ -9,7 +9,6 @@
         WindowStyle="None"
         WindowState="Maximized"
         ResizeMode="NoResize"
-        Closed="Window_Closed"
         SizeChanged="Window_SizeChanged">
 
     <Window.Resources>

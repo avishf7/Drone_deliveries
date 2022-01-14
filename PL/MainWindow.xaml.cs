@@ -33,10 +33,11 @@ namespace PL
             InitializeComponent();
         }
 
-        
-
-
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             WindowState = WindowState.Maximized;
@@ -73,15 +74,6 @@ namespace PL
             this.ShowPackages.IsEnabled = false;
 
             new PackagesView( this).Show();
-        }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            var dr = bl.GetDrones(d => d.DroneStatus == DroneStatuses.Maintenance);
-            foreach (var item in dr)
-            {
-                bl.RealeseDroneFromCharge(item.Id);
-            }
         }
     }
 }
