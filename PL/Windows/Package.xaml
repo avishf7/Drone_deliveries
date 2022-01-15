@@ -88,7 +88,7 @@
                        Margin="20"
                        TextAlignment="Center"
                        Visibility="Hidden"
-                       MouseDoubleClick="CustomerInPackageInfo_MouseDoubleClick"
+                       PreviewMouseUp="CustomerInPackageInfo_PreviewMouseUp"
                        >
 
             </TextBox>
@@ -134,8 +134,8 @@
                        Background="{StaticResource Static.Background}"                  
                        Margin="20"
                        TextAlignment="Center"
-                       Visibility="Hidden"
-                       MouseDoubleClick="CustomerInPackageInfo_MouseDoubleClick">
+                       Visibility="Hidden" PreviewMouseUp="CustomerInPackageInfo_PreviewMouseUp"
+                        >
             </TextBox>
 
 
@@ -254,7 +254,7 @@
                         Margin="5,10" 
                         FontFamily="Arial Black"
                         Click="cancel_Click">
-                <Image Source="https://cdn-icons-png.flaticon.com/512/1828/1828479.png" Margin="10"/>            
+                <Image Source="Pictures\Exit.png" Margin="10"/>            
             </Button>
 
 
@@ -298,8 +298,7 @@
                        IsEnabled="{Binding Converter={StaticResource ObjectToEnable}}"
                        Background="{StaticResource Static.Background}"                  
                        Margin="-2,1"
-                       TextAlignment="Center"
-                       MouseDoubleClick="DroneInPackageInfo_MouseDoubleClick"
+                       TextAlignment="Center" PreviewMouseUp="DroneInPackageInfo_PreviewMouseUp"
                        >
             </TextBox>
 
@@ -454,11 +453,11 @@
                         FontFamily="Arial Black"
                         Click="cancel_Click"
                         Visibility="Hidden">
-            <Image Source="https://cdn-icons-png.flaticon.com/512/1828/1828479.png" Margin="10"/>
+            <Image Source="Pictures\Exit.png" Margin="10"/>
         </Button>
     </Grid>
 
     <Window.Background>
-        <ImageBrush ImageSource="https://img.wisebuy.co.il/data/images/Guide/ThinkstockPhotos-668766928131508931264610000.jpg" />
+        <ImageBrush ImageSource="Pictures\windows background.jpg" />
     </Window.Background>
 </Window>

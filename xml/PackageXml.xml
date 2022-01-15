@@ -13,18 +13,6 @@
     <DroneId>-1</DroneId>
   </Package>
   <Package>
-    <Id>2</Id>
-    <SenderId>21</SenderId>
-    <TargetId>59</TargetId>
-    <Weight>Light</Weight>
-    <Priority>Normal</Priority>
-    <Requested>2022-01-11T13:52:11.0448379+02:00</Requested>
-    <Scheduled xsi:nil="true" />
-    <PickedUp xsi:nil="true" />
-    <Delivered xsi:nil="true" />
-    <DroneId>-1</DroneId>
-  </Package>
-  <Package>
     <Id>3</Id>
     <SenderId>42</SenderId>
     <TargetId>89</TargetId>

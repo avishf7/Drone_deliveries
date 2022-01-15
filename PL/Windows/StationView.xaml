@@ -101,6 +101,6 @@
 
 
     <Window.Background>
-        <ImageBrush ImageSource="https://img.wisebuy.co.il/data/images/Guide/ThinkstockPhotos-668766928131508931264610000.jpg" />
+        <ImageBrush ImageSource="Pictures\windows background.jpg" />
     </Window.Background>
 </Window>

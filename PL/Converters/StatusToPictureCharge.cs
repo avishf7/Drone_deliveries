@@ -18,9 +18,9 @@ namespace PL.Converters
         {
             return (DroneStatuses)value switch
             {
-                DroneStatuses.Available => "https://www.pngrepo.com/png/161328/512/battery.png",
-                DroneStatuses.Maintenance => "https://cdn0.iconfinder.com/data/icons/ios-edge-line-1/25/Battery-Dead-512.png",
-                DroneStatuses.Sendering => "https://deqn8kzyud5pf.cloudfront.net/assets/hamburgerX-blue-21400e6344ec76c3618c6ad6ae3d1f765d30715e49db6178b40fc1da45fded71.png",
+                DroneStatuses.Available => @"Pictures\Charge.png",
+                DroneStatuses.Maintenance => @"Pictures\Uncharge.png",
+                DroneStatuses.Sendering => @"Pictures\X.png",
                 _ => throw new NotImplementedException(),
             };
         }

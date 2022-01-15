@@ -22,8 +22,7 @@ namespace PL.Windows
     public partial class Station : Window
     {
         IBL bl = BlFactory.GetBl();
-
-
+   
         /// <summary>
         /// The window that opens this window.
         /// </summary>

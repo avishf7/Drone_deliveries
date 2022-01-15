@@ -16,7 +16,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="\Styels\FullCirculeButton.xaml"/>
                 <ResourceDictionary Source="\Styels\Templates.xaml"/>
-                <ResourceDictionary Source="\Converters\Converters.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -102,7 +101,7 @@
                      Visibility="Hidden">
             </TextBox>
 
-            
+
             <!--Grid used for customer update-->
             <Grid x:Name="UpdateNameGrid" Grid.Row="1" Grid.Column="1" Visibility="Hidden">
                 <Grid.ColumnDefinitions>
@@ -172,6 +171,7 @@
                      Grid.Row="0" 
                      Grid.Column="1"
                      Background="{StaticResource Static.Background}" 
+                     PreviewTextInput="IntTextBox_PreviewTextInput" 
                      Margin="20,5"
                      Visibility="Hidden">
                 </TextBox>
@@ -193,6 +193,7 @@
                      Grid.Row="1" 
                      Grid.Column="1"
                      Background="{StaticResource Static.Background}" 
+                     PreviewTextInput="IntTextBox_PreviewTextInput" 
                      Margin="20,5"
                      Visibility="Hidden">
                 </TextBox>
@@ -321,10 +322,31 @@
 
             <ListView x:Name="ChargingDronesListView"
                           ItemsSource="{Binding  ChargingDrones}" 
-                          Grid.Row="0" Grid.Column="1" Opacity="0.5" 
-                                             Margin="20,27"
-                                             FontSize="20"
-                          MouseDoubleClick="ChargingDronesListView_MouseDoubleClick" />
+                          Grid.Row="0"
+                          Grid.Column="1"
+                          Margin="27,20"
+                          FontSize="20"
+                          Background="{StaticResource Static.Background}"
+                          MouseDoubleClick="ChargingDronesListView_MouseDoubleClick" >
+                <ListView.ItemTemplate>
+                    <DataTemplate >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50*" />
+                                <RowDefinition Height="50*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50*" />
+                                <ColumnDefinition Width="50*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0"  Text="Drone ID: " />
+                            <TextBlock Grid.Row="0" Grid.Column="1"  Text="{Binding Path=DroneId ,Mode=OneWay}"  HorizontalAlignment="Center"  />
+                            <TextBlock Grid.Row="1" Grid.Column="0"  Text="Battery status: " />
+                            <ProgressBar Grid.Row="1" Grid.Column="1" Value="{Binding Path=BatteryStatus ,Mode=OneWay}" Width="80"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
 
             <Button x:Name="Exit"                         
@@ -333,12 +355,12 @@
                         Margin="30,22" 
                         FontFamily="Arial Black"
                         Click="cancel_Click">
-                <Image Source="https://cdn-icons-png.flaticon.com/512/1828/1828479.png" Margin="10"/>
+                <Image Source="Pictures\Exit.png" Margin="10"/>
             </Button>
         </Grid>
     </Grid>
 
     <Window.Background>
-        <ImageBrush ImageSource="https://img.wisebuy.co.il/data/images/Guide/ThinkstockPhotos-668766928131508931264610000.jpg" />
+        <ImageBrush ImageSource="Pictures\windows background.jpg" />
     </Window.Background>
 </Window>

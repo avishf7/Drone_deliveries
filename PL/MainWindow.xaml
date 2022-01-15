@@ -44,12 +44,12 @@
 
 
         <Button x:Name="Exit" Margin="20,5" Grid.Column="4" Grid.Row="1" FontFamily="Aharoni" Click="Exit_Click" Padding="30" Opacity="0.8" >
-            <Image Source="https://cdn-icons-png.flaticon.com/512/1828/1828479.png" Margin="10"/>
+            <Image Source="Exit.png" Margin="10"/>
         </Button>
 
     </Grid>
     <Window.Background>
-        <ImageBrush ImageSource="https://img.wisebuy.co.il/data/images/Guide/e-drone/shutterstock_533991019132541713394323269.jpg" />
+        <ImageBrush ImageSource="main background.jpg" />
     </Window.Background>
 
 </Window>
