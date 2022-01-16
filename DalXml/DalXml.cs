@@ -12,7 +12,7 @@ namespace Dal
 {
     sealed class DalXml : IDal
     {
-        public static DalXml Instance { get; } = new DalXml();
+        internal static DalXml Instance { get; } = new DalXml();
 
         private DalXml() { }
 

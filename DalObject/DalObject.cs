@@ -12,7 +12,7 @@ namespace Dal
     sealed class DalObject : IDal
     {
 
-        public static DalObject Instance { get; } = new DalObject();
+        internal static DalObject Instance { get; } = new DalObject();
 
         /// <summary>
         /// CTOR
