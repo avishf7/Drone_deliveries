@@ -93,8 +93,8 @@
     <Requested>2022-01-11T07:52:11.0449877+02:00</Requested>
     <Scheduled>2022-01-11T10:52:11.0449881+02:00</Scheduled>
     <PickedUp>2022-01-11T13:52:11.0449884+02:00</PickedUp>
-    <Delivered xsi:nil="true" />
-    <DroneId>34</DroneId>
+    <Delivered>2022-01-16T23:45:05.4340503+02:00</Delivered>
+    <DroneId>-1</DroneId>
   </Package>
   <Package>
     <Id>10</Id>

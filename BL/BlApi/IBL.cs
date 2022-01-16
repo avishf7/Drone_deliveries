@@ -42,11 +42,7 @@ namespace BlApi
         /// <returns>The list of dronesList</returns>
         IEnumerable<DroneToList> GetDrones(Predicate<DroneToList> predicate = null);
 
-        ///// <summary>
-        ///// Delete a drone from the list
-        ///// </summary>
-        ///// <param name="id">The id of the drone</param>
-        //void DeleteDrone(int id);
+
 
         #endregion
 
@@ -82,11 +78,7 @@ namespace BlApi
         /// <returns>The list of stations</returns>
         IEnumerable<StationToList> GetStations(Predicate<StationToList> predicate = null);
 
-        ///// <summary>
-        ///// Delete a station from the list
-        ///// </summary>
-        ///// <param name="id">The id of the station</param>
-        //public void DeleteStation(int id);
+
 
         #endregion
 
@@ -121,11 +113,7 @@ namespace BlApi
         /// <returns>The list of customers</returns>
         IEnumerable<CustomerToList> GetCustomers(Predicate<CustomerToList> predicate = null);
 
-        ///// <summary>
-        ///// Delete a customer from the list
-        ///// </summary>
-        ///// <param name="id">The id of the customer</param>
-        //public void DeleteCustomer(int id);
+
 
         #endregion
 

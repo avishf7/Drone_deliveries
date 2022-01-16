@@ -6,11 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace BL
 {
     public partial class BL : IBL
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddStation(Station station)
         {
             try
@@ -30,6 +32,7 @@ namespace BL
             }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateStation(int stationId, string name, int numOfChargeStation)
         {
             DO.Station dalSt;
@@ -67,6 +70,7 @@ namespace BL
 
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Station GetStation(int stationId)
         {
             try
@@ -93,6 +97,7 @@ namespace BL
             }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<StationToList> GetStations(Predicate<StationToList> predicate = null)
         {
             return dal.GetStations().Select(st => new StationToList()
@@ -102,19 +107,6 @@ namespace BL
                 NumberOfChargingStationsOccupied = dal.GetDronesCharges(drCh => drCh.StationId == st.Id).Count(),
                 SeveralAvailableChargingStations = st.FreeChargeSlots
             }).Where(st => predicate != null ? predicate(st) : true);
-        }
-
-        //public void DeleteStation(int id)
-        //{
-        //    try
-        //    {
-        //        dal.DeleteStation(id);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw new NotImplementedException();
-        //    }
-
-        //}
+        }       
     }
 }

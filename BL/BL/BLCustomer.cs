@@ -2,6 +2,7 @@
 using BlApi;
 using BO;
 using System;
+using System.Runtime.CompilerServices;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace BL
     public partial class BL : IBL
     {
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddCustomer(Customer customer)
         {
             try
@@ -31,6 +33,7 @@ namespace BL
             }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateCustomer(int customerId, string name, string phone)
         {
             DO.Customer dalCus;
@@ -54,9 +57,9 @@ namespace BL
 
 
             dal.UpdateCustomer(dalCus);
-
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Customer GetCustomer(int customerId)
         {
             try
@@ -98,6 +101,7 @@ namespace BL
 
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<CustomerToList> GetCustomers(Predicate<CustomerToList> predicate = null)
         {
             return dal.GetCustomers().Select(cus => GetCustomer(cus.Id))
@@ -119,19 +123,6 @@ namespace BL
                                                                      where pck.Status != PackageStatus.Provided
                                                                      select pck).Count(),
                                      }).Where(cus => predicate != null ? predicate(cus) : true);
-
-        }
-
-        //public void DeleteCustomer(int id)
-        //{
-        //    try
-        //    {
-        //        dal.DeleteCustomer(id);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw new NotImplementedException();
-        //    }
-        //}
+        }               
     }
 }

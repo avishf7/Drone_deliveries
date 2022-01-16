@@ -3,7 +3,7 @@
   <Station>
     <Id>5</Id>
     <Name>VIRTA Charging Station</Name>
-    <FreeChargeSlots>10</FreeChargeSlots>
+    <FreeChargeSlots>7</FreeChargeSlots>
     <Longitude>34.554392666232026</Longitude>
     <Lattitude>32.113611496805035</Lattitude>
   </Station>

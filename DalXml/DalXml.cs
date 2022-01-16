@@ -1,17 +1,17 @@
 ﻿using DalApi;
 using DO;
 using System;
+using System.Runtime.CompilerServices;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
-using System.Runtime.CompilerServices;
 
 
 namespace Dal
 {
     /// <summary>
-    ///  מחלקה שמנהלת גישה לנתונים שמיוצגים על ידי קבצי XML 
+    /// A class that manages access to data represented by XML files.
     /// </summary>
     sealed class DalXml : IDal
     {
@@ -28,6 +28,7 @@ namespace Dal
 
         #region Drone functions
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddDrone(Drone drone)
         {
             List<Drone> dronesList = XmlTools.LoadListFromXMLSerializer<Drone>(@"DroneXml.xml");
@@ -41,6 +42,7 @@ namespace Dal
             XmlTools.SaveListToXMLSerializer(dronesList, @"DroneXml.xml");
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateDrone(Drone drone)
         {
             List<Drone> dronesList = XmlTools.LoadListFromXMLSerializer<Drone>(@"DroneXml.xml");
@@ -56,7 +58,7 @@ namespace Dal
             XmlTools.SaveListToXMLSerializer(dronesList, @"DroneXml.xml");
         }
 
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Drone GetDrone(int droneId)
         {
             List<Drone> dronesList = XmlTools.LoadListFromXMLSerializer<Drone>(@"DroneXml.xml");
@@ -69,6 +71,7 @@ namespace Dal
             return dronesList.First(dr => dr.Id == droneId);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Drone> GetDrones(Predicate<Drone> predicate = null)
         {
             List<Drone> dronesList = XmlTools.LoadListFromXMLSerializer<Drone>(@"DroneXml.xml");
@@ -79,6 +82,7 @@ namespace Dal
 
         #region Station functions
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddStation(Station station)
         {
             List<Station> Stations = XmlTools.LoadListFromXMLSerializer<Station>(@"StationXml.xml");
@@ -91,7 +95,7 @@ namespace Dal
             XmlTools.SaveListToXMLSerializer(Stations, @"StationXml.xml");
         }
 
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateStation(Station station)
         {
             List<Station> Stations = XmlTools.LoadListFromXMLSerializer<Station>(@"StationXml.xml");
@@ -105,7 +109,7 @@ namespace Dal
             XmlTools.SaveListToXMLSerializer(Stations, @"StationXml.xml");
         }
 
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Station GetStation(int stationId)
         {
             List<Station> Stations = XmlTools.LoadListFromXMLSerializer<Station>(@"StationXml.xml");
@@ -117,14 +121,14 @@ namespace Dal
             return Stations.First(st => st.Id == stationId);
         }
 
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Station> GetStations(Predicate<Station> predicate = null)
         {
             List<Station> Stations = XmlTools.LoadListFromXMLSerializer<Station>(@"StationXml.xml");
             return Stations.Where(i => predicate == null ? true : predicate(i));
         }
 
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UsingChargingStation(int stationId)
         {
             List<Station> Stations = XmlTools.LoadListFromXMLSerializer<Station>(@"StationXml.xml");
@@ -138,7 +142,7 @@ namespace Dal
             XmlTools.SaveListToXMLSerializer(Stations, @"StationXml.xml");
         }
 
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void RealeseChargingStation(int stationId)
         {
             List<Station> Stations = XmlTools.LoadListFromXMLSerializer<Station>(@"StationXml.xml");
@@ -156,7 +160,7 @@ namespace Dal
 
         #region Customer functions
 
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddCustomer(Customer customer)
         {
             XElement element = XmlTools.LoadFromXMLElement(@"CustomerXml.xml");
@@ -182,7 +186,7 @@ namespace Dal
             XmlTools.SaveToXMLElement(element, @"CustomerXml.xml");
         }
 
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateCustomer(Customer customer)
         {
             XElement element = XmlTools.LoadFromXMLElement(@"CustomerXml.xml");
@@ -204,7 +208,7 @@ namespace Dal
             XmlTools.SaveToXMLElement(element, @"CustomerXml.xml");
         }
 
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Customer GetCustomer(int customerId)
         {
             XElement element = XmlTools.LoadFromXMLElement(@"CustomerXml.xml");
@@ -230,12 +234,7 @@ namespace Dal
   
         }
 
-
-        /// <summary>
-        /// Displays a list of customers.
-        /// </summary>
-        /// <param name="predicate">The list will be filtered according to the conditions obtained</param>
-        /// <returns>The list of customers</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Customer> GetCustomers(Predicate<Customer> predicate = null)
         {
             XElement element = XmlTools.LoadFromXMLElement(@"CustomerXml.xml");
@@ -257,10 +256,7 @@ namespace Dal
 
         #region Package functions
 
-        /// <summary>
-        /// Function of adding a package.
-        /// </summary>
-        /// <param name="package">Package to add</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddPackage(Package package)
         {
             List<Package> packages = XmlTools.LoadListFromXMLSerializer<Package>(@"PackageXml.xml");
@@ -279,10 +275,7 @@ namespace Dal
 
         }
 
-        /// <summary>
-        /// Function of updating a package.
-        /// </summary>
-        /// <param name="Package">Package to update</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdatePackage(Package package)
         {
             List<Package> packageList = XmlTools.LoadListFromXMLSerializer<Package>(@"PackageXml.xml");
@@ -298,11 +291,7 @@ namespace Dal
             XmlTools.SaveListToXMLSerializer(packageList, @"PackageXml.xml");
         }
 
-        /// <summary>
-        ///Function for displaying package.
-        /// </summary>
-        /// <param name="packageId"> The id of package</param>
-        /// <returns>A copy of the package function</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Package GetPackage(int packageId)
         {
             List<Package> package = XmlTools.LoadListFromXMLSerializer<Package>(@"PackageXml.xml");
@@ -316,11 +305,7 @@ namespace Dal
         }
 
 
-        /// <summary>
-        /// Displays a list of package's.
-        /// </summary>
-        /// <param name="predicate">The list will be filtered according to the conditions obtained</param>
-        /// <returns>The list of packages</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Package> GetPackages(Predicate<Package> predicate = null)
         {
             List<Package> package = XmlTools.LoadListFromXMLSerializer<Package>(@"PackageXml.xml");
@@ -329,11 +314,7 @@ namespace Dal
             return package.Where(i => predicate == null ? true : predicate(i));
         }
 
-        /// <summary>
-        /// A function that implements a state of connecting a package to a skimmer
-        /// </summary>
-        /// <param name="id">The id of the package </param>
-        /// <param name="droneId">The id of the drone</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void ConnectPackageToDrone(int id, int droneId)
         {
             List<Package> packageList = XmlTools.LoadListFromXMLSerializer<Package>(@"PackageXml.xml");
@@ -350,10 +331,7 @@ namespace Dal
             XmlTools.SaveListToXMLSerializer(packageList, @"PackageXml.xml");
         }
 
-        /// <summary>
-        /// A function that implements the state of a collected package
-        /// </summary>
-        /// <param name="id">The id of the package </param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void PickUp(int id)
         {
             List<Package> packageList = XmlTools.LoadListFromXMLSerializer<Package>(@"PackageXml.xml");
@@ -367,10 +345,7 @@ namespace Dal
             XmlTools.SaveListToXMLSerializer(packageList, @"PackageXml.xml");
         }
 
-        /// <summary>
-        /// A function that implements the state of a delivered package
-        /// </summary>
-        /// <param name="id">The id of the package</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void PackageDeliver(int id)
         {
             List<Package> packageList = XmlTools.LoadListFromXMLSerializer<Package>(@"PackageXml.xml");
@@ -386,10 +361,7 @@ namespace Dal
         }
 
 
-        /// <summary>
-        /// Delete a package from the list
-        /// </summary>
-        /// <param name="id">The id of the package</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeletePackage(int id)
         {
             List<Package> packageList = XmlTools.LoadListFromXMLSerializer<Package>(@"PackageXml.xml");
@@ -404,10 +376,7 @@ namespace Dal
 
         #region Drone charge functions
 
-        /// <summary>
-        /// Function of adding a droneCharge.
-        /// </summary>
-        /// <param name="droneCharge">Drone charge to add</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddDroneCharge(DroneCharge droneCharge)
         {
             List<DroneCharge> droneChargeList = XmlTools.LoadListFromXMLSerializer<DroneCharge>(@"DroneCharge.xml");
@@ -422,10 +391,7 @@ namespace Dal
             XmlTools.SaveListToXMLSerializer(droneChargeList, @"DroneCharge.xml");
         }
 
-        /// <summary>
-        /// Function of updating a drone charge.
-        /// </summary>
-        /// <param name="Package">Package to update</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateDroneCharge(DroneCharge droneCharge)
         {
             List<DroneCharge> droneChargeList = XmlTools.LoadListFromXMLSerializer<DroneCharge>(@"DroneCharge.xml");
@@ -441,11 +407,7 @@ namespace Dal
             XmlTools.SaveListToXMLSerializer(droneChargeList, @"DroneCharge.xml");
         }
 
-        /// <summary>
-        /// Function for displaying drone charges.
-        /// </summary>
-        /// <param name="droneId">The id of drone</param>
-        /// <returns>A copy of the drone function</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public DroneCharge GetDroneCharge(int droneId)
         {
             List<DroneCharge> droneCharge = XmlTools.LoadListFromXMLSerializer<DroneCharge>(@"DroneCharge.xml");
@@ -458,11 +420,7 @@ namespace Dal
             return droneCharge.First(dr => dr.DroneId == droneId);
         }
 
-        /// <summary>
-        /// Displays a list of drone chrarges.
-        /// </summary>
-        /// <param name="predicate">The list will be filtered according to the conditions obtained</param>
-        /// <returns>The list of dronesList</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DroneCharge> GetDronesCharges(Predicate<DroneCharge> predicate = null)
         {
             List<DroneCharge> droneCharge = XmlTools.LoadListFromXMLSerializer<DroneCharge>(@"DroneCharge.xml");
@@ -470,10 +428,7 @@ namespace Dal
             return droneCharge.Where(i => predicate == null ? true : predicate(i));
         }
 
-        /// <summary>
-        /// Delete a drone charge from the list
-        /// </summary>
-        /// <param name="id">The id of drone</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteDroneCharge(int id)
         {
             List<DroneCharge> droneCharge = XmlTools.LoadListFromXMLSerializer<DroneCharge>(@"DroneCharge.xml");
@@ -491,6 +446,7 @@ namespace Dal
 
         #endregion
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public List<double> ChargingRequest()
         {
             XElement config = XmlTools.LoadFromXMLElement(@"config.xml");

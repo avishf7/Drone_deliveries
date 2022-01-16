@@ -6,12 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace BL
 {
     public partial class BL : IBL
     {
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddDrone(Drone drone, int staionId)
         {
             try
@@ -43,6 +45,7 @@ namespace BL
             catch (DalApi.ExistsNumberException ex) { throw new BlApi.ExistsNumberException("Drone already exists", ex); }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateDrone(int droneId, string model)
         {
             try
@@ -58,6 +61,7 @@ namespace BL
 
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Drone GetDrone(int droneId)
         {
             var dr = dronesList.Find(x => x.Id == droneId);
@@ -104,6 +108,7 @@ namespace BL
             };
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DroneToList> GetDrones(Predicate<DroneToList> predicate = null)
         {
             return dronesList.Where(dr => predicate != null ? predicate(dr) : true)
@@ -117,20 +122,6 @@ namespace BL
                                  LocationOfDrone = dr.LocationOfDrone,
                                  PackageNumber = dr.PackageNumber,
                              });
-        }
-
-
-        //public void DeleteDrone(int id)
-        //{
-        //    try
-        //    {
-        //        dal.DeleteDrone(id);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw new NotImplementedException();
-        //    }
-        //}
-
+        }   
     }
 }

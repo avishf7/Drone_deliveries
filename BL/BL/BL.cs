@@ -2,6 +2,7 @@
 using BlApi;
 using BO;
 using System;
+using System.Runtime.CompilerServices;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace BL
 {
 
     /// <summary>
-    /// מחלקה שמנהלת את החלק הלוגי בתכנית
+    /// A class that manages the logical part of the program.
     /// </summary>
     sealed partial class BL : IBL
     {
@@ -152,6 +153,7 @@ namespace BL
         /// <param name="location">Drone's location</param>
         /// <returns> the station closest</returns>
         /// <exception cref="BlApi.NoNumberFoundException"></exception>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Location FindClosestStationLocation(Location location, Predicate<DO.Station> predicate = null)
         {
             var stations = dal.GetStations(predicate);

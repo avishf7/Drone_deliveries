@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace BL
 {
@@ -16,6 +17,7 @@ namespace BL
         /// </summary>
         /// <param name="customer">"DO.Customer" object</param>
         /// <returns>"CustomerInPackage" object</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public static CustomerInPackage GetCusomerInPackage(this DO.Customer customer)
         {
             CustomerInPackage BoCustomerInPackage = new()
@@ -35,6 +37,7 @@ namespace BL
         /// <param name="sLocation">Start location</param>
         /// <param name="eLocation">End location </param>
         /// <returns>distance (KM) between two received locations</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public static double Distance(this Location sLocation, Location eLocation)
         {
             //Converts decimal degrees to radians:

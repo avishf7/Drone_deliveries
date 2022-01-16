@@ -256,14 +256,16 @@
                    Margin="10"/>
 
             <ProgressBar x:Name="BattaryStatus" 
+                         Minimum="0" 
+                Maximum="100" 
                    FontSize="20"
-                   Value="{Binding Path=PODrone.BatteryStatus, Mode=OneWay}"
+                   Value="{Binding Path=PODrone.BatteryStatus, Mode=OneWay}" 
                    Grid.Row="0" 
                    Grid.Column="1"
                    Background="{StaticResource Static.Background}" 
-                   Margin="20" 
-                   >
+                   Margin="20">
             </ProgressBar>
+
 
             <Label x:Name="labalDroneStatus" 
                    FontSize="20"

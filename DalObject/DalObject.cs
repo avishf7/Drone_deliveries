@@ -1,5 +1,6 @@
 ﻿using DO;
 using System;
+using System.Runtime.CompilerServices;
 using System.Collections.Generic;
 using DalApi;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace Dal
 {
 
     /// <summary>
-    /// מחלקה שמנהלת גישה לנתונים שמיוצגים על יד אוספים ב C#
+    /// A class that manages access to the data represented by collections in C #.
     /// </summary>
     sealed class DalObject : IDal
     {
@@ -32,6 +33,7 @@ namespace Dal
         /// Function of adding a drone  to dronesList.
         /// </summary>
         /// <param name="drone">Drone to add</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddDrone(Drone drone)
         {
             if (DataSource.dronesList.Exists(x => x.Id == drone.Id))
@@ -45,6 +47,7 @@ namespace Dal
         /// Function of updating a drone.
         /// </summary>
         /// <param name="drone">Drone to update</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateDrone(Drone drone)
         {
             int iU = DataSource.dronesList.FindIndex(dr => dr.Id == drone.Id);
@@ -61,6 +64,7 @@ namespace Dal
         /// </summary>
         /// <param name="droneId">The id of drone</param>
         /// <returns>A copy of the drone function</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Drone GetDrone(int droneId)
         {
             if (!DataSource.dronesList.Exists(x => x.Id == droneId))
@@ -76,6 +80,7 @@ namespace Dal
         /// </summary>
         /// <param name="predicate">The list will be filtered according to the conditions obtained</param> 
         /// <returns>The list of dronesList</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Drone> GetDrones(Predicate<Drone> predicate = null)
         {
             return DataSource.dronesList.Where(i => predicate == null ? true : predicate(i));
@@ -100,6 +105,7 @@ namespace Dal
         /// Function of adding a drone station to the stations.
         /// </summary>
         /// <param name="station">Station to add</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddStation(Station station)
         {
             if (DataSource.stations.Exists(x => x.Id == station.Id))
@@ -113,6 +119,7 @@ namespace Dal
         /// Function of updating a station.
         /// </summary>
         /// <param name="station">Station to update</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateStation(Station station)
         {
             if (!DataSource.stations.Exists(x => x.Id == station.Id))
@@ -129,6 +136,7 @@ namespace Dal
         /// </summary>
         /// <param name="stationId">The id of the station</param>
         /// <returns>A copy of the station function</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Station GetStation(int stationId)
         {
             if (!DataSource.stations.Exists(x => x.Id == stationId))
@@ -137,8 +145,6 @@ namespace Dal
             }
 
             return DataSource.stations.First(st => st.Id == stationId);
-
-
         }
 
 
@@ -147,6 +153,7 @@ namespace Dal
         /// </summary>
         /// <param name="predicate">The list will be filtered according to the conditions obtained</param>
         /// <returns>The list of stations</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Station> GetStations(Predicate<Station> predicate = null)
         {
             return DataSource.stations.Where(i => predicate == null ? true : predicate(i));
@@ -156,6 +163,7 @@ namespace Dal
         /// A function that implements a state of perception of a charging position
         /// </summary>
         /// <param name="stationId">The id of the station</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UsingChargingStation(int stationId)
         {
             Station station = GetStation(stationId);
@@ -169,6 +177,7 @@ namespace Dal
         /// A function that implements a state of releasing a charging position
         /// </summary>
         /// <param name="stationId">The id of the station</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void RealeseChargingStation(int stationId)
         {
             Station station = GetStation(stationId);
@@ -178,15 +187,7 @@ namespace Dal
             DataSource.stations[indexStation] = station;
         }
 
-        ///// <summary>
-        ///// Delete a station from the list
-        ///// </summary>
-        ///// <param name="id">The id of the station</param>
-        //public void DeleteStation(int id)
-        //{
-        //    int Id = DataSource.stations.FindIndex(st => st.Id == id);
-        //    DataSource.stations.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundException(" "));
-        //}
+
         #endregion
 
         #region Customer functions
@@ -195,6 +196,7 @@ namespace Dal
         /// Function of adding a customer.
         /// </summary>
         /// <param name="customer">Customer to add</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddCustomer(Customer customer)
         {
             if (DataSource.customers.Exists(x => x.Id == customer.Id))
@@ -208,6 +210,7 @@ namespace Dal
         /// Function of updating a customer.
         /// </summary>
         /// <param name="customer">Customer to update</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateCustomer(Customer customer)
         {
             if (!DataSource.customers.Exists(x => x.Id == customer.Id))
@@ -224,6 +227,7 @@ namespace Dal
         /// </summary>
         /// <param name="customerId">The id of customer</param>
         /// <returns>A copy of the customer function</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Customer GetCustomer(int customerId)
         {
             if (!DataSource.customers.Exists(x => x.Id == customerId))
@@ -240,20 +244,12 @@ namespace Dal
         /// </summary>
         /// <param name="predicate">The list will be filtered according to the conditions obtained</param>
         /// <returns>The list of customers</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Customer> GetCustomers(Predicate<Customer> predicate = null)
         {
             return DataSource.customers.Where(i => predicate == null ? true : predicate(i));
         }
 
-        ///// <summary>
-        ///// Delete a customer from the list
-        ///// </summary>
-        ///// <param name="id">The id of the customer</param>
-        //public void DeleteCustomer(int id)
-        //{
-        //    int Id = DataSource.customers.FindIndex(cus => cus.Id == id);
-        //    DataSource.customers.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundException(" "));
-        //}
 
         #endregion
 
@@ -263,6 +259,7 @@ namespace Dal
         /// Function of adding a package.
         /// </summary>
         /// <param name="package">Package to add</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddPackage(Package package)
         {
             package.Id = DataSource.Config.PackageIdCounter++;
@@ -273,6 +270,7 @@ namespace Dal
         /// Function of updating a package.
         /// </summary>
         /// <param name="Package">Package to update</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdatePackage(Package package)
         {
             if (!DataSource.packages.Exists(x => x.Id == package.Id))
@@ -289,6 +287,7 @@ namespace Dal
         /// </summary>
         /// <param name="packageId"> The id of package</param>
         /// <returns>A copy of the package function</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Package GetPackage(int packageId)
         {
             if (!DataSource.packages.Exists(x => x.Id == packageId))
@@ -305,6 +304,7 @@ namespace Dal
         /// </summary>
         /// <param name="predicate">The list will be filtered according to the conditions obtained</param>
         /// <returns>The list of packages</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Package> GetPackages(Predicate<Package> predicate = null)
         {
             return DataSource.packages.Where(i => predicate == null ? true : predicate(i));
@@ -315,6 +315,7 @@ namespace Dal
         /// </summary>
         /// <param name="id">The id of the package </param>
         /// <param name="droneId">The id of the drone</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void ConnectPackageToDrone(int id, int droneId)
         {
             Package package = GetPackage(id);
@@ -331,6 +332,7 @@ namespace Dal
         /// A function that implements the state of a collected package
         /// </summary>
         /// <param name="id">The id of the package </param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void PickUp(int id)
         {
             Package package = GetPackage(id);
@@ -345,6 +347,7 @@ namespace Dal
         /// A function that implements the state of a delivered package
         /// </summary>
         /// <param name="id">The id of the package</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void PackageDeliver(int id)
         {
             Package package = GetPackage(id);
@@ -360,6 +363,7 @@ namespace Dal
         /// Delete a package from the list
         /// </summary>
         /// <param name="id">The id of the package</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeletePackage(int id)
         {
             int index = DataSource.packages.FindIndex(pck => pck.Id == id);
@@ -374,6 +378,7 @@ namespace Dal
         /// Function of adding a droneCharge.
         /// </summary>
         /// <param name="droneCharge">Drone charge to add</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddDroneCharge(DroneCharge droneCharge)
         {
             if (DataSource.droneCharges.Exists(x => x.DroneId == droneCharge.DroneId))
@@ -388,6 +393,7 @@ namespace Dal
         /// Function of updating a drone charge.
         /// </summary>
         /// <param name="Package">Package to update</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateDroneCharge(DroneCharge droneCharge)
         {
             if (!DataSource.droneCharges.Exists(x => x.DroneId == droneCharge.DroneId))
@@ -404,6 +410,7 @@ namespace Dal
         /// </summary>
         /// <param name="droneId">The id of drone</param>
         /// <returns>A copy of the drone function</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public DroneCharge GetDroneCharge(int droneId)
         {
             if (!DataSource.droneCharges.Exists(x => x.DroneId == droneId))
@@ -419,6 +426,7 @@ namespace Dal
         /// </summary>
         /// <param name="predicate">The list will be filtered according to the conditions obtained</param>
         /// <returns>The list of dronesList</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DroneCharge> GetDronesCharges(Predicate<DroneCharge> predicate = null)
         {
             return DataSource.droneCharges.Where(i => predicate == null ? true : predicate(i));
@@ -428,6 +436,7 @@ namespace Dal
         /// Delete a drone charge from the list
         /// </summary>
         /// <param name="id">The id of drone</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteDroneCharge(int id)
         {
             if (!DataSource.droneCharges.Exists(x => x.DroneId == id))
@@ -440,13 +449,13 @@ namespace Dal
         }
 
 
-
         #endregion
 
         /// <summary>
         /// Information on power consumption and charging time
         /// </summary>
         /// <returns>A list of the charging requests</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public List<double> ChargingRequest()
         {
             List<double> ChargingRequests = new()

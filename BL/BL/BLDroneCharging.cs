@@ -6,11 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace BL
 {
     public partial class BL : IBL
     {
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void SendDroneForCharge(int DroneId)
         {
 
@@ -52,11 +55,9 @@ namespace BL
             {
                 throw new NotEnoughBattery("Not enough to get to the nearest available station");
             }
-
-
         }
 
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void RealeseDroneFromCharge(int DroneId, TimeSpan time)
         {
             var dr = dronesList.Find(x => x.Id == DroneId);
@@ -85,8 +86,9 @@ namespace BL
             dal.RealeseChargingStation(station.Id);
             dal.DeleteDroneCharge(DroneId);
 
-        }   
+        }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void RealeseDroneFromCharge(int DroneId)
         {
             var timeOfCharge = DateTime.Now - dal.GetDroneCharge(DroneId).ChargeStart;

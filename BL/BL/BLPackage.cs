@@ -6,11 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace BL
 {
     public partial class BL : IBL
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddPackage(Package package)
         {
 
@@ -41,6 +43,7 @@ namespace BL
             }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Package GetPackage(int packageId)
         {
             try
@@ -76,6 +79,7 @@ namespace BL
             }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<PackageToList> GetPackages(Predicate<PackageToList> predicate = null)
         {
             return dal.GetPackages().Select(pck => new PackageToList()
@@ -93,6 +97,7 @@ namespace BL
 
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeletePackage(int id)
         {
             DO.Package DoPackage;
@@ -102,7 +107,6 @@ namespace BL
                 throw new PakcageConnectToDroneException("Package in transfar");
 
             dal.DeletePackage(id);
-
         }
     }
 }

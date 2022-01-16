@@ -8,11 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
+using System.Runtime.CompilerServices;
 
 namespace BL
 {
     public partial class BL : IBL
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void PackageAssigning(int droneId)
         {
             var dr = dronesList.SingleOrDefault(d => d.Id == droneId);
@@ -64,12 +66,11 @@ namespace BL
                     throw new BlApi.NoSuitablePackageForScheduledException("There is not enough battery", new NotEnoughBattery());
 
                 if (!isFound)
-                    throw new BlApi.NoSuitablePackageForScheduledException("There are no packages waiting to be assigned");
-
-                
+                    throw new BlApi.NoSuitablePackageForScheduledException("There are no packages waiting to be assigned");                
             }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void PickUp(int droneId)
         {
             var dr = dronesList.SingleOrDefault(d => d.Id == droneId);
@@ -94,6 +95,7 @@ namespace BL
             }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void Deliver(int droneId)
         {
             var dr = dronesList.SingleOrDefault(d => d.Id == droneId);
@@ -121,6 +123,4 @@ namespace BL
             }
         }
     }
-
-
 }
