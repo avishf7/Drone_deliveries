@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Windows"
         mc:Ignorable="d"
-        Title="Station" Height="450" Width="800" WindowStartupLocation="CenterScreen"
+        Title="Station" Height="450" Width="800" WindowStartupLocation="CenterOwner"
         WindowStyle="SingleBorderWindow" 
         ResizeMode="NoResize"
         DataContext="{Binding POStation, RelativeSource={RelativeSource self}}"
