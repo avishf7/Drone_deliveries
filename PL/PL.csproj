@@ -9,7 +9,17 @@
 
   <ItemGroup>
     <None Remove="drone.png" />
+    <None Remove="Exit.png" />
+    <None Remove="main background.jpg" />
+    <None Remove="Styels\X.png" />
     <None Remove="wave5.gif" />
+    <None Remove="Windows\Pictures\Assignment.png" />
+    <None Remove="Windows\Pictures\Charge.png" />
+    <None Remove="Windows\Pictures\Exit.png" />
+    <None Remove="Windows\Pictures\Pick.png" />
+    <None Remove="Windows\Pictures\Supply.png" />
+    <None Remove="Windows\Pictures\Uncharge.png" />
+    <None Remove="Windows\Pictures\X.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +29,20 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Exit.png" />
+    <Resource Include="main background.jpg" />
+    <Resource Include="Windows\Pictures\Assignment.png" />
+    <Resource Include="Windows\Pictures\Charge.png" />
+    <Resource Include="Windows\Pictures\Exit.png" />
+    <Resource Include="Windows\Pictures\Pick.png" />
+    <Resource Include="Windows\Pictures\Supply.png" />
+    <Resource Include="Windows\Pictures\Uncharge.png" />
+    <Resource Include="Styels\X.png" />
+    <Resource Include="Windows\Pictures\windows background.jpg" />
+    <Resource Include="Windows\Pictures\X.png" />
   </ItemGroup>
 
 </Project>

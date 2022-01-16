@@ -315,5 +315,25 @@ namespace PL.Windows
             else
                 MessageBox.Show("No element exists", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
+
+        private void PackageInProgress_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Released)
+            {
+                TextBox textBox = (TextBox)sender;
+
+                if (textBox.DataContext != null)
+                {
+                    var BOPackage = bl.GetPackage((textBox.DataContext as BO.PackageInTransfer).Id);
+                    PO.Package POPackage = Model.POPackages.Find(pck => pck.Id == BOPackage.Id);
+                    if (POPackage == null)
+                        Model.POPackages.Add(POPackage = new PO.Package().CopyFromBOPackage(BOPackage));
+
+                    new Package(this, POPackage).Show();
+                }
+                else
+                    MessageBox.Show("No element exists", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

@@ -6,7 +6,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <ImageBrush x:Key="xImage"
-           ImageSource="https://deqn8kzyud5pf.cloudfront.net/assets/hamburgerX-blue-21400e6344ec76c3618c6ad6ae3d1f765d30715e49db6178b40fc1da45fded71.png"
+           ImageSource="X.png"
            />
 
 
@@ -33,7 +33,6 @@
 
     <!--Representation template of package in transfer-->
     <ControlTemplate x:Key="PackageInTransferTemplate">
-
         <Grid x:Name="MainGrid">
             <Button x:Name="ShowPackage" Content="Show package" Visibility="Hidden" FontFamily="Arial Black"/>
             <ScrollViewer x:Name="PackageInfo" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">

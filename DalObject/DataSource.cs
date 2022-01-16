@@ -110,7 +110,7 @@ namespace Dal
                 {
                     Id = rand.Next(i * 10, (i + 1) * 10),
                     Name = stationNames[i],
-                    FreeChargeSlots = 4,
+                    FreeChargeSlots = 10,
                     Lattitude = 32 + rand.NextDouble() / 4,
                     Longitude = 34.5 + rand.NextDouble() / 4
                 });

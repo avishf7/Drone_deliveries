@@ -73,7 +73,7 @@ namespace PL.Windows
             this.POCustomer = customer;
 
             InitializeComponent();
-           
+
             MainGrid.RowDefinitions[0].Height = new(50, GridUnitType.Star);
             MainGrid.RowDefinitions[1].Height = new(50, GridUnitType.Star);
 
@@ -189,8 +189,8 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void OK_Click(object sender, RoutedEventArgs e)
         {
-           var updateElement = ((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0));
- 
+            var updateElement = ((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0));
+
             if (updateElement.Text != "")
             {
                 bl.UpdateCustomer(POCustomer.Id, UpdateName.Text, UpdatePhone.Text);
@@ -235,19 +235,22 @@ namespace PL.Windows
             }
         }
 
-        private void CustomerInPackageInfo_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (((TextBox)sender).DataContext != null)
-            {
-                BO.Customer BOCustomer = bl.GetCustomer((((TextBox)sender).DataContext as BO.CustomerInPackage).CustomerId);
-                PO.Customer POCustomer = Model.POCustomers.Find(cus => cus.Id == BOCustomer.Id);
-                if (POCustomer == null)
-                    Model.POCustomers.Add(POCustomer = new PO.Customer().CopyFromBOCustomer(BOCustomer));
 
-                new Customer(this, POCustomer).Show();
+        private void TextBox_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+                if (Mouse.LeftButton == MouseButtonState.Released)
+                    if (((TextBox)sender).DataContext != null)
+                    {
+                        BO.Customer BOCustomer = bl.GetCustomer((((TextBox)sender).DataContext as BO.CustomerInPackage).CustomerId);
+                        PO.Customer POCustomer = Model.POCustomers.Find(cus => cus.Id == BOCustomer.Id);
+                        if (POCustomer == null)
+                            Model.POCustomers.Add(POCustomer = new PO.Customer().CopyFromBOCustomer(BOCustomer));
+
+                        new Customer(this, POCustomer).Show();
+                    }
+                    else
+                        MessageBox.Show("No element exists", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else
-                MessageBox.Show("No element exists", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
-}
+

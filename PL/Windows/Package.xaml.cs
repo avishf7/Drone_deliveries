@@ -27,7 +27,7 @@ namespace PL.Windows
         /// The window that opens this window.
         /// </summary>
         public Window Sender { get; set; }
-        
+
         /// <summary>
         /// The variable from which the display opens
         /// </summary>
@@ -146,8 +146,8 @@ namespace PL.Windows
 
                     Model.UpdatePackages();
 
-                        Model.POCustomers.Find(cus => cus.Id == senderId)?.CopyFromBOCustomer(bl.GetCustomer(senderId));
-                        Model.POCustomers.Find(cus => cus.Id == targetId)?.CopyFromBOCustomer(bl.GetCustomer(targetId));
+                    Model.POCustomers.Find(cus => cus.Id == senderId)?.CopyFromBOCustomer(bl.GetCustomer(senderId));
+                    Model.POCustomers.Find(cus => cus.Id == targetId)?.CopyFromBOCustomer(bl.GetCustomer(targetId));
 
                     Model.UpdateCustomers();
 
@@ -162,55 +162,6 @@ namespace PL.Windows
 
 
         }
-
-
-        /// <summary>
-        /// Sets that by double-clicking a drone in the package from the list it will see the data on the DroneInPackage.
-        /// </summary>
-        /// <param name="sender">The element that activates the function</param>
-        /// <param name="e"></param>
-        private void DroneInPackageInfo_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            TextBox textBox = (TextBox)sender;
-
-            if (textBox.DataContext != null)
-            {
-                if ((textBox.DataContext as BO.DroneInPackage) != null)
-                {
-                    BO.Drone BODrone = bl.GetDrone((textBox.DataContext as DroneInPackage).Id);
-                    PO.Drone PODrone = Model.PODrones.Find(dr => dr.Id == BODrone.Id);
-                    if (PODrone == null)
-                        Model.PODrones.Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));
-
-                    new Drone(this, PODrone).Show();
-                }
-                else
-                    MessageBox.Show("No element exists", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-
-        /// <summary>
-        /// Sets that by double-clicking a customer in the package from the list it will see the data on the CustomerInPackage.
-        /// </summary>
-        /// <param name="sender">The element that activates the function</param>
-        /// <param name="e"></param>
-        private void CustomerInPackageInfo_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-
-            if (((TextBox)sender).DataContext != null)
-            {
-                BO.Customer BOCustomer = bl.GetCustomer((((TextBox)sender).DataContext as BO.CustomerInPackage).CustomerId);
-                PO.Customer POCustomer = Model.POCustomers.Find(cus => cus.Id == BOCustomer.Id);
-                if (POCustomer == null)
-                    Model.POCustomers.Add(POCustomer = new PO.Customer().CopyFromBOCustomer(BOCustomer));
-
-                new Customer(this, POCustomer).Show();
-            }
-            else
-                MessageBox.Show("No element exists", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-
 
         /// <summary>
         /// Delete a package
@@ -245,5 +196,43 @@ namespace PL.Windows
             this.Close();
         }
 
+        private void CustomerInPackageInfo_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Released)
+                if (((TextBox)sender).DataContext != null)
+                {
+                    BO.Customer BOCustomer = bl.GetCustomer((((TextBox)sender).DataContext as BO.CustomerInPackage).CustomerId);
+                    PO.Customer POCustomer = Model.POCustomers.Find(cus => cus.Id == BOCustomer.Id);
+                    if (POCustomer == null)
+                        Model.POCustomers.Add(POCustomer = new PO.Customer().CopyFromBOCustomer(BOCustomer));
+
+                    new Customer(this, POCustomer).Show();
+                }
+                else
+                    MessageBox.Show("No element exists", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void DroneInPackageInfo_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Released)
+            { 
+                TextBox textBox = (TextBox)sender;
+
+                if (textBox.DataContext != null)
+                {
+                    if ((textBox.DataContext as BO.DroneInPackage) != null)
+                    {
+                        BO.Drone BODrone = bl.GetDrone((textBox.DataContext as DroneInPackage).Id);
+                        PO.Drone PODrone = Model.PODrones.Find(dr => dr.Id == BODrone.Id);
+                        if (PODrone == null)
+                            Model.PODrones.Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));
+
+                        new Drone(this, PODrone).Show();
+                    }
+                    else
+                        MessageBox.Show("No element exists", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
     }
 }

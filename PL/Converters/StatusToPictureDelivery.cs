@@ -21,15 +21,15 @@ namespace PL.Converters
                 {
 
                     case DroneStatuses.Available:
-                        return new BitmapImage(new Uri("https://cdn2.iconfinder.com/data/icons/billing-shipping/100/Drone-512.png"));
+                        return new BitmapImage(new Uri( @"Pictures\Assignment.png", UriKind.Relative));
                     case DroneStatuses.Maintenance:
-                        return new BitmapImage(new Uri("https://deqn8kzyud5pf.cloudfront.net/assets/hamburgerX-blue-21400e6344ec76c3618c6ad6ae3d1f765d30715e49db6178b40fc1da45fded71.png"));
+                        return new BitmapImage(new Uri(@"Pictures\X.png", UriKind.Relative));
                     case DroneStatuses.Sendering:
                         if (values[1] != null)
                             if (((PackageInTransfer)values[1]).IsCollected)
-                                return new BitmapImage(new Uri("https://cdn2.iconfinder.com/data/icons/drone-for-commercial-and-industrial-usage-and-appl/468/drone-commercial-11-512.png"));
+                                return new BitmapImage(new Uri(@"Pictures\Supply.png", UriKind.Relative));
                             else
-                                return new BitmapImage(new Uri("https://cdn2.iconfinder.com/data/icons/drone-for-commercial-and-industrial-usage-and-appl/416/drone-commercial-10-512.png"));
+                                return new BitmapImage(new Uri(@"Pictures\Pick.png", UriKind.Relative));
                         break;
                 }
 

@@ -28,7 +28,7 @@ namespace BL
 
         private BL()
         {
-            //Bring the cinfig from DAL
+            //Bring the config from DAL
             List<double> tmp = dal.ChargingRequest();
             DroneAvailable = tmp[0];
             LightWeight = tmp[1];
@@ -45,58 +45,71 @@ namespace BL
             {
                 Location droneLocation = null;
                 double minBattery = 0, maxBattery = 100;
+                DroneStatuses droneStatus;
                 DO.Package Pck = senderingPackages.SingleOrDefault(x => x.DroneId == drone.Id);
-
                 bool isScheduled = !Pck.Equals(default(DO.Package));//If there is a package associated with the drone
-                DroneStatuses droneStatus = isScheduled ? DroneStatuses.Sendering : (DroneStatuses)rd.Next(2);
 
-
-                switch (droneStatus)
+                try
                 {
-                    case DroneStatuses.Available:
-                        DO.Customer randomCustomer = dal.GetCustomer(deliveredPackages.ToList()[rd.Next(deliveredPackages.Count())].TargetId);
+                    var droneCharge = dal.GetDroneCharge(drone.Id);
+                    var chargeStation = dal.GetStation(droneCharge.StationId);
 
-                        droneLocation = new() { Lattitude = randomCustomer.Lattitude, Longitude = randomCustomer.Longitude };
-                        minBattery = BatteryUsage(droneLocation.Distance(FindClosestStationLocation(droneLocation)));
-
-                        break;
-                    case DroneStatuses.Maintenance:
-                        DO.Station randomStation = stations.ToList()[rd.Next(stations.Count())];
-
-                        droneLocation = new() { Lattitude = randomStation.Lattitude, Longitude = randomStation.Longitude };
-                        maxBattery = 20.0;
-
-                        dal.AddDroneCharge(new()
-                        {
-                            DroneId = drone.Id,
-                            StationId = randomStation.Id,
-                            ChargeStart = DateTime.Now
-                        });
-                        break;
-                    case DroneStatuses.Sendering:
-                        DO.Customer sender = dal.GetCustomer(Pck.SenderId),
-                                         target = dal.GetCustomer(Pck.TargetId);
-
-                        Location senderLocation = new() { Lattitude = sender.Lattitude, Longitude = sender.Longitude },
-                                 targetLocation = new() { Lattitude = target.Lattitude, Longitude = target.Longitude };
-
-                        if (Pck.PickedUp == null)
-                        {
-                            droneLocation = FindClosestStationLocation(senderLocation);
-                            minBattery = BatteryUsage(droneLocation.Distance(senderLocation))
-                                       + BatteryUsage(senderLocation.Distance(targetLocation), (int)Pck.Weight)
-                                       + BatteryUsage(targetLocation.Distance(FindClosestStationLocation(targetLocation)));
-                        }
-                        else
-                        {
-                            droneLocation = senderLocation;
-                            minBattery = BatteryUsage(senderLocation.Distance(targetLocation), (int)Pck.Weight)
-                                       + BatteryUsage(targetLocation.Distance(FindClosestStationLocation(targetLocation)));
-                        }
-
-                        break;
+                    droneStatus = DroneStatuses.Maintenance;
+                    droneLocation = new() { Lattitude = chargeStation.Lattitude, Longitude = chargeStation.Longitude };
                 }
+                catch (DalApi.NoNumberFoundException ex)
+                {                                     
+                    droneStatus = isScheduled ? DroneStatuses.Sendering : (DroneStatuses)rd.Next(2);
 
+                    switch (droneStatus)
+                    {
+                        case DroneStatuses.Available:
+                            DO.Customer randomCustomer = dal.GetCustomer(deliveredPackages.ToList()[rd.Next(deliveredPackages.Count())].TargetId);
+
+                            droneLocation = new() { Lattitude = randomCustomer.Lattitude, Longitude = randomCustomer.Longitude };
+                            minBattery = BatteryUsage(droneLocation.Distance(FindClosestStationLocation(droneLocation)));
+
+                            break;
+                        case DroneStatuses.Maintenance:
+                            DO.Station randomStation;
+
+                            do { randomStation = stations.ToList()[rd.Next(stations.Count())]; } while (randomStation.FreeChargeSlots == 0);
+
+                            dal.UsingChargingStation(randomStation.Id);
+                            droneLocation = new() { Lattitude = randomStation.Lattitude, Longitude = randomStation.Longitude };
+                            maxBattery = 20.0;
+
+                            dal.AddDroneCharge(new()
+                            {
+                                DroneId = drone.Id,
+                                StationId = randomStation.Id,
+                                ChargeStart = DateTime.Now
+                            });
+                            break;
+                        case DroneStatuses.Sendering:
+                            DO.Customer sender = dal.GetCustomer(Pck.SenderId),
+                                             target = dal.GetCustomer(Pck.TargetId);
+
+                            Location senderLocation = new() { Lattitude = sender.Lattitude, Longitude = sender.Longitude },
+                                     targetLocation = new() { Lattitude = target.Lattitude, Longitude = target.Longitude };
+
+                            if (Pck.PickedUp == null)
+                            {
+                                droneLocation = FindClosestStationLocation(senderLocation);
+                                minBattery = BatteryUsage(droneLocation.Distance(senderLocation))
+                                           + BatteryUsage(senderLocation.Distance(targetLocation), (int)Pck.Weight)
+                                           + BatteryUsage(targetLocation.Distance(FindClosestStationLocation(targetLocation)));
+                            }
+                            else
+                            {
+                                droneLocation = senderLocation;
+                                minBattery = BatteryUsage(senderLocation.Distance(targetLocation), (int)Pck.Weight)
+                                           + BatteryUsage(targetLocation.Distance(FindClosestStationLocation(targetLocation)));
+                            }
+
+                            break;
+                    }
+                }
 
                 droneLists.Add(new()
                 {
