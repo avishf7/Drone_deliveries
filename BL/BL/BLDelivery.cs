@@ -15,7 +15,7 @@ namespace BL
     {
         public void PackageAssigning(int droneId)
         {
-            var dr = droneLists.SingleOrDefault(d => d.Id == droneId);
+            var dr = dronesList.SingleOrDefault(d => d.Id == droneId);
 
             if (dr == null ? throw new BlApi.NoNumberFoundException("") : true &&
                 dr.DroneStatus != DroneStatuses.Available ? throw new DroneNotAvailableException("") : true)
@@ -72,7 +72,7 @@ namespace BL
 
         public void PickUp(int droneId)
         {
-            var dr = droneLists.SingleOrDefault(d => d.Id == droneId);
+            var dr = dronesList.SingleOrDefault(d => d.Id == droneId);
 
             if (dr == default)
                 throw new BlApi.NoNumberFoundException("Drone ID not found");
@@ -96,7 +96,7 @@ namespace BL
 
         public void Deliver(int droneId)
         {
-            var dr = droneLists.SingleOrDefault(d => d.Id == droneId);
+            var dr = dronesList.SingleOrDefault(d => d.Id == droneId);
 
             if (dr == default)
                 throw new BlApi.NoNumberFoundException("Drone ID not found");

@@ -10,11 +10,20 @@ using System.Threading.Tasks;
 
 namespace PL
 {
+
+    /// <summary>
+    /// A class that holds all the collections and variables for display.
+    /// </summary>
     public sealed class Model : INotifyPropertyChanged
     {
+        /// <summary>
+        /// A variable that holds one and only instance of the class (singleton).
+        /// </summary>
         internal static Model Instance { get; set; } = new();
 
+
         IBL bl = BlFactory.GetBl();
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -172,6 +181,7 @@ namespace PL
 
         /// <summary>
         /// Initialize the data of the grouped collections.
+        /// 
         /// </summary>
         private Model()
         {
@@ -236,7 +246,7 @@ namespace PL
         /// <summary>
         /// Updates the POPackage entity view collection.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">The id of the package</param>
         public void UpdatePOPackage(int id)
         {
             var poPackage = POPackages.Where(pck => pck.Id == id).SingleOrDefault();
@@ -248,7 +258,7 @@ namespace PL
         /// <summary>
         /// Updates the POStation entity view collection
         /// </summary>
-        /// <param name="location"></param>
+        /// <param name="location">The location of station</param>
         public void UpdatePOStation(Location location)
         {
             var poStation = POStations.Where(st => st.LocationOfStation == location).SingleOrDefault();

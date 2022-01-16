@@ -6,18 +6,22 @@ using System.Linq;
 
 namespace Dal
 {
+
     /// <summary>
-    /// A class in which we will make the changes in all parts of the code
+    /// מחלקה שמנהלת גישה לנתונים שמיוצגים על יד אוספים ב C#
     /// </summary>
     sealed class DalObject : IDal
     {
 
+        /// <summary>
+        /// A variable that holds one and only instance of the class (singleton).
+        /// </summary>
         internal static DalObject Instance { get; } = new DalObject();
 
         /// <summary>
-        /// CTOR
+        /// private CTOR to prevent the creation of another instance of the class and to initialize first data.
         /// </summary>
-        private DalObject()//CTOR for Initialize first data
+        private DalObject()
         {
             DataSource.Initialize();
         }

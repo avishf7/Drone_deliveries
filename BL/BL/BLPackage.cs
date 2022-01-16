@@ -46,7 +46,7 @@ namespace BL
             try
             {
                 var DoPackage = dal.GetPackage(packageId);
-                var dr = droneLists.Find(x => x.PackageNumber == packageId);
+                var dr = dronesList.Find(x => x.PackageNumber == packageId);
 
                 Package BoPackage = new()
                 {

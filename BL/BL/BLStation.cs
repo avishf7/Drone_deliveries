@@ -83,7 +83,7 @@ namespace BL
                                      .Select(drCh => new DroneCharge
                                      {
                                          DroneId = drCh.DroneId,
-                                         BatteryStatus = droneLists.Find(x => x.Id == drCh.DroneId).BatteryStatus
+                                         BatteryStatus = dronesList.Find(x => x.Id == drCh.DroneId).BatteryStatus
                                      }).OrderBy(drCh => drCh.BatteryStatus)
                 };
             }

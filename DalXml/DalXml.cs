@@ -10,10 +10,20 @@ using System.Runtime.CompilerServices;
 
 namespace Dal
 {
+    /// <summary>
+    ///  מחלקה שמנהלת גישה לנתונים שמיוצגים על ידי קבצי XML 
+    /// </summary>
     sealed class DalXml : IDal
     {
+        /// <summary>
+        /// A variable that holds one and only instance of the class (singleton).
+        /// 
+        /// </summary>
         internal static DalXml Instance { get; } = new DalXml();
 
+        /// <summary>
+        /// private CTOR to prevent the creation of another instance of the class.
+        /// </summary>
         private DalXml() { }
 
         #region Drone functions

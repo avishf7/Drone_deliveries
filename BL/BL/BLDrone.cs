@@ -25,7 +25,7 @@ namespace BL
                     Model = drone.Model
                 });
 
-                droneLists.Add(new()
+                dronesList.Add(new()
                 {
                     Id = drone.Id,
                     MaxWeight = drone.MaxWeight,
@@ -52,7 +52,7 @@ namespace BL
                 dr.Model = model;
                 dal.UpdateDrone(dr);
 
-                droneLists.Find(drone => drone.Id == droneId).Model = model;
+                dronesList.Find(drone => drone.Id == droneId).Model = model;
             }
             catch (DalApi.NoNumberFoundException ex) { throw new BlApi.NoNumberFoundException("Drone ID not found", ex); }
 
@@ -60,7 +60,7 @@ namespace BL
 
         public Drone GetDrone(int droneId)
         {
-            var dr = droneLists.Find(x => x.Id == droneId);
+            var dr = dronesList.Find(x => x.Id == droneId);
             PackageInTransfer packageInTransfer = null;
 
             if (dr != null)
@@ -106,7 +106,7 @@ namespace BL
 
         public IEnumerable<DroneToList> GetDrones(Predicate<DroneToList> predicate = null)
         {
-            return droneLists.Where(dr => predicate != null ? predicate(dr) : true)
+            return dronesList.Where(dr => predicate != null ? predicate(dr) : true)
                              .Select(dr => new DroneToList()
                              {
                                  Id = dr.Id,

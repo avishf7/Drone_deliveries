@@ -9,23 +9,45 @@ using Dal;
 
 namespace BL
 {
+
+    /// <summary>
+    /// מחלקה שמנהלת את החלק הלוגי בתכנית
+    /// </summary>
     sealed partial class BL : IBL
     {
+        /// <summary>
+        /// A variable that holds one and only instance of the class (singleton)
+        /// </summary>
         internal static BL Instance { get; } = new BL();
 
+        /// <summary>
+        /// Variable for access to the data layer.
+        /// </summary>
         internal IDal dal = DalFactory.GetDal();
 
+        /// <summary>
+        /// Variable for random data.
+        /// </summary>
         Random rd = new Random();
 
-        List<DroneToList> droneLists = new();
+        /// <summary>
+        /// A list of drones in logic layer.
+        /// </summary>
+        List<DroneToList> dronesList = new();
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         internal static double DroneAvailable;
         internal static double LightWeight;
         internal static double MediumWeight;
         internal static double HeavyWeight;
         internal static double ChargingRate;
 
+
+        /// <summary>
+        /// private CTOR to prevent the creation of another instance of the class and to initialize drone list.
+        /// </summary>
         private BL()
         {
             //Bring the config from DAL
@@ -57,7 +79,7 @@ namespace BL
                     droneStatus = DroneStatuses.Maintenance;
                     droneLocation = new() { Lattitude = chargeStation.Lattitude, Longitude = chargeStation.Longitude };
                 }
-                catch (DalApi.NoNumberFoundException ex)
+                catch (DalApi.NoNumberFoundException)
                 {                                     
                     droneStatus = isScheduled ? DroneStatuses.Sendering : (DroneStatuses)rd.Next(2);
 
@@ -111,7 +133,7 @@ namespace BL
                     }
                 }
 
-                droneLists.Add(new()
+                dronesList.Add(new()
                 {
                     Id = drone.Id,
                     Model = drone.Model,

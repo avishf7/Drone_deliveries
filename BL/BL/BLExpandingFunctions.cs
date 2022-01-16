@@ -55,7 +55,5 @@ namespace BL
             return dist * 1.61081082288953;      //Converts to KM
         }
 
-        
-
     }
 }

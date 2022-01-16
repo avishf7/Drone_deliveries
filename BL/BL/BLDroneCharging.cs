@@ -14,7 +14,7 @@ namespace BL
         public void SendDroneForCharge(int DroneId)
         {
 
-            var dr = droneLists.SingleOrDefault(x => x.Id == DroneId);
+            var dr = dronesList.SingleOrDefault(x => x.Id == DroneId);
 
 
             if (dr == null)
@@ -59,7 +59,7 @@ namespace BL
 
         public void RealeseDroneFromCharge(int DroneId, TimeSpan time)
         {
-            var dr = droneLists.Find(x => x.Id == DroneId);
+            var dr = dronesList.Find(x => x.Id == DroneId);
 
             if (dr == null)
             {

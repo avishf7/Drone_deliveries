@@ -7,8 +7,15 @@ using System.Threading.Tasks;
 
 namespace DalApi
 {
+    /// <summary>
+    /// A class that imports the instance of the data access layer.
+    /// </summary>
     public static class DalFactory
     {
+        /// <summary>
+        /// A function that tries to return the instance of the selected data access layer in the configuration file.
+        /// </summary>
+        /// <returns>Instance of the data access layer</returns>
         public static IDal GetDal()
         {
             string dalType = DalConfig.DalName;
