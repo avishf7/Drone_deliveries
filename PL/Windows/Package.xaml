@@ -9,7 +9,7 @@
         WindowStyle="SingleBorderWindow" 
         ResizeMode="NoResize"
         DataContext="{Binding RelativeSource={RelativeSource self}}"
-         Topmost="{Binding Sender.Topmost, RelativeSource={RelativeSource self}}">
+        Topmost="{Binding Sender.Topmost, RelativeSource={RelativeSource self}}">
 
     <Window.Resources>
         <ResourceDictionary>

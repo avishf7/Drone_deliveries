@@ -3,14 +3,14 @@
   <Station>
     <Id>5</Id>
     <Name>VIRTA Charging Station</Name>
-    <FreeChargeSlots>22</FreeChargeSlots>
+    <FreeChargeSlots>23</FreeChargeSlots>
     <Longitude>34.554392666232026</Longitude>
     <Lattitude>32.113611496805035</Lattitude>
   </Station>
   <Station>
     <Id>15</Id>
     <Name>EV-Edge Charging Station</Name>
-    <FreeChargeSlots>22</FreeChargeSlots>
+    <FreeChargeSlots>26</FreeChargeSlots>
     <Longitude>34.54097611412451</Longitude>
     <Lattitude>32.01601992431843</Lattitude>
   </Station>
