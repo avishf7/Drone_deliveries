@@ -8,7 +8,7 @@
         Title="Drone" 
         Height="400" 
         Width="500" 
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="CenterOwner"
         WindowStyle="SingleBorderWindow" 
         ResizeMode="NoResize"
         DataContext="{Binding  RelativeSource={RelativeSource self}}"

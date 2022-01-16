@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Windows"
         mc:Ignorable="d"
-        Title="Package" Height="450" Width="600" WindowStartupLocation="CenterScreen"
+        Title="Package" Height="450" Width="600" WindowStartupLocation="CenterOwner"
         WindowStyle="SingleBorderWindow" 
         ResizeMode="NoResize"
         DataContext="{Binding RelativeSource={RelativeSource self}}"
-         Topmost="{Binding Sender.Topmost, RelativeSource={RelativeSource self}}">
+        Topmost="{Binding Sender.Topmost, RelativeSource={RelativeSource self}}">
 
     <Window.Resources>
         <ResourceDictionary>
