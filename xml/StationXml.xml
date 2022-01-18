@@ -10,7 +10,7 @@
   <Station>
     <Id>15</Id>
     <Name>EV-Edge Charging Station</Name>
-    <FreeChargeSlots>9</FreeChargeSlots>
+    <FreeChargeSlots>11</FreeChargeSlots>
     <Longitude>34.54097611412451</Longitude>
     <Lattitude>32.01601992431843</Lattitude>
   </Station>

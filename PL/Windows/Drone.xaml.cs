@@ -276,7 +276,6 @@ namespace PL.Windows
                         Model.UpdatePOPackage(providedPckageId);
                         Model.UpdateCustomers();
                         MessageBox.Show("The package was delivered to its destination, good day", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
-
                     }
                     else
                     {
