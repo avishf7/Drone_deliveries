@@ -93,19 +93,19 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0"  Text="ID: "  Margin="10" FontWeight="Bold"/>
-                    <TextBlock Grid.Row="0" Grid.Column="1"  Text="{Binding Path=CustomerId ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Row="0" Grid.Column="2"  Text="Name: " Margin="10" FontWeight="Bold"/>
-                    <TextBlock Grid.Row="0" Grid.Column="3"  Text="{Binding Path=CustomerName ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Row="0" Grid.Column="4"  Text="Phone: "  Margin="10" FontWeight="Bold"/>
-                    <TextBlock Grid.Row="0" Grid.Column="5"  Text="{Binding Path=CustomerPhone ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Row="1" Grid.Column="0"  Text="Amount of not provided packages: " Margin="10" FontWeight="Bold" />
-                    <TextBlock Grid.Row="1" Grid.Column="1"  Text="{Binding Path=NumOfPackagesNotProvided ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Row="1" Grid.Column="2"  Text="Amount of provided packages: " Margin="10" FontWeight="Bold" />
-                    <TextBlock Grid.Row="1" Grid.Column="3"  Text="{Binding Path=NumOfPackagesProvided ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Row="2" Grid.Column="0"  Text="Amount of not received packages: " Margin="10" FontWeight="Bold" />
-                    <TextBlock Grid.Row="2" Grid.Column="1"  Text="{Binding Path=NumOfPackagesNotReceived ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Row="2" Grid.Column="2"  Text="Amount of received packages: " Margin="10" FontWeight="Bold" />
-                    <TextBlock Grid.Row="2" Grid.Column="3"  Text="{Binding Path=NumOfPackagesReceived ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
+                    <TextBlock Grid.Row="0" Grid.Column="1"  Text="{Binding Path=Id ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
+                    <TextBlock Grid.Row="0" Grid.Column="2"  Text="Model: " Margin="10" FontWeight="Bold"/>
+                    <TextBlock Grid.Row="0" Grid.Column="3"  Text="{Binding Path=Model ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
+                    <TextBlock Grid.Row="0" Grid.Column="4"  Text="Max weight: "  Margin="10" FontWeight="Bold"/>
+                    <TextBlock Grid.Row="0" Grid.Column="5"  Text="{Binding Path=MaxWeight ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
+                    <TextBlock Grid.Row="1" Grid.Column="0"  Text="Drone status: " Margin="10" FontWeight="Bold" />
+                    <TextBlock Grid.Row="1" Grid.Column="1"  Text="{Binding Path=DroneStatus ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
+                    <TextBlock Grid.Row="1" Grid.Column="2"  Text="Location of drone: " Margin="10" FontWeight="Bold" />
+                    <TextBlock Grid.Row="1" Grid.Column="3"  Text="{Binding Path=LocationOfDrone ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
+                    <TextBlock Grid.Row="1" Grid.Column="4"  Text="Battery: " Margin="10" FontWeight="Bold" />
+                    <ProgressBar Grid.Row="1" Grid.Column="5"  Value="{Binding Path=BatteryStatus ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
+                    <TextBlock Grid.Row="2" Grid.Column="0"  Text="Package number: " Margin="10" FontWeight="Bold" />
+                    <TextBlock Grid.Row="2" Grid.Column="1"  Text="{Binding Path=PackageNumber ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
 
                 </Grid>
                 <Line Stroke="red" StrokeThickness="2px" X1="0" Y1="5" X2="750" Y2="5"/>

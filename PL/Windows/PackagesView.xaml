@@ -64,9 +64,10 @@
                     </Grid>
 
                     <ListView x:Name="PackagesListView"
-                             ItemsSource="{Binding Model.Packages}" 
+                              ItemsSource="{Binding Model.Packages}" 
                               Grid.Row="1"  Opacity="0.5" 
-                             MouseDoubleClick="PackagesListView_MouseDoubleClick" />
+                              ItemTemplate="{StaticResource PackageTemplate}"  
+                              MouseDoubleClick="PackagesListView_MouseDoubleClick" />
                 </Grid>
             </TabItem>
             <TabItem x:Name="GroupingView" Header="Grouping" Background="{StaticResource Static.Background}"  >
@@ -83,6 +84,7 @@
 
                                     <ListView ItemsSource="{Binding}" 
                                                  Background="{x:Null}"
+                                              ItemTemplate="{StaticResource PackageTemplate}"
                                                   MouseDoubleClick="PackagesListView_MouseDoubleClick"/>
                                 </Expander>
                             </Border>

@@ -35,6 +35,7 @@
                     <ListView x:Name="StationsListView"
                              ItemsSource="{Binding Model.Stations}" 
                              Opacity="0.5" 
+                             ItemTemplate="{StaticResource StationTemplate}" 
                              MouseDoubleClick="StationsListView_MouseDoubleClick" />
                 </Grid>
             </TabItem>
@@ -51,8 +52,9 @@
                                     </Expander.Header>
 
                                     <ListView ItemsSource="{Binding}" 
-                                                 Background="{x:Null}"
-                                                  MouseDoubleClick="StationsListView_MouseDoubleClick"/>
+                                              Background="{x:Null}"
+                                              ItemTemplate="{StaticResource StationTemplate}"       
+                                              MouseDoubleClick="StationsListView_MouseDoubleClick"/>
                                 </Expander>
                             </Border>
                         </DataTemplate>
