@@ -10,25 +10,7 @@
            />
 
 
-    <!--Representation template of location-->
-    <ControlTemplate x:Key="LocationTemplate">
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-            <Grid Background="{StaticResource Static.Background}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50*" />
-                    <RowDefinition Height="50*" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50*" />
-                    <ColumnDefinition Width="50*" />
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0"  Text="Longitude: " HorizontalAlignment="Left" />
-                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=Longitude ,Mode=OneWay, FallbackValue='None', StringFormat={}{0:F3}}" HorizontalAlignment="Center" />
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Lattitude: "  HorizontalAlignment="Left"/>
-                <TextBlock Grid.Row="1" Grid.Column="1"  Text="{Binding Path=Lattitude ,Mode=OneWay, FallbackValue='None', StringFormat={}{0:F3}}" HorizontalAlignment="Center" />
-            </Grid>
-        </ScrollViewer>
-    </ControlTemplate>
+    
 
 
     <!--Representation template of package in transfer-->
