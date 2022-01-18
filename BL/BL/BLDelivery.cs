@@ -22,51 +22,56 @@ namespace BL
             if (dr == null ? throw new BlApi.NoNumberFoundException("") : true &&
                 dr.DroneStatus != DroneStatuses.Available ? throw new DroneNotAvailableException("") : true)
             {
-                var orderPackages = dal.GetPackages().Where(pck => (int)pck.Weight <= (int)dr.MaxWeight)
+                lock (dal)
+                {
+                    var orderPackages = dal.GetPackages().Where(pck => (int)pck.Weight <= (int)dr.MaxWeight)
                                 .OrderByDescending(pck => pck.Priority)
                                 .ThenByDescending(pck => pck.Weight)
-                                .ThenBy(pck => dr.LocationOfDrone.Distance( new()
+                                .ThenBy(pck => dr.LocationOfDrone.Distance(new()
                                 {
                                     Lattitude = dal.GetCustomer(pck.SenderId).Lattitude,
                                     Longitude = dal.GetCustomer(pck.SenderId).Longitude
                                 }));
 
-                if (!orderPackages.Any())
-                    throw new BlApi.NoSuitablePackageForScheduledException("Packages weighing more than the drone's ability to carry");
+                    if (!orderPackages.Any())
+                        throw new BlApi.NoSuitablePackageForScheduledException("Packages weighing more than the drone's ability to carry");
 
-                bool isFound = false;//for checking if there is a fit package
-                bool isEnoughBattary = true;
+                    bool isFound = false;//for checking if there is a fit package
+                    bool isEnoughBattary = true;
 
-                foreach (var pck in orderPackages)
-                {
-                    if (isFound = pck.Scheduled == null)
+                    foreach (var pck in orderPackages)
                     {
-                        DO.Customer sender = dal.GetCustomer(pck.SenderId),
-                                         target = dal.GetCustomer(pck.TargetId);
-
-                        Location senderLocation = new() { Lattitude = sender.Lattitude, Longitude = sender.Longitude },
-                                 targetLocation = new() { Lattitude = target.Lattitude, Longitude = target.Longitude };
-
-                        double minBattery = BatteryUsage(dr.LocationOfDrone.Distance(senderLocation))
-                                          + BatteryUsage(senderLocation.Distance(targetLocation), (int)pck.Weight)
-                                          + BatteryUsage(targetLocation.Distance(FindClosestStationLocation(targetLocation)));
-
-
-                        if (isEnoughBattary = dr.BatteryStatus >= minBattery)
+                        if (isFound = pck.Scheduled == null)
                         {
-                            dr.DroneStatus = DroneStatuses.Sendering;
-                            dr.PackageNumber = pck.Id;
-                            dal.ConnectPackageToDrone(pck.Id, droneId);
-                            break;
+                            DO.Customer sender = dal.GetCustomer(pck.SenderId),
+                                             target = dal.GetCustomer(pck.TargetId);
+
+                            Location senderLocation = new() { Lattitude = sender.Lattitude, Longitude = sender.Longitude },
+                                     targetLocation = new() { Lattitude = target.Lattitude, Longitude = target.Longitude };
+
+                            double minBattery = BatteryUsage(dr.LocationOfDrone.Distance(senderLocation))
+                                              + BatteryUsage(senderLocation.Distance(targetLocation), (int)pck.Weight)
+                                              + BatteryUsage(targetLocation.Distance(FindClosestStationLocation(targetLocation)));
+
+
+                            if (isEnoughBattary = dr.BatteryStatus >= minBattery)
+                            {
+                                dr.DroneStatus = DroneStatuses.Sendering;
+                                dr.PackageNumber = pck.Id;
+                                dal.ConnectPackageToDrone(pck.Id, droneId);
+                                break;
+                            }
                         }
+
                     }
+
+
+                    if (!isEnoughBattary)
+                        throw new BlApi.NoSuitablePackageForScheduledException("There is not enough battery", new NotEnoughBattery());
+
+                    if (!isFound)
+                        throw new BlApi.NoSuitablePackageForScheduledException("There are no packages waiting to be assigned");
                 }
-
-                if (!isEnoughBattary)
-                    throw new BlApi.NoSuitablePackageForScheduledException("There is not enough battery", new NotEnoughBattery());
-
-                if (!isFound)
-                    throw new BlApi.NoSuitablePackageForScheduledException("There are no packages waiting to be assigned");                
             }
         }
 
@@ -80,18 +85,21 @@ namespace BL
             if (dr.PackageNumber == -1)
                 throw new NoPackageAssociatedWithDrone("");
 
-            var doPackage = dal.GetPackage(dr.PackageNumber);
-
-            if (doPackage.PickedUp != null)
-                throw new PackageAlreadyCollectedException("Package ID - " + doPackage.Id);
-
-            var sender = GetCustomer(doPackage.SenderId);
-
-            if (dr.PackageNumber == doPackage.Id)
+            lock (dal)
             {
-                dr.BatteryStatus = dr.BatteryStatus - BatteryUsage(dr.LocationOfDrone.Distance(sender.CustomerLocation));
-                dr.LocationOfDrone = sender.CustomerLocation;               
-                dal.PickUp(doPackage.Id);
+                var doPackage = dal.GetPackage(dr.PackageNumber);
+
+                if (doPackage.PickedUp != null)
+                    throw new PackageAlreadyCollectedException("Package ID - " + doPackage.Id);
+
+                var sender = GetCustomer(doPackage.SenderId);
+
+                if (dr.PackageNumber == doPackage.Id)
+                {
+                    dr.BatteryStatus = dr.BatteryStatus - BatteryUsage(dr.LocationOfDrone.Distance(sender.CustomerLocation));
+                    dr.LocationOfDrone = sender.CustomerLocation;
+                    dal.PickUp(doPackage.Id);
+                }
             }
         }
 
@@ -105,21 +113,24 @@ namespace BL
             if (dr.PackageNumber == -1)
                 throw new NoPackageAssociatedWithDrone();
 
-            var doPackage = dal.GetPackage(dr.PackageNumber);
-
-            if (doPackage.PickedUp == null)
-                throw new PackageNotCollectedException("Package ID - " + doPackage.Id);
-
-            var target = GetCustomer(doPackage.TargetId);
-
-            if (dr.PackageNumber == doPackage.Id)
+            lock (dal)
             {
-                dr.BatteryStatus = dr.BatteryStatus - BatteryUsage(dr.LocationOfDrone.Distance(target.CustomerLocation),
-                    (int)doPackage.Weight);
-                dr.LocationOfDrone = target.CustomerLocation;
-                dr.DroneStatus = DroneStatuses.Available;
-                dr.PackageNumber = -1;
-                dal.PackageDeliver(doPackage.Id); ;
+                var doPackage = dal.GetPackage(dr.PackageNumber);
+
+                if (doPackage.PickedUp == null)
+                    throw new PackageNotCollectedException("Package ID - " + doPackage.Id);
+
+                var target = GetCustomer(doPackage.TargetId);
+
+                if (dr.PackageNumber == doPackage.Id)
+                {
+                    dr.BatteryStatus = dr.BatteryStatus - BatteryUsage(dr.LocationOfDrone.Distance(target.CustomerLocation),
+                        (int)doPackage.Weight);
+                    dr.LocationOfDrone = target.CustomerLocation;
+                    dr.DroneStatus = DroneStatuses.Available;
+                    dr.PackageNumber = -1;
+                    dal.PackageDeliver(doPackage.Id); ;
+                }
             }
         }
     }

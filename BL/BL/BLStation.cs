@@ -17,14 +17,17 @@ namespace BL
         {
             try
             {
-                dal.AddStation(new DO.Station
+                lock (dal)
                 {
-                    Id = station.Id,
-                    Name = station.Name,
-                    Longitude = station.LocationOfStation.Longitude,
-                    Lattitude = station.LocationOfStation.Lattitude,
-                    FreeChargeSlots = station.FreeChargeSlots,
-                });
+                    dal.AddStation(new DO.Station
+                    {
+                        Id = station.Id,
+                        Name = station.Name,
+                        Longitude = station.LocationOfStation.Longitude,
+                        Lattitude = station.LocationOfStation.Lattitude,
+                        FreeChargeSlots = station.FreeChargeSlots,
+                    });
+                }
             }
             catch (DalApi.ExistsNumberException ex)
             {
@@ -40,8 +43,11 @@ namespace BL
 
             try
             {
-                dalSt = dal.GetStation(stationId);
-                blSt = GetStation(stationId);
+                lock (dal)
+                {
+                    dalSt = dal.GetStation(stationId);
+                    blSt = GetStation(stationId);
+                }
 
             }
             catch (DalApi.NoNumberFoundException ex)
@@ -66,7 +72,7 @@ namespace BL
                 dalSt.FreeChargeSlots = numOfChargeStation - blSt.ChargingDrones.Count();
             }
 
-            dal.UpdateStation(dalSt);
+            lock (dal) { dal.UpdateStation(dalSt); }
 
         }
 
@@ -75,21 +81,24 @@ namespace BL
         {
             try
             {
-                DO.Station DoStation = dal.GetStation(stationId);
-
-                return new()
+                lock (dal)
                 {
-                    Id = DoStation.Id,
-                    Name = DoStation.Name,
-                    FreeChargeSlots = DoStation.FreeChargeSlots,
-                    LocationOfStation = new Location { Lattitude = DoStation.Lattitude, Longitude = DoStation.Longitude },
-                    ChargingDrones = dal.GetDronesCharges(x => x.StationId == stationId)
-                                     .Select(drCh => new DroneCharge
-                                     {
-                                         DroneId = drCh.DroneId,
-                                         BatteryStatus = dronesList.Find(x => x.Id == drCh.DroneId).BatteryStatus
-                                     }).OrderBy(drCh => drCh.BatteryStatus)
-                };
+                    DO.Station DoStation = dal.GetStation(stationId);
+
+                    return new()
+                    {
+                        Id = DoStation.Id,
+                        Name = DoStation.Name,
+                        FreeChargeSlots = DoStation.FreeChargeSlots,
+                        LocationOfStation = new Location { Lattitude = DoStation.Lattitude, Longitude = DoStation.Longitude },
+                        ChargingDrones = dal.GetDronesCharges(x => x.StationId == stationId)
+                                         .Select(drCh => new DroneCharge
+                                         {
+                                             DroneId = drCh.DroneId,
+                                             BatteryStatus = dronesList.Find(x => x.Id == drCh.DroneId).BatteryStatus
+                                         }).OrderBy(drCh => drCh.BatteryStatus)
+                    };
+                }
             }
             catch (DalApi.NoNumberFoundException ex)
             {
@@ -100,13 +109,16 @@ namespace BL
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<StationToList> GetStations(Predicate<StationToList> predicate = null)
         {
-            return dal.GetStations().Select(st => new StationToList()
+            lock (dal)
             {
-                Id = st.Id,
-                Name = st.Name,
-                NumberOfChargingStationsOccupied = dal.GetDronesCharges(drCh => drCh.StationId == st.Id).Count(),
-                SeveralAvailableChargingStations = st.FreeChargeSlots
-            }).Where(st => predicate != null ? predicate(st) : true);
+                return dal.GetStations().Select(st => new StationToList()
+                {
+                    Id = st.Id,
+                    Name = st.Name,
+                    NumberOfChargingStationsOccupied = dal.GetDronesCharges(drCh => drCh.StationId == st.Id).Count(),
+                    SeveralAvailableChargingStations = st.FreeChargeSlots
+                }).Where(st => predicate != null ? predicate(st) : true);
+            }
         }       
     }
 }

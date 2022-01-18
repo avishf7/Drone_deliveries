@@ -321,8 +321,8 @@
                           Background="{StaticResource Static.Background}"
                           Margin="20,0"
                           MouseDoubleClick="PackageAtCustomerListView_MouseDoubleClick">
-                
-                <ItemsControl.ItemTemplate>
+
+                <ListView.ItemTemplate>
                     <DataTemplate>                                               
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -350,7 +350,7 @@
                             </Grid>
                        
                     </DataTemplate>
-                </ItemsControl.ItemTemplate>
+                </ListView.ItemTemplate>
             </ListView>
             
 

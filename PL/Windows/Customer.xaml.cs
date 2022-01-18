@@ -110,7 +110,7 @@ namespace PL.Windows
         private void IntTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             //Checks that entered numbers only
-            if (e.Handled = !(int.TryParse(e.Text, out int d)) && e.Text != "")
+            if (e.Handled = !int.TryParse(e.Text, out int d) && e.Text != "")
                 MessageBox.Show("Please enter only numbers.");
 
         }
