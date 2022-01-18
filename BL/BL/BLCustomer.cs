@@ -16,47 +16,55 @@ namespace BL
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddCustomer(Customer customer)
         {
+
             try
             {
-                dal.AddCustomer(new DO.Customer
+                lock (dal)
                 {
-                    Id = customer.Id,
-                    Name = customer.Name,
-                    Phone = customer.Phone,
-                    Longitude = customer.CustomerLocation.Longitude,
-                    Lattitude = customer.CustomerLocation.Lattitude
-                });
+                    dal.AddCustomer(new DO.Customer
+                    {
+                        Id = customer.Id,
+                        Name = customer.Name,
+                        Phone = customer.Phone,
+                        Longitude = customer.CustomerLocation.Longitude,
+                        Lattitude = customer.CustomerLocation.Lattitude
+                    });
+                }
             }
             catch (DalApi.ExistsNumberException ex)
             {
                 throw new BlApi.NoNumberFoundException("Customer already exists", ex);
             }
+
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateCustomer(int customerId, string name, string phone)
         {
-            DO.Customer dalCus;
-            Customer blCus;
-
-            try
+            lock (dal)
             {
-                dalCus = dal.GetCustomer(customerId);
-                blCus = GetCustomer(customerId);
+                DO.Customer dalCus;
+                Customer blCus;
 
+                try
+                {
+                    dalCus = dal.GetCustomer(customerId);
+                    blCus = GetCustomer(customerId);
+
+                }
+                catch (DalApi.NoNumberFoundException ex)
+                {
+                    throw new BlApi.NoNumberFoundException("Customer ID not found", ex);
+                }
+
+                if (name != "")
+                    dalCus.Name = name;
+                if (phone != "")
+                    dalCus.Phone = phone;
+
+
+                dal.UpdateCustomer(dalCus);
             }
-            catch (DalApi.NoNumberFoundException ex)
-            {
-                throw new BlApi.NoNumberFoundException("Customer ID not found", ex);
-            }
-
-            if (name != "")
-                dalCus.Name = name;
-            if (phone != "")
-                dalCus.Phone = phone;
-
-
-            dal.UpdateCustomer(dalCus);
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -64,35 +72,37 @@ namespace BL
         {
             try
             {
-
-                var DoCustomer = dal.GetCustomer(customerId);
-
-
-                Customer BoCustomer = new()
+                lock (dal)
                 {
-                    Id = DoCustomer.Id,
-                    Name = DoCustomer.Name,
-                    Phone = DoCustomer.Phone,
-                    CustomerLocation = new Location { Lattitude = DoCustomer.Lattitude, Longitude = DoCustomer.Longitude },
-                    PackageAtCustomerFromCustomer = dal.GetPackages(x => x.SenderId == customerId).Select(pck => new PackageAtCustomer()
-                    {
-                        PackageId = pck.Id,
-                        Weight = (BO.Weight)pck.Weight,
-                        Priority = (BO.Priorities)pck.Priority,
-                        Status = GetPackages(x => x.Id == pck.Id).Single().PackageStatus,
-                        OtherSideCustomer = dal.GetCustomer(pck.TargetId).GetCusomerInPackage()
-                    }),
-                    PackageAtCustomerToCustomer = dal.GetPackages(x => x.TargetId == customerId).Select(pck => new PackageAtCustomer()
-                    {
-                        PackageId = pck.Id,
-                        Weight = (BO.Weight)pck.Weight,
-                        Priority = (BO.Priorities)pck.Priority,
-                        Status = GetPackages(x => x.Id == pck.Id).Single().PackageStatus,
-                        OtherSideCustomer = dal.GetCustomer(pck.SenderId).GetCusomerInPackage()
-                    })
-                };
+                    var DoCustomer = dal.GetCustomer(customerId);
 
-                return BoCustomer;
+
+                    Customer BoCustomer = new()
+                    {
+                        Id = DoCustomer.Id,
+                        Name = DoCustomer.Name,
+                        Phone = DoCustomer.Phone,
+                        CustomerLocation = new Location { Lattitude = DoCustomer.Lattitude, Longitude = DoCustomer.Longitude },
+                        PackageAtCustomerFromCustomer = dal.GetPackages(x => x.SenderId == customerId).Select(pck => new PackageAtCustomer()
+                        {
+                            PackageId = pck.Id,
+                            Weight = (BO.Weight)pck.Weight,
+                            Priority = (BO.Priorities)pck.Priority,
+                            Status = GetPackages(x => x.Id == pck.Id).Single().PackageStatus,
+                            OtherSideCustomer = dal.GetCustomer(pck.TargetId).GetCusomerInPackage()
+                        }),
+                        PackageAtCustomerToCustomer = dal.GetPackages(x => x.TargetId == customerId).Select(pck => new PackageAtCustomer()
+                        {
+                            PackageId = pck.Id,
+                            Weight = (BO.Weight)pck.Weight,
+                            Priority = (BO.Priorities)pck.Priority,
+                            Status = GetPackages(x => x.Id == pck.Id).Single().PackageStatus,
+                            OtherSideCustomer = dal.GetCustomer(pck.SenderId).GetCusomerInPackage()
+                        })
+                    };
+
+                    return BoCustomer;
+                }
             }
             catch (DalApi.NoNumberFoundException ex)
             {
@@ -104,7 +114,9 @@ namespace BL
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<CustomerToList> GetCustomers(Predicate<CustomerToList> predicate = null)
         {
-            return dal.GetCustomers().Select(cus => GetCustomer(cus.Id))
+            lock (dal)
+            {
+                return dal.GetCustomers().Select(cus => GetCustomer(cus.Id))
                                      .Select(cus => new CustomerToList()
                                      {
                                          CustomerId = cus.Id,
@@ -123,6 +135,7 @@ namespace BL
                                                                      where pck.Status != PackageStatus.Provided
                                                                      select pck).Count(),
                                      }).Where(cus => predicate != null ? predicate(cus) : true);
-        }               
+            }
+        }
     }
 }

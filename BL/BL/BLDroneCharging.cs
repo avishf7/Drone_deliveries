@@ -30,11 +30,15 @@ namespace BL
                 throw new DroneNotAvailableException("");
             }
 
-            Location stLocation;
-            try { stLocation = FindClosestStationLocation(dr.LocationOfDrone, x => x.FreeChargeSlots > 0); }
-            catch (BlApi.NoNumberFoundException ex)
+            
+                Location stLocation;
+            lock (dal)
             {
-                throw new BlApi.NoNumberFoundException("There is no station with available charging stations", ex);
+                try { stLocation = FindClosestStationLocation(dr.LocationOfDrone, x => x.FreeChargeSlots > 0); }
+                catch (BlApi.NoNumberFoundException ex)
+                {
+                    throw new BlApi.NoNumberFoundException("There is no station with available charging stations", ex);
+                }
             }
 
             double KM = stLocation.Distance(dr.LocationOfDrone);
@@ -46,10 +50,13 @@ namespace BL
                 dr.LocationOfDrone = stLocation;
                 dr.DroneStatus = DroneStatuses.Maintenance;
 
-                DO.Station station = dal.GetStations(x => x.Lattitude == stLocation.Lattitude && x.Longitude == stLocation.Longitude).SingleOrDefault();
+                lock (dal)
+                {
+                    DO.Station station = dal.GetStations(x => x.Lattitude == stLocation.Lattitude && x.Longitude == stLocation.Longitude).SingleOrDefault();
 
-                dal.UsingChargingStation(station.Id);
-                dal.AddDroneCharge(new() { DroneId = DroneId, StationId = station.Id, ChargeStart = DateTime.Now });
+                    dal.UsingChargingStation(station.Id);
+                    dal.AddDroneCharge(new() { DroneId = DroneId, StationId = station.Id, ChargeStart = DateTime.Now });
+                }
             }
             else
             {
@@ -80,20 +87,25 @@ namespace BL
             }
             dr.DroneStatus = DroneStatuses.Available;
 
-            IEnumerable<DO.Station> stationsT = dal.GetStations(x => x.Lattitude == dr.LocationOfDrone.Lattitude && x.Longitude == dr.LocationOfDrone.Longitude);
-            DO.Station station = stationsT.SingleOrDefault(x => x.Lattitude == dr.LocationOfDrone.Lattitude && x.Longitude == dr.LocationOfDrone.Longitude);
+            lock (dal)
+            {
+                DO.Station station = dal.GetStations(x => x.Lattitude == dr.LocationOfDrone.Lattitude && x.Longitude == dr.LocationOfDrone.Longitude).SingleOrDefault();
 
-            dal.RealeseChargingStation(station.Id);
-            dal.DeleteDroneCharge(DroneId);
+                dal.RealeseChargingStation(station.Id);
+                dal.DeleteDroneCharge(DroneId);
+            }
 
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void RealeseDroneFromCharge(int DroneId)
         {
-            var timeOfCharge = DateTime.Now - dal.GetDroneCharge(DroneId).ChargeStart;
+            lock (dal)
+            {
+                var timeOfCharge = DateTime.Now - dal.GetDroneCharge(DroneId).ChargeStart;
 
-            RealeseDroneFromCharge(DroneId, (TimeSpan)timeOfCharge);
+                RealeseDroneFromCharge(DroneId, (TimeSpan)timeOfCharge);
+            }
         }
     }
 }

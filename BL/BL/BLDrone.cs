@@ -18,28 +18,29 @@ namespace BL
         {
             try
             {
-
-                DO.Station st = dal.GetStation(staionId);
-                dal.AddDrone(new DO.Drone
+                lock (dal)
                 {
-                    Id = drone.Id,
-                    MaxWeight = (DO.Weight)drone.MaxWeight,
-                    Model = drone.Model
-                });
+                    DO.Station st = dal.GetStation(staionId);
+                    dal.AddDrone(new DO.Drone
+                    {
+                        Id = drone.Id,
+                        MaxWeight = (DO.Weight)drone.MaxWeight,
+                        Model = drone.Model
+                    });
 
-                dronesList.Add(new()
-                {
-                    Id = drone.Id,
-                    MaxWeight = drone.MaxWeight,
-                    Model = drone.Model,
-                    BatteryStatus = rd.NextDouble() * rd.Next(20) + 20,
-                    DroneStatus = DroneStatuses.Maintenance,
-                    LocationOfDrone = new() { Lattitude = st.Lattitude, Longitude = st.Longitude },
-                    PackageNumber = -1
-                });
+                    dronesList.Add(new()
+                    {
+                        Id = drone.Id,
+                        MaxWeight = drone.MaxWeight,
+                        Model = drone.Model,
+                        BatteryStatus = rd.NextDouble() * rd.Next(20) + 20,
+                        DroneStatus = DroneStatuses.Maintenance,
+                        LocationOfDrone = new() { Lattitude = st.Lattitude, Longitude = st.Longitude },
+                        PackageNumber = -1
+                    });
 
-                dal.UsingChargingStation(staionId);
-
+                    dal.UsingChargingStation(staionId);
+                }
             }
             catch (DalApi.NoNumberFoundException ex) { throw new BlApi.NoNumberFoundException("Station ID not found", ex); }
             catch (DalApi.ExistsNumberException ex) { throw new BlApi.ExistsNumberException("Drone already exists", ex); }
@@ -50,10 +51,13 @@ namespace BL
         {
             try
             {
-                DO.Drone dr = dal.GetDrone(droneId);
+                lock (dal)
+                {
+                    DO.Drone dr = dal.GetDrone(droneId);
 
-                dr.Model = model;
-                dal.UpdateDrone(dr);
+                    dr.Model = model;
+                    dal.UpdateDrone(dr);
+                }
 
                 dronesList.Find(drone => drone.Id == droneId).Model = model;
             }
@@ -71,24 +75,27 @@ namespace BL
             {
                 if (dr.DroneStatus == DroneStatuses.Sendering)
                 {
-                    DO.Package package = dal.GetPackage(dr.PackageNumber);
-                    DO.Customer sender = dal.GetCustomer(package.SenderId),
-                                     target = dal.GetCustomer(package.TargetId);
-                    Location senderLocation = new() { Lattitude = sender.Lattitude, Longitude = sender.Longitude },
-                             targetLocation = new() { Lattitude = target.Lattitude, Longitude = target.Longitude };
-
-                    packageInTransfer = new PackageInTransfer()
+                    lock (dal)
                     {
-                        Id = package.Id,
-                        Weight = (Weight)package.Weight,
-                        IsCollected = package.PickedUp != null,
-                        Priority = (Priorities)package.Priority,
-                        SenderCustomerInPackage = new() { CustomerId = sender.Id, CustomerName = sender.Name },
-                        TargetCustomerInPackage = new() { CustomerId = target.Id, CustomerName = target.Name },
-                        CollectionLocation = senderLocation,
-                        DeliveryDestinationLocation = targetLocation,
-                        DistanceCollectionToDestination = senderLocation.Distance(targetLocation)
-                    };
+                        DO.Package package = dal.GetPackage(dr.PackageNumber);
+                        DO.Customer sender = dal.GetCustomer(package.SenderId),
+                                         target = dal.GetCustomer(package.TargetId);
+                        Location senderLocation = new() { Lattitude = sender.Lattitude, Longitude = sender.Longitude },
+                                 targetLocation = new() { Lattitude = target.Lattitude, Longitude = target.Longitude };
+
+                        packageInTransfer = new PackageInTransfer()
+                        {
+                            Id = package.Id,
+                            Weight = (Weight)package.Weight,
+                            IsCollected = package.PickedUp != null,
+                            Priority = (Priorities)package.Priority,
+                            SenderCustomerInPackage = new() { CustomerId = sender.Id, CustomerName = sender.Name },
+                            TargetCustomerInPackage = new() { CustomerId = target.Id, CustomerName = target.Name },
+                            CollectionLocation = senderLocation,
+                            DeliveryDestinationLocation = targetLocation,
+                            DistanceCollectionToDestination = senderLocation.Distance(targetLocation)
+                        };
+                    }
                 }
             }
             else
@@ -111,7 +118,9 @@ namespace BL
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DroneToList> GetDrones(Predicate<DroneToList> predicate = null)
         {
-            return dronesList.Where(dr => predicate != null ? predicate(dr) : true)
+            lock (dal)
+            {
+                return dronesList.Where(dr => predicate != null ? predicate(dr) : true)
                              .Select(dr => new DroneToList()
                              {
                                  Id = dr.Id,
@@ -122,6 +131,7 @@ namespace BL
                                  LocationOfDrone = dr.LocationOfDrone,
                                  PackageNumber = dr.PackageNumber,
                              });
-        }   
+            }
+        }
     }
 }

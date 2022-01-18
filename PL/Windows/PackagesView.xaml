@@ -23,6 +23,39 @@
         </ResourceDictionary>
     </Window.Resources>
 
+
+    <!--<DataTemplate x:Name="PackageTemplate" DataType="local:BL.Package">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0"  Text="ID: " />
+            <TextBlock Grid.Row="0" Grid.Column="1"  Text="{Binding Path= ,Mode=OneWay}"  HorizontalAlignment="Center"  />
+            <TextBlock Grid.Row="0" Grid.Column="2"  Text="Name: " />
+            <TextBlock Grid.Row="0" Grid.Column="3"  Text="{Binding Path=CustomerName ,Mode=OneWay}"  HorizontalAlignment="Center"  />
+            <TextBlock Grid.Row="0" Grid.Column="4"  Text="Phone: " />
+            <TextBlock Grid.Row="0" Grid.Column="5"  Text="{Binding Path=CustomerPhone ,Mode=OneWay}"  HorizontalAlignment="Center"  />
+            <TextBlock Grid.Row="1" Grid.Column="0"  Text="Amount of not provided packages: " />
+            <TextBlock Grid.Row="1" Grid.Column="1"  Text="{Binding Path=NumOfPackagesNotProvided ,Mode=OneWay}"  HorizontalAlignment="Center"  />
+            <TextBlock Grid.Row="1" Grid.Column="2"  Text="Amount of provided packages: " />
+            <TextBlock Grid.Row="1" Grid.Column="3"  Text="{Binding Path=NumOfPackagesProvided ,Mode=OneWay}"  HorizontalAlignment="Center"  />
+            <TextBlock Grid.Row="2" Grid.Column="0"  Text="Amount of not received packages: " />
+            <TextBlock Grid.Row="2" Grid.Column="1"  Text="{Binding Path=NumOfPackagesNotReceived ,Mode=OneWay}"  HorizontalAlignment="Center"  />
+            <TextBlock Grid.Row="2" Grid.Column="2"  Text="Amount of received packages: " />
+            <TextBlock Grid.Row="2" Grid.Column="3"  Text="{Binding Path=NumOfPackagesReceived ,Mode=OneWay}"  HorizontalAlignment="Center"  />
+        </Grid>
+    </DataTemplate>-->
+
     <!--Grid Displays a list of all packages with information about them-->
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
