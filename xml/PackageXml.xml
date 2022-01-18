@@ -132,4 +132,16 @@
     <Delivered>2022-01-18T19:45:10.1833424+02:00</Delivered>
     <DroneId>-1</DroneId>
   </Package>
+  <Package>
+    <Id>13</Id>
+    <SenderId>18</SenderId>
+    <TargetId>2</TargetId>
+    <Weight>Light</Weight>
+    <Priority>Fast</Priority>
+    <Requested>2022-01-18T20:04:24.0716502+02:00</Requested>
+    <Scheduled>2022-01-18T20:04:47.0725994+02:00</Scheduled>
+    <PickedUp>2022-01-18T20:04:54.585145+02:00</PickedUp>
+    <Delivered>2022-01-18T20:04:59.3354416+02:00</Delivered>
+    <DroneId>-1</DroneId>
+  </Package>
 </ArrayOfPackage>

@@ -349,13 +349,14 @@
                         </Image>
                     </Button>
                 </Grid>
+                
                 <Button x:Name="Simulator"
                         Content="Simulator"
                         Grid.Row="1"
                         Margin="5,5" 
                         FontSize="22"
                         FontFamily="Arial Black"
-                        IsEnabled="{Binding Path=PODrone.DroneStatus, Mode=OneWay, Converter={StaticResource StatusToEnabledCharge}}" Click="Simulator_Click">
+                        Click="Simulator_Click">
                 </Button>
 
                

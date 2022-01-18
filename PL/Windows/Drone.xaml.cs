@@ -341,10 +341,17 @@ namespace PL.Windows
 
             Simulator.Click -= Simulator_Click;
             Simulator.Click += Stop_Click;
+
+            Charge.Visibility = Visibility.Hidden;
+            Delivery.Visibility = Visibility.Hidden;
+            Exit.Visibility = Visibility.Hidden;
         }
 
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
+            Charge.Visibility = Visibility.Visible;
+            Delivery.Visibility = Visibility.Visible;
+            Exit.Visibility = Visibility.Visible;
 
             Simulator.Content = "Simulator";
             Simulator.Click -= Stop_Click;
