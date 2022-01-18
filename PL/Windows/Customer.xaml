@@ -319,12 +319,12 @@
                           ItemsSource="{Binding PackageAtCustomerFromCustomer}" 
                           Grid.Row="0" Grid.Column="1"                           
                           Background="{StaticResource Static.Background}"
-                          Margin="20,0"
+                          Margin="20,5"
                           MouseDoubleClick="PackageAtCustomerListView_MouseDoubleClick">
 
                 <ListView.ItemTemplate>
-                    <DataTemplate>                                               
-                            <Grid>
+                    <DataTemplate>
+                        <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="20*" />
                                     <RowDefinition Height="20*" />
@@ -345,14 +345,12 @@
                                 <TextBlock Grid.Row="3" Grid.Column="0" Text="Status: " />
                                 <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=Status ,Mode=OneWay, FallbackValue='None'}"/>
                                 <TextBlock Grid.Row="4" Grid.Column="0" Text="Target customer: " HorizontalAlignment="Stretch" />
-                            <TextBox Grid.Row="4" Grid.Column="1" Template="{DynamicResource CustomerInPackageTemplate}" DataContext="{Binding Path=OtherSideCustomer ,Mode=OneWay}"  PreviewMouseUp="TextBox_PreviewMouseUp"/>
-
+                                <TextBox Grid.Row="4" Grid.Column="1" Template="{DynamicResource CustomerInPackageTemplate}" DataContext="{Binding Path=OtherSideCustomer ,Mode=OneWay}"  PreviewMouseUp="TextBox_PreviewMouseUp"/>
                             </Grid>
-                       
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            
+
 
 
             <Label x:Name="labalPackageAtCustomerToCustomer" 
@@ -371,7 +369,7 @@
                           IsEnabled="{Binding Converter={StaticResource ObjectToEnable}}"
                           Background="{StaticResource Static.Background}"
                           Grid.Row="1" Grid.Column="1"
-                          Margin="20,0"
+                          Margin="20,5"
                           MouseDoubleClick="PackageAtCustomerListView_MouseDoubleClick" >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate >
@@ -404,7 +402,7 @@
             </ListView>
 
 
-         
+
             <Button x:Name="Exit"                         
                         Grid.Column="0"
                         Grid.Row="2"
@@ -414,7 +412,7 @@
                 <Image Source="Pictures\Exit.png" Margin="10"/>
             </Button>
 
-            
+
         </Grid>
     </Grid>
     <Window.Background>

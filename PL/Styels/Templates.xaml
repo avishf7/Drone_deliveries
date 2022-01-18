@@ -91,7 +91,7 @@
                     <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,5" Text="{Binding Path=Id ,Mode=OneWay, FallbackValue='None'}" HorizontalAlignment="Center" />
                     <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,5" Text="Location: " HorizontalAlignment="Stretch" />
                     <TextBox Grid.Row="1" Grid.Column="1" Margin="0,5" Template="{DynamicResource LocationTemplate}" DataContext="{Binding Path=LocationOfDrone ,Mode=OneWay}" HorizontalAlignment="Center" />
-                    <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,5" Text="Battery status: " />
+                    <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,5" Text="Battery: " />
                     <ProgressBar Grid.Row="2" Grid.Column="1" Margin="0,5" Value="{Binding Path=BatteryStatus ,Mode=OneWay}"/>
                 </Grid>
 

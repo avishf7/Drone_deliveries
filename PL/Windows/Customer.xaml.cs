@@ -85,7 +85,7 @@ namespace PL.Windows
             CustomerLocationInfo.Visibility = Visibility.Visible;
 
 
-            this.Height = 700;
+            this.Height = 750;
             this.Width = 550;
 
             //If the window that opened the new window closes, the new window will also close.

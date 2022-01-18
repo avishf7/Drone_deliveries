@@ -330,20 +330,23 @@
                           MouseDoubleClick="ChargingDronesListView_MouseDoubleClick" >
                 <ListView.ItemTemplate>
                     <DataTemplate >
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="50*" />
-                                <RowDefinition Height="50*" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50*" />
-                                <ColumnDefinition Width="50*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Row="0" Grid.Column="0"  Text="Drone ID: " />
-                            <TextBlock Grid.Row="0" Grid.Column="1"  Text="{Binding Path=DroneId ,Mode=OneWay}"  HorizontalAlignment="Center"  />
-                            <TextBlock Grid.Row="1" Grid.Column="0"  Text="Battery status: " />
-                            <ProgressBar Grid.Row="1" Grid.Column="1" Value="{Binding Path=BatteryStatus ,Mode=OneWay}" Width="80"/>
-                        </Grid>
+                        <StackPanel>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50*" />
+                                    <RowDefinition Height="50*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50*" />
+                                    <ColumnDefinition Width="50*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0"  Text="Drone ID: " />
+                                <TextBlock Grid.Row="0" Grid.Column="1"  Text="{Binding Path=DroneId ,Mode=OneWay}"  HorizontalAlignment="Center"  />
+                                <TextBlock Grid.Row="1" Grid.Column="0"  Text="Battery: " />
+                                <ProgressBar Grid.Row="1" Grid.Column="1" Value="{Binding Path=BatteryStatus ,Mode=OneWay}"/>
+                            </Grid>
+                            <Line Stroke="red" StrokeThickness="2px" X1="0" Y1="5" X2="180" Y2="5"/>
+                        </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
