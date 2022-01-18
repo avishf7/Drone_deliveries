@@ -335,5 +335,21 @@ namespace PL.Windows
                     MessageBox.Show("No element exists", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void Simulator_Click(object sender, RoutedEventArgs e)
+        {
+            Simulator.Content = "Stop simulator";
+
+            Simulator.Click -= Simulator_Click;
+            Simulator.Click += Stop_Click;
+        }
+
+        private void Stop_Click(object sender, RoutedEventArgs e)
+        {
+
+            Simulator.Content = "Simulator";
+            Simulator.Click -= Stop_Click;
+            Simulator.Click += Simulator_Click;
+        }
     }
 }
