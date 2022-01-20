@@ -84,7 +84,7 @@ namespace PL.Windows
             DroneLocationInfo.Visibility = Visibility.Visible;
 
             this.Height = 800;
-            this.Width = 600;
+            this.Width = 1200;
 
             //If the window that opened the new window closes, the new window will also close.
             this.Sender.Closed += Sender_Closed;

@@ -52,7 +52,7 @@ namespace BO
         /// <summary>
         /// Distance from collection point to destination
         /// </summary>
-        public double DistanceCollectionToDestination { get; set; }
+        public double DistanceToCollectionOrToDestination { get; set; }
 
 
 
@@ -62,7 +62,7 @@ namespace BO
                 + "\nSender customer in package: " + SenderCustomerInPackage +
                 "\nTarget customer in package: " + TargetCustomerInPackage + "\nCollection location: " +
                 CollectionLocation + "\nDelivery destination location: " + DeliveryDestinationLocation +
-                "\nDistance from collection point to destination: " + DistanceCollectionToDestination + "\n";
+                "\nDistance from collection point to destination: " + DistanceToCollectionOrToDestination + "\n";
         }
     }
 }

@@ -93,7 +93,7 @@ namespace BL
                             TargetCustomerInPackage = new() { CustomerId = target.Id, CustomerName = target.Name },
                             CollectionLocation = senderLocation,
                             DeliveryDestinationLocation = targetLocation,
-                            DistanceCollectionToDestination = senderLocation.Distance(targetLocation)
+                            DistanceToCollectionOrToDestination = senderLocation.Distance(targetLocation)
                         };
                     }
                 }
