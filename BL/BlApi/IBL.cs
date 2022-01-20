@@ -9,6 +9,12 @@ namespace BlApi
 {
     public interface IBL
     {
+        /// <summary>
+        /// SImulator for drones
+        /// </summary>
+        /// <param name="SimulatorProgress">Function to update the view</param>
+        /// <param name="IsRun">A penetration that tests the cancellation pending</param>
+        public void StartSimulator(Action SimulatorProgress, Func<bool> IsRun, int DroneId);
 
         #region Drone functions
 
@@ -18,7 +24,7 @@ namespace BlApi
         /// <param name="drone">Drone to add</param>   
         /// <exception cref="NoNumberFoundException"></exception>
         /// <exception cref="ExistsNumberException"></exception>
-        void AddDrone(Drone drone ,int staionId);
+        void AddDrone(Drone drone, int staionId);
 
         /// <summary>
         /// Function of updating a drone.

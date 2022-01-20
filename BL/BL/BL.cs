@@ -16,6 +16,8 @@ namespace BL
     /// </summary>
     sealed partial class BL : IBL
     {
+
+
         /// <summary>
         /// A variable that holds one and only instance of the class (singleton)
         /// </summary>

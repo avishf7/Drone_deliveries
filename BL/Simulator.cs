@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using BO;
 using System.Threading;
 using static BL.BL;
-
-
+using NPOI.SS.Formula.Functions;
+using Newtonsoft.Json.Serialization;
 
 namespace BL
 {
@@ -16,6 +16,10 @@ namespace BL
     /// </summary>
     class Simulator
     {
+        const int DELAY = 1000;
+        const double KMS = 2.0;
+
+       public Simulator(BL bl, Action SimulatorProgress, Func<bool> IsRun, int DroneId) { }
 
     }
 }

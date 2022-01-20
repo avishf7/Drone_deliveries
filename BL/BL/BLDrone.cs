@@ -93,7 +93,7 @@ namespace BL
                             TargetCustomerInPackage = new() { CustomerId = target.Id, CustomerName = target.Name },
                             CollectionLocation = senderLocation,
                             DeliveryDestinationLocation = targetLocation,
-                            DistanceToCollectionOrToDestination = senderLocation.Distance(targetLocation)
+                            DistanceToCollectionOrToDestination = package.PickedUp != null? dr.LocationOfDrone.Distance(targetLocation): dr.LocationOfDrone.Distance(senderLocation)
                         };
                     }
                 }
