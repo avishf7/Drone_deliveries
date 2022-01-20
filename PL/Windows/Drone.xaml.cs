@@ -73,8 +73,8 @@ namespace PL.Windows
 
             InitializeComponent();
 
-            MainGrid.RowDefinitions[0].Height = new(50, GridUnitType.Star);
-            MainGrid.RowDefinitions[1].Height = new(50, GridUnitType.Star);
+            MainGrid.RowDefinitions[0].Height = new(60, GridUnitType.Star);
+            MainGrid.RowDefinitions[1].Height = new(40, GridUnitType.Star);
 
 
             DroneInfoDownGrid.Visibility = Visibility.Visible;
