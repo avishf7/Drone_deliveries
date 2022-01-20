@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -337,6 +338,11 @@ namespace PL.Windows
 
         private void Simulator_Click(object sender, RoutedEventArgs e)
         {
+            BackgroundWorker worker = new() { WorkerReportsProgress = true, WorkerSupportsCancellation = true };
+            worker.DoWork += Worker_DoWork;
+            worker.ProgressChanged += Worker_ProgressChanged;
+            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+
             Simulator.Content = "Stop simulator";
 
             Simulator.Click -= Simulator_Click;
@@ -344,7 +350,61 @@ namespace PL.Windows
 
             Charge.Visibility = Visibility.Hidden;
             Delivery.Visibility = Visibility.Hidden;
+
+            worker.RunWorkerAsync();
         }
+
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            switch (PODrone.DroneStatus)
+            {
+                case DroneStatuses.Available:
+                    Cursor = Cursors.Wait;
+                    break;
+                case DroneStatuses.Maintenance:
+                    Cursor = Cursors.Arrow;
+                    PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
+                    Model.UpdateDrones();
+                    Model.UpdateStations();
+                    Model.UpdatePOStation(PODrone.LocationOfDrone);
+                    break;
+                case DroneStatuses.Sendering:
+                    Cursor = Cursors.Arrow;
+                    if (PODrone.PackageInProgress.IsCollected)
+                    {
+                        int providedPckageId = PODrone.PackageInProgress.Id;
+                        PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
+                        Model.UpdateDrones();
+                        Model.UpdatePackages();
+                        Model.UpdatePOPackage(providedPckageId);
+                        Model.UpdateCustomers();
+
+                    }
+                    else
+                    {                       
+                        PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
+                        Model.UpdateDrones();
+                        Model.UpdatePackages();
+                        Model.UpdatePOPackage(PODrone.PackageInProgress.Id);
+                        Model.UpdateCustomers();
+                    }
+                        break;
+            }
+        }
+
+
+
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            bl.StartSimulator(() => ((BackgroundWorker)sender).ReportProgress(0), () => ((BackgroundWorker)sender).CancellationPending, PODrone.Id);
+        }
+
+        
 
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
