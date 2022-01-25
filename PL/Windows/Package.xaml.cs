@@ -222,7 +222,7 @@ namespace PL.Windows
                 {
                     if ((textBox.DataContext as BO.DroneInPackage) != null)
                     {
-                        BO.Drone BODrone = bl.GetDrone((textBox.DataContext as DroneInPackage).Id);
+                        BO.dronesList BODrone = bl.GetDrone((textBox.DataContext as DroneInPackage).Id);
                         PO.Drone PODrone = Model.PODrones.Find(dr => dr.Id == BODrone.Id);
                         if (PODrone == null)
                             Model.PODrones.Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));
