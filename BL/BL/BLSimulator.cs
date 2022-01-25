@@ -12,13 +12,11 @@ using System.Runtime.CompilerServices;
 
 namespace BL
 {
-   public partial class BL :IBL
+    sealed partial class BL :IBL
     {
-        public void StartSimulator(Action SimulatorProgress, Func<bool> IsRun, int DroneId, TimeSpan time)
+        public void StartSimulator(Action SimulatorViewProgress, Func<bool> IsRun, int DroneId)
         {
-            new Simulator(this, SimulatorProgress, IsRun, DroneId);
-
-           
+            new Simulator(this, SimulatorViewProgress, IsRun, DroneId); 
         }
     }
 }

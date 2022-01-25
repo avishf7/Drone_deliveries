@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 
 namespace BL
 {
-    public partial class BL : IBL
+    sealed partial class BL : IBL
     {
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddStation(Station station)

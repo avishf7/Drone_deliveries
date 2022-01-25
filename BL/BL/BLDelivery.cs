@@ -12,7 +12,7 @@ using System.Runtime.CompilerServices;
 
 namespace BL
 {
-    public partial class BL : IBL
+    sealed partial class BL : IBL
     {
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void PackageAssigning(int droneId)
@@ -94,12 +94,10 @@ namespace BL
 
                 var sender = GetCustomer(doPackage.SenderId);
 
-                if (dr.PackageNumber == doPackage.Id)
-                {
-                    dr.BatteryStatus = dr.BatteryStatus - BatteryUsage(dr.LocationOfDrone.Distance(sender.CustomerLocation));
-                    dr.LocationOfDrone = sender.CustomerLocation;
-                    dal.PickUp(doPackage.Id);
-                }
+                dr.BatteryStatus = dr.BatteryStatus - BatteryUsage(dr.LocationOfDrone.Distance(sender.CustomerLocation));
+                dr.LocationOfDrone = sender.CustomerLocation;
+                dal.PickUp(doPackage.Id);
+
             }
         }
 
@@ -122,15 +120,13 @@ namespace BL
 
                 var target = GetCustomer(doPackage.TargetId);
 
-                if (dr.PackageNumber == doPackage.Id)
-                {
-                    dr.BatteryStatus = dr.BatteryStatus - BatteryUsage(dr.LocationOfDrone.Distance(target.CustomerLocation),
-                        (int)doPackage.Weight);
-                    dr.LocationOfDrone = target.CustomerLocation;
-                    dr.DroneStatus = DroneStatuses.Available;
-                    dr.PackageNumber = -1;
-                    dal.PackageDeliver(doPackage.Id); ;
-                }
+                dr.BatteryStatus = dr.BatteryStatus - BatteryUsage(dr.LocationOfDrone.Distance(target.CustomerLocation),
+                    (int)doPackage.Weight);
+                dr.LocationOfDrone = target.CustomerLocation;
+                dr.DroneStatus = DroneStatuses.Available;
+                dr.PackageNumber = -1;
+                dal.PackageDeliver(doPackage.Id); ;
+
             }
         }
     }
