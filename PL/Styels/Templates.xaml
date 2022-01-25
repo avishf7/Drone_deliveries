@@ -93,9 +93,9 @@
             <Button x:Name="ShowDrone" Content="Show drone" Visibility="Hidden" FontFamily="Arial Black"/>
             <Grid x:Name="DroneInfoGrid" Background="{StaticResource Static.Background}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="33*" />
-                    <RowDefinition Height="34*" />
-                    <RowDefinition Height="33*" />
+                    <RowDefinition Height="23*" />
+                    <RowDefinition Height="50*" />
+                    <RowDefinition Height="27*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50*" />
@@ -106,7 +106,7 @@
                 <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,5" Text="Location: " HorizontalAlignment="Stretch" />
                 <TextBox Grid.Row="1" Grid.Column="1" Margin="0,5" Template="{DynamicResource LocationTemplate}" DataContext="{Binding Path=LocationOfDrone ,Mode=OneWay}" HorizontalAlignment="Center" />
                 <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,5" Text="Battery: " />
-                <ProgressBar Grid.Row="2" Grid.Column="1" Margin="0,5" Value="{Binding Path=BatteryStatus ,Mode=OneWay}"/>
+                <ProgressBar Grid.Row="2" Grid.Column="1" Margin="0,6" Value="{Binding Path=BatteryStatus ,Mode=OneWay}"/>
             </Grid>
         </Grid>
         <ControlTemplate.Triggers>
@@ -159,5 +159,6 @@
         </ControlTemplate.Triggers>
 
     </ControlTemplate>
-
+    
+    
 </ResourceDictionary>

@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 
 namespace BL
 {
-    public partial class BL : IBL
+    sealed partial class BL : IBL
     {
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -30,8 +30,8 @@ namespace BL
                 throw new DroneNotAvailableException("");
             }
 
-            
-                Location stLocation;
+
+            Location stLocation;
             lock (dal)
             {
                 try { stLocation = FindClosestStationLocation(dr.LocationOfDrone, x => x.FreeChargeSlots > 0); }
@@ -41,12 +41,12 @@ namespace BL
                 }
             }
 
-            double KM = stLocation.Distance(dr.LocationOfDrone);
+            double battUsage = BatteryUsage(stLocation.Distance(dr.LocationOfDrone));
 
 
-            if (KM <= dr.BatteryStatus * DroneAvailable)
+            if (battUsage <= dr.BatteryStatus)
             {
-                dr.BatteryStatus -= KM / DroneAvailable;
+                dr.BatteryStatus -= battUsage;
                 dr.LocationOfDrone = stLocation;
                 dr.DroneStatus = DroneStatuses.Maintenance;
 

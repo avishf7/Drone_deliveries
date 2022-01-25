@@ -81,8 +81,8 @@
     <Requested>2022-01-11T07:52:11.0449864+02:00</Requested>
     <Scheduled>2022-01-11T10:52:11.0449867+02:00</Scheduled>
     <PickedUp>2022-01-11T13:52:11.0449871+02:00</PickedUp>
-    <Delivered xsi:nil="true" />
-    <DroneId>24</DroneId>
+    <Delivered>2022-01-25T00:29:58.4142168+02:00</Delivered>
+    <DroneId>-1</DroneId>
   </Package>
   <Package>
     <Id>9</Id>
@@ -163,9 +163,45 @@
     <Weight>Medium</Weight>
     <Priority>Fast</Priority>
     <Requested>2022-01-19T17:42:03.3371863+02:00</Requested>
-    <Scheduled xsi:nil="true" />
-    <PickedUp xsi:nil="true" />
-    <Delivered xsi:nil="true" />
-    <DroneId>0</DroneId>
+    <Scheduled>2022-01-25T00:30:34.5336907+02:00</Scheduled>
+    <PickedUp>2022-01-25T00:30:51.5493471+02:00</PickedUp>
+    <Delivered>2022-01-25T00:30:59.5569277+02:00</Delivered>
+    <DroneId>-1</DroneId>
+  </Package>
+  <Package>
+    <Id>16</Id>
+    <SenderId>18</SenderId>
+    <TargetId>2</TargetId>
+    <Weight>Medium</Weight>
+    <Priority>Normal</Priority>
+    <Requested>2022-01-25T01:38:20.0355174+02:00</Requested>
+    <Scheduled>2022-01-25T01:38:28.0669921+02:00</Scheduled>
+    <PickedUp>2022-01-25T01:38:37.0763131+02:00</PickedUp>
+    <Delivered>2022-01-25T01:38:40.087684+02:00</Delivered>
+    <DroneId>-1</DroneId>
+  </Package>
+  <Package>
+    <Id>17</Id>
+    <SenderId>30</SenderId>
+    <TargetId>2</TargetId>
+    <Weight>Heavy</Weight>
+    <Priority>Normal</Priority>
+    <Requested>2022-01-25T01:42:12.2112247+02:00</Requested>
+    <Scheduled>2022-01-25T01:47:06.66062+02:00</Scheduled>
+    <PickedUp>2022-01-25T01:47:16.5316119+02:00</PickedUp>
+    <Delivered>2022-01-25T01:47:27.6585787+02:00</Delivered>
+    <DroneId>-1</DroneId>
+  </Package>
+  <Package>
+    <Id>18</Id>
+    <SenderId>59</SenderId>
+    <TargetId>2</TargetId>
+    <Weight>Heavy</Weight>
+    <Priority>Normal</Priority>
+    <Requested>2022-01-25T01:47:54.4290356+02:00</Requested>
+    <Scheduled>2022-01-25T01:48:43.5177136+02:00</Scheduled>
+    <PickedUp>2022-01-25T01:48:51.5233399+02:00</PickedUp>
+    <Delivered>2022-01-25T01:48:59.5444947+02:00</Delivered>
+    <DroneId>-1</DroneId>
   </Package>
 </ArrayOfPackage>

@@ -16,28 +16,6 @@ namespace BL
     /// </summary>
     sealed partial class BL : IBL
     {
-
-
-        /// <summary>
-        /// A variable that holds one and only instance of the class (singleton)
-        /// </summary>
-        internal static BL Instance { get; } = new BL();
-
-        /// <summary>
-        /// Variable for access to the data layer.
-        /// </summary>
-        internal IDal dal = DalFactory.GetDal();
-
-        /// <summary>
-        /// Variable for random data.
-        /// </summary>
-        Random rd = new Random();
-
-        /// <summary>
-        /// A list of drones in logic layer.
-        /// </summary>
-        List<DroneToList> dronesList = new();
-
         /// <summary>
         /// 
         /// </summary>
@@ -58,6 +36,26 @@ namespace BL
         /// 
         /// </summary>
         internal static double ChargingRate;
+
+        /// <summary>
+        /// A variable that holds one and only instance of the class (singleton)
+        /// </summary>
+        internal static BL Instance { get; } = new BL();
+
+        /// <summary>
+        /// Variable for access to the data layer.
+        /// </summary>
+        internal IDal dal = DalFactory.GetDal();
+
+        /// <summary>
+        /// A list of drones in logic layer.
+        /// </summary>
+        internal List<DroneToList> dronesList = new();
+
+        /// <summary>
+        /// Variable for random data.
+        /// </summary>
+        Random rd = new Random();
 
 
         /// <summary>
@@ -197,7 +195,7 @@ namespace BL
         /// <param name="distance">The number of miles the drone has made</param>
         /// <param name="status">What weight the drone carries</param>
         /// <returns>Battery consumption</returns>
-        static double BatteryUsage(double distance, int status = 3)
+        internal static double BatteryUsage(double distance, int status = 3)
         {
             return (Weight)status switch
             {

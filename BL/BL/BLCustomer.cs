@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public partial class BL : IBL
+    sealed partial class BL : IBL
     {
 
         [MethodImpl(MethodImplOptions.Synchronized)]
