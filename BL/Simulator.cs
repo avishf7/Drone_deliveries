@@ -12,14 +12,23 @@ using Newtonsoft.Json.Serialization;
 
 namespace BL
 {
+
     /// <summary>
-    /// 
+    /// A class used by the program to operate the simulator.
     /// </summary>
     class Simulator
     {
+
         const int DELAY = 1000;
         const double KMS = 2.0;
 
+        /// <summary>
+        /// CTOR
+        /// </summary>
+        /// <param name="bl">Variable for access to the functions of the BL logic layer</param>
+        /// <param name="SimulatorViewProgress">The process that changes the display in the drone window according to the simulator</param>
+        /// <param name="IsRun">Checks if the simulator is still working</param>
+        /// <param name="DroneId">The id of the drone</param>
         public Simulator(BL bl, Action SimulatorViewProgress, Func<bool> IsRun, int DroneId)
         {
             var drone = bl.dronesList.SingleOrDefault(x => x.Id == DroneId);
@@ -126,19 +135,22 @@ namespace BL
                                 }
 
                             SimulatorViewProgress();
-
                         }
                         break;
-
                 }
-
 
                 Thread.Sleep(DELAY);
             }
-
-
         }
 
+        /// <summary>
+        /// Function that updates the drone position, distance from the destination and battery level
+        /// </summary>
+        /// <param name="bl">Variable for access to the functions of the BL logic layer</param>
+        /// <param name="drone">The drone for which the test is required</param>
+        /// <param name="destantion">The destination of the drone</param>
+        /// <param name="KM">The distance between the drone and the destination</param>
+        /// <param name="SimulatorViewProgress">The process that changes the display in the drone window according to the simulator</param>
         private static void DroneMoveSimulator(BL bl, DroneToList drone, Location destantion, double KM, Action SimulatorViewProgress)
         {
             double lattitudeMovePerKM = (destantion.Lattitude - drone.LocationOfDrone.Lattitude) / KM;
@@ -163,7 +175,6 @@ namespace BL
             }
 
             drone.LocationOfDrone = destantion;
-
         }
     }
 }

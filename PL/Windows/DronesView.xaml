@@ -67,16 +67,16 @@
 
                     <ListView x:Name="DronesListView"
                           ItemsSource="{Binding Model.Drones}" 
-                          Grid.Row="1" Opacity="0.5" 
+                          Grid.Row="1" Opacity="0.7" 
                           ItemTemplate="{StaticResource DroneTemplate}" 
                           MouseDoubleClick="DronesListView_MouseDoubleClick" />
                 </Grid>
             </TabItem>
             <TabItem x:Name="GroupingView" Header="Grouping" Background="{StaticResource Static.Background}"  >
-                <ListBox Background="{StaticResource Static.Background}" ItemsSource="{Binding Model.GroupingDrones}">
+                <ListBox Background="{StaticResource Static.Background}" Opacity="1" ItemsSource="{Binding Model.GroupingDrones}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderBrush="Gray" BorderThickness="1" Padding="5" Margin="5">
+                            <Border BorderBrush="Gray"  BorderThickness="1" Padding="5" Margin="5">
                                 <Expander IsExpanded="True">
                                     <Expander.Header>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">

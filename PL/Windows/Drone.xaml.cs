@@ -338,30 +338,52 @@ namespace PL.Windows
             }
         }
 
+        /// <summary>
+        /// Changes in the drone window by pressing the simulator button.
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
         private void Simulator_Click(object sender, RoutedEventArgs e)
         {
+            //Change simulator button to stop simulator.
             Simulator.Content = "Stop simulator";
 
+            //Change the button press to Stop Simulator.
             Simulator.Click -= Simulator_Click;
             Simulator.Click += Stop_Click;
 
+            //Disappearing action buttons in the window.
             Charge.Visibility = Visibility.Hidden;
             Delivery.Visibility = Visibility.Hidden;
 
             worker.RunWorkerAsync();
         }
 
+        /// <summary>
+        /// Changes in the drone window after the simulator has stopped working.
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            //Return the action buttons in the window.
             Charge.Visibility = Visibility.Visible;
             Delivery.Visibility = Visibility.Visible;
             Cursor = Cursors.Arrow;
 
+            //Change simulator button to simulator.
             Simulator.Content = "Simulator";
+
+            //Change the button press to Simulator.
             Simulator.Click -= Stop_Click;
             Simulator.Click += Simulator_Click;
         }
 
+        /// <summary>
+        /// The process that changes the display in the drone window according to the simulator.
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {           
             switch (PODrone.DroneStatus)
@@ -392,14 +414,22 @@ namespace PL.Windows
         }
 
 
-
+        /// <summary>
+        /// The procession ran in the background.
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             bl.StartSimulator(() => ((BackgroundWorker)sender).ReportProgress(0), () => !((BackgroundWorker)sender).CancellationPending, PODrone.Id);
         }
 
-        
 
+        /// <summary>
+        /// Stops the procession.
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
             Cursor = Cursors.Wait;
