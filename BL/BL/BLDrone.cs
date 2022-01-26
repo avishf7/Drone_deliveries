@@ -14,7 +14,7 @@ namespace BL
     {
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void AddDrone(Drone drone, int staionId)
+        public void AddDrone(dronesList drone, int staionId)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace BL
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public Drone GetDrone(int droneId)
+        public dronesList GetDrone(int droneId)
         {
             var dr = dronesList.Find(x => x.Id == droneId);
             PackageInTransfer packageInTransfer = null;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    public class Drone
+    public class dronesList
     {
         /// <summary>
         /// Gets the id.

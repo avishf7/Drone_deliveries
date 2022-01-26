@@ -228,7 +228,7 @@ namespace PL.Windows
 
             if (droneCharge != null && droneCharge != null)
             {
-                BO.Drone BODrone = bl.GetDrone((listView.SelectedItem as DroneCharge).DroneId);
+                BO.dronesList BODrone = bl.GetDrone((listView.SelectedItem as DroneCharge).DroneId);
                 PO.Drone PODrone = Model.PODrones.Find(dr => dr.Id == BODrone.Id);
                 if (PODrone == null)
                     Model.PODrones.Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));

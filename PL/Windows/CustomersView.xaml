@@ -35,7 +35,7 @@
         <ListView x:Name="CustomersListView"
                              Grid.Row="0"
                              ItemsSource="{Binding Model.Customers}" 
-                             Opacity="0.5" 
+                             Opacity="0.7" 
                              MouseDoubleClick="CustomersListView_MouseDoubleClick" 
                              ItemTemplate="{StaticResource CustomerTemplate}"/>
 

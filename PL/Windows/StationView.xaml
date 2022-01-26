@@ -34,13 +34,13 @@
 
                     <ListView x:Name="StationsListView"
                              ItemsSource="{Binding Model.Stations}" 
-                             Opacity="0.5" 
+                             Opacity="0.7" 
                              ItemTemplate="{StaticResource StationTemplate}" 
                              MouseDoubleClick="StationsListView_MouseDoubleClick" />
                 </Grid>
             </TabItem>
             <TabItem x:Name="GroupingView" Header="Grouping" Background="{StaticResource Static.Background}"  >
-                <ListBox Background="{StaticResource Static.Background}" ItemsSource="{Binding Model.GroupingStations}">
+                <ListBox Background="{StaticResource Static.Background}" Opacity="1" ItemsSource="{Binding Model.GroupingStations}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Border BorderBrush="Gray" BorderThickness="1" Padding="5" Margin="5">
