@@ -12,7 +12,7 @@
         WindowStyle="SingleBorderWindow" 
         ResizeMode="NoResize"
         DataContext="{Binding  RelativeSource={RelativeSource self}}"
-         Topmost="{Binding Sender.Topmost, RelativeSource={RelativeSource self}}">
+        Topmost="{Binding Sender.Topmost, RelativeSource={RelativeSource self}}" Closing="Window_Closing">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -258,11 +258,9 @@
             
 
             <ProgressBar x:Name="BattaryStatus" 
-                   FontSize="20"
-                   Value="{Binding Path=PODrone.BatteryStatus, Mode=OneWay}" 
+                   Value="{Binding Path=PODrone.BatteryStatus, Mode=OneWay}"                         
                    Grid.Row="0" 
                    Grid.Column="1"
-                   Background="{StaticResource Static.Background}" 
                    Margin="20">
             </ProgressBar>
 

@@ -132,7 +132,6 @@ namespace BL
 
                 }
 
-
                 Thread.Sleep(DELAY);
             }
 

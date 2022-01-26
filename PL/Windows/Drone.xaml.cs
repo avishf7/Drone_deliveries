@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,6 +28,8 @@ namespace PL.Windows
         IBL bl = BlFactory.GetBl();
 
         BackgroundWorker worker = new() { WorkerReportsProgress = true, WorkerSupportsCancellation = true };
+
+        bool waitToExit = false;
 
         /// <summary>
         /// The window that opens this window.
@@ -237,7 +240,7 @@ namespace PL.Windows
                     Model.UpdateDrones();
                     Model.UpdateStations();
                     Model.UpdatePOStation(PODrone.LocationOfDrone);
-                   
+
                     MessageBox.Show("Released from charging", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
 
@@ -245,7 +248,7 @@ namespace PL.Windows
             }
         }
 
-        
+
 
         /// <summary>
         /// A button that handles the delivery of the package according to the status of the drone.
@@ -274,12 +277,12 @@ namespace PL.Windows
                 case DroneStatuses.Sendering:
                     if (PODrone.PackageInProgress.IsCollected)
                     {
-                        bl.Deliver(PODrone.Id);                        
+                        bl.Deliver(PODrone.Id);
                         MessageBox.Show("The package was delivered to its destination, good day", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     else
                     {
-                        bl.PickUp(PODrone.Id);                        
+                        bl.PickUp(PODrone.Id);
                         MessageBox.Show("The package was successfully collected by the drone", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     }
@@ -288,9 +291,9 @@ namespace PL.Windows
                     PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
                     Model.UpdateDrones();
                     Model.UpdatePackages();
-                    Model.UpdatePOPackage(packageId);                   
+                    Model.UpdatePOPackage(packageId);
                     Model.UpdateCustomers();
-                    
+
                     break;
             }
         }
@@ -307,12 +310,12 @@ namespace PL.Windows
 
             if (textBox.DataContext != null)
             {
-                    var BOPackage = bl.GetPackage((textBox.DataContext as BO.PackageInTransfer).Id);
-                    PO.Package POPackage = Model.POPackages.Find(pck => pck.Id == BOPackage.Id);
-                    if (POPackage == null)
-                        Model.POPackages.Add(POPackage = new PO.Package().CopyFromBOPackage(BOPackage));
+                var BOPackage = bl.GetPackage((textBox.DataContext as BO.PackageInTransfer).Id);
+                PO.Package POPackage = Model.POPackages.Find(pck => pck.Id == BOPackage.Id);
+                if (POPackage == null)
+                    Model.POPackages.Add(POPackage = new PO.Package().CopyFromBOPackage(BOPackage));
 
-                    new Package(this, POPackage).Show();                
+                new Package(this, POPackage).Show();
             }
             else
                 MessageBox.Show("No element exists", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -353,17 +356,22 @@ namespace PL.Windows
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            Charge.Visibility = Visibility.Visible;
-            Delivery.Visibility = Visibility.Visible;
-            Cursor = Cursors.Arrow;
+            if (!waitToExit)
+            {
+                Charge.Visibility = Visibility.Visible;
+                Delivery.Visibility = Visibility.Visible;
+                Cursor = Cursors.Arrow;
 
-            Simulator.Content = "Simulator";
-            Simulator.Click -= Stop_Click;
-            Simulator.Click += Simulator_Click;
+                Simulator.Content = "Simulator";
+                Simulator.Click -= Stop_Click;
+                Simulator.Click += Simulator_Click;
+            }
+            else
+                this.Close();
         }
 
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {           
+        {
             switch (PODrone.DroneStatus)
             {
                 case DroneStatuses.Available:
@@ -372,14 +380,14 @@ namespace PL.Windows
                     Cursor = Cursors.Wait;
                     break;
                 case DroneStatuses.Maintenance:
-                    Cursor = Cursors.Arrow;
+                    Cursor = ((BackgroundWorker)sender).CancellationPending ? Cursors.Wait : Cursors.Arrow;
                     PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
                     Model.UpdateDrones();
                     Model.UpdateStations();
                     Model.UpdatePOStation(PODrone.LocationOfDrone);
                     break;
                 case DroneStatuses.Sendering:
-                    Cursor = Cursors.Arrow;
+                    Cursor = ((BackgroundWorker)sender).CancellationPending ? Cursors.Wait : Cursors.Arrow;
                     var packageId = PODrone.PackageInProgress.Id;
                     PODrone.CopyFromBODrone(bl.GetDrone(PODrone.Id));
                     Model.UpdateDrones();
@@ -398,12 +406,17 @@ namespace PL.Windows
             bl.StartSimulator(() => ((BackgroundWorker)sender).ReportProgress(0), () => !((BackgroundWorker)sender).CancellationPending, PODrone.Id);
         }
 
-        
+
 
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
-            Cursor = Cursors.Wait;
-            worker.CancelAsync();                       
+            worker.CancelAsync();
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            if (waitToExit = e.Cancel = worker.IsBusy)
+                Stop_Click(sender, null);
         }
     }
 }
