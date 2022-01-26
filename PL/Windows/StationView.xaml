@@ -30,35 +30,54 @@
         </Grid.RowDefinitions>
         <TabControl Background="{x:Null}" Grid.Row="0" >
             <TabItem x:Name="NormalView" Header="Normal" Background="{StaticResource Static.Background}"  >
-                <Grid x:Name="TabNormalGrid">                  
+                <Grid x:Name="TabNormalGrid">
 
                     <ListView x:Name="StationsListView"
                              ItemsSource="{Binding Model.Stations}" 
                              Opacity="0.7" 
                              ItemTemplate="{StaticResource StationTemplate}" 
-                             MouseDoubleClick="StationsListView_MouseDoubleClick" />
+                             MouseDoubleClick="StationsListView_MouseDoubleClick" >
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
                 </Grid>
             </TabItem>
             <TabItem x:Name="GroupingView" Header="Grouping" Background="{StaticResource Static.Background}"  >
-                <ListBox Background="{StaticResource Static.Background}" Opacity="1" ItemsSource="{Binding Model.GroupingStations}">
+                <ListBox Opacity="0.7" ItemsSource="{Binding Model.GroupingStations}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Border BorderBrush="Gray" BorderThickness="1" Padding="5" Margin="5">
                                 <Expander IsExpanded="True">
                                     <Expander.Header>
                                         <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Free slots: " FontWeight="Bold" />
                                             <TextBlock Text="{Binding Key}" FontWeight="Bold" />
                                         </StackPanel>
                                     </Expander.Header>
 
-                                    <ListView ItemsSource="{Binding}" 
+                                    <ListView MaxHeight="250"
+                                              ItemsSource="{Binding}" 
                                               Background="{x:Null}"
                                               ItemTemplate="{StaticResource StationTemplate}"       
-                                              MouseDoubleClick="StationsListView_MouseDoubleClick"/>
+                                              MouseDoubleClick="StationsListView_MouseDoubleClick">
+                                        <ListView.ItemContainerStyle>
+                                            <Style TargetType="ListViewItem">
+                                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                            </Style>
+                                        </ListView.ItemContainerStyle>
+                                    </ListView>
                                 </Expander>
                             </Border>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
                 </ListBox>
 
             </TabItem>

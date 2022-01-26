@@ -321,7 +321,6 @@
                           Background="{StaticResource Static.Background}"
                           Margin="20,5"
                           MouseDoubleClick="PackageAtCustomerListView_MouseDoubleClick">
-
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>

@@ -69,29 +69,47 @@
                           ItemsSource="{Binding Model.Drones}" 
                           Grid.Row="1" Opacity="0.7" 
                           ItemTemplate="{StaticResource DroneTemplate}" 
-                          MouseDoubleClick="DronesListView_MouseDoubleClick" />
+                          MouseDoubleClick="DronesListView_MouseDoubleClick" >
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
                 </Grid>
             </TabItem>
             <TabItem x:Name="GroupingView" Header="Grouping" Background="{StaticResource Static.Background}"  >
-                <ListBox Background="{StaticResource Static.Background}" Opacity="1" ItemsSource="{Binding Model.GroupingDrones}">
+                <ListBox Opacity="0.7" ItemsSource="{Binding Model.GroupingDrones}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Border BorderBrush="Gray"  BorderThickness="1" Padding="5" Margin="5">
                                 <Expander IsExpanded="True">
                                     <Expander.Header>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">
-                                            <TextBlock Text="{Binding Key}" FontWeight="Bold" />
+                                            <TextBlock Text="{Binding Key}" FontSize="20" FontWeight="Bold" />
                                         </StackPanel>
                                     </Expander.Header>
 
-                                    <ListView ItemsSource="{Binding}" 
-                                                 Background="{x:Null}"
+                                    <ListView MaxHeight="250"
+                                              ItemsSource="{Binding}" 
+                                              Background="{x:Null}"
                                               ItemTemplate="{StaticResource DroneTemplate}"  
-                                                  MouseDoubleClick="DronesListView_MouseDoubleClick"/>
+                                              MouseDoubleClick="DronesListView_MouseDoubleClick">
+                                        <ListView.ItemContainerStyle>
+                                            <Style TargetType="ListViewItem">
+                                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                            </Style>
+                                        </ListView.ItemContainerStyle>
+                                    </ListView>
                                 </Expander>
                             </Border>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
                 </ListBox>
 
             </TabItem>

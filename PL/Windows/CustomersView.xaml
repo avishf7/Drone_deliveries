@@ -37,7 +37,13 @@
                              ItemsSource="{Binding Model.Customers}" 
                              Opacity="0.7" 
                              MouseDoubleClick="CustomersListView_MouseDoubleClick" 
-                             ItemTemplate="{StaticResource CustomerTemplate}"/>
+                             ItemTemplate="{StaticResource CustomerTemplate}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
 
 
         <!--Grid for buttons in the window-->
