@@ -112,9 +112,16 @@ namespace PL.Windows
         private void IntTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             //Checks that entered numbers only
-            if (e.Handled = !int.TryParse(e.Text, out int d) && e.Text != "")
+            if (e.Handled = !int.TryParse(e.Text, out int d) && e.Text != "" || d < 0)
                 MessageBox.Show("Please enter only numbers.");
+        }
+        
 
+            private void DoubleTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            //Checks that entered numbers only
+            if (e.Handled = !int.TryParse(e.Text, out int d) && e.Text != "" && e.Text != "." || d < 0)
+                MessageBox.Show("Please enter only numbers.");
         }
 
         /// <summary>
@@ -138,22 +145,31 @@ namespace PL.Windows
             {
                 if (stationId.Text != "" && name.Text != "" && stationLocationLongitude.Text != "" && stationLocationLattitude.Text != "" && freeChargeSlots.Text != null)
                 {
-                    bl.AddStation(new()
+                    double c = 0, d = 0;
+
+                    //Checks that the number entered can be entered into int32
+                    if (e.Handled = !int.TryParse(stationId.Text, out int b) || !double.TryParse(stationLocationLattitude.Text, out c) || !double.TryParse(stationLocationLongitude.Text, out d))
+                        MessageBox.Show("Invalid input", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                    else
                     {
-                        Id = int.Parse(stationId.Text),
-                        Name = name.Text,
-                        LocationOfStation = new()
+                        bl.AddStation(new()
                         {
-                            Lattitude = int.Parse(stationLocationLattitude.Text),
-                            Longitude = int.Parse(stationLocationLongitude.Text)
-                        },
-                        FreeChargeSlots = int.Parse(freeChargeSlots.Text),
-                    });
+                            Id = b,
+                            Name = name.Text,
+                            LocationOfStation = new()
+                            {
+                                Lattitude = c,
+                                Longitude = d
+                            },
+                            FreeChargeSlots = int.Parse(freeChargeSlots.Text),
+                        });
 
-                    Model.UpdateStations();
+                        Model.UpdateStations();
 
-                    MessageBox.Show("Adding the station was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
-                    this.Close();
+                        MessageBox.Show("Adding the station was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+                        this.Close();
+                    }
                 }
                 else
                     MessageBox.Show("There are unfilled fields", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -239,6 +255,11 @@ namespace PL.Windows
             {
                 MessageBox.Show("No element to see ", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void stationLocationLongitude_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+
         }
     }
 }
