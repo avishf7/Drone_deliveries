@@ -321,6 +321,11 @@ namespace PL.Windows
                 MessageBox.Show("No element exists", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
         private void PackageInProgress_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
             if (Mouse.LeftButton == MouseButtonState.Released)
@@ -441,6 +446,11 @@ namespace PL.Windows
             worker.CancelAsync();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender">The element that activates the function</param>
+        /// <param name="e"></param>
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             if (waitToExit = e.Cancel = worker.IsBusy)
