@@ -13,7 +13,8 @@ namespace BlApi
         /// SImulator for drones
         /// </summary>
         /// <param name="SimulatorProgress">Function to update the view</param>
-        /// <param name="IsRun">A penetration that tests the cancellation pending</param>
+        /// <param name="IsRun">Function that tests the cancellation pending</param>
+        /// <param name="DroneId">The id of the drone</param>
         public void StartSimulator(Action SimulatorProgress, Func<bool> IsRun, int DroneId);
 
         #region Drone functions
