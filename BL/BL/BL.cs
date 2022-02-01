@@ -104,9 +104,17 @@ namespace BL
                         switch (droneStatus)
                         {
                             case DroneStatuses.Available:
-                                DO.Customer randomCustomer = dal.GetCustomer(deliveredPackages.ToList()[rd.Next(deliveredPackages.Count())].TargetId);
+                                Location randomLocation = null;// Random location of either end of shipment or end of loading
 
-                                droneLocation = new() { Lattitude = randomCustomer.Lattitude, Longitude = randomCustomer.Longitude };
+                                int countCustomers = deliveredPackages.Count();
+                                if (countCustomers > 0)
+                                    //Random location of end of shipment
+                                    randomLocation = this.GetCustomer(deliveredPackages.ToList()[rd.Next(deliveredPackages.Count())].TargetId).CustomerLocation;
+                                else
+                                    //Random location end of loading
+                                    randomLocation = this.GetStation(stations.ToList()[rd.Next(stations.Count())].Id).LocationOfStation;
+
+                                droneLocation = new() { Lattitude = randomLocation.Lattitude, Longitude = randomLocation.Longitude };
                                 minBattery = BatteryUsage(droneLocation.Distance(FindClosestStationLocation(droneLocation)));
 
                                 break;

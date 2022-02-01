@@ -23,7 +23,7 @@ namespace BL
         const double KMS = 2.0;
 
         /// <summary>
-        /// CTOR
+        /// CTOR to active the simulator thread
         /// </summary>
         /// <param name="bl">Variable for access to the functions of the BL logic layer</param>
         /// <param name="SimulatorViewProgress">The process that changes the display in the drone window according to the simulator</param>
@@ -170,6 +170,7 @@ namespace BL
                         Longitude = drone.LocationOfDrone.Longitude + longitudeMovePerKM * KMS
                     };
                 }
+
 
                 SimulatorViewProgress();
             }

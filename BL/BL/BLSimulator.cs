@@ -18,12 +18,7 @@ namespace BL
     /// </summary>
     sealed partial class BL :IBL
     {
-        /// <summary>
-        /// Function to operate the simulator.
-        /// </summary>
-        /// <param name="SimulatorViewProgress">The process that changes the display in the drone window according to the simulator</param>
-        /// <param name="IsRun">Checks if the simulator is still working</param>
-        /// <param name="DroneId">The id of the drone</param>
+      
         public void StartSimulator(Action SimulatorViewProgress, Func<bool> IsRun, int DroneId)
         {
             new Simulator(this, SimulatorViewProgress, IsRun, DroneId); 
