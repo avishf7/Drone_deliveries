@@ -42,7 +42,7 @@ namespace BL
                         Thread.Sleep(3 * DELAY);
                         try
                         {
-                            bl.PackageAssigning(DroneId);
+                            bl.PackageAssigning(DroneId);//Try to assign a package to the drone
                             SimulatorViewProgress();
                         }
                         catch (NoSuitablePackageForScheduledException ex)
