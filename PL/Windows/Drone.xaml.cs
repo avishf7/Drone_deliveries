@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -117,9 +118,8 @@ namespace PL.Windows
         private void IntTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             //Checks that entered numbers only
-            if (e.Handled = !int.TryParse(e.Text, out int d) && e.Text != "" || d <= 0)
+            if (e.Handled = !int.TryParse(e.Text, out int d) && e.Text != "" || d < 0)
                 MessageBox.Show("Please enter only positive numbers.");
-
         }
 
         /// <summary>
@@ -143,18 +143,24 @@ namespace PL.Windows
             {
                 if (droneId.Text != "" && model.Text != "" && maxWeight.SelectedItem != null && stations.SelectedItem != null)
                 {
-                    bl.AddDrone(new()
+                    //Checks that the number entered can be entered into int32
+                    if (e.Handled = !int.TryParse(droneId.Text, out int b))
+                        MessageBox.Show("Invalid input", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    else
                     {
-                        Id = int.Parse(droneId.Text),
-                        Model = model.Text,
-                        MaxWeight = (Weight)maxWeight.SelectedItem,
-                    }, ((StationToList)stations.SelectedItem).Id);
+                        bl.AddDrone(new()
+                        {
+                            Id = b,
+                            Model = model.Text,
+                            MaxWeight = (Weight)maxWeight.SelectedItem,
+                        }, ((StationToList)stations.SelectedItem).Id);
 
 
-                    Model.UpdateDrones();
+                        Model.UpdateDrones();
 
-                    MessageBox.Show("Adding the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
-                    this.Close();
+                        MessageBox.Show("Adding the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+                        this.Close();
+                    }
                 }
                 else
                     MessageBox.Show("There are unfilled fields", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);

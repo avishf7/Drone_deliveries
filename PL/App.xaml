@@ -6,6 +6,7 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
 
+        <!--This template represents CustomerToList-->
         <DataTemplate x:Key="CustomerTemplate" DataType="bo:CustomerToList">
             <StackPanel>
                 <Grid>
@@ -43,6 +44,7 @@
             </StackPanel>
         </DataTemplate>
 
+        <!--This template represents PackageToList-->
         <DataTemplate x:Key="PackageTemplate" DataType="bo:PackageToList">
             <StackPanel>
                 <Grid VerticalAlignment="Stretch">
@@ -77,6 +79,7 @@
             </StackPanel>
         </DataTemplate>
 
+        <!--This template represents DroneToList-->
         <DataTemplate x:Key="DroneTemplate" DataType="bo:DroneToList">
             <StackPanel>
                 <Grid>
@@ -133,6 +136,7 @@
             </StackPanel>
         </DataTemplate>
 
+        <!--This template represents StationToList-->
         <DataTemplate x:Key="StationTemplate" DataType="bo:StationToList">
             <StackPanel>
                 <Grid>

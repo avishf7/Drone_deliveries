@@ -110,9 +110,15 @@ namespace PL.Windows
         private void IntTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             //Checks that entered numbers only
-            if (e.Handled = !int.TryParse(e.Text, out int d) && e.Text != "")
+            if (e.Handled = !int.TryParse(e.Text, out int d) && e.Text != "" || d < 0)
                 MessageBox.Show("Please enter only numbers.");
+        }
 
+        private void DoubleTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            //Checks that entered numbers only
+            if (e.Handled = !int.TryParse(e.Text, out int d) && e.Text != "" && e.Text != "." || d < 0)
+                MessageBox.Show("Please enter only numbers.");
         }
 
         /// <summary>
@@ -136,24 +142,33 @@ namespace PL.Windows
             {
                 if (customerId.Text != "" && name.Text != "" && phone.Text != "" && customerLocationLongitude.Text != "" && customerLocationLattitude.Text != "")
                 {
-                    bl.AddCustomer(new()
+                    double c = 0, d = 0;
+
+                    //Checks that the number entered can be entered into int32
+                    if (e.Handled = !int.TryParse(customerId.Text, out int b) || !double.TryParse(customerLocationLattitude.Text, out c) || !double.TryParse(customerLocationLongitude.Text, out d))
+                        MessageBox.Show("Invalid input", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    else
                     {
-                        Id = int.Parse(customerId.Text),
-                        Name = name.Text,
-                        Phone = phone.Text,
-                        CustomerLocation = new()
+
+                        bl.AddCustomer(new()
                         {
-                            Lattitude = int.Parse(customerLocationLattitude.Text),
-                            Longitude = int.Parse(customerLocationLongitude.Text)
-                        },
-                        PackageAtCustomerFromCustomer = new List<PackageAtCustomer>(),
-                        PackageAtCustomerToCustomer = new List<PackageAtCustomer>()
-                    });
+                            Id = b,
+                            Name = name.Text,
+                            Phone = phone.Text,
+                            CustomerLocation = new()
+                            {
+                                Lattitude = c,
+                                Longitude = d
+                            },
+                            PackageAtCustomerFromCustomer = new List<PackageAtCustomer>(),
+                            PackageAtCustomerToCustomer = new List<PackageAtCustomer>()
+                        });
 
-                    Model.UpdateCustomers();
+                        Model.UpdateCustomers();
 
-                    MessageBox.Show("Adding the customer was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
-                    this.Close();
+                        MessageBox.Show("Adding the customer was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+                        this.Close();
+                    }
                 }
                 else
                     MessageBox.Show("There are unfilled fields", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
