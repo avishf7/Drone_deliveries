@@ -83,7 +83,7 @@ namespace Dal
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Drone> GetDrones(Predicate<Drone> predicate = null)
         {
-            return DataSource.dronesList.Where(i => predicate == null ? true : predicate(i));
+            return DataSource.dronesList.Where(dr => predicate == null || predicate(dr));
 
         }
 
@@ -156,7 +156,7 @@ namespace Dal
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Station> GetStations(Predicate<Station> predicate = null)
         {
-            return DataSource.stations.Where(i => predicate == null ? true : predicate(i));
+            return DataSource.stations.Where(st => predicate == null || predicate(st));
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace Dal
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Customer> GetCustomers(Predicate<Customer> predicate = null)
         {
-            return DataSource.customers.Where(i => predicate == null ? true : predicate(i));
+            return DataSource.customers.Where(cus => predicate == null || predicate(cus));
         }
 
 
@@ -307,7 +307,7 @@ namespace Dal
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Package> GetPackages(Predicate<Package> predicate = null)
         {
-            return DataSource.packages.Where(i => predicate == null ? true : predicate(i));
+            return DataSource.packages.Where(pck => predicate == null || predicate(pck));
         }
 
         /// <summary>
@@ -429,7 +429,7 @@ namespace Dal
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DroneCharge> GetDronesCharges(Predicate<DroneCharge> predicate = null)
         {
-            return DataSource.droneCharges.Where(i => predicate == null ? true : predicate(i));
+            return DataSource.droneCharges.Where(i => predicate == null || predicate(i));
         }
 
         /// <summary>

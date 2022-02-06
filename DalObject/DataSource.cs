@@ -16,23 +16,23 @@ namespace Dal
         /// <summary>
         /// Create a static random show.
         /// </summary>
-        static Random rand = new Random();
+        static readonly Random rand = new Random();
         /// <summary>
         /// Create a static array that contains customer names
         /// </summary>
-        static string[] customerNames = new string[10] { "Shlomi", "Meir", "Miki", "Shalom", "Dani", "Avishay", "Chaim", "Moti", "Shimon", "Bibi" };
+        static readonly string[] customerNames = new string[10] { "Shlomi", "Meir", "Miki", "Shalom", "Dani", "Avishay", "Chaim", "Moti", "Shimon", "Bibi" };
         /// <summary>
         /// Create a static array that contains customers' phone numbers.
         /// </summary>
-        static string[] phones = new string[10] { "0546273849", "0546223849", "0546211849", "0546413849", "0546254849", "0546273878", "0547273849", "0546273749", "0546277849", "0546273847" };
+        static readonly string[] phones = new string[10] { "0546273849", "0546223849", "0546211849", "0546413849", "0546254849", "0546273878", "0547273849", "0546273749", "0546277849", "0546273847" };
         /// <summary>
         /// Create a static array that contains stations name.
         /// </summary>
-        static string[] stationNames = new string[2] { "VIRTA Charging Station", "EV-Edge Charging Station" };
+        static readonly string[] stationNames = new string[2] { "VIRTA Charging Station", "EV-Edge Charging Station" };
         /// <summary>
         ///  Create a static array that contains drone's model.
         /// </summary>
-        static string[] models = new string[3] { "MAVIC MINI 2", "Mavic Air 2", "COMBO AIR 2S" };
+        static readonly string[] models = new string[3] { "MAVIC MINI 2", "Mavic Air 2", "COMBO AIR 2S" };
 
         /// <summary>
         /// Create a static drone list. 

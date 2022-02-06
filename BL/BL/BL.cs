@@ -55,7 +55,7 @@ namespace BL
         /// <summary>
         /// Variable for random data.
         /// </summary>
-        Random rd = new Random();
+        readonly Random rd = new Random();
 
 
         /// <summary>

@@ -174,7 +174,7 @@ namespace PL
 
         //A collection that represents a view of filters
 
-        public BO.Weight? maxWeightFilter = null;
+        public BO.Weight? MaxWeightFilter = null;
         public BO.DroneStatuses? DroneStatusesFilter = null;
         public BO.PackageStatus? PackageStatusFilter = null;
         #endregion
@@ -206,7 +206,7 @@ namespace PL
         public void UpdateDrones()
         {
             Drones = bl.GetDrones(dr => (DroneStatusesFilter != null ? dr.DroneStatus == DroneStatusesFilter : true) &&
-                               (maxWeightFilter != null ? dr.MaxWeight == maxWeightFilter : true));
+                               (MaxWeightFilter != null ? dr.MaxWeight == MaxWeightFilter : true));
 
             GroupingDrones = from drone in bl.GetDrones()
                              group drone by drone.DroneStatus;

@@ -101,7 +101,7 @@ namespace BL
                                 pck.PickedUp != null ? PackageStatus.Collected :
                                 pck.Scheduled != null ? PackageStatus.Associated :
                                 PackageStatus.Defined
-                }).Where(pck => predicate != null ? predicate(pck) : true);
+                }).Where(pck => predicate == null || predicate(pck));
             }
         }
 

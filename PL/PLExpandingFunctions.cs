@@ -15,7 +15,7 @@ namespace PL
         /// <param name="PODrone">PL Drone object</param>
         /// <param name="BODrone">BL Drone object</param>
         /// <returns>this PL Drone object</returns>
-        public static PO.Drone CopyFromBODrone(this PO.Drone PODrone, BO.dronesList BODrone)
+        public static PO.Drone CopyFromBODrone(this PO.Drone PODrone, BO.Drone BODrone)
         {
             PODrone.Id = BODrone.Id;
             PODrone.Model = BODrone.Model;

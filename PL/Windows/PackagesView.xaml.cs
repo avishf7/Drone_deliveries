@@ -50,6 +50,7 @@ namespace PL.Windows
 
             this.sender = sender;
 
+            Model.UpdatePackages();
 
             //If the window that opened the new window closes, the new window will also close.
             this.sender.Closing += Sender_Closing;
@@ -99,6 +100,7 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void Window_Closed(object sender, EventArgs e)
         {
+            Model.PackageStatusFilter = null;
             ((Button)this.sender.FindName("ShowPackages")).IsEnabled = true;
         }
 

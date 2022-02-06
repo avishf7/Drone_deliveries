@@ -117,7 +117,7 @@ namespace BL
                     Name = st.Name,
                     NumberOfChargingStationsOccupied = dal.GetDronesCharges(drCh => drCh.StationId == st.Id).Count(),
                     SeveralAvailableChargingStations = st.FreeChargeSlots
-                }).Where(st => predicate != null ? predicate(st) : true);
+                }).Where(st => predicate == null || predicate(st));
             }
         }       
     }

@@ -14,7 +14,7 @@ namespace BL
     {
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void AddDrone(dronesList drone, int staionId)
+        public void AddDrone(Drone drone, int staionId)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace BL
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public dronesList GetDrone(int droneId)
+        public Drone GetDrone(int droneId)
         {
             var dr = dronesList.Find(x => x.Id == droneId);
             PackageInTransfer packageInTransfer = null;
@@ -120,7 +120,7 @@ namespace BL
         {
             lock (dal)
             {
-                return dronesList.Where(dr => predicate != null ? predicate(dr) : true)
+                return dronesList.Where(dr => predicate == null || predicate(dr))
                              .Select(dr => new DroneToList()
                              {
                                  Id = dr.Id,

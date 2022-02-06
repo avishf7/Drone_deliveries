@@ -52,9 +52,8 @@ namespace PL.Windows
         {
             InitializeComponent();
             this.sender = sender;
-            Model.GroupingDrones = from drone in bl.GetDrones()
-                                            group drone by drone.DroneStatus;
-
+            Model.UpdateDrones();
+            Model.UpdateDrones();
 
             //If the window that opened the new window closes, the new window will also close.
             this.sender.Closing += Sender_Closing;
@@ -104,7 +103,7 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void MaxWeigth_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Model.maxWeightFilter = (Weight?)((ComboBox)sender).SelectedItem;
+            Model.MaxWeightFilter = (Weight?)((ComboBox)sender).SelectedItem;
             Model.UpdateDrones();
         }
 
@@ -126,6 +125,8 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void Window_Closed(object sender, EventArgs e)
         {
+            Model.DroneStatusesFilter = null;
+            Model.MaxWeightFilter = null;
             ((Button)this.sender.FindName("ShowDrones")).IsEnabled = true;
         }
 
@@ -164,7 +165,7 @@ namespace PL.Windows
         {
             if (((ListView)sender).SelectedItem != null)
             {
-                BO.dronesList BODrone = bl.GetDrone((((ListView)sender).SelectedItem as BO.DroneToList).Id);
+                BO.Drone BODrone = bl.GetDrone((((ListView)sender).SelectedItem as BO.DroneToList).Id);
                 PO.Drone PODrone = Model.PODrones.Find(dr => dr.Id == BODrone.Id);
                 if (PODrone == null)
                     Model.PODrones.Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));

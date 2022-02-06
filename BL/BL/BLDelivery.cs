@@ -94,7 +94,7 @@ namespace BL
 
                 var sender = GetCustomer(doPackage.SenderId);
 
-                dr.BatteryStatus = dr.BatteryStatus - BatteryUsage(dr.LocationOfDrone.Distance(sender.CustomerLocation));
+                dr.BatteryStatus -= BatteryUsage(dr.LocationOfDrone.Distance(sender.CustomerLocation));
                 dr.LocationOfDrone = sender.CustomerLocation;
                 dal.PickUp(doPackage.Id);
 
@@ -120,7 +120,7 @@ namespace BL
 
                 var target = GetCustomer(doPackage.TargetId);
 
-                dr.BatteryStatus = dr.BatteryStatus - BatteryUsage(dr.LocationOfDrone.Distance(target.CustomerLocation),
+                dr.BatteryStatus -= BatteryUsage(dr.LocationOfDrone.Distance(target.CustomerLocation),
                     (int)doPackage.Weight);
                 dr.LocationOfDrone = target.CustomerLocation;
                 dr.DroneStatus = DroneStatuses.Available;

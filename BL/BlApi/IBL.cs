@@ -25,7 +25,7 @@ namespace BlApi
         /// <param name="drone">Drone to add</param>   
         /// <exception cref="NoNumberFoundException"></exception>
         /// <exception cref="ExistsNumberException"></exception>
-        void AddDrone(dronesList drone, int staionId);
+        void AddDrone(Drone drone, int staionId);
 
         /// <summary>
         /// Function of updating a drone.
@@ -40,7 +40,7 @@ namespace BlApi
         /// <param name="droneId">The id of drone</param>
         /// <returns>A copy of the drone function</returns>  
         /// <exception cref="NoNumberFoundException"></exception>
-        dronesList GetDrone(int droneId);
+        Drone GetDrone(int droneId);
 
         /// <summary>
         /// Displays a list of drone's.
