@@ -1,9 +1,7 @@
 # Project in .NET
 
-A project on the .NET platform for managing a skimmer delivery company, using the three-layer architecture,
-Implementation of design patterns (single, factory, contract design),
-Working with threads (by a background worker) to create a simulation of performing real-time delivery, and using XML files for the database,
-Write in WPF (XAML for UI, C # and Linq for database).
+A project on the .NET platform for managing a drone delivery company,
+Using three-tier architecture, implementing design patterns (singleton, factory, contract design), working with threads (by background worker) to create real-time delivery execution simulation, and using XML files for the database, writes WPF (XAML For UI, C # and Linq for the database).
 
 
 ## Creators:
