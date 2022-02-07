@@ -34,7 +34,7 @@
                 <Grid x:Name="TabNormalGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50*"/>
-                        <RowDefinition Height="50*"/>
+                        <RowDefinition Height="65*"/>
                         <RowDefinition Height="400*"/>
                     </Grid.RowDefinitions>
                     
@@ -74,12 +74,12 @@
                             <ColumnDefinition Width="16.66*"/>
                             <ColumnDefinition Width="20"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0"  Text="ID"  Margin="10" FontWeight="Bold"/>
-                        <TextBlock Grid.Column="1"  Text="Sender name" Margin="10" FontWeight="Bold"/>
-                        <TextBlock Grid.Column="2"  Text="Target name"  Margin="10" FontWeight="Bold"/>
-                        <TextBlock Grid.Column="3"  Text="Package status" Margin="10" FontWeight="Bold" />
-                        <TextBlock Grid.Column="4"  Text="Package weight" Margin="10" FontWeight="Bold" />
-                        <TextBlock Grid.Column="5"  Text="Priority" Margin="10" FontWeight="Bold" />
+                        <TextBlock Grid.Column="0"  Text="ID"  Margin="10" FontWeight="Bold" HorizontalAlignment="Center" Foreground="GreenYellow"/>
+                        <TextBlock Grid.Column="1"  Text="Sender name" Margin="10" FontWeight="Bold" HorizontalAlignment="Center" Foreground="GreenYellow"/>
+                        <TextBlock Grid.Column="2"  Text="Target name"  Margin="10" FontWeight="Bold" HorizontalAlignment="Center" Foreground="GreenYellow"/>
+                        <TextBlock Grid.Column="3"  Text="Package status" Margin="10" FontWeight="Bold" HorizontalAlignment="Center" Foreground="GreenYellow" />
+                        <TextBlock Grid.Column="4"  Text="Package weight" Margin="10" FontWeight="Bold" HorizontalAlignment="Center" Foreground="GreenYellow"/>
+                        <TextBlock Grid.Column="5"  Text="Priority" Margin="10" FontWeight="Bold" HorizontalAlignment="Center" Foreground="GreenYellow" />
                     </Grid>
 
                         <ListView x:Name="PackagesListView"
@@ -106,8 +106,27 @@
                                             <TextBlock Text="{Binding Key}" FontWeight="Bold" />
                                         </StackPanel>
                                     </Expander.Header>
+                                    <StackPanel Orientation="Vertical">
 
-                                    <ListView MaxHeight="250"
+                                        <Grid Background="DarkBlue">
+                                            <Grid.ColumnDefinitions >
+                                                <ColumnDefinition Width="16.66*"/>
+                                                <ColumnDefinition Width="16.66*"/>
+                                                <ColumnDefinition Width="16.66*"/>
+                                                <ColumnDefinition Width="16.66*"/>
+                                                <ColumnDefinition Width="16.66*"/>
+                                                <ColumnDefinition Width="16.66*"/>
+                                                <ColumnDefinition Width="20"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0"  Text="ID"  Margin="10" FontWeight="Bold" HorizontalAlignment="Center" Foreground="GreenYellow"/>
+                                            <TextBlock Grid.Column="1"  Text="Sender name" Margin="10" FontWeight="Bold" HorizontalAlignment="Center" Foreground="GreenYellow"/>
+                                            <TextBlock Grid.Column="2"  Text="Target name"  Margin="10" FontWeight="Bold" HorizontalAlignment="Center" Foreground="GreenYellow"/>
+                                            <TextBlock Grid.Column="3"  Text="Package status" Margin="10" FontWeight="Bold" HorizontalAlignment="Center" Foreground="GreenYellow" />
+                                            <TextBlock Grid.Column="4"  Text="Package weight" Margin="10" FontWeight="Bold" HorizontalAlignment="Center" Foreground="GreenYellow"/>
+                                            <TextBlock Grid.Column="5"  Text="Priority" Margin="10" FontWeight="Bold" HorizontalAlignment="Center" Foreground="GreenYellow" />
+                                        </Grid>
+
+                                        <ListView MaxHeight="250"
                                               ItemsSource="{Binding}" 
                                               Background="{x:Null}"
                                               ItemTemplate="{StaticResource PackageTemplate}"
@@ -118,6 +137,7 @@
                                             </Style>
                                         </ListView.ItemContainerStyle>
                                     </ListView>
+                                    </StackPanel>
                                 </Expander>
                             </Border>
                         </DataTemplate>

@@ -10,11 +10,7 @@
         <DataTemplate x:Key="CustomerTemplate" DataType="bo:CustomerToList">
             <StackPanel>
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
+                   
                     <Grid.ColumnDefinitions >
                         <ColumnDefinition Width="14.28*"/>
                         <ColumnDefinition Width="14.28*"/>
@@ -41,31 +37,21 @@
         <!--This template represents PackageToList-->
         <DataTemplate x:Key="PackageTemplate" DataType="bo:PackageToList">
             <StackPanel>
-                <Grid VerticalAlignment="Stretch">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
+                <Grid VerticalAlignment="Stretch">                   
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="16.66*"/>
+                        <ColumnDefinition Width="16.66*"/>
+                        <ColumnDefinition Width="16.66*"/>
+                        <ColumnDefinition Width="16.66*"/>
+                        <ColumnDefinition Width="16.66*"/>
+                        <ColumnDefinition Width="16.66*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0"  Text="ID: "  Margin="10" FontWeight="Bold"/>
-                    <TextBlock Grid.Row="0" Grid.Column="1"  Text="{Binding Path=Id ,Mode=OneWay}"   Margin="10" />
-                    <TextBlock Grid.Row="0" Grid.Column="2"  Text="Sender name: " Margin="10" FontWeight="Bold"/>
-                    <TextBlock Grid.Row="0" Grid.Column="3"  Text="{Binding Path=SenderName ,Mode=OneWay}"   Margin="10" />
-                    <TextBlock Grid.Row="0" Grid.Column="4"  Text="Target name: "  Margin="10" FontWeight="Bold"/>
-                    <TextBlock Grid.Row="0" Grid.Column="5"  Text="{Binding Path=TargetName ,Mode=OneWay}"   Margin="10" />
-                    <TextBlock Grid.Row="1" Grid.Column="0"  Text="Package status: " Margin="10" FontWeight="Bold" />
-                    <TextBlock Grid.Row="1" Grid.Column="1"  Text="{Binding Path=PackageStatus ,Mode=OneWay}"   Margin="10" />
-                    <TextBlock Grid.Row="1" Grid.Column="2"  Text="Package weight: " Margin="10" FontWeight="Bold" />
-                    <TextBlock Grid.Row="1" Grid.Column="3"  Text="{Binding Path=Weight ,Mode=OneWay}"   Margin="10" />
-                    <TextBlock Grid.Row="1" Grid.Column="4"  Text="Priority: " Margin="10" FontWeight="Bold" />
-                    <TextBlock Grid.Row="1" Grid.Column="5"  Text="{Binding Path=Priority ,Mode=OneWay}"  Margin="10" />
+                    <TextBlock Grid.Column="0"  Text="{Binding Path=Id ,Mode=OneWay}"   Margin="10" HorizontalAlignment="Center" />
+                    <TextBlock Grid.Column="1"  Text="{Binding Path=SenderName ,Mode=OneWay}" Margin="10" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Column="2"  Text="{Binding Path=TargetName ,Mode=OneWay}" Margin="10" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Column="3"  Text="{Binding Path=PackageStatus ,Mode=OneWay}" Margin="10" HorizontalAlignment="Center" />
+                    <TextBlock Grid.Column="4"  Text="{Binding Path=Weight ,Mode=OneWay}" Margin="10" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Column="5"  Text="{Binding Path=Priority ,Mode=OneWay}" Margin="10" HorizontalAlignment="Center"/>
 
                 </Grid>
                 <Line Stroke="red" StrokeThickness="2px"
