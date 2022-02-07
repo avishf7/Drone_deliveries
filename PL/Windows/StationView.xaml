@@ -31,8 +31,25 @@
         <TabControl Background="{x:Null}" Grid.Row="0" >
             <TabItem x:Name="NormalView" Header="Normal" Background="{StaticResource Static.Background}"  >
                 <Grid x:Name="TabNormalGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="65*"/>
+                        <RowDefinition Height="400*"/>
+                    </Grid.RowDefinitions>
 
-                    <ListView x:Name="StationsListView"
+                    <Grid Grid.Row="0" Background="DarkBlue">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="25*" />
+                            <ColumnDefinition Width="25*" />
+                            <ColumnDefinition Width="25*" />
+                            <ColumnDefinition Width="25*" />
+                        </Grid.ColumnDefinitions >
+                        <Label Grid.Column="0" Content="ID" Foreground="GreenYellow"  Margin="10" HorizontalAlignment="Center" FontWeight="Bold"/>
+                        <Label Grid.Column="1" Content="Name" Foreground="GreenYellow" Margin="10" HorizontalAlignment="Center" FontWeight="Bold"/>
+                        <Label Grid.Column="2" Content="Busy slots" Foreground="GreenYellow" Margin="10" HorizontalAlignment="Center" FontWeight="Bold"/>
+                        <Label Grid.Column="3" Content="Available slots" Foreground="GreenYellow" Margin="10" HorizontalAlignment="Center" FontWeight="Bold" />                     
+                    </Grid>
+
+                    <ListView Grid.Row="1" x:Name="StationsListView"
                              ItemsSource="{Binding Model.Stations}" 
                              Opacity="0.7" 
                              ItemTemplate="{StaticResource StationTemplate}" 
@@ -58,6 +75,21 @@
                                         </StackPanel>
                                     </Expander.Header>
 
+                                    <StackPanel>
+                                        <Grid Grid.Row="0" Background="DarkBlue">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="25*" />
+                                                <ColumnDefinition Width="25*" />
+                                                <ColumnDefinition Width="25*" />
+                                                <ColumnDefinition Width="25*" />
+                                                <ColumnDefinition Width="20"/>
+                                            </Grid.ColumnDefinitions >
+                                            <Label Grid.Column="0" Content="ID" Foreground="GreenYellow"  Margin="10" HorizontalAlignment="Center" FontWeight="Bold"/>
+                                            <Label Grid.Column="1" Content="Name" Foreground="GreenYellow" Margin="10" HorizontalAlignment="Center" FontWeight="Bold"/>
+                                            <Label Grid.Column="2" Content="Busy slots" Foreground="GreenYellow" Margin="10" HorizontalAlignment="Center" FontWeight="Bold"/>
+                                            <Label Grid.Column="3" Content="Available slots" Foreground="GreenYellow" Margin="10" HorizontalAlignment="Center" FontWeight="Bold" />
+                                        </Grid>
+                                    
                                     <ListView MaxHeight="250"
                                               ItemsSource="{Binding}" 
                                               Background="{x:Null}"
@@ -69,6 +101,7 @@
                                             </Style>
                                         </ListView.ItemContainerStyle>
                                     </ListView>
+                                    </StackPanel>
                                 </Expander>
                             </Border>
                         </DataTemplate>

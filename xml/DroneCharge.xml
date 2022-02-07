@@ -1,11 +1,6 @@
 <?xml version="1.0"?>
 <ArrayOfDroneCharge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <DroneCharge>
-    <DroneId>24</DroneId>
-    <StationId>5</StationId>
-    <ChargeStart>2022-01-25T01:36:51.1974896+02:00</ChargeStart>
-  </DroneCharge>
-  <DroneCharge>
     <DroneId>534</DroneId>
     <StationId>12</StationId>
     <ChargeStart>2022-02-07T17:50:10.4453084+02:00</ChargeStart>
