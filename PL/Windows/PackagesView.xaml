@@ -34,6 +34,7 @@
                 <Grid x:Name="TabNormalGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50*"/>
+                        <RowDefinition Height="50*"/>
                         <RowDefinition Height="400*"/>
                     </Grid.RowDefinitions>
                     
@@ -63,9 +64,27 @@
 
                     </Grid>
 
-                    <ListView x:Name="PackagesListView"
+                    <Grid Grid.Row="1" Background="DarkBlue">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="16.66*"/>
+                            <ColumnDefinition Width="16.66*"/>
+                            <ColumnDefinition Width="16.66*"/>
+                            <ColumnDefinition Width="16.66*"/>
+                            <ColumnDefinition Width="16.66*"/>
+                            <ColumnDefinition Width="16.66*"/>
+                            <ColumnDefinition Width="20"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0"  Text="ID"  Margin="10" FontWeight="Bold"/>
+                        <TextBlock Grid.Column="1"  Text="Sender name" Margin="10" FontWeight="Bold"/>
+                        <TextBlock Grid.Column="2"  Text="Target name"  Margin="10" FontWeight="Bold"/>
+                        <TextBlock Grid.Column="3"  Text="Package status" Margin="10" FontWeight="Bold" />
+                        <TextBlock Grid.Column="4"  Text="Package weight" Margin="10" FontWeight="Bold" />
+                        <TextBlock Grid.Column="5"  Text="Priority" Margin="10" FontWeight="Bold" />
+                    </Grid>
+
+                        <ListView x:Name="PackagesListView"
                               ItemsSource="{Binding Model.Packages}" 
-                              Grid.Row="1"  Opacity="0.7" 
+                              Grid.Row="2"  Opacity="0.7" 
                               ItemTemplate="{StaticResource PackageTemplate}"  
                               MouseDoubleClick="PackagesListView_MouseDoubleClick" >
                         <ListView.ItemContainerStyle>

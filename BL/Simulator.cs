@@ -67,7 +67,7 @@ namespace BL
                                             }
 
                                         SimulatorViewProgress();
-
+                                        
                                         DroneMoveSimulator(bl, drone, new() { Lattitude = chargeStation.Lattitude, Longitude = chargeStation.Longitude }, distance, SimulatorViewProgress);
 
                                         bl.dal.AddDroneCharge(new() { DroneId = DroneId, StationId = chargeStation.Id, ChargeStart = DateTime.Now });

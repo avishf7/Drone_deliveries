@@ -46,6 +46,7 @@
                 <ColumnDefinition Width="50*"/>
             </Grid.ColumnDefinitions>
 
+          
             <Label x:Name="labalCustomerId" 
                    FontSize="20"
                    VerticalContentAlignment="Center"

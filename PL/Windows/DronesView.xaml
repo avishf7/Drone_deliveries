@@ -65,6 +65,8 @@
 
                     </Grid>
 
+                   
+                    
                     <ListView x:Name="DronesListView"
                           ItemsSource="{Binding Model.Drones}" 
                           Grid.Row="1" Opacity="0.7" 

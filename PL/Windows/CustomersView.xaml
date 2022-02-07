@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.Windows"
         mc:Ignorable="d"
         Title="CustomersView" 
-        Height="450"
+        Height="500"
         Width="800"
         Closed="Window_Closed" 
         ResizeMode="NoResize"
@@ -25,15 +25,44 @@
 
 
     <!--Grid Displays a list of all cutomers with information about them-->
-    <Grid x:Name="MainGrid">
+    <Grid x:Name="MainGrid" ShowGridLines="True">
         <Grid.RowDefinitions>
+            <RowDefinition Height="75*"/>
             <RowDefinition Height="450*"/>
             <RowDefinition Height="80*"/>
         </Grid.RowDefinitions>
 
+        <Grid Grid.Row="0" ShowGridLines="True" Background="DarkBlue">
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="14.28*"/>
+                <ColumnDefinition Width="14.28*"/>
+                <ColumnDefinition Width="14.28*"/>
+                <ColumnDefinition Width="14.28*"/>
+                <ColumnDefinition Width="14.28*"/>
+                <ColumnDefinition Width="14.28*"/>
+                <ColumnDefinition Width="14.28*"/>
+                <ColumnDefinition Width="20"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0"  Text="ID"  Margin="10" FontWeight="Bold" HorizontalAlignment="Center" Foreground="GreenYellow" />
+            <TextBlock Grid.Column="1"  Text="Name" Margin="10" FontWeight="Bold" HorizontalAlignment="Center" Foreground="GreenYellow"/>
+            <TextBlock Grid.Column="2"  Text="Phone"  Margin="10" FontWeight="Bold" HorizontalAlignment="Center" Foreground="GreenYellow"/>
+            <TextBlock Grid.Column="3"  Margin="10" FontWeight="Bold" HorizontalAlignment="Center" Foreground="GreenYellow" TextAlignment="Center">
+                Not provided<LineBreak/> packages
+            </TextBlock>
+            <TextBlock Grid.Column="4" Margin="10" FontWeight="Bold" HorizontalAlignment="Center" Foreground="GreenYellow">
+                provided<LineBreak/> packages
+            </TextBlock>
+            <TextBlock Grid.Column="5" Margin="10" FontWeight="Bold"  HorizontalAlignment="Center" Foreground="GreenYellow" TextAlignment="Center">
+                Not received<LineBreak/> packages
+            </TextBlock>
+            <TextBlock Grid.Column="6" Margin="10" FontWeight="Bold" HorizontalAlignment="Center" Foreground="GreenYellow" >
+                received<LineBreak/> packages 
+            </TextBlock>
+        </Grid>
+
 
         <ListView x:Name="CustomersListView"
-                             Grid.Row="0"
+                             Grid.Row="1"
                              ItemsSource="{Binding Model.Customers}" 
                              Opacity="0.7" 
                              MouseDoubleClick="CustomersListView_MouseDoubleClick" 
@@ -47,7 +76,7 @@
 
 
         <!--Grid for buttons in the window-->
-        <Grid x:Name="DownGrid" Grid.Row="1">
+        <Grid x:Name="DownGrid" Grid.Row="2">
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="10*"/>
                 <ColumnDefinition Width="20*"/>
