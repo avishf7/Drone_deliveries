@@ -77,29 +77,20 @@
         <DataTemplate x:Key="DroneTemplate" DataType="bo:DroneToList">
             <StackPanel>
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="18*" />
-                        <ColumnDefinition Width="18*" />
-                        <ColumnDefinition Width="18*" />
-                        <ColumnDefinition Width="18*" />
-                        <ColumnDefinition Width="18*" />
-                        <ColumnDefinition Width="18*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0"  Text="ID: "  Margin="10" FontWeight="Bold"/>
-                    <TextBlock Grid.Row="0" Grid.Column="1"  Text="{Binding Path=Id ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Row="0" Grid.Column="2"  Text="Model: " Margin="10" FontWeight="Bold"/>
-                    <TextBlock Grid.Row="0" Grid.Column="3"  Text="{Binding Path=Model ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Row="0" Grid.Column="4"  Text="Max weight: "  Margin="10" FontWeight="Bold"/>
-                    <TextBlock Grid.Row="0" Grid.Column="5"  Text="{Binding Path=MaxWeight ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Row="1" Grid.Column="0"  Text="Drone status: " Margin="10" FontWeight="Bold" />
-                    <TextBlock Grid.Row="1" Grid.Column="1"  Text="{Binding Path=DroneStatus ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Row="1" Grid.Column="2"  Text="Location of drone: " Margin="10" FontWeight="Bold" />
-                    <TextBox Grid.Row="1" Grid.Column="3"    DataContext="{Binding Path=LocationOfDrone ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" >
+                        <ColumnDefinition Width="16.6*"/>
+                        <ColumnDefinition Width="16.6*"/>
+                        <ColumnDefinition Width="16.6*"/>
+                        <ColumnDefinition Width="16.6*"/>
+                        <ColumnDefinition Width="16.6*"/>
+                        <ColumnDefinition Width="16.6*"/>
+                    </Grid.ColumnDefinitions >
+
+                    <TextBlock Grid.Column="0" Text="{Binding Path=Id ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
+                    <TextBlock Grid.Column="1" Text="{Binding Path=Model ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
+                    <TextBlock Grid.Column="2" Text="{Binding Path=MaxWeight ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
+                    <TextBlock Grid.Column="3" Text="{Binding Path=DroneStatus ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
+                    <TextBox Grid.Column="4" DataContext="{Binding Path=LocationOfDrone ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" >
                         <TextBox.Template>
                             <ControlTemplate>
                                 <Grid >
@@ -119,10 +110,7 @@
                             </ControlTemplate>
                         </TextBox.Template>
                     </TextBox>
-                    <TextBlock Grid.Row="1" Grid.Column="4"  Text="Battery: " Margin="10" FontWeight="Bold" />
-                    <ProgressBar Grid.Row="1" Grid.Column="5"  Value="{Binding Path=BatteryStatus ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" Width="100" />
-                    <TextBlock Grid.Row="2" Grid.Column="0"  Text="Package number: " Margin="10" FontWeight="Bold" />
-                    <TextBlock Grid.Row="2" Grid.Column="1"  Text="{Binding Path=PackageNumber ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
+                    <ProgressBar Grid.Column="5" Value="{Binding Path=BatteryStatus ,Mode=OneWay}" Margin="5,15"  />
 
                 </Grid>
                 <Line Stroke="red" StrokeThickness="2px"

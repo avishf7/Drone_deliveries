@@ -177,9 +177,9 @@ namespace Dal
             Customer = new XElement("Customer",
                                 new XElement("Id", customer.Id),
                                 new XElement("Name", customer.Name),
-                                new XElement("PhoneNumber", customer.Phone),
+                                new XElement("Phone", customer.Phone),
                                 new XElement("Longitude", customer.Longitude),
-                                new XElement("Latitude", customer.Lattitude));
+                                new XElement("Lattitude", customer.Lattitude));
 
             element.Add(Customer);
 
@@ -201,9 +201,9 @@ namespace Dal
 
             Customer.Element("Id").Value = customer.Id.ToString();
             Customer.Element("Name").Value = customer.Name;
-            Customer.Element("PhoneNumber").Value = customer.Phone;
+            Customer.Element("Phone").Value = customer.Phone;
             Customer.Element("Longitude").Value = customer.Longitude.ToString();
-            Customer.Element("Latitude").Value = customer.Lattitude.ToString();
+            Customer.Element("Lattitude").Value = customer.Lattitude.ToString();
 
             XmlTools.SaveToXMLElement(element, @"CustomerXml.xml");
         }
@@ -433,10 +433,10 @@ namespace Dal
         {
             List<DroneCharge> droneCharge = XmlTools.LoadListFromXMLSerializer<DroneCharge>(@"DroneCharge.xml");
 
-            if (!droneCharge.Exists(x => x.DroneId == id))
-            {
-                throw new NoNumberFoundException();
-            }
+            //if (!droneCharge.Exists(x => x.DroneId == id))
+            //{
+            //    throw new NoNumberFoundException();
+            //}
 
             int Id = droneCharge.FindIndex(drc => drc.DroneId == id);
             droneCharge.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundException(" "));

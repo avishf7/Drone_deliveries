@@ -14,13 +14,13 @@ namespace BL
     {
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void AddDrone(Drone drone, int staionId)
+        public void AddDrone(Drone drone, int stationId)
         {
             try
             {
                 lock (dal)
                 {
-                    DO.Station st = dal.GetStation(staionId);
+                    DO.Station st = dal.GetStation(stationId);
                     dal.AddDrone(new DO.Drone
                     {
                         Id = drone.Id,
@@ -39,7 +39,8 @@ namespace BL
                         PackageNumber = -1
                     });
 
-                    dal.UsingChargingStation(staionId);
+                    dal.UsingChargingStation(stationId);
+                    dal.AddDroneCharge(new() { DroneId = drone.Id, StationId = stationId, ChargeStart = DateTime.Now });
                 }
             }
             catch (DalApi.NoNumberFoundException ex) { throw new BlApi.NoNumberFoundException("Station ID not found", ex); }
