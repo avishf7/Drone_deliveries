@@ -31,9 +31,10 @@
         </Grid.RowDefinitions>
         <TabControl Background="{x:Null}" Grid.Row="0"   >
             <TabItem x:Name="NormalView" Header="Normal" Background="{StaticResource Static.Background}"  >
-                <Grid x:Name="TabNormalGrid">
+                <Grid x:Name="TabNormalGrid" ShowGridLines="True">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50*"/>
+                        <RowDefinition Height="65*"/>
                         <RowDefinition Height="400*"/>
                     </Grid.RowDefinitions>
 
@@ -65,9 +66,26 @@
 
                     </Grid>
 
+                    <Grid Grid.Row="1" Background="DarkBlue">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="16.6*"/>
+                            <ColumnDefinition Width="16.6*"/>
+                            <ColumnDefinition Width="16.6*"/>
+                            <ColumnDefinition Width="16.6*"/>
+                            <ColumnDefinition Width="16.6*"/>
+                            <ColumnDefinition Width="16.6*"/>
+                            <ColumnDefinition Width="20"/>
+                        </Grid.ColumnDefinitions >
+                        <Label Grid.Column="0"  Content="ID" Foreground="GreenYellow"  Margin="10" HorizontalAlignment="Center" FontWeight="Bold"/>
+                        <Label Grid.Column="1" Content="Model" Foreground="GreenYellow" Margin="10" HorizontalAlignment="Center" FontWeight="Bold"/>
+                        <Label Grid.Column="2" Content="Max weight" Foreground="GreenYellow" Margin="10" HorizontalAlignment="Center" FontWeight="Bold"/>
+                        <Label Grid.Column="3" Content="Drone status" Foreground="GreenYellow" Margin="10" HorizontalAlignment="Center" FontWeight="Bold" />
+                        <Label Grid.Column="4" Content="Location" Foreground="GreenYellow" Margin="10" HorizontalAlignment="Center" FontWeight="Bold" />
+                        <Label Grid.Column="5" Content="Battery" Margin="10" Foreground="GreenYellow" FontWeight="Bold" HorizontalAlignment="Center" />
+                    </Grid>
                     <ListView x:Name="DronesListView"
                           ItemsSource="{Binding Model.Drones}" 
-                          Grid.Row="1" Opacity="0.7" 
+                          Grid.Row="2" Opacity="0.7" 
                           ItemTemplate="{StaticResource DroneTemplate}" 
                           MouseDoubleClick="DronesListView_MouseDoubleClick" >
                         <ListView.ItemContainerStyle>
@@ -89,8 +107,25 @@
                                             <TextBlock Text="{Binding Key}" FontSize="20" FontWeight="Bold" />
                                         </StackPanel>
                                     </Expander.Header>
-
-                                    <ListView MaxHeight="250"
+                                    <StackPanel Orientation="Vertical">
+                                        <Grid  Background="DarkBlue">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="16.6*"/>
+                                                <ColumnDefinition Width="16.6*"/>
+                                                <ColumnDefinition Width="16.6*"/>
+                                                <ColumnDefinition Width="16.6*"/>
+                                                <ColumnDefinition Width="16.6*"/>
+                                                <ColumnDefinition Width="16.6*"/>
+                                                <ColumnDefinition Width="20"/>
+                                            </Grid.ColumnDefinitions >
+                                            <Label Grid.Column="0"  Content="ID" Foreground="GreenYellow"  Margin="10" HorizontalAlignment="Center" FontWeight="Bold"/>
+                                            <Label Grid.Column="1" Content="Model" Foreground="GreenYellow" Margin="10" HorizontalAlignment="Center" FontWeight="Bold"/>
+                                            <Label Grid.Column="2" Content="Max weight" Foreground="GreenYellow" Margin="10" HorizontalAlignment="Center" FontWeight="Bold"/>
+                                            <Label Grid.Column="3" Content="Drone status" Foreground="GreenYellow" Margin="10" HorizontalAlignment="Center" FontWeight="Bold" />
+                                            <Label Grid.Column="4" Content="Location" Foreground="GreenYellow" Margin="10" HorizontalAlignment="Center" FontWeight="Bold" />
+                                            <Label Grid.Column="5" Content="Battery" Margin="10" Foreground="GreenYellow" FontWeight="Bold" HorizontalAlignment="Center" />
+                                        </Grid>
+                                        <ListView MaxHeight="250"
                                               ItemsSource="{Binding}" 
                                               Background="{x:Null}"
                                               ItemTemplate="{StaticResource DroneTemplate}"  
@@ -100,7 +135,8 @@
                                                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                                             </Style>
                                         </ListView.ItemContainerStyle>
-                                    </ListView>
+                                        </ListView>
+                                    </StackPanel>
                                 </Expander>
                             </Border>
                         </DataTemplate>
