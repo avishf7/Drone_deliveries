@@ -72,16 +72,9 @@
   </Customer>
   <Customer>
     <Id>30624</Id>
-    <Name>bbgg</Name>
+    <Name>Dan</Name>
     <Phone>0998899888</Phone>
     <Longitude>35.108572</Longitude>
     <Lattitude>32.171439</Lattitude>
-  </Customer>
-  <Customer>
-    <Id>53454325</Id>
-    <Name>gad</Name>
-    <Phone>0564321111</Phone>
-    <Longitude>35.43</Longitude>
-    <Lattitude>32.65</Lattitude>
   </Customer>
 </ArrayOfCustomer>

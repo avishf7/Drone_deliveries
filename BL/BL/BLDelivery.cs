@@ -24,7 +24,8 @@ namespace BL
             {
                 lock (dal)
                 {
-                    var orderPackages = dal.GetPackages().Where(pck => (int)pck.Weight <= (int)dr.MaxWeight)
+                    var orderPackages = dal.GetPackages().Where(pck => pck.Scheduled==null)
+                                .Where(pck => (int)pck.Weight <= (int)dr.MaxWeight)
                                 .OrderByDescending(pck => pck.Priority)
                                 .ThenByDescending(pck => pck.Weight)
                                 .ThenBy(pck => dr.LocationOfDrone.Distance(new()

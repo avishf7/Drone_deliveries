@@ -255,16 +255,7 @@
                    FontFamily="Arial Black"
                    Margin="10"/>
 
-            <!--<TextBlock x:Name="battary"
-                       Grid.Row="0"
-                       Grid.Column="1"
-                       FontSize="20"
-                       Text="{Binding Path=PODrone.BatteryStatus, Mode=OneWay}"
-                       TextAlignment="Center"
-                       Margin="20">-->
-                
-            <!--</TextBlock>-->
-            
+                      
 
             <ProgressBar x:Name="BattaryStatus" 
                    Value="{Binding Path=PODrone.BatteryStatus, Mode=OneWay}"                         
