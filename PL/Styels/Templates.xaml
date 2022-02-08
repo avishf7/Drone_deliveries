@@ -6,8 +6,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <ImageBrush x:Key="xImage"
-           ImageSource="X.png"
-           />
+                ImageSource="X.png"/>
 
     <!--Representation template of location-->
     <ControlTemplate x:Key="LocationTemplate">

@@ -147,12 +147,16 @@ namespace BL
                                     minBattery = BatteryUsage(droneLocation.Distance(senderLocation))
                                                + BatteryUsage(senderLocation.Distance(targetLocation), (int)Pck.Weight)
                                                + BatteryUsage(targetLocation.Distance(FindClosestStationLocation(targetLocation)));
+
+                                    minBattery = minBattery < maxBattery ? minBattery : maxBattery - 1;
                                 }
                                 else
                                 {
                                     droneLocation = senderLocation;
                                     minBattery = BatteryUsage(senderLocation.Distance(targetLocation), (int)Pck.Weight)
                                                + BatteryUsage(targetLocation.Distance(FindClosestStationLocation(targetLocation)));
+
+                                    minBattery = minBattery < maxBattery ? minBattery : maxBattery - 1;
                                 }
 
                                 break;

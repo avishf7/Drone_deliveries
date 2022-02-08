@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="StationView" 
         Height="500" 
-        Width="800" 
+        Width="770" 
         Closed="Window_Closed" 
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
@@ -32,31 +32,46 @@
             <TabItem x:Name="NormalView" Header="Normal" Background="{StaticResource Static.Background}"  >
                 <Grid x:Name="TabNormalGrid">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="65*"/>
                         <RowDefinition Height="400*"/>
                     </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0" Background="DarkBlue">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="25*" />
-                            <ColumnDefinition Width="25*" />
-                            <ColumnDefinition Width="25*" />
-                            <ColumnDefinition Width="25*" />
-                        </Grid.ColumnDefinitions >
-                        <Label Grid.Column="0" Content="ID" Foreground="GreenYellow"  Margin="10" HorizontalAlignment="Center" FontWeight="Bold"/>
-                        <Label Grid.Column="1" Content="Name" Foreground="GreenYellow" Margin="10" HorizontalAlignment="Center" FontWeight="Bold"/>
-                        <Label Grid.Column="2" Content="Busy slots" Foreground="GreenYellow" Margin="10" HorizontalAlignment="Center" FontWeight="Bold"/>
-                        <Label Grid.Column="3" Content="Available slots" Foreground="GreenYellow" Margin="10" HorizontalAlignment="Center" FontWeight="Bold" />                     
-                    </Grid>
-
-                    <ListView Grid.Row="1" x:Name="StationsListView"
+                    <ListView Grid.Row="0" x:Name="StationsListView"
                              ItemsSource="{Binding Model.Stations}" 
                              Opacity="0.7" 
-                             ItemTemplate="{StaticResource StationTemplate}" 
+                              TextElement.FontSize="15"
                              MouseDoubleClick="StationsListView_MouseDoubleClick" >
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="ID"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding SeveralAvailableChargingStations}" >
+                                    <TextBlock TextAlignment="Center">
+                                        Free charging
+                                        <LineBreak/>
+                                        stations
+                                    </TextBlock>
+                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding NumberOfChargingStationsOccupied}">
+                                    <TextBlock TextAlignment="Center">
+                                        Busy charging
+                                        <LineBreak/>
+                                        station
+                                    </TextBlock>
+                                </GridViewColumn>                            
+                                <GridView.ColumnHeaderContainerStyle>
+                                    <Style TargetType="GridViewColumnHeader">
+                                        <Setter Property="FontWeight" Value="Bold"/>
+                                        <Setter Property="Foreground" Value="LawnGreen"/>
+                                        <Setter Property="Background" Value="DarkBlue"/>
+                                        <Setter Property="Width" Value="185"/>
+                                    </Style>
+                                </GridView.ColumnHeaderContainerStyle>
+                            </GridView>
+                        </ListView.View>
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="Margin" Value="0,5"/>
                             </Style>
                         </ListView.ItemContainerStyle>
                     </ListView>
@@ -67,41 +82,55 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Border BorderBrush="Gray" BorderThickness="1" Padding="5" Margin="5">
-                                <Expander IsExpanded="True">
+                                <Expander IsExpanded="False">
                                     <Expander.Header>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Free slots: " FontWeight="Bold" />
-                                            <TextBlock Text="{Binding Key}" FontWeight="Bold" />
+                                            <TextBlock Text="Free slots: " FontSize="20" FontWeight="Bold" />
+                                            <TextBlock Text="{Binding Key}" FontSize="20" FontWeight="Bold" />
                                         </StackPanel>
                                     </Expander.Header>
 
-                                    <StackPanel>
-                                        <Grid Grid.Row="0" Background="DarkBlue">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="25*" />
-                                                <ColumnDefinition Width="25*" />
-                                                <ColumnDefinition Width="25*" />
-                                                <ColumnDefinition Width="25*" />
-                                                <ColumnDefinition Width="20"/>
-                                            </Grid.ColumnDefinitions >
-                                            <Label Grid.Column="0" Content="ID" Foreground="GreenYellow"  Margin="10" HorizontalAlignment="Center" FontWeight="Bold"/>
-                                            <Label Grid.Column="1" Content="Name" Foreground="GreenYellow" Margin="10" HorizontalAlignment="Center" FontWeight="Bold"/>
-                                            <Label Grid.Column="2" Content="Busy slots" Foreground="GreenYellow" Margin="10" HorizontalAlignment="Center" FontWeight="Bold"/>
-                                            <Label Grid.Column="3" Content="Available slots" Foreground="GreenYellow" Margin="10" HorizontalAlignment="Center" FontWeight="Bold" />
-                                        </Grid>
-                                    
                                     <ListView MaxHeight="250"
                                               ItemsSource="{Binding}" 
                                               Background="{x:Null}"
-                                              ItemTemplate="{StaticResource StationTemplate}"       
+                                              TextElement.FontSize="14"      
                                               MouseDoubleClick="StationsListView_MouseDoubleClick">
+                                        <ListView.View>
+                                            <GridView>
+                                                <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="ID"/>
+                                                <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name"/>
+                                                <GridViewColumn DisplayMemberBinding="{Binding SeveralAvailableChargingStations}" >
+                                                    <TextBlock TextAlignment="Center">
+                                                         Free charging
+                                                         <LineBreak/>
+                                                         stations
+                                                    </TextBlock>
+                                                </GridViewColumn>
+                                                <GridViewColumn DisplayMemberBinding="{Binding NumberOfChargingStationsOccupied}">
+                                                    <TextBlock TextAlignment="Center">
+                                                        Busy charging
+                                                        <LineBreak/>
+                                                        station
+                                                    </TextBlock>
+                                                </GridViewColumn>
+                                                <GridView.ColumnHeaderContainerStyle>
+                                                    <Style TargetType="GridViewColumnHeader">
+                                                        <Setter Property="FontWeight" Value="Bold"/>
+                                                        <Setter Property="Foreground" Value="LawnGreen"/>
+                                                        <Setter Property="Background" Value="DarkBlue"/>
+                                                        <Setter Property="Width" Value="175"/>
+                                                    </Style>
+                                                </GridView.ColumnHeaderContainerStyle>
+                                            </GridView>
+                                        </ListView.View>
                                         <ListView.ItemContainerStyle>
                                             <Style TargetType="ListViewItem">
-                                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                                <Setter Property="Margin" Value="0,5"/>
                                             </Style>
                                         </ListView.ItemContainerStyle>
                                     </ListView>
-                                    </StackPanel>
+
                                 </Expander>
                             </Border>
                         </DataTemplate>

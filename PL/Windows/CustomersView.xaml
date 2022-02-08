@@ -27,49 +27,63 @@
     <!--Grid Displays a list of all cutomers with information about them-->
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="75*"/>
             <RowDefinition Height="450*"/>
             <RowDefinition Height="80*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="DarkBlue">
-            <Grid.ColumnDefinitions >
-                <ColumnDefinition Width="14.28*"/>
-                <ColumnDefinition Width="14.28*"/>
-                <ColumnDefinition Width="14.28*"/>
-                <ColumnDefinition Width="14.28*"/>
-                <ColumnDefinition Width="14.28*"/>
-                <ColumnDefinition Width="14.28*"/>
-                <ColumnDefinition Width="14.28*"/>
-                <ColumnDefinition Width="20"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0"  Text="ID"  Margin="10" FontWeight="Bold" HorizontalAlignment="Center" Foreground="GreenYellow" />
-            <TextBlock Grid.Column="1"  Text="Name" Margin="10" FontWeight="Bold" HorizontalAlignment="Center" Foreground="GreenYellow"/>
-            <TextBlock Grid.Column="2"  Text="Phone"  Margin="10" FontWeight="Bold" HorizontalAlignment="Center" Foreground="GreenYellow"/>
-            <TextBlock Grid.Column="3"  Margin="10" FontWeight="Bold" HorizontalAlignment="Center" Foreground="GreenYellow" TextAlignment="Center">
-                Not provided<LineBreak/> packages
-            </TextBlock>
-            <TextBlock Grid.Column="4" Margin="10" FontWeight="Bold" HorizontalAlignment="Center" Foreground="GreenYellow">
-                provided<LineBreak/> packages
-            </TextBlock>
-            <TextBlock Grid.Column="5" Margin="10" FontWeight="Bold"  HorizontalAlignment="Center" Foreground="GreenYellow" TextAlignment="Center">
-                Not received<LineBreak/> packages
-            </TextBlock>
-            <TextBlock Grid.Column="6" Margin="10" FontWeight="Bold" HorizontalAlignment="Center" Foreground="GreenYellow" >
-                received<LineBreak/> packages 
-            </TextBlock>
-        </Grid>
-
-
-        <ListView x:Name="CustomersListView"
-                             Grid.Row="1"
-                             ItemsSource="{Binding Model.Customers}" 
-                             Opacity="0.7" 
-                             MouseDoubleClick="CustomersListView_MouseDoubleClick" 
-                             ItemTemplate="{StaticResource CustomerTemplate}">
+        <ListView  x:Name="CustomersListView"
+                   Grid.Row="0"
+                   ItemsSource="{Binding Model.Customers}" 
+                   TextElement.FontSize="16"
+                   Opacity="0.7" 
+                   MouseDoubleClick="CustomersListView_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding CustomerId}" Header="ID"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding CustomerName}" Header="Name"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding CustomerPhone}" Header="Phone"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding NumOfPackagesNotProvided}">
+                        <TextBlock TextAlignment="Center">
+                        Not provided
+                        <LineBreak/>
+                        packages
+                        </TextBlock>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding NumOfPackagesProvided}">
+                        <TextBlock TextAlignment="Center">
+                        Provided
+                        <LineBreak/>
+                        packages
+                        </TextBlock>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding NumOfPackagesNotReceived}" >
+                        <TextBlock TextAlignment="Center">
+                        Not received
+                        <LineBreak/>
+                        packages
+                        </TextBlock>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding NumOfPackagesReceived}">
+                        <TextBlock TextAlignment="Center">
+                        Received
+                        <LineBreak/>
+                        packages
+                        </TextBlock>
+                    </GridViewColumn>
+                    <GridView.ColumnHeaderContainerStyle>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="Foreground" Value="LawnGreen"/>
+                            <Setter Property="Background" Value="DarkBlue"/>
+                            <Setter Property="Width" Value="108.4"/>
+                        </Style>
+                    </GridView.ColumnHeaderContainerStyle>
+                </GridView>
+            </ListView.View>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="0,5"/>
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
