@@ -50,4 +50,14 @@
     <Model>don45</Model>
     <MaxWeight>Medium</MaxWeight>
   </Drone>
+  <Drone>
+    <Id>566566</Id>
+    <Model>jjhh</Model>
+    <MaxWeight>Medium</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>663366</Id>
+    <Model>jjkkl</Model>
+    <MaxWeight>Light</MaxWeight>
+  </Drone>
 </ArrayOfDrone>
