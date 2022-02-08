@@ -18,7 +18,6 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="\Styels\FullCirculeButton.xaml"/>
-                <ResourceDictionary Source="\Styels\Templates.xaml"/>
                 <ResourceDictionary Source="\Converters\Converters.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -193,7 +192,8 @@
                  Grid.Column="1"
                  FontSize="20"
                  DataContext="{Binding Path=PODrone.LocationOfDrone}"
-                 Template="{StaticResource LocationTemplate}"         
+                 Template="{StaticResource LocationTemplate}"    
+                 Background="{StaticResource Static.Background}"
                  Margin="20,10"
                  TextAlignment="Center"
                  Visibility="Hidden">

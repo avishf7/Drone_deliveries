@@ -6,111 +6,159 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
 
-        <!--This template represents CustomerToList-->
-        <DataTemplate x:Key="CustomerTemplate" DataType="bo:CustomerToList">
-            <StackPanel>
-                <Grid>
-                   
-                    <Grid.ColumnDefinitions >
-                        <ColumnDefinition Width="14.28*"/>
-                        <ColumnDefinition Width="14.28*"/>
-                        <ColumnDefinition Width="14.28*"/>
-                        <ColumnDefinition Width="14.28*"/>
-                        <ColumnDefinition Width="14.28*"/>
-                        <ColumnDefinition Width="14.28*"/>
-                        <ColumnDefinition Width="14.28*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0"  Text="{Binding Path=CustomerId ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Column="1"  Text="{Binding Path=CustomerName ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Column="2"  Text="{Binding Path=CustomerPhone ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Column="3"  Text="{Binding Path=NumOfPackagesNotProvided ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Column="4"  Text="{Binding Path=NumOfPackagesProvided ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Column="5"  Text="{Binding Path=NumOfPackagesNotReceived ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Column="6"  Text="{Binding Path=NumOfPackagesReceived ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
+        <ImageBrush x:Key="xImage"
+                    ImageSource="Windows\Pictures\X.png"/>
 
-                </Grid>
-                <Line Stroke="red" StrokeThickness="2px"
-                      X2="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=StackPanel}}"/>
-            </StackPanel>
-        </DataTemplate>
-
-        <!--This template represents PackageToList-->
-        <DataTemplate x:Key="PackageTemplate" DataType="bo:PackageToList">
-            <StackPanel>
-                <Grid VerticalAlignment="Stretch">                   
+        <!--Representation template of location-->
+        <ControlTemplate x:Key="LocationTemplate" TargetType="TextBox">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <Grid Background="{TemplateBinding Background}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50*" />
+                        <RowDefinition Height="50*" />
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="16.66*"/>
-                        <ColumnDefinition Width="16.66*"/>
-                        <ColumnDefinition Width="16.66*"/>
-                        <ColumnDefinition Width="16.66*"/>
-                        <ColumnDefinition Width="16.66*"/>
-                        <ColumnDefinition Width="16.66*"/>
+                        <ColumnDefinition Width="50*" />
+                        <ColumnDefinition Width="50*" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0"  Text="{Binding Path=Id ,Mode=OneWay}"   Margin="10" HorizontalAlignment="Center" />
-                    <TextBlock Grid.Column="1"  Text="{Binding Path=SenderName ,Mode=OneWay}" Margin="10" HorizontalAlignment="Center"/>
-                    <TextBlock Grid.Column="2"  Text="{Binding Path=TargetName ,Mode=OneWay}" Margin="10" HorizontalAlignment="Center"/>
-                    <TextBlock Grid.Column="3"  Text="{Binding Path=PackageStatus ,Mode=OneWay}" Margin="10" HorizontalAlignment="Center" />
-                    <TextBlock Grid.Column="4"  Text="{Binding Path=Weight ,Mode=OneWay}" Margin="10" HorizontalAlignment="Center"/>
-                    <TextBlock Grid.Column="5"  Text="{Binding Path=Priority ,Mode=OneWay}" Margin="10" HorizontalAlignment="Center"/>
-
+                    <TextBlock Grid.Row="0" Grid.Column="0"  Text="Longitude: " HorizontalAlignment="Left" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=Longitude ,Mode=OneWay, FallbackValue='None', StringFormat={}{0:F3}}" HorizontalAlignment="Center" />
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Lattitude: "  HorizontalAlignment="Left"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1"  Text="{Binding Path=Lattitude ,Mode=OneWay, FallbackValue='None', StringFormat={}{0:F3}}" HorizontalAlignment="Center" />
                 </Grid>
-                <Line Stroke="red" StrokeThickness="2px"
-                      X2="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=StackPanel}}"/>
-            </StackPanel>
-        </DataTemplate>
+            </ScrollViewer>
+        </ControlTemplate>
 
-        <!--This template represents DroneToList-->
-        <DataTemplate x:Key="DroneTemplate" DataType="bo:DroneToList">
-            <StackPanel>
-                <Grid>
+
+
+        <!--Representation template of package in transfer-->
+        <ControlTemplate x:Key="PackageInTransferTemplate" TargetType="TextBox">
+            <Grid x:Name="MainGrid">
+                <Button x:Name="ShowPackage" Content="Show package" Visibility="Hidden" FontFamily="Arial Black" Margin="15"/>
+                <ScrollViewer x:Name="PackageInfo" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <Grid x:Name="PackageInfoGrid" Background="{TemplateBinding Background}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*" />
+                            <ColumnDefinition Width="50*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Margin="3" Text="Package ID: " />
+                        <TextBlock Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding Path=Id ,Mode=OneWay, FallbackValue='None'}" HorizontalAlignment="Center" />
+                        <TextBlock Grid.Row="1" Grid.Column="0" Margin="3" Text="Is collected: " />
+                        <TextBlock Grid.Row="1" Grid.Column="1" Margin="3" Text="{Binding Path=IsCollected ,Mode=OneWay, FallbackValue='None'}" HorizontalAlignment="Center" />
+                        <TextBlock Grid.Row="2" Grid.Column="0" Margin="3" Text="Weight: " />
+                        <TextBlock Grid.Row="2" Grid.Column="1" Margin="3" Text="{Binding Path=Weight ,Mode=OneWay, FallbackValue='None'}" HorizontalAlignment="Center" />
+                        <TextBlock Grid.Row="3" Grid.Column="0" Margin="3" Text="Priority: " />
+                        <TextBlock Grid.Row="3" Grid.Column="1" Margin="3" Text="{Binding Path=Priority ,Mode=OneWay, FallbackValue='None'}" HorizontalAlignment="Center" />
+                        <TextBlock Grid.Row="4" Grid.Column="0" Margin="3" Text="Sender: " />
+                        <TextBox Grid.Row="4" Grid.Column="1"   Margin="3" Background="{TemplateBinding Background}" DataContext="{Binding Path=SenderCustomerInPackage ,Mode=OneWay, FallbackValue='None'}" Template="{DynamicResource CustomerInPackageTemplate}" HorizontalAlignment="Center" />
+                        <TextBlock Grid.Row="5" Grid.Column="0" Margin="3" Text="Target: " />
+                        <TextBox Grid.Row="5" Grid.Column="1"   Margin="3" Background="{TemplateBinding Background}" DataContext="{Binding Path=TargetCustomerInPackage ,Mode=OneWay, FallbackValue='None'}" Template="{DynamicResource CustomerInPackageTemplate}" HorizontalAlignment="Center" />
+                        <TextBlock Grid.Row="6" Grid.Column="0" Margin="3" Text="Collection location: " />
+                        <TextBox Grid.Row="6" Grid.Column="1"   Margin="3" Background="{TemplateBinding Background}" DataContext="{Binding Path=CollectionLocation ,Mode=OneWay, FallbackValue='None'}" Template="{DynamicResource LocationTemplate}" HorizontalAlignment="Center" />
+                        <TextBlock Grid.Row="7" Grid.Column="0" Margin="3" Text="Destination location: " />
+                        <TextBox Grid.Row="7" Grid.Column="1"   Margin="3" Background="{TemplateBinding Background}" DataContext="{Binding Path=DeliveryDestinationLocation ,Mode=OneWay, FallbackValue='None'}" Template="{DynamicResource LocationTemplate}" HorizontalAlignment="Center" />
+                        <TextBlock Grid.Row="8" Grid.Column="0" Margin="3" Text="Distance: " />
+                        <TextBlock Grid.Row="8" Grid.Column="1" Margin="3" Text="{Binding Path=DistanceToCollectionOrToDestination ,Mode=OneWay, FallbackValue='None', StringFormat={}{0:F3}}" HorizontalAlignment="Center" />
+                    </Grid>
+
+                </ScrollViewer>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Visibility" TargetName="ShowPackage" Value="Visible"/>
+                    <Setter Property="Visibility" TargetName="PackageInfo" Value="Hidden"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Visibility" TargetName="PackageInfo" Value="Hidden"/>
+                    <Setter Property="Background" TargetName="MainGrid" Value="{StaticResource xImage}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <!--Representation template of drone in package-->
+        <ControlTemplate x:Key="DroneInPackageTemplate" TargetType="TextBox">
+
+            <Grid x:Name="MainGrid">
+                <Button x:Name="ShowDrone" Content="Show drone" Visibility="Hidden" FontFamily="Arial Black"/>
+                <Grid x:Name="DroneInfoGrid" Background="{TemplateBinding Background}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="23*" />
+                        <RowDefinition Height="50*" />
+                        <RowDefinition Height="27*" />
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="16.6*"/>
-                        <ColumnDefinition Width="16.6*"/>
-                        <ColumnDefinition Width="16.6*"/>
-                        <ColumnDefinition Width="16.6*"/>
-                        <ColumnDefinition Width="16.6*"/>
-                        <ColumnDefinition Width="16.6*"/>
-                    </Grid.ColumnDefinitions >
-
-                    <TextBlock Grid.Column="0" Text="{Binding Path=Id ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Column="1" Text="{Binding Path=Model ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Column="2" Text="{Binding Path=MaxWeight ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Column="3" Text="{Binding Path=DroneStatus ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBox Grid.Column="4" DataContext="{Binding Path=LocationOfDrone ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" >
-                        <TextBox.Template>
-                            <ControlTemplate>
-                                
-                            </ControlTemplate>
-                        </TextBox.Template>
-                    </TextBox>
-                    <ProgressBar Grid.Column="5" Value="{Binding Path=BatteryStatus ,Mode=OneWay}" Margin="5,15"  />
-
-                </Grid>
-                <Line Stroke="red" StrokeThickness="2px"
-                      X2="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=StackPanel}}"/>
-            </StackPanel>
-        </DataTemplate>
-
-        <!--This template represents StationToList-->
-        <DataTemplate x:Key="StationTemplate" DataType="bo:StationToList">
-            <StackPanel>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="25*" />
-                        <ColumnDefinition Width="25*" />
-                        <ColumnDefinition Width="25*" />
-                        <ColumnDefinition Width="25*" />
+                        <ColumnDefinition Width="50*" />
+                        <ColumnDefinition Width="50*" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="{Binding Path=Id ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Column="1" Text="{Binding Path=Name ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Column="2" Text="{Binding Path=NumberOfChargingStationsOccupied ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Column="3" Text="{Binding Path=SeveralAvailableChargingStations ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-
+                    <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,5" Text="Drone ID: " HorizontalAlignment="Left"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,5" Text="{Binding Path=Id ,Mode=OneWay, FallbackValue='None'}" HorizontalAlignment="Center" />
+                    <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,5" Text="Location: " HorizontalAlignment="Left" />
+                    <TextBox Grid.Row="1" Grid.Column="1" Margin="0,5" Background="{TemplateBinding Background}" Template="{StaticResource LocationTemplate}" DataContext="{Binding Path=LocationOfDrone ,Mode=OneWay}" HorizontalAlignment="Left" />
+                    <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,5" Text="Battery: "  HorizontalAlignment="Left"/>
+                    <ProgressBar Grid.Row="2" Grid.Column="1" Margin="0,6,6,6" Value="{Binding Path=BatteryStatus ,Mode=OneWay}" HorizontalAlignment="Stretch"/>
                 </Grid>
-                <Line Stroke="red" StrokeThickness="2px"
-                      X2="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=StackPanel}}"/>
-            </StackPanel>
-        </DataTemplate>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Visibility" TargetName="ShowDrone" Value="Visible"/>
+                    <Setter Property="Visibility" TargetName="DroneInfoGrid" Value="Hidden"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Visibility" TargetName="DroneInfoGrid" Value="Hidden"/>
+                    <Setter Property="Background" TargetName="MainGrid" Value="{StaticResource xImage}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+
+
+        <!--Representation Customer in package-->
+        <ControlTemplate x:Key="CustomerInPackageTemplate" TargetType="TextBox">
+            <Grid x:Name="MainGrid">
+
+                <Button x:Name="ShowCustomer" Content="Show customer" Visibility="Hidden" FontFamily="Arial Black" />
+                <ScrollViewer x:Name="CustomerInfo" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <Grid x:Name="CustomerInfoGrid" Background="{TemplateBinding Background}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50*" />
+                            <RowDefinition Height="50*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*" />
+                            <ColumnDefinition Width="50*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0"  Text="Name: " HorizontalAlignment="Left" />
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=CustomerName ,Mode=OneWay}" HorizontalAlignment="Center" />
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Id: "  HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1"  Text="{Binding Path=CustomerId ,Mode=OneWay}" HorizontalAlignment="Center" />
+
+                    </Grid>
+
+                </ScrollViewer>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Visibility" TargetName="ShowCustomer" Value="Visible"/>
+                    <Setter Property="Visibility" TargetName="CustomerInfo" Value="Hidden"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Visibility" TargetName="CustomerInfo" Value="Hidden"/>
+                    <Setter Property="Background" TargetName="MainGrid" Value="{StaticResource xImage}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+
+        </ControlTemplate>
 
     </Application.Resources>
 </Application>
