@@ -56,7 +56,7 @@ namespace Dal
                 throw new NoNumberFoundException(" ");
             }
 
-            DataSource.dronesList.Insert(iU, drone);
+            DataSource.dronesList[iU] = drone;
         }
 
         /// <summary>
@@ -87,15 +87,7 @@ namespace Dal
 
         }
 
-        ///// <summary>
-        ///// Delete a drone from the list
-        ///// </summary>
-        ///// <param name="id">The id of the drone</param>
-        //public void DeleteDrone(int id)
-        //{
-        //    int Id = DataSource.dronesList.FindIndex(dr => dr.Id == id);
-        //    DataSource.dronesList.RemoveAt(Id != -1 ? Id : throw new NoNumberFoundException(" "));
-        //}
+      
 
         #endregion
 
@@ -128,7 +120,8 @@ namespace Dal
             }
 
             int iU = DataSource.stations.FindIndex(st => st.Id == station.Id);
-            DataSource.stations.Insert(iU, station);
+
+            DataSource.stations[iU] = station;
         }
 
         /// <summary>
@@ -219,7 +212,8 @@ namespace Dal
             }
 
             int iU = DataSource.customers.FindIndex(cus => cus.Id == customer.Id);
-            DataSource.customers.Insert(iU, customer);
+
+            DataSource.customers[iU] = customer;
         }
 
         /// <summary>
@@ -279,7 +273,10 @@ namespace Dal
             }
 
             int iU = DataSource.packages.FindIndex(pck => pck.Id == package.Id);
-            DataSource.packages.Insert(iU, package);
+  
+            DataSource.packages[iU] = package;
+
+
         }
 
         /// <summary>
@@ -402,7 +399,8 @@ namespace Dal
             }
 
             int iU = DataSource.droneCharges.FindIndex(drCh => drCh.DroneId == droneCharge.DroneId);
-            DataSource.droneCharges.Insert(iU, droneCharge);
+
+            DataSource.droneCharges[iU] = droneCharge;
         }
 
         /// <summary>

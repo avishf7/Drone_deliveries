@@ -26,8 +26,13 @@
     <ChargeStart>2022-02-08T20:20:40.2717116+02:00</ChargeStart>
   </DroneCharge>
   <DroneCharge>
-    <DroneId>301</DroneId>
-    <StationId>630</StationId>
-    <ChargeStart>2022-02-08T21:15:39.9892999+02:00</ChargeStart>
+    <DroneId>311</DroneId>
+    <StationId>12</StationId>
+    <ChargeStart>2022-02-08T21:41:56.4226819+02:00</ChargeStart>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneId>99699</DroneId>
+    <StationId>32123</StationId>
+    <ChargeStart>2022-02-09T00:05:30.5241886+02:00</ChargeStart>
   </DroneCharge>
 </ArrayOfDroneCharge>

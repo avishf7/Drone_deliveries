@@ -17,7 +17,7 @@
   <Station>
     <Id>12</Id>
     <Name>Shomron</Name>
-    <FreeChargeSlots>9</FreeChargeSlots>
+    <FreeChargeSlots>8</FreeChargeSlots>
     <Longitude>35.082855</Longitude>
     <Lattitude>32.170912</Lattitude>
   </Station>
@@ -29,10 +29,10 @@
     <Lattitude>32.083605</Lattitude>
   </Station>
   <Station>
-    <Id>630</Id>
-    <Name>Emanuel</Name>
-    <FreeChargeSlots>9</FreeChargeSlots>
-    <Longitude>35.136802</Longitude>
-    <Lattitude>32.160722</Lattitude>
+    <Id>32123</Id>
+    <Name>עמנואל</Name>
+    <FreeChargeSlots>8</FreeChargeSlots>
+    <Longitude>35.142926</Longitude>
+    <Lattitude>32.158701</Lattitude>
   </Station>
 </ArrayOfStation>

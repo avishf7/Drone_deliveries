@@ -52,8 +52,7 @@ namespace Dal
             {
                 throw new NoNumberFoundException(" ");
             }
-
-            dronesList.Insert(iU, drone);
+            dronesList[iU] = drone;
 
             XmlTools.SaveListToXMLSerializer(dronesList, @"DroneXml.xml");
         }
@@ -104,7 +103,8 @@ namespace Dal
                 throw new NoNumberFoundException();
             }
             int iU = Stations.FindIndex(st => st.Id == station.Id);
-            Stations.Insert(iU, station);
+
+            Stations[iU] = station;
 
             XmlTools.SaveListToXMLSerializer(Stations, @"StationXml.xml");
         }
@@ -286,6 +286,7 @@ namespace Dal
             }
 
             int iU = packageList.FindIndex(pck => pck.Id == package.Id);
+            packageList.RemoveAt(iU);
             packageList.Insert(iU, package);
 
             XmlTools.SaveListToXMLSerializer(packageList, @"PackageXml.xml");
@@ -402,7 +403,8 @@ namespace Dal
             }
 
             int iU = droneChargeList.FindIndex(drCh => drCh.DroneId == droneCharge.DroneId);
-            droneChargeList.Insert(iU, droneCharge);
+
+            droneChargeList[iU] = droneCharge;
 
             XmlTools.SaveListToXMLSerializer(droneChargeList, @"DroneCharge.xml");
         }
