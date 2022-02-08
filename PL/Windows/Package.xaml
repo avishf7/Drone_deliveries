@@ -71,7 +71,14 @@
                      Visibility="Hidden">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding CustomerId}" />
+                        <TextBlock >
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat=" {0} - {1} ">
+                                    <Binding Path="CustomerName" />
+                                    <Binding Path="CustomerId" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ComboBox>
@@ -118,7 +125,14 @@
                      Visibility="Hidden">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding CustomerId}"/>
+                        <TextBlock >
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat=" {0} - {1} ">
+                                    <Binding Path="CustomerName" />
+                                    <Binding Path="CustomerId" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ComboBox>

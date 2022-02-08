@@ -108,24 +108,16 @@
         <DataTemplate x:Key="StationTemplate" DataType="bo:StationToList">
             <StackPanel>
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="25*" />
                         <ColumnDefinition Width="25*" />
                         <ColumnDefinition Width="25*" />
                         <ColumnDefinition Width="25*" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0"  Text="ID: "  Margin="10" FontWeight="Bold"/>
-                    <TextBlock Grid.Row="0" Grid.Column="1"  Text="{Binding Path=Id ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Row="0" Grid.Column="2"  Text="Name: " Margin="10" FontWeight="Bold"/>
-                    <TextBlock Grid.Row="0" Grid.Column="3"  Text="{Binding Path=Name ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Row="1" Grid.Column="0"  Text="Number of charging stations occupied: "  Margin="10" FontWeight="Bold"/>
-                    <TextBlock Grid.Row="1" Grid.Column="1"  Text="{Binding Path=NumberOfChargingStationsOccupied ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Row="1" Grid.Column="2"  Text="Several  available charging stations: " Margin="10" FontWeight="Bold" />
-                    <TextBlock Grid.Row="1" Grid.Column="3"  Text="{Binding Path=SeveralAvailableChargingStations ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
+                    <TextBlock Grid.Column="0" Text="{Binding Path=Id ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
+                    <TextBlock Grid.Column="1" Text="{Binding Path=Name ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
+                    <TextBlock Grid.Column="2" Text="{Binding Path=NumberOfChargingStationsOccupied ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
+                    <TextBlock Grid.Column="3" Text="{Binding Path=SeveralAvailableChargingStations ,Mode=OneWay}"  HorizontalAlignment="Center" Margin="10" />
 
                 </Grid>
                 <Line Stroke="red" StrokeThickness="2px"

@@ -3,7 +3,7 @@
   <Station>
     <Id>5</Id>
     <Name>VIRTA Charging Station</Name>
-    <FreeChargeSlots>7</FreeChargeSlots>
+    <FreeChargeSlots>9</FreeChargeSlots>
     <Longitude>34.554392666232026</Longitude>
     <Lattitude>32.113611496805035</Lattitude>
   </Station>
@@ -17,7 +17,7 @@
   <Station>
     <Id>12</Id>
     <Name>Shomron</Name>
-    <FreeChargeSlots>6</FreeChargeSlots>
+    <FreeChargeSlots>10</FreeChargeSlots>
     <Longitude>35.082855</Longitude>
     <Lattitude>32.170912</Lattitude>
   </Station>

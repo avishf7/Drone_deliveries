@@ -21,8 +21,7 @@ namespace PL
         /// </summary>
         internal static Model Instance { get; set; } = new();
 
-
-        IBL bl = BlFactory.GetBl();
+        readonly IBL bl = BlFactory.GetBl();
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -95,7 +94,7 @@ namespace PL
         #region Grouping collections
 
 
-        public IEnumerable<IGrouping<DroneStatuses, BO.DroneToList>> groupingDrones;
+        IEnumerable<IGrouping<DroneStatuses, BO.DroneToList>> groupingDrones;
         /// <summary>
         /// A collection that represents a grouped view of a drone entity
         /// </summary>
@@ -110,7 +109,7 @@ namespace PL
             }
         }
 
-        public IEnumerable<IGrouping<string, BO.PackageToList>> groupingPackages { get; set; }
+        IEnumerable<IGrouping<string, BO.PackageToList>> groupingPackages { get; set; }
         /// <summary>
         /// A collection that represents a grouped view of a package entity
         /// </summary>
