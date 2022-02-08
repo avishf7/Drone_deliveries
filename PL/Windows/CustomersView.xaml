@@ -25,14 +25,14 @@
 
 
     <!--Grid Displays a list of all cutomers with information about them-->
-    <Grid x:Name="MainGrid" ShowGridLines="True">
+    <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="75*"/>
             <RowDefinition Height="450*"/>
             <RowDefinition Height="80*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" ShowGridLines="True" Background="DarkBlue">
+        <Grid Grid.Row="0" Background="DarkBlue">
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="14.28*"/>
                 <ColumnDefinition Width="14.28*"/>
