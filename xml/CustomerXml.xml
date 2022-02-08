@@ -77,4 +77,18 @@
     <Longitude>35.108572</Longitude>
     <Lattitude>32.171439</Lattitude>
   </Customer>
+  <Customer>
+    <Id>205918790</Id>
+    <Name>Avishay</Name>
+    <Phone>0543451233</Phone>
+    <Longitude>34.828505</Longitude>
+    <Lattitude>32.080775</Lattitude>
+  </Customer>
+  <Customer>
+    <Id>205459738</Id>
+    <Name>Chaim</Name>
+    <Phone>0556525977</Phone>
+    <Longitude>35.142896</Longitude>
+    <Lattitude>32.158842</Lattitude>
+  </Customer>
 </ArrayOfCustomer>

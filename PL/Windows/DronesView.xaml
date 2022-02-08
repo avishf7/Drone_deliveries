@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="DronesView"
         Height="500" 
-        Width="990" 
+        Width="1010" 
         Closed="Window_Closed" 
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
@@ -31,7 +31,7 @@
         </Grid.RowDefinitions>
         <TabControl Background="{x:Null}" Grid.Row="0"   >
             <TabItem x:Name="NormalView" Header="Normal" Background="{StaticResource Static.Background}"  >
-                <Grid x:Name="TabNormalGrid" ShowGridLines="True">
+                <Grid x:Name="TabNormalGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50*"/>
                         <RowDefinition Height="400*"/>

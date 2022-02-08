@@ -143,7 +143,7 @@
 
 
             <!--Grid used to add station location-->
-            <Grid x:Name="AddStationGrid" Grid.Row="2" Grid.Column="1"  Visibility="Hidden">
+            <Grid x:Name="AddStationGrid" Margin="20,0" Grid.Row="2" Grid.Column="1"  Visibility="Hidden" Background="{StaticResource Static.Background}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50*"/>
                     <RowDefinition Height="50*"/>
@@ -158,7 +158,7 @@
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
                    Content="Longitude:" 
-                       Foreground="Red"
+                   Foreground="DarkGreen"
                    Grid.Row="0" 
                    Grid.Column="0" 
                    FontFamily="Arial Black"
@@ -181,7 +181,7 @@
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
                    Content="Lattitude:" 
-                        Foreground="Red"
+                   Foreground="DarkGreen"
                    Grid.Row="1" 
                    Grid.Column="0"                      
                    FontFamily="Arial Black"
@@ -287,7 +287,7 @@
                     Grid.Row="0"
                     Margin="15,5" 
                     FontFamily="Arial Black"
-                    Click="add_Click"/>
+                    Click="Add_Click"/>
 
             <Button x:Name="cancelAdd" 
                     Content="Cancel" 
@@ -295,7 +295,7 @@
                     Grid.Row="1"
                     Margin="15,5" 
                     FontFamily="Arial Black"
-                    Click="cancel_Click"/>
+                    Click="Cancel_Click"/>
         </Grid>
 
 
@@ -364,7 +364,7 @@
                         Grid.Row="3"
                         Margin="30,22" 
                         FontFamily="Arial Black"
-                        Click="cancel_Click">
+                        Click="Cancel_Click">
                 <Image Source="Pictures\Exit.png" Margin="10"/>
             </Button>
         </Grid>

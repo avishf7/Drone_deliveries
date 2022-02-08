@@ -26,9 +26,8 @@ namespace PL.Windows
     /// </summary>
     public partial class Drone : Window
     {
-        IBL bl = BlFactory.GetBl();
-
-        BackgroundWorker worker = new() { WorkerReportsProgress = true, WorkerSupportsCancellation = true };
+        readonly IBL bl = BlFactory.GetBl();
+        readonly BackgroundWorker worker = new() { WorkerReportsProgress = true, WorkerSupportsCancellation = true };
 
         bool waitToExit = false;
 
@@ -107,7 +106,7 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void Sender_Closed(object sender, EventArgs e)
         {
-            cancel_Click(sender, null);
+            Cancel_Click(sender, null);
         }
 
         /// <summary>
@@ -127,7 +126,7 @@ namespace PL.Windows
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
-        private void cancel_Click(object sender, RoutedEventArgs e)
+        private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -137,7 +136,7 @@ namespace PL.Windows
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
-        private void add_Click(object sender, RoutedEventArgs e)
+        private void Add_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -148,15 +147,20 @@ namespace PL.Windows
                         MessageBox.Show("Invalid input", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                     else
                     {
+                        var stationToList = stations.SelectedItem as StationToList;
+
                         bl.AddDrone(new()
                         {
                             Id = b,
                             Model = model.Text,
                             MaxWeight = (Weight)maxWeight.SelectedItem,
-                        }, ((StationToList)stations.SelectedItem).Id);
+                        }, stationToList.Id);
 
+                        
 
                         Model.UpdateDrones();
+                        Model.UpdateStations();
+                        Model.UpdatePOStation(bl.GetStation(stationToList.Id).LocationOfStation);
 
                         MessageBox.Show("Adding the drone was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
                         this.Close();
@@ -281,15 +285,17 @@ namespace PL.Windows
                     catch (NoSuitablePackageForScheduledException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
                     break;
                 case DroneStatuses.Sendering:
+                    string messege;
+
                     if (PODrone.PackageInProgress.IsCollected)
                     {
                         bl.Deliver(PODrone.Id);
-                        MessageBox.Show("The package was delivered to its destination, good day", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+                        messege = "The package was delivered to its destination, good day";
                     }
                     else
                     {
                         bl.PickUp(PODrone.Id);
-                        MessageBox.Show("The package was successfully collected by the drone", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+                        messege = "The package was successfully collected by the drone";
 
                     }
 
@@ -300,6 +306,7 @@ namespace PL.Windows
                     Model.UpdatePOPackage(packageId);
                     Model.UpdateCustomers();
 
+                    MessageBox.Show(messege, "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
                     break;
             }
         }
@@ -316,7 +323,7 @@ namespace PL.Windows
 
             if (textBox.DataContext != null)
             {
-                var BOPackage = bl.GetPackage((textBox.DataContext as BO.PackageInTransfer).Id);
+                var BOPackage = bl.GetPackage((textBox.DataContext as PackageInTransfer).Id);
                 PO.Package POPackage = Model.POPackages.Find(pck => pck.Id == BOPackage.Id);
                 if (POPackage == null)
                     Model.POPackages.Add(POPackage = new PO.Package().CopyFromBOPackage(BOPackage));

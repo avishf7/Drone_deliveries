@@ -3,8 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL.Windows"
-        xmlns:BO="clr-namespace:BO;assembly=BL"        
+        xmlns:local="clr-namespace:PL.Windows"       
         mc:Ignorable="d"
         Title="Customer" Height="450" Width="800" WindowStartupLocation="CenterOwner"
         WindowStyle="SingleBorderWindow" 
@@ -142,7 +141,7 @@
 
 
             <!--Grid used to add customer location-->
-            <Grid x:Name="AddCustomerLocationGrid" Grid.Row="2" Grid.Column="1"  Visibility="Hidden">
+            <Grid x:Name="AddCustomerLocationGrid" Margin="20,0" Grid.Row="2" Grid.Column="1"  Visibility="Hidden" Background="{StaticResource Static.Background}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50*"/>
                     <RowDefinition Height="50*"/>
@@ -160,7 +159,8 @@
                    Grid.Row="0" 
                    Grid.Column="0"                              
                    FontFamily="Arial Black"
-                   Margin="2" />
+                   Margin="2"
+                   Foreground="DarkGreen"/>
 
                 <TextBox x:Name="customerLocationLongitude" 
                      FontSize="20"
@@ -179,7 +179,8 @@
                    HorizontalContentAlignment="Center"
                    Content="Lattitude:" 
                    Grid.Row="1" 
-                   Grid.Column="0"    
+                   Grid.Column="0" 
+                   Foreground="DarkGreen"
                    FontFamily="Arial Black"
                    Margin="2"/>
 
@@ -282,7 +283,7 @@
                     Grid.Row="0"
                     Margin="15,5" 
                     FontFamily="Arial Black"
-                    Click="add_Click"/>
+                    Click="Add_Click"/>
 
             <Button x:Name="cancelAdd" 
                     Content="Cancel" 
@@ -290,7 +291,7 @@
                     Grid.Row="1"
                     Margin="15,5" 
                     FontFamily="Arial Black"
-                    Click="cancel_Click"/>
+                    Click="Cancel_Click"/>
         </Grid>
 
 
@@ -409,7 +410,7 @@
                         Grid.Row="2"
                         Margin="30,22" 
                         FontFamily="Arial Black"
-                        Click="cancel_Click">
+                        Click="Cancel_Click">
                 <Image Source="Pictures\Exit.png" Margin="10"/>
             </Button>
 

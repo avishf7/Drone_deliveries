@@ -3,22 +3,36 @@
   <Station>
     <Id>5</Id>
     <Name>VIRTA Charging Station</Name>
-    <FreeChargeSlots>9</FreeChargeSlots>
+    <FreeChargeSlots>8</FreeChargeSlots>
     <Longitude>34.554392666232026</Longitude>
     <Lattitude>32.113611496805035</Lattitude>
   </Station>
   <Station>
     <Id>15</Id>
     <Name>EV-Edge Charging Station</Name>
-    <FreeChargeSlots>10</FreeChargeSlots>
+    <FreeChargeSlots>9</FreeChargeSlots>
     <Longitude>34.54097611412451</Longitude>
     <Lattitude>32.01601992431843</Lattitude>
   </Station>
   <Station>
     <Id>12</Id>
     <Name>Shomron</Name>
-    <FreeChargeSlots>10</FreeChargeSlots>
+    <FreeChargeSlots>9</FreeChargeSlots>
     <Longitude>35.082855</Longitude>
     <Lattitude>32.170912</Lattitude>
+  </Station>
+  <Station>
+    <Id>101</Id>
+    <Name>Benei-Brak</Name>
+    <FreeChargeSlots>9</FreeChargeSlots>
+    <Longitude>34.827571</Longitude>
+    <Lattitude>32.083605</Lattitude>
+  </Station>
+  <Station>
+    <Id>630</Id>
+    <Name>Emanuel</Name>
+    <FreeChargeSlots>9</FreeChargeSlots>
+    <Longitude>35.136802</Longitude>
+    <Lattitude>32.160722</Lattitude>
   </Station>
 </ArrayOfStation>

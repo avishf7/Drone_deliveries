@@ -21,7 +21,7 @@ namespace PL.Windows
     /// </summary>
     public partial class Customer : Window
     {
-        IBL bl = BlFactory.GetBl();
+        readonly IBL bl = BlFactory.GetBl();
 
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void Sender_Closed(object sender, EventArgs e)
         {
-            cancel_Click(sender, null);
+            Cancel_Click(sender, null);
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace PL.Windows
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
-        private void cancel_Click(object sender, RoutedEventArgs e)
+        private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -136,7 +136,7 @@ namespace PL.Windows
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
-        private void add_Click(object sender, RoutedEventArgs e)
+        private void Add_Click(object sender, RoutedEventArgs e)
         {
             try
             {

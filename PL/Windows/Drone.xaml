@@ -220,7 +220,7 @@
                     Grid.Row="0"
                     Margin="15,5" 
                     FontFamily="Arial Black"
-                    Click="add_Click"/>
+                    Click="Add_Click"/>
 
             <Button x:Name="cancelAdd" 
                     Content="Cancel" 
@@ -228,7 +228,7 @@
                     Grid.Row="1"
                     Margin="15,5" 
                     FontFamily="Arial Black"
-                    Click="cancel_Click"/>
+                    Click="Cancel_Click"/>
         </Grid>
 
 
@@ -291,7 +291,7 @@
                         Grid.Row="2"
                         Margin="20,5" 
                         FontFamily="Arial Black"
-                        Click="cancel_Click">
+                        Click="Cancel_Click">
                 <Image Source="Pictures\Exit.png" Margin="10"/>
             </Button>
 

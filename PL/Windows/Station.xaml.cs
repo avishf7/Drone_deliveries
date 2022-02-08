@@ -21,7 +21,7 @@ namespace PL.Windows
     /// </summary>
     public partial class Station : Window
     {
-        IBL bl = BlFactory.GetBl();
+        readonly IBL bl = BlFactory.GetBl();
    
         /// <summary>
         /// The window that opens this window.
@@ -99,7 +99,7 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void Sender_Closed(object sender, EventArgs e)
         {
-            cancel_Click(sender, null);
+            Cancel_Click(sender, null);
         }
 
 
@@ -129,7 +129,7 @@ namespace PL.Windows
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
-        private void cancel_Click(object sender, RoutedEventArgs e)
+        private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -139,7 +139,7 @@ namespace PL.Windows
         /// </summary>
         /// <param name="sender">The element that activates the function</param>
         /// <param name="e"></param>
-        private void add_Click(object sender, RoutedEventArgs e)
+        private void Add_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -238,13 +238,11 @@ namespace PL.Windows
         /// <param name="e"></param>
         private void ChargingDronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
             ListView listView = (ListView)sender;
-            DroneCharge droneCharge = listView.SelectedItem as BO.DroneCharge;
 
-            if (droneCharge != null && droneCharge != null)
+            if (listView.SelectedItem is DroneCharge droneCharge)
             {
-                BO.Drone BODrone = bl.GetDrone((listView.SelectedItem as DroneCharge).DroneId);
+                BO.Drone BODrone = bl.GetDrone(droneCharge.DroneId);
                 PO.Drone PODrone = Model.PODrones.Find(dr => dr.Id == BODrone.Id);
                 if (PODrone == null)
                     Model.PODrones.Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));
@@ -255,11 +253,6 @@ namespace PL.Windows
             {
                 MessageBox.Show("No element to see ", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-
-        private void stationLocationLongitude_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-
         }
     }
 }

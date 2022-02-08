@@ -22,11 +22,12 @@ namespace PL.Windows
     /// </summary>
     public partial class StationsView : Window
     {
-        IBL bl = BlFactory.GetBl();
+        readonly IBL bl = BlFactory.GetBl();
+
         /// <summary>
         /// The window that opens this window.
         /// </summary>
-        MainWindow sender;
+        readonly MainWindow sender;
 
         //That they will not be able to close the window with the X button
         bool isCloseClick = true;

@@ -94,48 +94,48 @@ namespace PL
         #region Grouping collections
 
 
-        IEnumerable<IGrouping<DroneStatuses, BO.DroneToList>> groupingDrones;
+        IEnumerable<IGrouping<DroneStatuses, DroneToList>> groupingDrones;
         /// <summary>
         /// A collection that represents a grouped view of a drone entity
         /// </summary>
-        public IEnumerable<IGrouping<DroneStatuses, BO.DroneToList>> GroupingDrones
+        public IEnumerable<IGrouping<DroneStatuses, DroneToList>> GroupingDrones
         {
             get => groupingDrones;
             set
             {
                 groupingDrones = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("GroupingDrones"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(GroupingDrones)));
             }
         }
 
-        IEnumerable<IGrouping<string, BO.PackageToList>> groupingPackages { get; set; }
+        IEnumerable<IGrouping<string, PackageToList>> groupingPackages;
         /// <summary>
         /// A collection that represents a grouped view of a package entity
         /// </summary>
-        public IEnumerable<IGrouping<string, BO.PackageToList>> GroupingPackages
+        public IEnumerable<IGrouping<string, PackageToList>> GroupingPackages
         {
             get => groupingPackages;
             set
             {
                 groupingPackages = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("GroupingPackages"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(GroupingPackages)));
             }
         }
 
-        IEnumerable<IGrouping<int, BO.StationToList>> groupingStations;
+        IEnumerable<IGrouping<int, StationToList>> groupingStations;
         /// <summary>
         /// A collection that represents a grouped view of a station entity
         /// </summary>
-        public IEnumerable<IGrouping<int, BO.StationToList>> GroupingStations
+        public IEnumerable<IGrouping<int, StationToList>> GroupingStations
         {
             get => groupingStations;
             set
             {
                 groupingStations = value;
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("GroupingStations"));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(GroupingStations)));
             }
         }
         #endregion
@@ -204,8 +204,8 @@ namespace PL
         /// </summary>
         public void UpdateDrones()
         {
-            Drones = bl.GetDrones(dr => (DroneStatusesFilter != null ? dr.DroneStatus == DroneStatusesFilter : true) &&
-                               (MaxWeightFilter != null ? dr.MaxWeight == MaxWeightFilter : true));
+            Drones = bl.GetDrones(dr => (DroneStatusesFilter == null || dr.DroneStatus == DroneStatusesFilter) &&
+                               (MaxWeightFilter == null || dr.MaxWeight == MaxWeightFilter));
 
             GroupingDrones = from drone in bl.GetDrones()
                              group drone by drone.DroneStatus;
@@ -227,7 +227,7 @@ namespace PL
         /// </summary>
         public void UpdatePackages()
         {
-            Packages = bl.GetPackages(pck => (PackageStatusFilter != null ? pck.PackageStatus == PackageStatusFilter : true));
+            Packages = bl.GetPackages(pck => (PackageStatusFilter == null || pck.PackageStatus == PackageStatusFilter));
 
             GroupingPackages = from package in bl.GetPackages()
                                group package by package.SenderName;          

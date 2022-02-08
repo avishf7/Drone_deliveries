@@ -60,4 +60,14 @@
     <Model>jjkkl</Model>
     <MaxWeight>Light</MaxWeight>
   </Drone>
+  <Drone>
+    <Id>301</Id>
+    <Model>G-Force1</Model>
+    <MaxWeight>Heavy</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>301</Id>
+    <Model>Air-Force251</Model>
+    <MaxWeight>Heavy</MaxWeight>
+  </Drone>
 </ArrayOfDrone>
