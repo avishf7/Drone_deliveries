@@ -75,7 +75,7 @@ namespace Dal
         public IEnumerable<Drone> GetDrones(Predicate<Drone> predicate = null)
         {
             List<Drone> dronesList = XmlTools.LoadListFromXMLSerializer<Drone>(@"DroneXml.xml");
-            return dronesList.Where(i => predicate == null ? true : predicate(i));
+            return dronesList.Where(i => predicate == null || predicate(i));
         }
 
         #endregion
@@ -125,7 +125,7 @@ namespace Dal
         public IEnumerable<Station> GetStations(Predicate<Station> predicate = null)
         {
             List<Station> Stations = XmlTools.LoadListFromXMLSerializer<Station>(@"StationXml.xml");
-            return Stations.Where(i => predicate == null ? true : predicate(i));
+            return Stations.Where(i => predicate == null || predicate(i));
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -311,7 +311,7 @@ namespace Dal
             List<Package> package = XmlTools.LoadListFromXMLSerializer<Package>(@"PackageXml.xml");
 
 
-            return package.Where(i => predicate == null ? true : predicate(i));
+            return package.Where(i => predicate == null || predicate(i));
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -425,7 +425,7 @@ namespace Dal
         {
             List<DroneCharge> droneCharge = XmlTools.LoadListFromXMLSerializer<DroneCharge>(@"DroneCharge.xml");
 
-            return droneCharge.Where(i => predicate == null ? true : predicate(i));
+            return droneCharge.Where(i => predicate == null || predicate(i));
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]

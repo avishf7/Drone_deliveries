@@ -134,7 +134,7 @@ namespace BL
                                          NumOfPackagesNotReceived = (from pck in cus.PackageAtCustomerToCustomer
                                                                      where pck.Status != PackageStatus.Provided
                                                                      select pck).Count(),
-                                     }).Where(cus => predicate != null ? predicate(cus) : true);
+                                     }).Where(cus => predicate == null || predicate(cus));
             }
         }
     }
