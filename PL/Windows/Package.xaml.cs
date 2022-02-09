@@ -163,7 +163,7 @@ namespace PL.Windows
         {
             try
             {
-                MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure? ", "Notice", button: MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure? ", "Notice", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
                     bl.DeletePackage(POPackage.Id);
@@ -179,13 +179,12 @@ namespace PL.Windows
                     Model.UpdateCustomers();
 
                     MessageBox.Show("Delete the package was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.Close();
                 }
 
             }
             catch (NoNumberFoundException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
             catch (PakcageConnectToDroneException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
-
-            this.Close();
         }
 
         private void CustomerInPackageInfo_PreviewMouseUp(object sender, MouseButtonEventArgs e)

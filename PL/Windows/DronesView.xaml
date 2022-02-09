@@ -213,7 +213,7 @@
                 <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="AddDrone" Grid.Column="1" Margin="12" Padding="5" FontFamily="Arial Black" Click="AddDrone_Click" >
+            <Button x:Name="AddDrone" Grid.Column="1" Margin="12" Padding="10" FontFamily="Arial Black" Click="AddDrone_Click" >
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <Viewbox>

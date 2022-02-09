@@ -17,7 +17,7 @@
   <Station>
     <Id>12</Id>
     <Name>Shomron</Name>
-    <FreeChargeSlots>9</FreeChargeSlots>
+    <FreeChargeSlots>10</FreeChargeSlots>
     <Longitude>35.082855</Longitude>
     <Lattitude>32.170912</Lattitude>
   </Station>
