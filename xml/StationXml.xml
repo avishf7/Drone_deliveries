@@ -24,14 +24,14 @@
   <Station>
     <Id>101</Id>
     <Name>Benei-Brak</Name>
-    <FreeChargeSlots>9</FreeChargeSlots>
+    <FreeChargeSlots>8</FreeChargeSlots>
     <Longitude>34.827571</Longitude>
     <Lattitude>32.083605</Lattitude>
   </Station>
   <Station>
     <Id>32123</Id>
     <Name>עמנואל</Name>
-    <FreeChargeSlots>8</FreeChargeSlots>
+    <FreeChargeSlots>9</FreeChargeSlots>
     <Longitude>35.142926</Longitude>
     <Lattitude>32.158701</Lattitude>
   </Station>

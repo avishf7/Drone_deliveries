@@ -308,9 +308,9 @@
     <Priority>Fast</Priority>
     <Requested>2022-02-07T23:36:17.1929116+02:00</Requested>
     <Scheduled>2022-02-07T23:38:32.1332656+02:00</Scheduled>
-    <PickedUp xsi:nil="true" />
-    <Delivered xsi:nil="true" />
-    <DroneId>566566</DroneId>
+    <PickedUp>2022-02-09T19:08:48.8375002+02:00</PickedUp>
+    <Delivered>2022-02-09T19:08:54.757387+02:00</Delivered>
+    <DroneId>-1</DroneId>
   </Package>
   <Package>
     <Id>31</Id>

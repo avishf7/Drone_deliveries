@@ -1,18 +1,9 @@
 ﻿using System;
 using BlApi;
 using BO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace PL.Windows
 {
@@ -172,22 +163,23 @@ namespace PL.Windows
         {
             try
             {
+                MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure? ", "Notice", button: MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                if (messageBoxResult == MessageBoxResult.OK)
+                {
+                    bl.DeletePackage(POPackage.Id);
 
-                bl.DeletePackage(POPackage.Id);
+                    int senderId = POPackage.SenderCustomerInPackage.CustomerId;
+                    int targetId = POPackage.TargetCustomerInPackage.CustomerId;
+                    Model.UpdatePackages();
 
 
-                int senderId = POPackage.SenderCustomerInPackage.CustomerId;
-                int targetId = POPackage.TargetCustomerInPackage.CustomerId;
-                Model.UpdatePackages();
+                    Model.POCustomers.Find(cus => cus.Id == senderId)?.CopyFromBOCustomer(bl.GetCustomer(senderId));
+                    Model.POCustomers.Find(cus => cus.Id == targetId)?.CopyFromBOCustomer(bl.GetCustomer(targetId));
 
+                    Model.UpdateCustomers();
 
-
-                Model.POCustomers.Find(cus => cus.Id == senderId)?.CopyFromBOCustomer(bl.GetCustomer(senderId));
-                Model.POCustomers.Find(cus => cus.Id == targetId)?.CopyFromBOCustomer(bl.GetCustomer(targetId));
-
-                Model.UpdateCustomers();
-
-                MessageBox.Show("Delete the package was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Delete the package was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
 
             }
             catch (NoNumberFoundException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
