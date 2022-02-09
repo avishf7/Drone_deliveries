@@ -190,7 +190,6 @@ namespace PL.Windows
         {
             ((Button)sender).Content = "OK";
             ((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0)).IsReadOnly = false;
-            ((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0)).Text = "";
 
             ((Button)sender).Click -= Update_Click;
             ((Button)sender).Click += OK_Click;
@@ -209,7 +208,7 @@ namespace PL.Windows
                 if (((TextBox)VisualTreeHelper.GetChild(VisualTreeHelper.GetParent((Button)sender), 0)).Text != "")
                 {
                     bl.UpdateStation(POStation.Id, UpdateName.Text, POStation.FreeChargeSlots);
-
+                    Model.UpdateStations();
                     MessageBox.Show("Updating the element was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     ((Button)sender).Content = "Update";

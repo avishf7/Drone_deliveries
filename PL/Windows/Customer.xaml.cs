@@ -57,11 +57,6 @@ namespace PL.Windows
             phone.Visibility = Visibility.Visible;
         }
 
-        ///// <summary>
-        /////
-        ///// </summary>
-        ///// <param name="sender">The element that activates the function</param>
-
         /// <summary>
         ///  Consructor or customer display fwindow.
         /// </summary>
@@ -209,8 +204,8 @@ namespace PL.Windows
             if (updateElement.Text != "")
             {
                 bl.UpdateCustomer(POCustomer.Id, UpdateName.Text, UpdatePhone.Text);
-
                 Model.UpdateCustomers();
+
                 foreach (var pck in POCustomer.PackageAtCustomerFromCustomer)
                     Model.UpdatePOPackage(pck.PackageId);
                 foreach (var pck in POCustomer.PackageAtCustomerToCustomer)

@@ -17,21 +17,21 @@
   <Station>
     <Id>12</Id>
     <Name>Shomron</Name>
-    <FreeChargeSlots>8</FreeChargeSlots>
+    <FreeChargeSlots>9</FreeChargeSlots>
     <Longitude>35.082855</Longitude>
     <Lattitude>32.170912</Lattitude>
   </Station>
   <Station>
     <Id>101</Id>
     <Name>Benei-Brak</Name>
-    <FreeChargeSlots>8</FreeChargeSlots>
+    <FreeChargeSlots>7</FreeChargeSlots>
     <Longitude>34.827571</Longitude>
     <Lattitude>32.083605</Lattitude>
   </Station>
   <Station>
     <Id>32123</Id>
-    <Name>עמנואל</Name>
-    <FreeChargeSlots>9</FreeChargeSlots>
+    <Name>Emanuel</Name>
+    <FreeChargeSlots>10</FreeChargeSlots>
     <Longitude>35.142926</Longitude>
     <Lattitude>32.158701</Lattitude>
   </Station>

@@ -184,7 +184,6 @@ namespace PL.Windows
         {
             Update.Content = "OK";
             UpdateModel.IsReadOnly = false;
-            UpdateModel.Text = "";
 
             Update.Click -= Update_Click;
             Update.Click += OK_Click;
