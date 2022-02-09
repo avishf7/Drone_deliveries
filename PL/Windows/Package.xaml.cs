@@ -163,8 +163,8 @@ namespace PL.Windows
         {
             try
             {
-                MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure? ", "Notice", button: MessageBoxButton.OKCancel, MessageBoxImage.Question);
-                if (messageBoxResult == MessageBoxResult.OK)
+                MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure? ", "Notice", button: MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (messageBoxResult == MessageBoxResult.Yes)
                 {
                     bl.DeletePackage(POPackage.Id);
 
