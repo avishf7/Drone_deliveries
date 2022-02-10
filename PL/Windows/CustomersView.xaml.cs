@@ -124,7 +124,7 @@ namespace PL.Windows
                 if (POCustomer == null)
                     Model.POCustomers.Add(POCustomer = new PO.Customer().CopyFromBOCustomer(BOCustomer));
 
-                new Customer(this, POCustomer).Show();
+                new Customer(this, POCustomer.CopyFromBOCustomer(BOCustomer)).Show();
             }
 
         }

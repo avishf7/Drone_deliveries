@@ -123,7 +123,7 @@ namespace PL.Windows
                 if (POStation == null)
                     Model.POStations.Add(POStation = new PO.Station().CopyFromBOStation(BOStation));
 
-                new Station(this, POStation).Show();
+                new Station(this, POStation.CopyFromBOStation(BOStation)).Show();
 
             }
         }

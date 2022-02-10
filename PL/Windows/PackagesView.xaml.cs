@@ -157,7 +157,7 @@ namespace PL.Windows
                 if (POPackage == null)
                     Model.POPackages.Add(POPackage = new PO.Package().CopyFromBOPackage(BOPackage));
 
-                new Package(this, POPackage).Show();
+                new Package(this, POPackage.CopyFromBOPackage(BOPackage)).Show();
 
             }
         }
