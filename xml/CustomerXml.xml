@@ -91,4 +91,11 @@
     <Longitude>35.142896</Longitude>
     <Lattitude>32.158842</Lattitude>
   </Customer>
+  <Customer>
+    <Id>336699885</Id>
+    <Name>Arady</Name>
+    <Phone>0550880662</Phone>
+    <Longitude>35.225563</Longitude>
+    <Lattitude>31.260696</Lattitude>
+  </Customer>
 </ArrayOfCustomer>

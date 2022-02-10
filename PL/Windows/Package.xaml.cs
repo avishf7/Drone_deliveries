@@ -131,8 +131,7 @@ namespace PL.Windows
                             Weight = (Weight)Weight.SelectedItem,
                             Priority = (Priorities)priority.SelectedItem,
                         });
-                    }
-                    catch (NotValidTargetException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
+
 
 
                     Model.UpdatePackages();
@@ -144,6 +143,9 @@ namespace PL.Windows
 
                     MessageBox.Show("Adding the package was completed successfully!", "Notice", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
+
+                    }
+                    catch (NotValidTargetException ex) { MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); }
                 }
                 else
                     MessageBox.Show("There are unfilled fields", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);

@@ -75,4 +75,9 @@
     <Model>rrtt123</Model>
     <MaxWeight>Heavy</MaxWeight>
   </Drone>
+  <Drone>
+    <Id>744</Id>
+    <Model>KKMO66</Model>
+    <MaxWeight>Medium</MaxWeight>
+  </Drone>
 </ArrayOfDrone>

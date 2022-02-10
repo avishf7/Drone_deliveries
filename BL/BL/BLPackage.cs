@@ -22,28 +22,31 @@ namespace BL
             if (senderId == targetId)
                 throw new NotValidTargetException("The destination is the same as the sender");
 
-            try
-            {
-                lock (dal)
+            if (BatteryUsage(GetCustomer(senderId).CustomerLocation.Distance(GetCustomer(targetId).CustomerLocation), (int)package.Weight) > 100)
+                throw new NotValidTargetException("The distination is too far away");
+
+                try
                 {
-                    dal.AddPackage(new DO.Package
+                    lock (dal)
                     {
-                        SenderId = senderId,
-                        TargetId = targetId,
-                        Weight = (DO.Weight)package.Weight,
-                        Priority = (DO.Priorities)package.Priority,
-                        DroneId = 0,
-                        Requested = DateTime.Now,
-                        Scheduled = null,
-                        PickedUp = null,
-                        Delivered = null
-                    });
+                        dal.AddPackage(new DO.Package
+                        {
+                            SenderId = senderId,
+                            TargetId = targetId,
+                            Weight = (DO.Weight)package.Weight,
+                            Priority = (DO.Priorities)package.Priority,
+                            DroneId = 0,
+                            Requested = DateTime.Now,
+                            Scheduled = null,
+                            PickedUp = null,
+                            Delivered = null
+                        });
+                    }
                 }
-            }
-            catch (DalApi.ExistsNumberException ex)
-            {
-                throw new BlApi.ExistsNumberException("Package already exists ", ex);
-            }
+                catch (DalApi.ExistsNumberException ex)
+                {
+                    throw new BlApi.ExistsNumberException("Package already exists ", ex);
+                }
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]

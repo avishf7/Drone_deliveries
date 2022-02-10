@@ -35,4 +35,11 @@
     <Longitude>35.142926</Longitude>
     <Lattitude>32.158701</Lattitude>
   </Station>
+  <Station>
+    <Id>85</Id>
+    <Name>Yam Hmelach</Name>
+    <FreeChargeSlots>10</FreeChargeSlots>
+    <Longitude>35.208189</Longitude>
+    <Lattitude>31.25919</Lattitude>
+  </Station>
 </ArrayOfStation>
