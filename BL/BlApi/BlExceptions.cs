@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace BlApi
 {
-
+    /// <summary>
+    /// Throws when an ID number already exists
+    /// </summary>
     [Serializable]
     public class ExistsNumberException : Exception
     {
@@ -22,6 +24,9 @@ namespace BlApi
         { return "Exists number: " + "\n" + Message; }
     }
 
+    /// <summary>
+    /// Throws when no ID number exists
+    /// </summary>
     [Serializable]
     public class NoNumberFoundException : Exception
     {
@@ -36,6 +41,9 @@ namespace BlApi
         { return "Number not found: " + "\n" + Message; }
     }
 
+    /// <summary>
+    /// Throws when trying to delete an already associated package
+    /// </summary>
     [Serializable]
     public class PakcageConnectToDroneException : Exception
     {
@@ -50,6 +58,9 @@ namespace BlApi
         { return "Can not be deleted: " + "\n" + Message; }
     }
 
+    /// <summary>
+    /// Throws when the drone is not available
+    /// </summary>
     [Serializable]
     public class DroneNotAvailableException : Exception
     {
@@ -65,6 +76,9 @@ namespace BlApi
         { return "Drone is not available: " + "\n" + Message; }
     }
 
+    /// <summary>
+    /// Throws when trying to release from a charger a drone that is not charging
+    /// </summary>
     [Serializable]
     public class DroneNotMaintenanceException : Exception
     {
@@ -80,6 +94,9 @@ namespace BlApi
         { return "Drone is not maintenance status: " + "\n" + Message; }
     }
 
+    /// <summary>
+    /// Throws when no package has been found that can be associated with the drone
+    /// </summary>
     [Serializable]
     public class NoSuitablePackageForScheduledException : Exception
     {
@@ -94,6 +111,9 @@ namespace BlApi
         { return "There is no suitable package for scheduled: " + "\n" + Message; }
     }
 
+    /// <summary>
+    /// Throws when trying to insert an invalid amount (too small)
+    /// </summary>
     [Serializable]
     public class TooSmallAmount : Exception
     {
@@ -109,6 +129,9 @@ namespace BlApi
 
     }
 
+    /// <summary>
+    /// Throws when there is not enough battery for drone to perform operation
+    /// </summary>
     [Serializable]
     public class NotEnoughBattery : Exception
     {
@@ -124,6 +147,9 @@ namespace BlApi
 
     }
 
+    /// <summary>
+    /// Throws when there is no package associated with the drone trying to make delivery
+    /// </summary>
     [Serializable]
     public class NoPackageAssociatedWithDrone : Exception
     {
@@ -135,7 +161,9 @@ namespace BlApi
         { return "  There is no package associated with the drone: " + "\n" + Message; }
     }
 
-
+    /// <summary>
+    /// Throws when trying to pick up a package that has already been collected
+    /// </summary>
     [Serializable]
     public class PackageAlreadyCollectedException : Exception
     {
@@ -150,6 +178,9 @@ namespace BlApi
         { return "The package registered with the drone has already been collected: " + "\n" + Message; }
     }
 
+    /// <summary>
+    /// Throws when trying to deliver a package that has not yet been collected
+    /// </summary>
     [Serializable]
     public class PackageNotCollectedException : Exception
     {
@@ -162,6 +193,9 @@ namespace BlApi
         { return "The package registered with the drone has not yet been collected: " + "\n" + Message; }
     }
 
+    /// <summary>
+    /// When trying to add a package whose destination is invalid
+    /// </summary>
     [Serializable]
     public class NotValidTargetException : Exception
     {

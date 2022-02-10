@@ -10,7 +10,9 @@ using System.Runtime.Serialization;
 namespace DalApi
 {
 
-
+    /// <summary>
+    /// Throws when an ID number already exists
+    /// </summary>
     [Serializable]
     public class ExistsNumberException : Exception
     {
@@ -25,6 +27,9 @@ namespace DalApi
         { return "Exists number exception:"+ Message; }
     }
 
+    /// <summary>
+    /// Throws when no ID number exists
+    /// </summary>
     [Serializable]
     public class NoNumberFoundException : Exception
     {
@@ -39,6 +44,9 @@ namespace DalApi
         { return "No number found exeptions:" + Message; }
     }
 
+    /// <summary>
+    /// Throws when unable to load XML file
+    /// </summary>
     [Serializable]
     public class XMLFileLoadCreateException : Exception
     {

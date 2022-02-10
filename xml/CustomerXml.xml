@@ -93,9 +93,16 @@
   </Customer>
   <Customer>
     <Id>336699885</Id>
-    <Name>Arady</Name>
-    <Phone>0550880662</Phone>
+    <Name>Dromy</Name>
+    <Phone>0505050505</Phone>
     <Longitude>35.225563</Longitude>
     <Lattitude>31.260696</Lattitude>
+  </Customer>
+  <Customer>
+    <Id>252025202</Id>
+    <Name>Dimony</Name>
+    <Phone>0520520520</Phone>
+    <Longitude>35.200605</Longitude>
+    <Lattitude>31.042296</Lattitude>
   </Customer>
 </ArrayOfCustomer>

@@ -186,7 +186,6 @@ namespace PL.Windows
 
             ((Button)sender).Content = "OK";
             updateElement.IsReadOnly = false;
-            updateElement.Text = "";
 
             ((Button)sender).Click -= Update_Click;
             ((Button)sender).Click += OK_Click;

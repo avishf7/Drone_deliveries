@@ -24,7 +24,7 @@
   <Station>
     <Id>101</Id>
     <Name>Benei-Brak</Name>
-    <FreeChargeSlots>7</FreeChargeSlots>
+    <FreeChargeSlots>6</FreeChargeSlots>
     <Longitude>34.827571</Longitude>
     <Lattitude>32.083605</Lattitude>
   </Station>
@@ -37,8 +37,8 @@
   </Station>
   <Station>
     <Id>85</Id>
-    <Name>Yam Hmelach</Name>
-    <FreeChargeSlots>10</FreeChargeSlots>
+    <Name>Darom</Name>
+    <FreeChargeSlots>14</FreeChargeSlots>
     <Longitude>35.208189</Longitude>
     <Lattitude>31.25919</Lattitude>
   </Station>

@@ -322,7 +322,7 @@
                           ItemsSource="{Binding PackageAtCustomerFromCustomer}" 
                           Grid.Row="0" Grid.Column="1"                           
                           Background="{StaticResource Static.Background}"
-                          Margin="20,5"
+                          Margin="15,5"
                           MouseDoubleClick="PackageAtCustomerListView_MouseDoubleClick">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -347,7 +347,7 @@
                                 <TextBlock Grid.Row="3" Grid.Column="0" Text="Status: " />
                                 <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=Status ,Mode=OneWay, FallbackValue='None'}"/>
                                 <TextBlock Grid.Row="4" Grid.Column="0" Text="Target customer: " HorizontalAlignment="Stretch" />
-                                <TextBox Grid.Row="4" Grid.Column="1" Template="{DynamicResource CustomerInPackageTemplate}" DataContext="{Binding Path=OtherSideCustomer ,Mode=OneWay}"  PreviewMouseUp="TextBox_PreviewMouseUp"/>
+                                <TextBox Background="{StaticResource Static.Background}" Grid.Row="4" Grid.Column="1" Template="{DynamicResource CustomerInPackageTemplate}" DataContext="{Binding Path=OtherSideCustomer ,Mode=OneWay}"  PreviewMouseUp="TextBox_PreviewMouseUp"/>
                             </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -371,7 +371,7 @@
                           IsEnabled="{Binding Converter={StaticResource ObjectToEnable}}"
                           Background="{StaticResource Static.Background}"
                           Grid.Row="1" Grid.Column="1"
-                          Margin="20,5"
+                          Margin="15,5"
                           MouseDoubleClick="PackageAtCustomerListView_MouseDoubleClick" >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate >
@@ -396,8 +396,7 @@
                             <TextBlock Grid.Row="3" Grid.Column="0" Text="Status: " />
                             <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=Status ,Mode=OneWay, FallbackValue='None'}"/>
                             <TextBlock Grid.Row="4" Grid.Column="0" Text="Sender customer: " />
-                            <TextBox Grid.Row="4" Grid.Column="1" Template="{DynamicResource CustomerInPackageTemplate}" DataContext="{Binding Path=OtherSideCustomer ,Mode=OneWay}" PreviewMouseUp="TextBox_PreviewMouseUp"/>
-
+                            <TextBox Background="{StaticResource Static.Background}" Grid.Row="4" Grid.Column="1" Template="{DynamicResource CustomerInPackageTemplate}" DataContext="{Binding Path=OtherSideCustomer ,Mode=OneWay}" PreviewMouseUp="TextBox_PreviewMouseUp"/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

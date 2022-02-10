@@ -80,4 +80,14 @@
     <Model>KKMO66</Model>
     <MaxWeight>Medium</MaxWeight>
   </Drone>
+  <Drone>
+    <Id>969</Id>
+    <Model>GBG77</Model>
+    <MaxWeight>Heavy</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>565</Id>
+    <Model>AIG35</Model>
+    <MaxWeight>Heavy</MaxWeight>
+  </Drone>
 </ArrayOfDrone>
