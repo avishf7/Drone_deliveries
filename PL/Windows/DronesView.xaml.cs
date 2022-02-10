@@ -169,7 +169,7 @@ namespace PL.Windows
                 if (PODrone == null)
                     Model.PODrones.Add(PODrone = new PO.Drone().CopyFromBODrone(BODrone));
 
-                new Drone( this, PODrone).Show();
+                new Drone( this, PODrone.CopyFromBODrone(BODrone)).Show();
 
             }
         }        
