@@ -42,4 +42,11 @@
     <Longitude>35.208189</Longitude>
     <Lattitude>31.25919</Lattitude>
   </Station>
+  <Station>
+    <Id>32</Id>
+    <Name>Miron</Name>
+    <FreeChargeSlots>15</FreeChargeSlots>
+    <Longitude>35.443405</Longitude>
+    <Lattitude>32.984164</Lattitude>
+  </Station>
 </ArrayOfStation>
