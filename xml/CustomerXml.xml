@@ -105,11 +105,4 @@
     <Longitude>35.200605</Longitude>
     <Lattitude>31.042296</Lattitude>
   </Customer>
-  <Customer>
-    <Id>9898989</Id>
-    <Name>בני</Name>
-    <Phone>0505050505</Phone>
-    <Longitude>34.555</Longitude>
-    <Lattitude>32.666</Lattitude>
-  </Customer>
 </ArrayOfCustomer>
